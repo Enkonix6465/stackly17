@@ -910,6 +910,16 @@
                     <i class="fas fa-bars"></i>
                 </div>
             </div>
+             <div class="profile-container" style="position: relative;">
+                    <div class="profile-icon" id="profile-btn">
+                      PS
+                    </div>
+                    <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
+                      <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </header>
 
@@ -1133,6 +1143,29 @@
 
         // Run the animation function once the window has loaded
         window.onload = animateOnScroll;
+           // Profile dropdown functionality
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        profileBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+            profileDropdown.style.display = 'none';
+          }
+        });
+
+        // Logout function
+        function logout() {
+          // Add your logout logic here
+          alert('Logged out successfully!');
+          window.location.href = 'login.html';
+        }
+        
     </script>
 </body>
 </html>
