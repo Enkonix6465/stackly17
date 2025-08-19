@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stackly Digital Marketing - About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* CSS variables for a consistent dark theme */
+        :root {
+            --bg: #0b0d12;
+            --surface: #0f1219;
+            --glass: rgba(255,255,255,0.08);
+            --text: #e9eefc;
+            --muted: #a6b1d0;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #00d1ff;
+            --card: #101522;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+        }
+
+        /* Light theme overrides for a dual-mode experience */
+        body.light {
+            --bg: #f0f4f9;
+            --surface: #ffffff;
+            --glass: rgba(0,0,0,0.05);
+            --text: #1d2c41;
+            --muted: #5e6d8a;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #008cff;
+            --card: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,.1);
+        }
+
+        /* Base styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Video Hero Section Styles */
+        .video-background-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-background-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white; /* Make sure this color stands out against your video */
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin: 0 0 1rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Optional: Add a dark overlay to improve text readability on top of the video */
+        .video-background-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Adjust the color and opacity as needed */
+            z-index: 0;
+        }
+
+        /* Header and Navigation */
+        .header {
+            background-color: var(--surface);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+         .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand);
+            display: flex;
+            align-items: center;
+        }
+        
+      .logo img {
+    max-height: 50px;  /* adjust this value to your taste */
+    width: auto;
+    display: block;
+}
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--brand);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--card);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 150px;
+            margin-top: 15px;
+            list-style: none;
+        }
+        
+        .nav-links li:hover > .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            padding: 10px 15px;
+            color: var(--text);
+            display: block;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: var(--surface);
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #9B59B6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        /* Mobile navigation */
+        @media (max-width: 768px) {
+            .nav-right {
+                gap: 1rem;
+            }
+            .nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--surface);
+                box-shadow: var(--shadow);
+                padding: 1rem 0;
+                text-align: center;
+                margin-right: 0;
+            }
+            .nav.open {
+                display: block;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links a {
+                padding: 0.5rem;
+            }
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                margin-top: 0;
+                background-color: transparent;
+            }
+            .dropdown-menu a {
+                padding-left: 30px;
+            }
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .section-subheading {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+        }
+        
+        /* Our Story Section */
+        .story-section {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            text-align: left;
+        }
+        
+        .story-content {
+            flex: 1;
+        }
+
+        .story-image {
+            flex: 1;
+        }
+
+        .story-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .story-section {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+        }
+
+        /* Our Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0,0,0,.5);
+            background: linear-gradient(135deg, var(--card), var(--surface));
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .team-member h4 {
+            font-size: 1.25rem;
+            margin: 0.5rem 0 0;
+        }
+        
+        .team-member p {
+            color: var(--muted);
+            margin: 0.5rem 0 1rem;
+        }
+
+        .social-icons a {
+            color: var(--muted);
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--brand);
+        }
+
+        /* Our Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .value-card {
+            background: var(--card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0,0,0,.5);
+            background: linear-gradient(135deg, var(--card), var(--surface));
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--brand);
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+
+        .value-card p {
+            color: var(--muted);
+        }
+
+        /* Milestones Section */
+        .milestones-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            text-align: left;
+        }
+        
+        .milestone {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        
+        .milestone-year {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--brand);
+        }
+
+        .milestone-content h4 {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem;
+        }
+        
+        .milestone-content p {
+            color: var(--muted);
+            margin: 0;
+        }
+        
+        .milestones-image {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .milestones-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Why Choose Us Section */
+        .choose-us-section {
+            background-color: var(--surface);
+            padding: 5rem 0;
+        }
+        
+        .choose-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .choose-us-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .choose-us-item:hover {
+            transform: translateY(-5px);
+            background-color: var(--card);
+        }
+
+        .choose-us-item i {
+            font-size: 2.5rem;
+            color: var(--brand);
+        }
+
+        .choose-us-text h3 {
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .choose-us-text p {
+            color: var(--muted);
+            margin: 0.5rem 0 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--surface);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1 1 200px;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-section a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--brand);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--glass);
+            color: var(--muted);
+        }
+
+        /* --- Animations --- */
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Base styles for animated elements */
+        .animated-element {
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0) !important;
+        }
+        
+        /* Specific animation classes */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        /* New Hero Section Styles */
+        /* Global Reset */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* optional dark overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #fff;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .hero-paragraph {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: #224DB7;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .hero-button:hover {
+            background-color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            0% {
+            opacity: 0;
+            transform: translateY(-20px);
+            }
+            100% {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            0% {
+            opacity: 0;
+            transform: translateY(20px);
+            }
+            100% {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        .animate-fade-up-delayed {
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo">
+                <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
+                </div>
+            </a>
+            <div class="nav-right">
+                <nav class="nav" id="site-nav">
+                    <ul class="nav-links">
+                        <li class="dropdown">
+                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="redesigned_index.html">Home 1</a></li>
+                                <li><a href="home3.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="About us.html" class="active">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                               <li><a href="Services.html">All Services</a></li>
+                               <li><a href="social-media.html">Social Media Marketing</a></li>
+                               <li><a href="seo.html">SEO Optimization</a></li>
+                               <li><a href="ppc.html">PPC Advertising</a></li>
+                               <li><a href="web-dev.html">web development</a></li>
+                               <li><a href="email.html">Email Marketing</a></li>
+                               <li><a href="analytics.html">Analytics & Reporting</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li class="dropdown">
+                            <a href="login.html">Login <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="login.html">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html">Admin Login</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="profile-container" style="position: relative;">
+                    <div class="profile-icon" id="profile-btn">
+                      PS
+                    </div>
+                    <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
+                      <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+                    </div>
+                </div>
+                
+                <div class="theme-toggle">
+                    <button id="theme-toggle" class="btn btn-secondary">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <video autoplay muted loop playsinline class="hero-bg-video">
+                <source src="https://cdn.pixabay.com/video/2022/02/23/108640-681143995_large.mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-slide-in">About Us</h1>
+                    <p class="hero-paragraph animate-fade-up">
+                        Our mission is rooted in trust, transparency, and delivering value at every step of your property journey.
+                    </p>
+                    <a href="contact.html" class="hero-button animate-fade-up-delayed">Reach Out Today</a>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container story-section">
+                <div class="story-content animated-element animate-slide-in-left">
+                    <h2 class="section-heading">Our Story</h2>
+                    <p class="section-subheading">From a small startup to a leading agency, our journey is one of passion, innovation, and client success.</p>
+                    <p>Founded in 2018 by a group of marketing enthusiasts, Stackly Digital Marketing was born out of a shared belief that effective digital marketing should be accessible and transparent. We started with a mission to help small businesses compete with industry giants by leveraging smart, data-driven strategies.</p>
+                 
+                </div>
+                <div class="story-image animated-element animate-slide-in-right">
+                    <img src="https://cdn.pixabay.com/photo/2018/02/08/10/22/desk-3139127_1280.jpg" alt="A photo of a team collaborating in an office.">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-heading animated-element animate-fade-in-up">Meet the Team</h2>
+                <p class="section-subheading animated-element animate-fade-in-up">Our diverse team of experts brings a wide range of skills and a commitment to excellence.</p>
+                <div class="team-grid">
+                    <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <img src="https://i.pinimg.com/1200x/52/09/f6/5209f6863f1e5a4e552bdbbc30bf20fb.jpg" alt="Profile picture of Jane Doe.">
+                        <h4>Jane Doe</h4>
+                        <p>Founder & CEO</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://i.pinimg.com/736x/88/ae/fb/88aefb54ee3f3e7191b3df89b5230ad0.jpg" alt="Profile picture of John Smith.">
+                        <h4>John Smith</h4>
+                        <p>Lead Strategist</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <img src="https://i.pinimg.com/736x/a1/33/65/a13365ea6314be632e999b14b0f23da3.jpg" alt="Profile picture of Alice Lee.">
+                        <h4>Alice Lee</h4>
+                        <p>Creative Director</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <img src="https://i.pinimg.com/736x/90/1e/9c/901e9c722dfc110924863b61ae7d64a2.jpg" alt="Profile picture of Michael Kim.">
+                        <h4>Michael Kim</h4>
+                        <p>SEO Specialist</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-heading animated-element animate-fade-in-up">Our Core Values</h2>
+                <p class="section-subheading animated-element animate-fade-in-up">These principles guide our work and define our commitment to our clients and each other.</p>
+                <div class="values-grid">
+                    <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Innovation</h3>
+                        <p>We embrace change and are constantly seeking new and creative ways to solve problems.</p>
+                    </div>
+                    <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Integrity</h3>
+                        <p>We believe in honesty, transparency, and building trust in every interaction.</p>
+                    </div>
+                    <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <i class="fas fa-users-cog"></i>
+                        <h3>Collaboration</h3>
+                        <p>We work together as a cohesive unit and partner closely with our clients to achieve shared goals.</p>
+                    </div>
+                    <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Results-Driven</h3>
+                        <p>Our focus is on delivering tangible, measurable outcomes that contribute to your success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="container">
+                <h2 class="section-heading animated-element animate-fade-in-up">Our Journey So Far</h2>
+                <p class="section-subheading animated-element animate-fade-in-up">A look back at our key achievements and moments that define our growth.</p>
+                <img src="https://www.shutterstock.com/image-vector/infographic-sales-funnel-diagram-template-600nw-2454300497.jpg" alt="A graphical timeline showing company milestones." class="milestones-image animated-element animate-fade-in" style="animation-delay: 0.5s;">
+                <div class="milestones-grid" style="margin-top: 3rem;">
+                    <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <div class="milestone-year">2018</div>
+                        <div class="milestone-content">
+                            <h4>Company Founded</h4>
+                            <p>Stackly Digital Marketing is launched with a focus on web design and SEO.</p>
+                        </div>
+                    </div>
+                    <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.7s;">
+                        <div class="milestone-year">2019</div>
+                        <div class="milestone-content">
+                            <h4>First Major Client</h4>
+                            <p>Successfully executed a full-scale digital campaign for a national retail brand.</p>
+                        </div>
+                    </div>
+                    <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.8s;">
+                        <div class="milestone-year">2021</div>
+                        <div class="milestone-content">
+                            <h4>Team Expansion</h4>
+                            <p>Expanded our team by 50% to include dedicated PPC and social media experts.</p>
+                        </div>
+                    </div>
+                    <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.9s;">
+                        <div class="milestone-year">2023</div>
+                        <div class="milestone-content">
+                            <h4>Award Recognition</h4>
+                            <p>Awarded "Best Small Digital Agency" by industry publications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section choose-us-section">
+            <div class="container">
+                <h2 class="section-heading animated-element animate-fade-in-up">Why Partner With Us?</h2>
+                <p class="section-subheading animated-element animate-fade-in-up">We are committed to delivering exceptional results and a seamless client experience.</p>
+                <div class="choose-us-grid">
+                    <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <i class="fas fa-bullseye"></i>
+                        <div class="choose-us-text">
+                            <h3>Data-Driven Strategies</h3>
+                            <p>Every decision we make is backed by thorough research and analytics to ensure maximum ROI.</p>
+                        </div>
+                    </div>
+                    <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <i class="fas fa-gem"></i>
+                        <div class="choose-us-text">
+                            <h3>Transparent Reporting</h3>
+                            <p>We provide clear, easy-to-understand reports so you always know how your campaigns are performing.</p>
+                        </div>
+                    </div>
+                    <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <i class="fas fa-headset"></i>
+                        <div class="choose-us-text">
+                            <h3>Dedicated Support</h3>
+                            <p>Our team is always available to answer your questions and provide personalized guidance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+    <div class="container footer-container">
+        <div class="footer-section">
+            <div class="logo">
+                <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
+            </div>
+            <p>Your partner for digital marketing success. We deliver results that matter.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="redesigned_index.html">Home</a></li>
+                <li><a href="About us.html">About Us</a></li>
+                <li><a href="Services.html">services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="seo.html">SEO</a></li>
+                <li><a href="ppc.html">PPC</a></li>
+                <li><a href="social-media.html">Social Media</a></li>
+                <li><a href="web-dev.html">Web Development</a></li>
+                 <li><a href="email.html">email marketing</a></li>
+                  <li><a href="analytics.html">Analytics</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li><a href="#">info@stackly.com</a></li>
+                <li><a href="#">+1 (555) 123-4567</a></li>
+                <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2024 Stackly Digital Marketing. All rights reserved.
+    </div>
+</footer>
+
+    <script>
+        // Mobile nav toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const nav = document.getElementById('site-nav');
+        mobileToggle?.addEventListener('click', () => nav.classList.toggle('open'));
+
+        // Theme toggle
+        document.getElementById('theme-toggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+        });
+
+        // Profile dropdown functionality
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        profileBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+            profileDropdown.style.display = 'none';
+          }
+        });
+
+        // Logout function
+        function logout() {
+          // Add your logout logic here
+          alert('Logged out successfully!');
+          window.location.href = 'login.html';
+        }
+
+        // Function to handle the animated elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animated-element');
+            
+            // Set up a new IntersectionObserver
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    // If the element is visible, add the 'visible' class to trigger the animation
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Stop observing the element once it's visible to prevent re-animating
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // Adjust the root margin to make the animation trigger earlier or later
+                rootMargin: '0px',
+                // Trigger when at least 20% of the element is visible
+                threshold: 0.2
+            });
+
+            // Loop through all elements and observe them
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        };
+
+        // Run the animation function once the window has loaded
+        window.onload = animateOnScroll;
+    </script>
+</body>
+</html>

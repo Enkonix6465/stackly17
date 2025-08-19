@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stackly Digital Marketing - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* CSS variables for a consistent dark theme */
+        :root {
+          --bg: #0b0d12;
+          --surface: #0f1219;
+          --glass: rgba(255,255,255,0.08);
+          --text: #e9eefc;
+          --muted: #a6b1d0;
+          --brand: #224DB7;
+          --brand-2: #5b8cff;
+          --accent: #00d1ff;
+          --card: #101522;
+          --shadow: 0 10px 30px rgba(0,0,0,.35);
+          --hero-overlay-dark: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+          --badge-bg: rgba(34,77,183,.15);
+          --badge-border: rgba(34,77,183,.35);
+          --badge-text: #cfe0ff;
+        }
+
+        /* Light theme overrides for a dual-theme design */
+        body.light {
+          --bg: #f0f4f9;
+          --surface: #ffffff;
+          --glass: rgba(0,0,0,0.05);
+          --text: #1d2c41;
+          --muted: #5e6d8a;
+          --brand: #224DB7;
+          --brand-2: #5b8cff;
+          --accent: #008cff;
+          --card: #ffffff;
+          --shadow: 0 10px 30px rgba(0, 0, 0, .1);
+          --hero-overlay-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+          --badge-bg: rgba(34,77,183,.05);
+          --badge-border: rgba(34,77,183,.2);
+          --badge-text: #224DB7;
+        }
+        
+        body {
+          margin: 0;
+          font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+          background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+          color: var(--text);
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+        .container { width: min(1200px, 92%); margin-inline: auto; }
+
+        /* ---------- Header (sticky, glass) ---------- */
+        .header { background-color: var(--surface); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); transition: background-color 0.3s ease; }
+        .logo-img { height: 40px; width: auto; margin-right: 8px; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--brand); display: flex; align-items: center; }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav { flex-grow: 1; display: flex; justify-content: flex-end; margin-right: 1rem; }
+        .nav-links { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; align-items: center; }
+        .nav-links a { color: var(--muted); font-weight: 600; padding: 5px 0; transition: color .3s; position: relative; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  position: absolute;
+  top: 100%;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  padding: 10px 0;
+  min-width: 150px;
+  list-style: none;
+}
+
+/* Show with delay */
+.nav-links li:hover > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0.2s; /* adjust delay */
+}
+
+        .dropdown-menu a { padding: 10px 15px; color: var(--text); display: block; transition: color 0.3s ease; }
+        .profile { position: relative; }
+        .profile-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #9B59B6; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; cursor: pointer; }
+        .profile-menu { display: none; position: absolute; top: 120%; right: 0; background: var(--card); box-shadow: var(--shadow); border-radius: 8px; overflow: hidden; transition: background-color 0.3s ease; }
+        .profile-menu a { display: block; padding: 10px 15px; color: var(--text); white-space: nowrap; transition: color 0.3s ease; }
+        .profile:hover .profile-menu { display: block; }
+        .mobile-menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+        .theme-toggle { display: block; }
+
+        @media (max-width: 768px) {
+          .nav { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--surface); box-shadow: var(--shadow); padding: 1rem 0; }
+          .nav.open { display: block; }
+          .nav-links { flex-direction: column; gap: 1rem; }
+          .mobile-menu-toggle { display: block; }
+        }
+
+        /* Global Reset */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* optional dark overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #fff;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .hero-paragraph {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: #224DB7;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .hero-button:hover {
+            background-color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        .animate-fade-up-delayed {
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+        .animate-slide-in,
+        .animate-fade-up,
+        .animate-fade-up-delayed {
+            animation-fill-mode: both;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+        .section-heading, .section-subheading {
+            text-align: center;
+        }
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .service-card {
+            background-color: var(--card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--brand);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+
+        .service-card p {
+            color: var(--muted);
+        }
+
+        /* About Us Section */
+        .about-section {
+            background-color: var(--surface);
+            padding: 5rem 0;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Case Studies Section */
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .case-study-card {
+            background-color: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .case-study-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .case-study-info {
+            padding: 1.5rem;
+        }
+        
+        .case-study-info h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem;
+        }
+
+        .case-study-info p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 0;
+        }
+        
+        /* Testimonials Section */
+        .testimonial-card {
+            background-color: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-card .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .testimonial-card .author-info img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .testimonial-role {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--brand);
+            padding: 4rem 0;
+            color: #fff;
+            border-radius: 12px;
+            margin-top: 5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            color: #fff;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid rgba(255,255,255,.06);
+            transition: background-color 0.3s ease;
+        }
+        .footer-content {
+            display:grid;
+            grid-template-columns: 2fr 1fr 1fr 1.4fr;
+            gap: 20px;
+            padding: 46px 0;
+        }
+        .footer h3, .footer h4 { margin-top:0; }
+        .footer p, .footer li { color: var(--muted); transition: color 0.3s ease; }
+        .social-links { display:flex; gap:12px; margin-top:10px; }
+        .social-links a { width:38px; height:38px; display:grid; place-items:center; border-radius:10px; background: var(--glass); border:1px solid var(--glass); transition: background-color 0.3s ease; }
+        .footer ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,.06); text-align:center; padding: 16px 0 22px; color: var(--muted); font-size:.95rem; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content { grid-template-columns: 1.4fr 1fr 1fr; }
+            .nav-container { grid-template-columns: auto 1fr auto; }
+            .theme-toggle { display:block; }
+        }
+        @media (max-width: 780px) {
+            .mobile-menu-toggle { display:block; }
+            .nav { display:none; position:absolute; left:0; right:0; top:100%; background:var(--surface); box-shadow:var(--shadow); padding:1rem 0; }
+            .nav.open { display:block; }
+            .nav-links { flex-direction:column; align-items:flex-start; padding: 10px 12px 16px; }
+            .dropdown:hover .dropdown-menu { display:none; }
+            .dropdown .dropdown-toggle::after{ content: ""; }
+            .dropdown-menu { position:relative; border:none; background:transparent; padding:6px 0 10px; display:block; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="redesigned_index.html" class="logo">
+                <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
+            </a>
+            <div class="nav-right">
+                <nav class="nav" id="site-nav">
+                    <ul class="nav-links">
+                        <li class="dropdown">
+                            <a href="redesigned_index.html" class="active">Home <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="redesigned_index.html">Home 1</a></li>
+                                <li><a href="home3.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="About us.html">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="Services.html">All Services</a></li>
+                                <li><a href="social-media.html">Social Media Marketing</a></li>
+                                <li><a href="seo.html">SEO Optimization</a></li>
+                                <li><a href="ppc.html">PPC Advertising</a></li>
+                                <li><a href="web-dev.html">web development</a></li>
+                                <li><a href="email.html">Email Marketing</a></li>
+                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li class="dropdown">
+                            <a href="signup.html">Login <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="login.html">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html">Admin Login</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="profile-container" style="position: relative;">
+                    <div class="profile-icon" id="profile-btn">
+                      PS
+                    </div>
+                    <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
+                      <a href="#" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+                    </div>
+                </div>
+                <div class="theme-toggle">
+                    <button id="theme-toggle" class="btn btn-secondary">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <video autoplay muted loop playsinline class="hero-bg-video">
+                <source src="https://videos.pexels.com/video-files/3044995/3044995-uhd_2560_1440_24fps.mp4">
+                Your browser does not support the video tag.
+            </video>
+        
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-slide-in">Home</h1>
+                    <p class="hero-paragraph animate-fade-up">
+                       Stackly Digital Marketing helps businesses grow with data-driven strategies, creative content, and cutting-edge.
+                    </p>
+                    <a href="contact.html" class="hero-button animate-fade-up-delayed">Reach Out Today</a>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-heading">Services We Offer</h2>
+                <p class="section-subheading">Our expertise spans a wide range of digital solutions tailored to your unique needs.</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-search-dollar"></i>
+                        <h3>SEO & Content Marketing</h3>
+                        <p>Boost your visibility and attract qualified leads with powerful search engine optimization.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Paid Advertising (PPC)</h3>
+                        <p>Launch targeted campaigns across platforms to drive instant traffic and conversions.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Social Media Management</h3>
+                        <p>Build a strong community and engage with your audience on all major social platforms.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <h3>Email Marketing</h3>
+                        <p>Nurture your leads and build customer loyalty with automated, personalized email campaigns.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Web Design & Development</h3>
+                        <p>Create stunning, high-performing websites optimized for user experience and conversion.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-edit"></i>
+                        <h3>Analytics & Reporting</h3>
+                        <p>Gain valuable insights and track your ROI with detailed, transparent performance reports.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section about-section">
+            <div class="about-image">
+                <img src="https://cdn.pixabay.com/photo/2016/11/19/21/01/analysis-1841158_1280.jpg" alt="A team of digital marketing professionals working together.">
+            </div>
+            <div class="about-content">
+                <h2 class="section-heading">Our Mission</h2>
+                <p class="section-subheading">We are a team of passionate digital strategists dedicated to helping brands thrive in the online world.</p>
+                <p>At Stackly Digital Marketing, we believe that a successful online presence is built on a foundation of solid strategy, creative execution, and continuous optimization. We partner with you to understand your goals and deliver measurable results that drive business growth.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-heading">Recent Case Studies</h2>
+                <p class="section-subheading">See how we've helped our clients achieve their marketing goals and grow their business.</p>
+                <div class="case-studies-grid">
+                    <div class="case-study-card">
+                        <img src="https://cdn.pixabay.com/photo/2015/05/15/01/48/computer-767776_1280.jpg" alt="eCommerce dashboard with charts and graphs.">
+                        <div class="case-study-info">
+                            <h4>E-commerce Sales Growth</h4>
+                            <p>Increased monthly revenue by 150% through targeted PPC campaigns and SEO optimization.</p>
+                        </div>
+                    </div>
+                    <div class="case-study-card">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/11/11/02/project-management-2738521_1280.jpg" alt="A funnel diagram showing lead conversion process.">
+                        <div class="case-study-info">
+                            <h4>Lead Generation for SaaS</h4>
+                            <p>Generated over 500 qualified leads in three months with a focused content marketing strategy.</p>
+                        </div>
+                    </div>
+                    <div class="case-study-card">
+                        <img src="https://cdn.pixabay.com/photo/2018/02/23/09/03/human-3175027_1280.jpg" alt="Social media icons and a large magnifying glass.">
+                        <div class="case-study-info">
+                            <h4>Brand Awareness Campaign</h4>
+                            <p>Achieved a 300% increase in social media engagement and brand reach within six months.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section about-section">
+            <div class="container">
+                <h2 class="section-heading">What Our Clients Say</h2>
+                <p class="section-subheading">Don't just take our word for it—see what our partners have to say about our work.</p>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Working with Stackly has been a game-changer for our business. Their strategic approach and dedication to results are unparalleled. Our online presence has never been stronger."</p>
+                    <div class="author-info">
+                        <img src="https://i.pinimg.com/1200x/52/09/f6/5209f6863f1e5a4e552bdbbc30bf20fb.jpg" alt="Profile picture of Jane Doe.">
+                        <div>
+                            <p class="testimonial-author">- Jane Doe</p>
+                            <p class="testimonial-role">CEO of InnovateTech Solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section cta-section">
+            <div class="container">
+                <h2 class="section-heading">Ready to Grow Your Business?</h2>
+                <p>Let's discuss how a tailored digital marketing strategy can help you achieve your goals.</p>
+                <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
+                <p>Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
+                
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="redesigned_index.html">Home</a></li>
+            <li><a href="About us.html">About Us</a></li>
+            <li><a href="Services.html">Services</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+
+            <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="seo.html">SEO</a></li>
+                <li><a href="ppc.html">PPC</a></li>
+                <li><a href="social-media.html">Social Media</a></li>
+                <li><a href="web-dev.html">Web Development</a></li>
+                 <li><a href="email.html">email marketing</a></li>
+                  <li><a href="analytics.html">Analytics</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const nav = document.getElementById('site-nav');
+        mobileToggle?.addEventListener('click', () => nav.classList.toggle('open'));
+
+        // Theme toggle (simple demo toggling body class)
+        document.getElementById('theme-toggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+        });
+
+        // Profile dropdown functionality
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        profileBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+            profileDropdown.style.display = 'none';
+          }
+        });
+
+        // Logout function
+        function logout() {
+          // Add your logout logic here
+          alert('Logged out successfully!');
+          window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

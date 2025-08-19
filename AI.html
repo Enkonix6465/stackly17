@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly Digital Marketing - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* CSS variables for a consistent dark theme */
+    :root {
+      --bg: #0b0d12;
+      --surface: #0f1219;
+      --glass: rgba(255,255,255,0.08);
+      --text: #e9eefc;
+      --muted: #a6b1d0;
+      --brand: #224DB7;
+      --brand-2: #5b8cff;
+      --accent: #00d1ff;
+      --card: #101522;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --hero-overlay-dark: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+      --badge-bg: rgba(34,77,183,.15);
+      --badge-border: rgba(34,77,183,.35);
+      --badge-text: #cfe0ff;
+    }
+
+    /* Light theme overrides for a dual-theme design */
+    body.light {
+      --bg: #f0f4f9;
+      --surface: #ffffff;
+      --glass: rgba(0,0,0,0.05);
+      --text: #1d2c41;
+      --muted: #5e6d8a;
+      --brand: #224DB7;
+      --brand-2: #5b8cff;
+      --accent: #008cff;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .1);
+      --hero-overlay-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+      --badge-bg: rgba(34,77,183,.05);
+      --badge-border: rgba(34,77,183,.2);
+      --badge-text: #224DB7;
+    }
+    
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1200px, 92%); margin-inline: auto; }
+
+    /* ---------- Header (sticky, glass) ---------- */
+    .header { background-color: var(--surface); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); transition: background-color 0.3s ease; }
+    .logo-img { height: 40px; width: auto; margin-right: 8px; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--brand); display: flex; align-items: center; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav { flex-grow: 1; display: flex; justify-content: flex-end; margin-right: 1rem; }
+    .nav-links { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; align-items: center; }
+    .nav-links a { color: var(--muted); font-weight: 600; padding: 5px 0; transition: color .3s; position: relative; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  position: absolute;
+  top: 100%;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  padding: 10px 0;
+  min-width: 150px;
+  list-style: none;
+}
+
+/* Show with delay */
+.nav-links li:hover > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0.2s; /* adjust delay */
+}
+
+    .dropdown-menu a { padding: 10px 15px; color: var(--text); display: block; transition: color 0.3s ease; }
+    .profile { position: relative; }
+    .profile-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #9B59B6; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; cursor: pointer; }
+    .profile-menu { display: none; position: absolute; top: 120%; right: 0; background: var(--card); box-shadow: var(--shadow); border-radius: 8px; overflow: hidden; transition: background-color 0.3s ease; }
+    .profile-menu a { display: block; padding: 10px 15px; color: var(--text); white-space: nowrap; transition: color 0.3s ease; }
+    .profile:hover .profile-menu { display: block; }
+    .mobile-menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+    .theme-toggle { display: block; }
+
+    @media (max-width: 768px) {
+      .nav { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--surface); box-shadow: var(--shadow); padding: 1rem 0; }
+      .nav.open { display: block; }
+      .nav-links { flex-direction: column; gap: 1rem; }
+      .mobile-menu-toggle { display: block; }
+    }
+
+    .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        .section-subheading {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+        }
+        .cta-image-section {
+            position: relative;
+            padding: 6rem 2rem;
+            color: #fff;
+            text-align: center;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 5rem;
+            background-image: url('https://cdn.pixabay.com/photo/2015/01/25/21/02/phone-612061_1280.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .cta-image-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        .cta-image-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cta-image-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 0.5rem;
+        }
+        .cta-image-content p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .cta-image-content button {
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cta-image-content button:hover {
+            background-color: #00b3e6;
+        }
+
+    
+
+  
+
+
+
+    /* ---------- Footer ---------- */
+    .footer { background: var(--surface); border-top: 1px solid rgba(255,255,255,.06); transition: background-color 0.3s ease; }
+    .footer-content { display:grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 20px; padding: 46px 0; }
+    .footer h3, .footer h4 { margin-top:0; }
+    .footer p, .footer li { color: var(--muted); transition: color 0.3s ease; }
+    .social-links { display:flex; gap:12px; margin-top:10px; }
+    .social-links a { width:38px; height:38px; display:grid; place-items:center; border-radius:10px; background: var(--glass); border:1px solid var(--glass); transition: background-color 0.3s ease; }
+    .footer ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,.06); text-align:center; padding: 16px 0 22px; color: var(--muted); font-size:.95rem; }
+
+    /* ---------- Utilities ---------- */
+
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1024px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-content { grid-template-columns: 1.4fr 1fr 1fr; }
+      .nav-container { grid-template-columns: auto 1fr auto; }
+      .theme-toggle { display:block; }
+    }
+    @media (max-width: 780px) {
+      .mobile-menu-toggle { display:block; }
+      .nav { display:none; position:absolute; left:0; right:0; top:100%; background:var(--surface); box-shadow:var(--shadow); padding:1rem 0; }
+      .nav.open { display:block; }
+      .nav-links { flex-direction:column; align-items:flex-start; padding: 10px 12px 16px; }
+      .dropdown:hover .dropdown-menu { display:none; }
+      .dropdown .dropdown-toggle::after{ content: ""; }
+      .dropdown-menu { position:relative; border:none; background:transparent; padding:6px 0 10px; display:block; }
+      .welcome-content { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-content { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 420px) { .stats-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav-container">
+      <a href="redesigned_index.html" class="logo">
+        <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
+      </a>
+      <div class="nav-right">
+        <nav class="nav" id="site-nav">
+          <ul class="nav-links">
+            <li class="dropdown">
+              <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="redesigned_index.html">Home 1</a></li>
+                <li><a href="home3.html">Home 2</a></li>
+              </ul>
+            </li>
+            <li><a href="About us.html">About Us</a></li>
+            <li class="dropdown">
+              <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="Services.html">All Services</a></li>
+                <li><a href="social-media.html">Social Media Marketing</a></li>
+                <li><a href="seo.html">SEO Optimization</a></li>
+                <li><a href="ppc.html">PPC Advertising</a></li>
+                <li><a href="web-dev.html">web development</a></li>
+                <li><a href="email.html">Email Marketing</a></li>
+                <li><a href="analytics.html">Analytics & Reporting</a></li>
+              </ul>
+            </li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li class="dropdown">
+              <a href="signup.html">Login <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="login.html">Sign Up/Login</a></li>
+                <li><a href="sign admin.html">Admin Login</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="profile-container" style="position: relative;">
+          <div class="profile-icon" id="profile-btn">
+            PS
+          </div>
+          <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
+            <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+          </div>
+        </div>
+        <div class="theme-toggle">
+          <button id="theme-toggle" class="btn btn-secondary">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+        <div class="mobile-menu-toggle" id="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+   <section class="section article-section">
+            <div class="container">
+                <div class="article-header">
+                    <h1 class="article-title">The Role of AI in Modern Marketing</h1>
+                    <p class="article-meta">Published on August 18, 2024 by Jane Doe</p>
+                </div>
+                <img class="article-image" src="https://cdn.pixabay.com/photo/2023/05/08/08/41/ai-7977960_1280.jpg" alt="Article image showing AI in modern marketing" />
+                <div class="article-content">
+                    <p>Artificial intelligence is no longer a futuristic concept; it's a fundamental tool reshaping the digital marketing landscape. From automating repetitive tasks to providing deep insights into consumer behavior, AI is empowering marketers to create more effective and personalized campaigns. This shift is not about replacing human creativity but enhancing it with data-driven precision.</p>
+                    <h2>AI-Powered Personalization</h2>
+                    <p>One of the most significant impacts of AI is its ability to deliver hyper-personalized experiences. AI algorithms can analyze vast amounts of customer data—including browsing history, purchase behavior, and demographics—to segment audiences with unprecedented accuracy. This allows marketers to serve highly relevant content, product recommendations, and offers, leading to higher engagement and conversion rates.</p>
+                    <h2>Automated Content Creation</h2>
+                    <p>AI-powered tools are now capable of generating various forms of content, from social media posts and email newsletters to blog outlines and ad copy. While these tools still require human oversight, they can dramatically speed up the content creation process, freeing up creative teams to focus on strategy and high-level ideas. This allows businesses to maintain a consistent content flow without a massive increase in resources.</p>
+                    <h2>Predictive Analytics and SEO</h2>
+                    <p>AI is also revolutionizing search engine optimization (SEO) by moving beyond simple keyword analysis. Predictive analytics can forecast future search trends, helping marketers optimize their content before a topic becomes saturated. AI tools can analyze competitor strategies, identify opportunities, and even suggest improvements to on-page elements, ensuring that your content ranks higher and reaches the right audience.</p>
+                    <h2>Challenges and the Future</h2>
+                    <p>Despite its benefits, the integration of AI in marketing is not without its challenges. Data privacy concerns, the need for skilled talent, and the ethical implications of using AI are all critical considerations. However, as the technology becomes more sophisticated and accessible, AI will continue to be an indispensable partner for marketers, driving innovation and shaping the future of digital engagement.</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="cta-image-section">
+                    <div class="cta-image-content">
+                        <h2>Ready to Elevate Your Digital Presence?</h2>
+                        <p>Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
+                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+           <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
+          <p>Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
+         
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="redesigned_index.html">Home</a></li>
+            <li><a href="About us.html">About Us</a></li>
+            <li><a href="Services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          
+          </ul>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul>
+           <li>
+                <li><a href="seo.html">SEO</a></li>
+                <li><a href="ppc.html">PPC</a></li>
+                <li><a href="social-media.html">Social Media</a></li>
+                <li><a href="web-dev.html">Web Development</a></li>
+                 <li><a href="web-dev.html">email marketing</a></li>
+                  <li><a href="web-dev.html">Analytics</a></li>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
+            <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+            <li><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const nav = document.getElementById('site-nav');
+    mobileToggle?.addEventListener('click', ()=> nav.classList.toggle('open'));
+
+    // Theme toggle (simple demo toggling body class)
+    document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
+      document.body.classList.toggle('light');
+    });
+
+    // Profile dropdown functionality
+    const profileBtn = document.getElementById('profile-btn');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    
+    profileBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.style.display = 'none';
+      }
+    });
+
+    // Logout function
+    function logout() {
+      // Add your logout logic here
+      alert('Logged out successfully!');
+      window.location.href = 'login.html';
+    }
+
+    // Animated counters when visible
+    const counters = document.querySelectorAll('.stat-number');
+    const animateCount = (el) => {
+      const target = +el.dataset.target;
+      const duration = 1600;
+      const start = performance.now();
+      const formatter = (n)=>{
+        if (target >= 1000000) return Intl.NumberFormat('en', {notation:'compact'}).format(n);
+        return Intl.NumberFormat('en').format(n);
+      };
+      function tick(now){
+        const p = Math.min(1, (now - start) / duration);
+        const value = Math.floor(target * (0.2 + 0.8 * (p)));
+        el.textContent = formatter(value);
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); io.unobserve(e.target); } });
+    }, { threshold: .4 });
+    counters.forEach(c=> io.observe(c));
+  </script>
+</body>
+</html>

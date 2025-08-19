@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Digital Marketing - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS variables for a consistent dark theme */
+        :root {
+            --bg: #0b0d12;
+            --surface: #0f1219;
+            --glass: rgba(255,255,255,0.08);
+            --text: #e9eefc;
+            --muted: #a6b1d0;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #00d1ff;
+            --card: #101522;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+        }
+
+        /* Light theme overrides for a dual-theme design */
+        body.light {
+            --bg: #f0f4f9;
+            --surface: #ffffff;
+            --glass: rgba(0,0,0,0.05);
+            --text: #1d2c41;
+            --muted: #5e6d8a;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #008cff;
+            --card: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .1);
+        }
+    
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg); /* Use theme variable for main background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Card Container */
+        .login-card {
+            display: flex;
+            width: 850px;
+            max-width: 90vw;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideUp 1s ease-in-out;
+            background-color: var(--surface); /* Use theme variable for card background */
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Left Side (Animated) */
+        .login-left {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(135deg, #3b00ff, #ff00d4);
+            color: white;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        .login-left h1 {
+            font-size: 32px;
+            margin-top: 40%;
+            margin-bottom: 10px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .login-left p {
+            font-size: 16px;
+            animation: fadeIn 1.4s ease-in-out;
+        }
+
+        /* Blobs Animation */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        .blob1 {
+            width: 150px;
+            height: 150px;
+            top: 15%;
+            left: 20%;
+        }
+        .blob2 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            right: 25%;
+        }
+        .blob3 {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            left: 70%;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Right Side (Form) */
+        .login-right {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff; /* Set solid white background */
+            color: #1d2c41; /* Set a dark text color for contrast */
+        }
+
+        .login-right h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1d2c41;
+        }
+
+        .login-right form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-right label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #5e6d8a;
+            display: block;
+        }
+
+        .login-right input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d4d8e3; /* Set a dark border for contrast */
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            outline: none;
+            background-color: #ffffff;
+            color: #1d2c41;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-right input:focus {
+            border-color: #224DB7;
+        }
+
+        .continue-btn {
+            background: linear-gradient(to right, #ff00d4, #3b00ff);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: #224DB7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .login-card {
+                flex-direction: column;
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .login-left {
+                flex: none;
+                height: 200px;
+                padding: 20px;
+            }
+            
+            .login-left h1 {
+                margin-top: 10%;
+                font-size: 24px;
+            }
+            
+            .login-right {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="login-left">
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue access</p>
+
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
+
+    <div class="login-right">
+        <h2>Sign In</h2>
+        <form id="loginForm">
+            <label>Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="continue-btn">Sign In</button>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        if (!email || !password) {
+            alert('Please enter both email and password.');
+            return;
+        }
+        
+        // Check for admin credentials
+        if (email === 'admin@enkonix.in' && password === 'admin123') {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userRole', 'admin');
+            localStorage.setItem('userData', JSON.stringify({
+                firstName: 'Admin',
+                lastName: 'User',
+                email: 'admin@enkonix.in',
+                role: 'admin'
+            }));
+            alert('Admin login successful! Redirecting to dashboard...');
+            window.location.href = 'admin.html';
+        } else {
+            // Regular user login (simplified - in real app would validate against database)
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userRole', 'user');
+            localStorage.setItem('userData', JSON.stringify({
+                firstName: 'User',
+                lastName: 'Account',
+                email: email,
+                role: 'user'
+            }));
+            alert('Login successful! Welcome to Stackly Digital Marketing.');
+            window.location.href = 'index.html';
+        }
+    });
+</script>
+
+</body>
+</html>

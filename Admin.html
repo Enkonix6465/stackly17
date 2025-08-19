@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Digital Marketing - Admin Dashboard</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* CSS Variables for a consistent dark theme, inspired by the other provided files */
+        :root {
+            --bg: #0b0d12;
+            --surface: #0f1219;
+            --glass: rgba(255, 255, 255, 0.08);
+            --text: #e9eefc;
+            --muted: #a6b1d0;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #00d1ff;
+            --card: #101522;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+        }
+
+        /* Light Mode Variables */
+        body.light-mode {
+            --bg: #f0f2f5;
+            --surface: #ffffff;
+            --text: #333333;
+            --muted: #666666;
+            --card: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* General Body and Layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dashboard-container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background-color: var(--surface);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-2);
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item a:hover {
+            background-color: var(--card);
+            color: var(--text);
+        }
+
+        .nav-item a.active {
+            background-color: var(--brand);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            padding: 32px;
+            background-color: var(--bg);
+        }
+        
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--surface);
+            margin-bottom: 20px;
+        }
+
+        .top-bar .profile-menu {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .top-bar .profile-menu-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: var(--card);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .top-bar .profile-menu:hover .profile-menu-dropdown {
+            display: block;
+        }
+
+        .top-bar .profile-menu-dropdown a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .top-bar .profile-menu-dropdown a:hover {
+            background-color: var(--surface);
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .quick-actions .btn {
+            background-color: var(--brand);
+            color: var(--text);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .quick-actions .btn:hover {
+            background-color: var(--brand-2);
+            transform: translateY(-2px);
+        }
+
+        /* Card and Grid Layouts */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body.light-mode .card {
+            border: 1px solid #e0e0e0;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent);
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 8px;
+            line-height: 1;
+        }
+        
+        /* Table Styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--surface);
+        }
+        
+        .data-table th {
+            background-color: var(--surface);
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        
+        .data-table td {
+            background-color: var(--card);
+            color: var(--text);
+        }
+
+        .data-table tr:hover td {
+            background-color: #1a1e2a;
+        }
+
+        body.light-mode .data-table tr:hover td {
+            background-color: #f7f7f7;
+        }
+        
+        .data-table .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .status-active { background-color: #27ae60; color: #fff; }
+        .status-paused { background-color: #f39c12; color: #fff; }
+        .status-draft { background-color: #8e44ad; color: #fff; }
+        .status-admin { background-color: #2980b9; color: #fff; }
+        .status-user { background-color: #9b59b6; color: #fff; }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--surface);
+            background-color: var(--surface);
+            color: var(--text);
+        }
+
+        .btn {
+            background-color: var(--brand);
+            color: var(--text);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--brand-2);
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 8px;
+            transition: color 0.2s ease;
+        }
+
+        .btn-icon:hover {
+            color: var(--text);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--card);
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--muted);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--text);
+        }
+
+        /* Message Box */
+        .message-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--brand);
+            color: var(--text);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* New: Alert Styles */
+        .alert-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .alert-item.info {
+            background-color: var(--brand);
+        }
+        .alert-item.warning {
+            background-color: #f39c12;
+        }
+        .alert-item.success {
+            background-color: #27ae60;
+        }
+        .alert-item i {
+            color: var(--text);
+        }
+
+        /* Section visibility */
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 16px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 0;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--surface);
+                padding: 16px;
+                gap: 4px;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main dashboard container -->
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">Stackly Digital</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" data-section="dashboard" class="active">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-section="campaigns">
+                        <i class="fas fa-bullhorn"></i> Campaigns
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-section="users">
+                        <i class="fas fa-users"></i> Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-section="analytics">
+                        <i class="fas fa-chart-area"></i> Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-section="logs">
+                        <i class="fas fa-history"></i> Logs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-section="settings">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="top-bar">
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <div class="profile-menu">
+                    <a href="#"><i class="fas fa-user-circle"></i> Admin User</a>
+                    <div class="profile-menu-dropdown">
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <div class="section-header">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-rocket"></i> Active Campaigns</h3>
+                        <p class="stat-number">42</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-dollar-sign"></i> Total Budget</h3>
+                        <p class="stat-number">$150,000</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-user-plus"></i> New Leads (last 30 days)</h3>
+                        <p class="stat-number">1,250</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-user"></i> Active Users</h3>
+                        <p class="stat-number">25</p>
+                    </div>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Alerts & Notifications</h2>
+                </div>
+                <div class="card">
+                    <ul class="alert-list">
+                        <li class="alert-item success">
+                            <i class="fas fa-check-circle"></i> Campaign 'Q3 Product Launch' reached 100% of its goal.
+                        </li>
+                        <li class="alert-item info">
+                            <i class="fas fa-info-circle"></i> 'New Client Onboarding' campaign will go live in 24 hours.
+                        </li>
+                        <li class="alert-item warning">
+                            <i class="fas fa-exclamation-triangle"></i> Campaign 'Holiday Sale 2024' is running low on budget.
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                </div>
+                <div class="card">
+                    <ul class="activity-feed" style="list-style:none; padding: 0; margin: 0;">
+                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
+                            <i class="fas fa-check-circle" style="color: #2ecc71;"></i> Campaign 'Summer Sale' went live.
+                        </li>
+                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
+                            <i class="fas fa-pause-circle" style="color: #f39c12;"></i> Campaign 'Winter Ads' paused due to budget cap.
+                        </li>
+                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
+                            <i class="fas fa-user-plus" style="color: #3498db;"></i> New client 'TechCorp' added to the system.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Campaigns Section -->
+            <section id="campaigns" class="admin-section">
+                <div class="section-header">
+                    <h1>Campaigns</h1>
+                    <div class="quick-actions">
+                        <a href="#" class="btn" id="add-campaign-btn">
+                            <i class="fas fa-plus"></i> Create New Campaign
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Campaign Name</th>
+                                <th>Client</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>Budget</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Q3 Product Launch</td>
+                                <td>Innovate Inc.</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>2024-07-01</td>
+                                <td>$25,000</td>
+                                <td>
+                                    <button class="btn-icon" onclick="showModal('edit', 'Q3 Product Launch')"><i class="fas fa-pen"></i></button>
+                                    <button class="btn-icon" onclick="showModal('delete', 'Q3 Product Launch')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Holiday Sale 2024</td>
+                                <td>Fashionista Co.</td>
+                                <td><span class="status-badge status-paused">Paused</span></td>
+                                <td>2024-05-15</td>
+                                <td>$12,000</td>
+                                <td>
+                                    <button class="btn-icon" onclick="showModal('edit', 'Holiday Sale 2024')"><i class="fas fa-pen"></i></button>
+                                    <button class="btn-icon" onclick="showModal('delete', 'Holiday Sale 2024')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>New Client Onboarding</td>
+                                <td>TechCorp</td>
+                                <td><span class="status-badge status-draft">Draft</span></td>
+                                <td>2024-08-16</td>
+                                <td>$5,000</td>
+                                <td>
+                                    <button class="btn-icon" onclick="showModal('edit', 'New Client Onboarding')"><i class="fas fa-pen"></i></button>
+                                    <button class="btn-icon" onclick="showModal('delete', 'New Client Onboarding')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- User Management Section -->
+            <section id="users" class="admin-section">
+                <div class="section-header">
+                    <h1>User Management</h1>
+                    <div class="quick-actions">
+                        <a href="#" class="btn" id="add-user-btn">
+                            <i class="fas fa-user-plus"></i> Add New User
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Admin User</td>
+                                <td>admin@stackly.com</td>
+                                <td><span class="status-badge status-admin">Admin</span></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="btn-icon" onclick="showModal('edit', 'Admin User')"><i class="fas fa-pen"></i></button>
+                                    <button class="btn-icon" onclick="showModal('delete', 'Admin User')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>john.d@client.com</td>
+                                <td><span class="status-badge status-user">User</span></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="btn-icon" onclick="showModal('edit', 'John Doe')"><i class="fas fa-pen"></i></button>
+                                    <button class="btn-icon" onclick="showModal('delete', 'John Doe')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jane Smith</td>
+                                <td>jane.s@client.com</td>
+                                <td><span class="status-badge status-user">User</span></td>
+                                <td><span class="status-badge status-paused">Paused</span></td>
+                                <td>
+                                    <button class="btn-icon" onclick="showModal('edit', 'Jane Smith')"><i class="fas fa-pen"></i></button>
+                                    <button class="btn-icon" onclick="showModal('delete', 'Jane Smith')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="admin-section">
+                <div class="section-header">
+                    <h1>Analytics</h1>
+                </div>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-link"></i> Website Visitors</h3>
+                        <p class="stat-number" id="visitor-count">0</p>
+                        <p class="text-muted">Total number of unique visitors to your website.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-envelope-open-text"></i> Digital Marketing Inquiries</h3>
+                        <p class="stat-number">385</p>
+                        <p class="text-muted">Total inquiries submitted via forms or contact pages.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-chart-pie"></i> Conversion Rate</h3>
+                        <p class="stat-number">4.5%</p>
+                        <p class="text-muted">Percentage of website visitors who become leads.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-users"></i> Audience Demographics</h3>
+                        <p class="stat-number">35% Male, 65% Female</p>
+                        <p class="text-muted">Distribution of your target audience.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-chart-bar"></i> Traffic Sources</h3>
+                        <p class="stat-number">55% Organic, 30% Social, 15% Paid</p>
+                        <p class="text-muted">Breakdown of how visitors find your site.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs Section -->
+            <section id="logs" class="admin-section">
+                <div class="section-header">
+                    <h1>Activity Logs</h1>
+                </div>
+                <div class="card">
+                    <ul class="activity-feed" id="log-list" style="list-style:none; padding: 0; margin: 0;">
+                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
+                            <i class="fas fa-calendar-check" style="color: #27ae60;"></i> [2024-08-16 10:30] Campaign 'Q3 Launch' status updated to 'Active'.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="admin-section">
+                <div class="section-header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-user-circle"></i> Profile Settings</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" value="Admin User">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" value="admin@stackly.com">
+                            </div>
+                            <button type="submit" class="btn">Update Profile</button>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                        <form>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox"> Enable Two-Factor Authentication
+                                </label>
+                            </div>
+                            <button type="submit" class="btn">Save Security</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="custom-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-message"></p>
+            <div id="modal-buttons" style="display: flex; gap: 10px; margin-top: 20px;"></div>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript for the dashboard functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item a');
+            const sections = document.querySelectorAll('.admin-section');
+            const modal = document.getElementById('custom-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+            const modalButtons = document.getElementById('modal-buttons');
+            const closeBtn = document.querySelector('.close-btn');
+            const addCampaignBtn = document.getElementById('add-campaign-btn');
+            const addUserBtn = document.getElementById('add-user-btn');
+
+            // Elements for real-time data
+            const visitorCountEl = document.getElementById('visitor-count');
+            const logListEl = document.getElementById('log-list');
+
+            // --- Local Storage Functions for Analytics & Logs ---
+            // Function to get data from local storage, with a fallback
+            const getData = (key, defaultValue) => {
+                try {
+                    const data = localStorage.getItem(key);
+                    return data ? JSON.parse(data) : defaultValue;
+                } catch (e) {
+                    console.error('Error parsing data from localStorage', e);
+                    return defaultValue;
+                }
+            };
+
+            // Function to set data in local storage
+            const setData = (key, data) => {
+                try {
+                    localStorage.setItem(key, JSON.stringify(data));
+                } catch (e) {
+                    console.error('Error saving data to localStorage', e);
+                }
+            };
+            
+            // Increment website visitor count on page load
+            let visitorCount = getData('visitorCount', 0);
+            visitorCount++;
+            setData('visitorCount', visitorCount);
+            visitorCountEl.textContent = visitorCount;
+
+            // Record a login event and store it
+            const recordLogin = () => {
+                const now = new Date();
+                const timestamp = now.toLocaleString();
+                const newLog = {
+                    type: 'login',
+                    message: 'Admin user logged in to the dashboard.',
+                    time: timestamp
+                };
+                let logs = getData('adminLogs', []);
+                logs.unshift(newLog); // Add to the beginning of the array
+                // Keep only the 10 most recent logs to prevent local storage overflow
+                if (logs.length > 10) {
+                    logs = logs.slice(0, 10);
+                }
+                setData('adminLogs', logs);
+            };
+
+            // Display logs on page load
+            const displayLogs = () => {
+                const logs = getData('adminLogs', []);
+                // Clear the default content
+                logListEl.innerHTML = ''; 
+                logs.forEach(log => {
+                    const li = document.createElement('li');
+                    li.style.borderBottom = '1px solid var(--surface)';
+                    li.style.padding = '12px 0';
+                    li.innerHTML = `<i class="fas fa-sign-in-alt" style="color: #3498db;"></i> [${log.time}] ${log.message}`;
+                    logListEl.appendChild(li);
+                });
+            };
+
+            // This function is for demonstration and is called when the admin page loads.
+            // In a real application, you'd call this from a server-side login function.
+            recordLogin();
+            displayLogs();
+            
+            // --- End of Local Storage Functions ---
+
+
+            // Function to show a section based on data-section attribute
+            const showSection = (sectionId) => {
+                navItems.forEach(item => item.classList.remove('active'));
+                sections.forEach(section => section.classList.remove('active'));
+                
+                const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            };
+            
+            // Set initial active section to 'dashboard'
+            showSection('dashboard');
+
+            // Event listeners for navigation items
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = item.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+
+            // Function to show a custom modal (replacing alert/confirm)
+            const showModal = (action, item) => {
+                modal.style.display = 'flex';
+                modalButtons.innerHTML = ''; // Clear previous buttons
+
+                if (action === 'edit') {
+                    modalTitle.textContent = `Edit ${item}`;
+                    modalMessage.textContent = `This would open a form to edit the data for "${item}".`;
+                    modalButtons.innerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
+                } else if (action === 'delete') {
+                    modalTitle.textContent = `Delete ${item}?`;
+                    modalMessage.textContent = `Are you sure you want to delete "${item}"? This action cannot be undone.`;
+                    modalButtons.innerHTML = `
+                        <button class="btn" style="background-color: #e74c3c;" onclick="confirmDelete('${item}')">Confirm Delete</button>
+                        <button class="btn" style="background-color: #7f8c8d;" onclick="closeModal()">Cancel</button>
+                    `;
+                } else if (action === 'add-campaign') {
+                    modalTitle.textContent = 'Create New Campaign';
+                    modalMessage.textContent = `This would show a form to add a new campaign.`;
+                    modalButtons.innerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
+                } else if (action === 'add-user') {
+                    modalTitle.textContent = 'Add New User';
+                    modalMessage.textContent = `This would show a form to add a new user.`;
+                    modalButtons.innerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
+                }
+            };
+            
+            // Function to confirm delete action
+            window.confirmDelete = (item) => {
+                console.log(`Deleting ${item}...`);
+                // In a real app, this is where you would make an API call to delete the item
+                // For this example, we'll just show a message.
+                closeModal();
+                showMessage(`"${item}" deleted successfully!`);
+            };
+            
+            // Function to close the modal
+            const closeModal = () => {
+                modal.style.display = 'none';
+            };
+            window.closeModal = closeModal; // Expose to global scope for button click
+
+            // Event listener for the "Create New Campaign" button
+            addCampaignBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showModal('add-campaign');
+            });
+            
+            // Event listener for the "Add New User" button
+            addUserBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showModal('add-user');
+            });
+
+            // Event listener for closing modal
+            closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Function to show a temporary message box
+            const showMessage = (message) => {
+                const messageBox = document.createElement('div');
+                messageBox.className = 'message-box';
+                messageBox.textContent = message;
+                document.body.appendChild(messageBox);
+                
+                // Animate in
+                setTimeout(() => {
+                    messageBox.style.opacity = '1';
+                }, 100);
+                
+                // Animate out and remove
+                setTimeout(() => {
+                    messageBox.style.opacity = '0';
+                    setTimeout(() => {
+                        messageBox.remove();
+                    }, 300);
+                }, 3000);
+            };
+
+            // Theme Toggle Functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            themeToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLight = body.classList.contains('light-mode');
+                themeToggleBtn.querySelector('i').className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            });
+
+            // Logout Functionality
+            window.logout = () => {
+                // In a real application, you would clear the user session here (e.g., Firebase auth.signOut())
+                console.log('User logged out.');
+                window.location.href = 'index.html'; // Redirect to the main page
+            };
+        });
+    </script>
+</body>
+</html>
