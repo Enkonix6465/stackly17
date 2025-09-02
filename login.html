@@ -289,7 +289,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('userRole', 'user');
             alert('Login successful! Welcome back, ' + storedData.firstName + '.');
-            window.location.href = 'blog.html'; // redirect to user dashboard
+            window.location.href = 'home1.html'; // redirect to user dashboard
         } else {
             alert('No account found with this email. Please sign up first.');
             window.location.href = 'index.html';
