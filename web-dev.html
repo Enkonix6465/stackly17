@@ -227,6 +227,46 @@
             margin-left: 1rem;
         }
 
+        .language-toggle {
+            position: relative;
+            z-index: 10;
+        }
+        .language-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            padding: 5px 0;
+            min-width: 120px;
+        }
+        .language-dropdown.show {
+            display: block;
+        }
+        .language-dropdown a {
+            display: block;
+            padding: 8px 15px;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .language-dropdown a:hover {
+            background-color: var(--surface);
+        }
+
         /* Mobile navigation */
         @media (max-width: 768px) {
             .nav-right {
@@ -266,6 +306,15 @@
             }
             .mobile-menu-toggle {
                 display: block;
+            }
+            .language-toggle {
+                position: static;
+                width: 100%;
+            }
+            .language-dropdown {
+                position: static;
+                width: 100%;
+                box-shadow: none;
             }
         }
         .section {
@@ -579,7 +628,7 @@
 <body>
     <header class="header">
         <div class="container nav-container">
-            <a href="redesigned_index.html" class="logo">
+            <a href="home1.html" class="logo">
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
@@ -588,47 +637,57 @@
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-lang="home">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-lang="home1">Home 1</a></li>
+                                <li><a href="home3.html" data-lang="home2">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html">About Us</a></li>
+                        <li><a href="About us.html" data-lang="about-us">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html" class="active">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" class="active" data-lang="services">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                                <li><a href="seo.html" data-lang="seo">SEO & Content</a></li>
+                                <li><a href="ppc.html" data-lang="ppc">PPC Management</a></li>
+                                <li><a href="social-media.html" data-lang="social-media">Social Media Marketing</a></li>
+                                <li><a href="web-dev.html" data-lang="web-dev">Web Development</a></li>
+                                <li><a href="email.html" data-lang="email">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-lang="analytics">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-lang="blog">Blog</a></li>
+                        <li><a href="contact.html" data-lang="contact-us">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="#">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="index.html" data-lang="login">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="index.html" data-lang="sign-up-login">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-lang="admin-login">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
                 <div class="profile-dropdown" id="profile-dropdown">
-                    <div class="profile-icon">
-                        <span>PS</span>
-                    </div>
+                    <div class="profile-icon"><span id="initials-display"></span></div>
                     <ul class="profile-dropdown-content">
-                        <li><a href="signup.html">Logout</a></li>
+                        <li><a href="index.html" data-lang="logout">Logout</a></li>
                     </ul>
                 </div>
                 <div class="theme-toggle">
                     <button id="theme-toggle" class="btn btn-secondary">
                         <i class="fas fa-moon"></i>
                     </button>
+                </div>
+                <div class="language-toggle">
+                    <button class="language-button" id="language-button">
+                        <i class="fas fa-globe"></i>
+                        <span id="current-lang">EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" data-lang-code="en">English</a>
+                        <a href="#" data-lang-code="ar">Arabic</a>
+                        <a href="#" data-lang-code="he">Hebrew</a>
+                    </div>
                 </div>
                 <div class="mobile-menu-toggle" id="mobile-toggle">
                     <i class="fas fa-bars"></i>
@@ -646,8 +705,8 @@
 
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in">Web Development</h1>
-                    <p class="hero-paragraph animate-fade-up">
+                    <h1 class="hero-title animate-slide-in" data-lang="hero-title">Web Development</h1>
+                    <p class="hero-paragraph animate-fade-up" data-lang="hero-paragraph">
                         Build a stunning, high-performing website that serves as the perfect digital storefront for your business.
                     </p>
                 </div>
@@ -656,10 +715,10 @@
 
         <section class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Your Digital Foundation</h2>
-                <h3 class="section-subheading" style="margin-bottom: 1.5rem;">We build websites that are beautiful, fast, and functional.</h3>
-                <p>Your website is often the first point of contact for your customers. Our web development services ensure it leaves a lasting impression. We build custom websites that are not only visually appealing but also optimized for user experience, mobile responsiveness, and search engine performance. </p>
-                <p>Whether you need a simple portfolio site or a complex e-commerce platform, our team uses the latest technologies to create a secure, scalable, and powerful web presence that drives conversions.</p>
+                <h2 class="section-heading" data-lang="your-digital-foundation-heading">Your Digital Foundation</h2>
+                <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-lang="your-digital-foundation-subheading">We build websites that are beautiful, fast, and functional.</h3>
+                <p data-lang="your-digital-foundation-p1">Your website is often the first point of contact for your customers. Our web development services ensure it leaves a lasting impression. We build custom websites that are not only visually appealing but also optimized for user experience, mobile responsiveness, and search engine performance. </p>
+                <p data-lang="your-digital-foundation-p2">Whether you need a simple portfolio site or a complex e-commerce platform, our team uses the latest technologies to create a secure, scalable, and powerful web presence that drives conversions.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/51/b2/fe/51b2fee7367115957f29cb0add059017.jpg" alt="A photo of a laptop with code on the screen." />
@@ -668,27 +727,27 @@
 
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Key Features of Our Service</h2>
+                <h2 class="section-heading" data-lang="key-features-heading">Key Features of Our Service</h2>
                 <div class="icon-grid">
                     <div class="icon-item">
                         <i class="fas fa-mobile-alt"></i>
-                        <h4>Responsive Design</h4>
-                        <p>Your website will look and function flawlessly on any device, from desktops to smartphones.</p>
+                        <h4 data-lang="responsive-design-title">Responsive Design</h4>
+                        <p data-lang="responsive-design-text">Your website will look and function flawlessly on any device, from desktops to smartphones.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-rocket"></i>
-                        <h4>Performance Optimization</h4>
-                        <p>We build fast-loading websites that provide a smooth user experience and improve SEO.</p>
+                        <h4 data-lang="performance-optimization-title">Performance Optimization</h4>
+                        <p data-lang="performance-optimization-text">We build fast-loading websites that provide a smooth user experience and improve SEO.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-lock"></i>
-                        <h4>Security & Maintenance</h4>
-                        <p>We ensure your site is secure and well-maintained with regular updates and backups.</p>
+                        <h4 data-lang="security-title">Security & Maintenance</h4>
+                        <p data-lang="security-text">We ensure your site is secure and well-maintained with regular updates and backups.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-shopping-cart"></i>
-                        <h4>E-commerce Solutions</h4>
-                        <p>Launch a secure and easy-to-manage online store that maximizes sales and customer satisfaction.</p>
+                        <h4 data-lang="ecommerce-title">E-commerce Solutions</h4>
+                        <p data-lang="ecommerce-text">Launch a secure and easy-to-manage online store that maximizes sales and customer satisfaction.</p>
                     </div>
                 </div>
             </div>
@@ -696,27 +755,27 @@
         
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Our Proven 4-Step Process</h2>
+                <h2 class="section-heading" data-lang="proven-process-heading">Our Proven 4-Step Process</h2>
                 <div class="process-steps">
                     <div class="process-step">
                         <div class="step-number">01</div>
-                        <h4>Discovery & Planning</h4>
-                        <p>We work with you to define your vision, goals, and technical requirements for the project.</p>
+                        <h4 data-lang="discovery-title">Discovery & Planning</h4>
+                        <p data-lang="discovery-text">We work with you to define your vision, goals, and technical requirements for the project.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">02</div>
-                        <h4>Design & Development</h4>
-                        <p>Our team designs a beautiful interface and builds the website with clean, optimized code.</p>
+                        <h4 data-lang="design-title">Design & Development</h4>
+                        <p data-lang="design-text">Our team designs a beautiful interface and builds the website with clean, optimized code.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">03</div>
-                        <h4>Testing & Launch</h4>
-                        <p>We rigorously test the site for bugs, performance, and security before a seamless launch.</p>
+                        <h4 data-lang="testing-title">Testing & Launch</h4>
+                        <p data-lang="testing-text">We rigorously test the site for bugs, performance, and security before a seamless launch.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">04</div>
-                        <h4>Support & Maintenance</h4>
-                        <p>We provide ongoing support to keep your site updated, secure, and running smoothly.</p>
+                        <h4 data-lang="support-title">Support & Maintenance</h4>
+                        <p data-lang="support-text">We provide ongoing support to keep your site updated, secure, and running smoothly.</p>
                     </div>
                 </div>
             </div>
@@ -724,9 +783,9 @@
 
         <section class="section full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Ready for a Website that Works?</h2>
-                <p>Our team is ready to build a website that not only looks great but also helps you achieve your business objectives. Let's create your digital masterpiece together.</p>
-                <a href="contact.html" class="btn">Get a Free Consultation</a>
+                <h2 class="section-heading" data-lang="ready-for-website-heading">Ready for a Website that Works?</h2>
+                <p data-lang="ready-for-website-text">Our team is ready to build a website that not only looks great but also helps you achieve your business objectives. Let's create your digital masterpiece together.</p>
+                <a href="contact.html" class="btn" data-lang="consultation-button">Get a Free Consultation</a>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/1200x/13/8f/b7/138fb764a994b10a7e20c3e871c438ba.jpg" alt="An image of a team collaborating on a strategy." />
@@ -740,39 +799,39 @@
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
-                <p>Your partner for digital marketing success. We deliver results that matter.</p>
+                <p data-lang="footer-tagline">Your partner for digital marketing success. We deliver results that matter.</p>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4 data-lang="quick-links-title">Quick Links</h4>
                 <ul>
-                    <li><a href="redesigned_index.html">Home</a></li>
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="Services.html">services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home1.htmlgi" data-lang="home-footer">Home</a></li>
+                    <li><a href="About us.html" data-lang="about-us-footer">About Us</a></li>
+                    <li><a href="Services.html" data-lang="services-footer">services</a></li>
+                    <li><a href="blog.html" data-lang="blog-footer">Blog</a></li>
+                    <li><a href="contact.html" data-lang="contact-footer">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Services</h4>
+                <h4 data-lang="services-title">Services</h4>
                 <ul>
-                    <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                    <li><a href="seo.html" data-lang="seo-footer">SEO & Content</a></li>
+                    <li><a href="ppc.html" data-lang="ppc-footer">PPC Management</a></li>
+                    <li><a href="social-media.html" data-lang="social-media-footer">Social Media Marketing</a></li>
+                    <li><a href="web-dev.html" data-lang="web-dev-footer">Web Development</a></li>
+                    <li><a href="email.html" data-lang="email-footer">Email Marketing</a></li>
+                    <li><a href="analytics.html" data-lang="analytics-footer">Analytics & Reporting</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Contact Info</h4>
+                <h4 data-lang="contact-info-title">Contact Info</h4>
                 <ul>
-                    <li><a href="#">info@stackly.com</a></li>
-                    <li><a href="#">+1 (555) 123-4567</a></li>
-                    <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+                    <li><a href="#" data-lang="email-contact">info@stackly.com</a></li>
+                    <li><a href="#" data-lang="phone-contact">+1 (555) 123-4567</a></li>
+                    <li><a href="#" data-lang="address-contact">123 Marketing Lane, Suite 456, City, State</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-lang="footer-copyright">
             &copy; 2024 Stackly Digital Marketing. All rights reserved.
         </div>
     </footer>
@@ -821,6 +880,282 @@
                 profileDropdown.classList.remove('show');
             }
         });
-    </script>
+
+        const languageButton = document.getElementById('language-button');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const currentLangSpan = document.getElementById('current-lang');
+        const pageBody = document.querySelector('body');
+
+        const translations = {
+            'en': {
+                'home': 'Home',
+                'home1': 'Home 1',
+                'home2': 'Home 2',
+                'about-us': 'About Us',
+                'services': 'Services',
+                'seo': 'SEO & Content',
+                'ppc': 'PPC Management',
+                'social-media': 'Social Media Marketing',
+                'web-dev': 'Web Development',
+                'email': 'Email Marketing',
+                'analytics': 'Analytics & Reporting',
+                'blog': 'Blog',
+                'contact-us': 'Contact Us',
+                'login': 'Login',
+                'sign-up-login': 'Sign Up/Login',
+                'admin-login': 'Admin Login',
+                'logout': 'Logout',
+                'hero-title': 'Web Development',
+                'hero-paragraph': 'Build a stunning, high-performing website that serves as the perfect digital storefront for your business.',
+                'your-digital-foundation-heading': 'Your Digital Foundation',
+                'your-digital-foundation-subheading': 'We build websites that are beautiful, fast, and functional.',
+                'your-digital-foundation-p1': 'Your website is often the first point of contact for your customers. Our web development services ensure it leaves a lasting impression. We build custom websites that are not only visually appealing but also optimized for user experience, mobile responsiveness, and search engine performance.',
+                'your-digital-foundation-p2': 'Whether you need a simple portfolio site or a complex e-commerce platform, our team uses the latest technologies to create a secure, scalable, and powerful web presence that drives conversions.',
+                'key-features-heading': 'Key Features of Our Service',
+                'responsive-design-title': 'Responsive Design',
+                'responsive-design-text': 'Your website will look and function flawlessly on any device, from desktops to smartphones.',
+                'performance-optimization-title': 'Performance Optimization',
+                'performance-optimization-text': 'We build fast-loading websites that provide a smooth user experience and improve SEO.',
+                'security-title': 'Security & Maintenance',
+                'security-text': 'We ensure your site is secure and well-maintained with regular updates and backups.',
+                'ecommerce-title': 'E-commerce Solutions',
+                'ecommerce-text': 'Launch a secure and easy-to-manage online store that maximizes sales and customer satisfaction.',
+                'proven-process-heading': 'Our Proven 4-Step Process',
+                'discovery-title': 'Discovery & Planning',
+                'discovery-text': 'We work with you to define your vision, goals, and technical requirements for the project.',
+                'design-title': 'Design & Development',
+                'design-text': 'Our team designs a beautiful interface and builds the website with clean, optimized code.',
+                'testing-title': 'Testing & Launch',
+                'testing-text': 'We rigorously test the site for bugs, performance, and security before a seamless launch.',
+                'support-title': 'Support & Maintenance',
+                'support-text': 'We provide ongoing support to keep your site updated, secure, and running smoothly.',
+                'ready-for-website-heading': 'Ready for a Website that Works?',
+                'ready-for-website-text': 'Our team is ready to build a website that not only looks great but also helps you achieve your business objectives. Let\'s create your digital masterpiece together.',
+                'consultation-button': 'Get a Free Consultation',
+                'footer-tagline': 'Your partner for digital marketing success. We deliver results that matter.',
+                'quick-links-title': 'Quick Links',
+                'home-footer': 'Home',
+                'about-us-footer': 'About Us',
+                'services-footer': 'services',
+                'blog-footer': 'Blog',
+                'contact-footer': 'Contact',
+                'services-title': 'Services',
+                'seo-footer': 'SEO & Content',
+                'ppc-footer': 'PPC Management',
+                'social-media-footer': 'Social Media Marketing',
+                'web-dev-footer': 'Web Development',
+                'email-footer': 'Email Marketing',
+                'analytics-footer': 'Analytics & Reporting',
+                'contact-info-title': 'Contact Info',
+                'email-contact': 'info@stackly.com',
+                'phone-contact': '+1 (555) 123-4567',
+                'address-contact': '123 Marketing Lane, Suite 456, City, State',
+                'footer-copyright': '© 2024 Stackly Digital Marketing. All rights reserved.'
+            },
+            'ar': {
+                'home': 'الرئيسية',
+                'home1': 'الرئيسية 1',
+                'home2': 'الرئيسية 2',
+                'about-us': 'من نحن',
+                'services': 'الخدمات',
+                'seo': 'تحسين محركات البحث والمحتوى',
+                'ppc': 'إدارة حملات الدفع بالنقرة',
+                'social-media': 'التسويق عبر وسائل التواصل الاجتماعي',
+                'web-dev': 'تطوير الويب',
+                'email': 'التسويق عبر البريد الإلكتروني',
+                'analytics': 'التحليلات والتقارير',
+                'blog': 'المدونة',
+                'contact-us': 'اتصل بنا',
+                'login': 'تسجيل الدخول',
+                'sign-up-login': 'التسجيل/تسجيل الدخول',
+                'admin-login': 'تسجيل دخول المسؤول',
+                'logout': 'تسجيل الخروج',
+                'hero-title': 'تطوير الويب',
+                'hero-paragraph': 'أنشئ موقعًا إلكترونيًا مذهلاً وعالي الأداء ليكون الواجهة الرقمية المثالية لعملك.',
+                'your-digital-foundation-heading': 'أساسك الرقمي',
+                'your-digital-foundation-subheading': 'نحن نبني مواقع إلكترونية جميلة، سريعة، وعملية.',
+                'your-digital-foundation-p1': 'موقعك الإلكتروني غالبًا ما يكون نقطة الاتصال الأولى لعملائك. خدمات تطوير الويب لدينا تضمن أنه يترك انطباعًا دائمًا. نبني مواقع إلكترونية مخصصة ليست فقط جذابة بصريًا بل ومُحسّنة أيضًا لتجربة المستخدم، الاستجابة على الأجهزة المحمولة، وأداء محركات البحث.',
+                'your-digital-foundation-p2': 'سواء كنت بحاجة إلى موقع بسيط للمحفظة أو منصة تجارة إلكترونية معقدة، يستخدم فريقنا أحدث التقنيات لإنشاء وجود على الويب آمن، قابل للتطوير، وقوي يدفع التحويلات.',
+                'key-features-heading': 'الميزات الرئيسية لخدمتنا',
+                'responsive-design-title': 'تصميم متجاوب',
+                'responsive-design-text': 'سيبدو موقعك ويعمل بشكل لا تشوبه شائبة على أي جهاز، من أجهزة الكمبيوتر المكتبية إلى الهواتف الذكية.',
+                'performance-optimization-title': 'تحسين الأداء',
+                'performance-optimization-text': 'نحن نبني مواقع سريعة التحميل توفر تجربة مستخدم سلسة وتحسن أداء تحسين محركات البحث.',
+                'security-title': 'الأمان والصيانة',
+                'security-text': 'نحن نضمن أن موقعك آمن ويتم صيانته بشكل جيد مع تحديثات منتظمة ونسخ احتياطية.',
+                'ecommerce-title': 'حلول التجارة الإلكترونية',
+                'ecommerce-text': 'أطلق متجرًا إلكترونيًا آمنًا وسهل الإدارة يزيد المبيعات ورضا العملاء.',
+                'proven-process-heading': 'عمليتنا المجربة المكونة من 4 خطوات',
+                'discovery-title': 'الاكتشاف والتخطيط',
+                'discovery-text': 'نعمل معك لتحديد رؤيتك، أهدافك، والمتطلبات التقنية للمشروع.',
+                'design-title': 'التصميم والتطوير',
+                'design-text': 'يقوم فريقنا بتصميم واجهة جميلة وبناء الموقع بكود نظيف ومحسّن.',
+                'testing-title': 'الاختبار والإطلاق',
+                'testing-text': 'نقوم باختبار الموقع بدقة بحثًا عن الأخطاء، الأداء، والأمان قبل إطلاقه بسلاسة.',
+                'support-title': 'الدعم والصيانة',
+                'support-text': 'نقدم دعمًا مستمرًا للحفاظ على موقعك محدّثًا، آمنًا، ويعمل بسلاسة.',
+                'ready-for-website-heading': 'هل أنت جاهز لموقع إلكتروني يعمل؟',
+                'ready-for-website-text': 'فريقنا جاهز لبناء موقع إلكتروني لا يبدو رائعًا فحسب، بل يساعدك أيضًا على تحقيق أهداف عملك. دعنا ننشئ تحفتك الرقمية معًا.',
+                'consultation-button': 'احصل على استشارة مجانية',
+                'footer-tagline': 'شريكك لنجاح التسويق الرقمي. نحن نقدم نتائج تهمك.',
+                'quick-links-title': 'روابط سريعة',
+                'home-footer': 'الرئيسية',
+                'about-us-footer': 'من نحن',
+                'services-footer': 'الخدمات',
+                'blog-footer': 'المدونة',
+                'contact-footer': 'اتصل بنا',
+                'services-title': 'الخدمات',
+                'seo-footer': 'تحسين محركات البحث والمحتوى',
+                'ppc-footer': 'إدارة حملات الدفع بالنقرة',
+                'social-media-footer': 'التسويق عبر وسائل التواصل الاجتماعي',
+                'web-dev-footer': 'تطوير الويب',
+                'email-footer': 'التسويق عبر البريد الإلكتروني',
+                'analytics-footer': 'التحليلات والتقارير',
+                'contact-info-title': 'معلومات الاتصال',
+                'email-contact': 'info@stackly.com',
+                'phone-contact': '+1 (555) 123-4567',
+                'address-contact': '123 Marketing Lane, Suite 456, City, State',
+                'footer-copyright': '© 2024 Stackly Digital Marketing. جميع الحقوق محفوظة.'
+            },
+            'he': {
+                'home': 'ראשי',
+                'home1': 'ראשי 1',
+                'home2': 'ראשי 2',
+                'about-us': 'אודותינו',
+                'services': 'שירותים',
+                'seo': 'קידום אתרים ותוכן',
+                'ppc': 'ניהול קמפיינים PPC',
+                'social-media': 'שיווק במדיה חברתית',
+                'web-dev': 'פיתוח אתרים',
+                'email': 'שיווק בדוא"ל',
+                'analytics': 'אנליטיקס ודיווח',
+                'blog': 'בלוג',
+                'contact-us': 'צור קשר',
+                'login': 'התחברות',
+                'sign-up-login': 'הרשמה/התחברות',
+                'admin-login': 'התחברות מנהל',
+                'logout': 'התנתקות',
+                'hero-title': 'פיתוח אתרים',
+                'hero-paragraph': 'בנה אתר אינטרנט מהמם ובעל ביצועים גבוהים שישמש כחנות הדיגיטלית המושלמת לעסק שלך.',
+                'your-digital-foundation-heading': 'הבסיס הדיגיטלי שלך',
+                'your-digital-foundation-subheading': 'אנו בונים אתרים יפים, מהירים ופונקציונליים.',
+                'your-digital-foundation-p1': 'האתר שלך הוא לעיתים קרובות נקודת המגע הראשונה עבור הלקוחות שלך. שירותי פיתוח האתרים שלנו מבטיחים שהוא ישאיר רושם מתמשך. אנו בונים אתרים מותאמים אישית שאינם רק מושכים ויזואלית אלא גם מותאמים לחוויית משתמש, רספונסיביות לנייד וביצועי מנועי חיפוש.',
+                'your-digital-foundation-p2': 'בין אם אתה זקוק לאתר פורטפוליו פשוט או לפלטפורמת מסחר אלקטרוני מורכבת, הצוות שלנו משתמש בטכנולוגיות העדכניות ביותר כדי ליצור נוכחות אינטרנטית מאובטחת, ניתנת להרחבה, ועוצמתית שמניעה המרות.',
+                'key-features-heading': 'תכונות עיקריות של השירות שלנו',
+                'responsive-design-title': 'עיצוב רספונסיבי',
+                'responsive-design-text': 'האתר שלך ייראה ויתפקד ללא דופי בכל מכשיר, ממחשבים שולחניים ועד טלפונים חכמים.',
+                'performance-optimization-title': 'אופטימיזציית ביצועים',
+                'performance-optimization-text': 'אנו בונים אתרים נטענים במהירות המספקים חוויית משתמש חלקה ומשפרים את קידום האתרים.',
+                'security-title': 'אבטחה ותחזוקה',
+                'security-text': 'אנו מבטיחים שהאתר שלך מאובטח ומתוחזק היטב עם עדכונים וגיבויים קבועים.',
+                'ecommerce-title': 'פתרונות מסחר אלקטרוני',
+                'ecommerce-text': 'השק תצורה של חנות מקוונת מאובטחת וקלה לניהול שממקסמת מכירות ושביעות רצון לקוחות.',
+                'proven-process-heading': 'תהליך ה-4 שלבים המוכח שלנו',
+                'discovery-title': 'גילוי ותכנון',
+                'discovery-text': 'אנו עובדים איתך כדי להגדיר את החזון, היעדים והדרישות הטכניות שלך לפרויקט.',
+                'design-title': 'עיצוב ופיתוח',
+                'design-text': 'הצוות שלנו מעצב ממשק יפהפה ובונה את האתר עם קוד נקי וממוטב.',
+                'testing-title': 'בדיקה והשקה',
+                'testing-text': 'אנו בודקים את האתר בקפדנות עבור באגים, ביצועים ואבטחה לפני השקה חלקה.',
+                'support-title': 'תמיכה ותחזוקה',
+                'support-text': 'אנו מספקים תמיכה מתמשכת כדי לשמור על האתר שלך מעודכן, מאובטח ופועל בצורה חלקה.',
+                'ready-for-website-heading': 'מוכן לאתר שעובד?',
+                'ready-for-website-text': 'הצוות שלנו מוכן לבנות אתר שלא רק נראה נהדר אלא גם עוזר לך להשיג את היעדים העסקיים שלך. בואו ניצור את יצירת המופת הדיגיטלית שלכם יחד.',
+                'consultation-button': 'קבל ייעוץ חינם',
+                'footer-tagline': 'השותף שלך להצלחה בשיווק דיגיטלי. אנו מספקים תוצאות שחשובות.',
+                'quick-links-title': 'קישורים מהירים',
+                'home-footer': 'ראשי',
+                'about-us-footer': 'אודותינו',
+                'services-footer': 'שירותים',
+                'blog-footer': 'בלוג',
+                'contact-footer': 'צור קשר',
+                'services-title': 'שירותים',
+                'seo-footer': 'קידום אתרים ותוכן',
+                'ppc-footer': 'ניהול קמפיינים PPC',
+                'social-media-footer': 'שיווק במדיה חברתית',
+                'web-dev-footer': 'פיתוח אתרים',
+                'email-footer': 'שיווק בדוא"ל',
+                'analytics-footer': 'אנליטיקס ודיווח',
+                'contact-info-title': 'פרטי התקשרות',
+                'email-contact': 'info@stackly.com',
+                'phone-contact': '+1 (555) 123-4567',
+                'address-contact': '123 Marketing Lane, Suite 456, City, State',
+                'footer-copyright': '© 2024 Stackly Digital Marketing. כל הזכויות שמורות.'
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            currentLangSpan.textContent = lang.toUpperCase();
+            // Set body direction for RTL languages
+            if (lang === 'ar' || lang === 'he') {
+                pageBody.style.direction = 'rtl';
+            } else {
+                pageBody.style.direction = 'ltr';
+            }
+        }
+
+        languageButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+        });
+
+        document.querySelectorAll('.language-dropdown a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const langCode = e.target.getAttribute('data-lang-code');
+                setLanguage(langCode);
+                languageDropdown.classList.remove('show');
+            });
+        });
+
+        document.addEventListener('click', () => {
+            languageDropdown.classList.remove('show');
+        });
+
+        setLanguage('en');
+    
+// Profile dropdown + initials + full name (from localStorage.userData)
+function getUserInitials(name) {
+  if (!name) return "U";
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0][0];
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const profileBtn = document.getElementById("profile-btn");
+  const profileDropdown = document.getElementById("profile-dropdown");
+  const initialsDisplay = document.getElementById("initials-display");
+  const fullNameDisplay = document.getElementById("full-name-display");
+
+  // Read userData from localStorage
+  let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  let storedName = "Guest User";
+  if (userData.firstName && userData.lastName) {
+    storedName = userData.firstName + " " + userData.lastName;
+  }
+
+  if (initialsDisplay) initialsDisplay.textContent = getUserInitials(storedName);
+  if (fullNameDisplay) fullNameDisplay.textContent = storedName;
+
+  if (profileBtn && profileDropdown) {
+    profileBtn.addEventListener("click", () => {
+      profileDropdown.classList.toggle("active");
+    });
+    document.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove("active");
+      }
+    });
+  }
+});
+
+</script>
 </body>
 </html>

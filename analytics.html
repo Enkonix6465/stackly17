@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stackly - Analytics & Reporting</title>
+    <title data-lang="hero_title">Stackly - Analytics & Reporting</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -136,27 +136,27 @@
         }
 
         .dropdown-menu {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  position: absolute;
-  top: 100%;
-  background: var(--card);
-  box-shadow: var(--shadow);
-  border-radius: 8px;
-  padding: 10px 0;
-  min-width: 150px;
-  list-style: none;
-}
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            position: absolute;
+            top: 100%;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 150px;
+            list-style: none;
+        }
 
-/* Show with delay */
-.nav-links li:hover > .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition-delay: 0.2s; /* adjust delay */
-}
+        /* Show with delay */
+        .nav-links li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0.2s; /* adjust delay */
+        }
 
 
         .dropdown-menu a {
@@ -226,6 +226,16 @@
             font-size: 1.5rem;
             cursor: pointer;
             margin-left: 1rem;
+        }
+        
+        .lang-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: var(--card);
+            color: var(--text);
+            border: 1px solid var(--glass);
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         /* Mobile navigation */
@@ -575,12 +585,37 @@
             animation: fadeUp 1s ease-out forwards;
             animation-delay: 1.5s;
         }
+        @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
     </style>
 </head>
 <body>
     <header class="header">
         <div class="container nav-container">
-            <a href="redesigned_index.html" class="logo">
+            <a href="home1.html" class="logo">
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
@@ -589,31 +624,31 @@
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-lang="home">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-lang="home">Home 1</a></li>
+                                <li><a href="home3.html" data-lang="home">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html">About Us</a></li>
+                        <li><a href="About us.html" data-lang="about_us">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html" class="active">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" class="active" data-lang="services">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                                <li><a href="seo.html" data-lang="seo_content">SEO & Content</a></li>
+                                <li><a href="ppc.html" data-lang="ppc_management">PPC Management</a></li>
+                                <li><a href="social-media.html" data-lang="social_media_marketing">Social Media Marketing</a></li>
+                                <li><a href="web-dev.html" data-lang="web_development">Web Development</a></li>
+                                <li><a href="email.html" data-lang="email_marketing">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-lang="analytics_reporting">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-lang="blog">Blog</a></li>
+                        <li><a href="contact.html" data-lang="contact_us">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="login.html">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="login.html" data-lang="login">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="index.html" data-lang="sign_up_login">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-lang="admin_login">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -623,13 +658,20 @@
                         <span>PS</span>
                     </div>
                     <ul class="profile-dropdown-content">
-                        <li><a href="signup.html">Logout</a></li>
+                        <li><a href="index.html" data-lang="logout">Logout</a></li>
                     </ul>
                 </div>
                 <div class="theme-toggle">
                     <button id="theme-toggle" class="btn btn-secondary">
                         <i class="fas fa-moon"></i>
                     </button>
+                </div>
+                <div class="lang-toggle-container">
+                    <select id="lang-toggle" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="he">עברית</option>
+                    </select>
                 </div>
                 <div class="mobile-menu-toggle" id="mobile-toggle">
                     <i class="fas fa-bars"></i>
@@ -647,8 +689,8 @@
 
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in">Analytics & Reporting</h1>
-                    <p class="hero-paragraph animate-fade-up">
+                    <h1 class="hero-title animate-slide-in" data-lang="hero_title">Analytics & Reporting</h1>
+                    <p class="hero-paragraph animate-fade-up" data-lang="hero_paragraph">
                         Gain a clear, data-driven view of your performance to make smarter marketing decisions.
                     </p>
                 </div>
@@ -656,10 +698,10 @@
         </section>
         <section class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Make Every Decision Count</h2>
-                <h3 class="section-subheading" style="margin-bottom: 1.5rem;">We turn raw data into actionable insights for growth.</h3>
-                <p>In the world of digital marketing, data is your most powerful asset. Our analytics and reporting services provide you with a transparent, comprehensive view of your campaign performance. We don't just give you numbers; we provide actionable insights that help you understand what's working and where to invest next.</p>
-                <p>We set up advanced tracking, create custom dashboards, and provide regular, easy-to-understand reports so you can see the true impact of your marketing efforts and confidently plan for the future.</p>
+                <h2 class="section-heading" data-lang="make_every_decision_heading">Make Every Decision Count</h2>
+                <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-lang="make_every_decision_subheading">We turn raw data into actionable insights for growth.</h3>
+                <p data-lang="make_every_decision_p1">In the world of digital marketing, data is your most powerful asset. Our analytics and reporting services provide you with a transparent, comprehensive view of your campaign performance. We don't just give you numbers; we provide actionable insights that help you understand what's working and where to invest next.</p>
+                <p data-lang="make_every_decision_p2">We set up advanced tracking, create custom dashboards, and provide regular, easy-to-understand reports so you can see the true impact of your marketing efforts and confidently plan for the future.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://cdn.pixabay.com/photo/2016/11/27/21/42/stock-1863880_1280.jpg" alt="A photo of a data dashboard." />
@@ -668,27 +710,27 @@
 
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Key Features of Our Service</h2>
+                <h2 class="section-heading" data-lang="key_features_heading">Key Features of Our Service</h2>
                 <div class="icon-grid">
                     <div class="icon-item">
                         <i class="fas fa-tachometer-alt"></i>
-                        <h4>Custom Dashboards</h4>
-                        <p>We build personalized dashboards that track your most important KPIs in real-time.</p>
+                        <h4 data-lang="custom_dashboards_h4">Custom Dashboards</h4>
+                        <p data-lang="custom_dashboards_p">We build personalized dashboards that track your most important KPIs in real-time.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-chart-line"></i>
-                        <h4>Performance Reporting</h4>
-                        <p>Receive regular, comprehensive reports with clear insights into your campaign results.</p>
+                        <h4 data-lang="performance_reporting_h4">Performance Reporting</h4>
+                        <p data-lang="performance_reporting_p">Receive regular, comprehensive reports with clear insights into your campaign results.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-sitemap"></i>
-                        <h4>Attribution Modeling</h4>
-                        <p>Understand which channels and campaigns are truly driving conversions and revenue.</p>
+                        <h4 data-lang="attribution_modeling_h4">Attribution Modeling</h4>
+                        <p data-lang="attribution_modeling_p">Understand which channels and campaigns are truly driving conversions and revenue.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-eye"></i>
-                        <h4>Competitor Analysis</h4>
-                        <p>Gain insights into your competitors' strategies and identify new opportunities for growth.</p>
+                        <h4 data-lang="competitor_analysis_h4">Competitor Analysis</h4>
+                        <p data-lang="competitor_analysis_p">Gain insights into your competitors' strategies and identify new opportunities for growth.</p>
                     </div>
                 </div>
             </div>
@@ -696,27 +738,27 @@
         
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Our Proven 4-Step Process</h2>
+                <h2 class="section-heading" data-lang="proven_process_heading">Our Proven 4-Step Process</h2>
                 <div class="process-steps">
                     <div class="process-step">
                         <div class="step-number">01</div>
-                        <h4>Setup & Integration</h4>
-                        <p>We connect all your marketing tools and set up robust tracking to collect all necessary data.</p>
+                        <h4 data-lang="step_1_h4">Setup & Integration</h4>
+                        <p data-lang="step_1_p">We connect all your marketing tools and set up robust tracking to collect all necessary data.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">02</div>
-                        <h4>Analysis & Insights</h4>
-                        <p>Our experts analyze the data to uncover trends, identify issues, and find growth opportunities.</p>
+                        <h4 data-lang="step_2_h4">Analysis & Insights</h4>
+                        <p data-lang="step_2_p">Our experts analyze the data to uncover trends, identify issues, and find growth opportunities.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">03</div>
-                        <h4>Reporting & Recommendations</h4>
-                        <p>We provide regular reports and clear, actionable recommendations for your team.</p>
+                        <h4 data-lang="step_3_h4">Reporting & Recommendations</h4>
+                        <p data-lang="step_3_p">We provide regular reports and clear, actionable recommendations for your team.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">04</div>
-                        <h4>Ongoing Optimization</h4>
-                        <p>We use the insights to continually refine and improve your marketing strategies for better ROI.</p>
+                        <h4 data-lang="step_4_h4">Ongoing Optimization</h4>
+                        <p data-lang="step_4_p">We use the insights to continually refine and improve your marketing strategies for better ROI.</p>
                     </div>
                 </div>
             </div>
@@ -724,9 +766,9 @@
 
         <section class="section full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Ready to Make Data-Driven Decisions?</h2>
-                <p>Stop guessing and start growing with a clear understanding of your performance. Contact us to learn how our analytics services can transform your business.</p>
-                <a href="contact.html" class="btn">Get a Free Consultation</a>
+                <h2 class="section-heading" data-lang="ready_to_make_decisions_heading">Ready to Make Data-Driven Decisions?</h2>
+                <p data-lang="ready_to_make_decisions_p">Stop guessing and start growing with a clear understanding of your performance. Contact us to learn how our analytics services can transform your business.</p>
+                <a href="contact.html" class="btn" data-lang="free_consultation_btn">Get a Free Consultation</a>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/6d/35/95/6d3595a2839f66ba371637d5f7e9fa30.jpg" alt="An image of a team collaborating on a strategy." />
@@ -740,44 +782,197 @@
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
-                <p>Your partner for digital marketing success. We deliver results that matter.</p>
+                <p data-lang="footer_description">Your partner for digital marketing success. We deliver results that matter.</p>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4 data-lang="footer_quick_links">Quick Links</h4>
                 <ul>
-                    <li><a href="redesigned_index.html">Home</a></li>
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="Services.html">services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home1.html" data-lang="home">Home</a></li>
+                    <li><a href="About us.html" data-lang="about_us">About Us</a></li>
+                    <li><a href="Services.html" data-lang="services">Services</a></li>
+                    <li><a href="blog.html" data-lang="blog">Blog</a></li>
+                    <li><a href="contact.html" data-lang="contact_us">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Services</h4>
+                <h4 data-lang="footer_services">Services</h4>
                 <ul>
-                    <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                    <li><a href="seo.html" data-lang="seo_content">SEO & Content</a></li>
+                    <li><a href="ppc.html" data-lang="ppc_management">PPC Management</a></li>
+                    <li><a href="social-media.html" data-lang="social_media_marketing">Social Media Marketing</a></li>
+                    <li><a href="web-dev.html" data-lang="web_development">Web Development</a></li>
+                    <li><a href="email.html" data-lang="email_marketing">Email Marketing</a></li>
+                    <li><a href="analytics.html" data-lang="analytics_reporting">Analytics & Reporting</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Contact Info</h4>
+                <h4 data-lang="footer_contact_info">Contact Info</h4>
                 <ul>
                     <li><a href="#">info@stackly.com</a></li>
                     <li><a href="#">+1 (555) 123-4567</a></li>
-                    <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+                    <li><a href="#" data-lang="footer_address">123 Marketing Lane, Suite 456, City, State</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-lang="footer_copyright">
             &copy; 2024 Stackly Digital Marketing. All rights reserved.
         </div>
     </footer>
 
     <script>
+        const languageData = {
+            "en": {
+                "home": "Home",
+                "about_us": "About Us",
+                "services": "Services",
+                "seo_content": "SEO & Content",
+                "ppc_management": "PPC Management",
+                "social_media_marketing": "Social Media Marketing",
+                "web_development": "Web Development",
+                "email_marketing": "Email Marketing",
+                "analytics_reporting": "Analytics & Reporting",
+                "blog": "Blog",
+                "contact_us": "Contact Us",
+                "login": "Login",
+                "sign_up_login": "Sign Up/Login",
+                "admin_login": "Admin Login",
+                "logout": "Logout",
+                "hero_title": "Analytics & Reporting",
+                "hero_paragraph": "Gain a clear, data-driven view of your performance to make smarter marketing decisions.",
+                "make_every_decision_heading": "Make Every Decision Count",
+                "make_every_decision_subheading": "We turn raw data into actionable insights for growth.",
+                "make_every_decision_p1": "In the world of digital marketing, data is your most powerful asset. Our analytics and reporting services provide you with a transparent, comprehensive view of your campaign performance. We don't just give you numbers; we provide actionable insights that help you understand what's working and where to invest next.",
+                "make_every_decision_p2": "We set up advanced tracking, create custom dashboards, and provide regular, easy-to-understand reports so you can see the true impact of your marketing efforts and confidently plan for the future.",
+                "key_features_heading": "Key Features of Our Service",
+                "custom_dashboards_h4": "Custom Dashboards",
+                "custom_dashboards_p": "We build personalized dashboards that track your most important KPIs in real-time.",
+                "performance_reporting_h4": "Performance Reporting",
+                "performance_reporting_p": "Receive regular, comprehensive reports with clear insights into your campaign results.",
+                "attribution_modeling_h4": "Attribution Modeling",
+                "attribution_modeling_p": "Understand which channels and campaigns are truly driving conversions and revenue.",
+                "competitor_analysis_h4": "Competitor Analysis",
+                "competitor_analysis_p": "Gain insights into your competitors' strategies and identify new opportunities for growth.",
+                "proven_process_heading": "Our Proven 4-Step Process",
+                "step_1_h4": "Setup & Integration",
+                "step_1_p": "We connect all your marketing tools and set up robust tracking to collect all necessary data.",
+                "step_2_h4": "Analysis & Insights",
+                "step_2_p": "Our experts analyze the data to uncover trends, identify issues, and find growth opportunities.",
+                "step_3_h4": "Reporting & Recommendations",
+                "step_3_p": "We provide regular reports and clear, actionable recommendations for your team.",
+                "step_4_h4": "Ongoing Optimization",
+                "step_4_p": "We use the insights to continually refine and improve your marketing strategies for better ROI.",
+                "ready_to_make_decisions_heading": "Ready to Make Data-Driven Decisions?",
+                "ready_to_make_decisions_p": "Stop guessing and start growing with a clear understanding of your performance. Contact us to learn how our analytics services can transform your business.",
+                "free_consultation_btn": "Get a Free Consultation",
+                "footer_description": "Your partner for digital marketing success. We deliver results that matter.",
+                "footer_quick_links": "Quick Links",
+                "footer_services": "Services",
+                "footer_contact_info": "Contact Info",
+                "footer_address": "123 Marketing Lane, Suite 456, City, State",
+                "footer_copyright": "© 2024 Stackly Digital Marketing. All rights reserved."
+            },
+            "ar": {
+                "home": "الرئيسية",
+                "about_us": "من نحن",
+                "services": "الخدمات",
+                "seo_content": "تحسين محركات البحث والمحتوى",
+                "ppc_management": "إدارة حملات الدفع لكل نقرة",
+                "social_media_marketing": "التسويق عبر وسائل التواصل الاجتماعي",
+                "web_development": "تطوير الويب",
+                "email_marketing": "التسويق عبر البريد الإلكتروني",
+                "analytics_reporting": "التحليلات والتقارير",
+                "blog": "المدونة",
+                "contact_us": "اتصل بنا",
+                "login": "تسجيل الدخول",
+                "sign_up_login": "التسجيل/تسجيل الدخول",
+                "admin_login": "تسجيل دخول المسؤول",
+                "logout": "تسجيل الخروج",
+                "hero_title": "التحليلات والتقارير",
+                "hero_paragraph": "احصل على رؤية واضحة ومبنية على البيانات لأدائك لاتخاذ قرارات تسويقية أكثر ذكاءً.",
+                "make_every_decision_heading": "اجعل كل قرار ذا أهمية",
+                "make_every_decision_subheading": "نحن نحول البيانات الأولية إلى رؤى قابلة للتنفيذ لتحقيق النمو.",
+                "make_every_decision_p1": "في عالم التسويق الرقمي، البيانات هي أقوى أصولك. توفر لك خدمات التحليلات والتقارير لدينا رؤية شفافة وشاملة لأداء حملاتك. نحن لا نقدم لك أرقامًا فحسب؛ بل نوفر رؤى قابلة للتنفيذ تساعدك على فهم ما ينجح وأين يجب أن تستثمر في الخطوة التالية.",
+                "make_every_decision_p2": "نحن نقوم بإعداد تتبع متقدم، وإنشاء لوحات معلومات مخصصة، وتقديم تقارير منتظمة وسهلة الفهم حتى تتمكن من رؤية التأثير الحقيقي لجهودك التسويقية والتخطيط للمستقبل بثقة.",
+                "key_features_heading": "الميزات الرئيسية لخدمتنا",
+                "custom_dashboards_h4": "لوحات معلومات مخصصة",
+                "custom_dashboards_p": "نحن نبني لوحات معلومات مخصصة تتتبع أهم مؤشرات الأداء الرئيسية الخاصة بك في الوقت الفعلي.",
+                "performance_reporting_h4": "تقارير الأداء",
+                "performance_reporting_p": "احصل على تقارير منتظمة وشاملة مع رؤى واضحة حول نتائج حملاتك.",
+                "attribution_modeling_h4": "نموذج الإحالة",
+                "attribution_modeling_p": "افهم أي القنوات والحملات هي التي تقود حقًا التحويلات والإيرادات.",
+                "competitor_analysis_h4": "تحليل المنافسين",
+                "competitor_analysis_p": "احصل على رؤى حول استراتيجيات منافسيك وحدد فرصًا جديدة للنمو.",
+                "proven_process_heading": "عمليتنا المجربة المكونة من 4 خطوات",
+                "step_1_h4": "الإعداد والتكامل",
+                "step_1_p": "نحن نربط جميع أدواتك التسويقية ونقوم بإعداد تتبع قوي لجمع كل البيانات اللازمة.",
+                "step_2_h4": "التحليل والرؤى",
+                "step_2_p": "يحلل خبراؤنا البيانات للكشف عن الاتجاهات، وتحديد المشكلات، وإيجاد فرص النمو.",
+                "step_3_h4": "التقارير والتوصيات",
+                "step_3_p": "نقدم تقارير منتظمة وتوصيات واضحة وقابلة للتنفيذ لفريقك.",
+                "step_4_h4": "التحسين المستمر",
+                "step_4_p": "نحن نستخدم الرؤى لتحسين وتطوير استراتيجياتك التسويقية باستمرار لتحقيق عائد استثمار أفضل.",
+                "ready_to_make_decisions_heading": "هل أنت مستعد لاتخاذ قرارات مبنية على البيانات؟",
+                "ready_to_make_decisions_p": "توقف عن التخمين وابدأ في النمو بفهم واضح لأدائك. اتصل بنا لمعرفة كيف يمكن لخدمات التحليلات لدينا أن تحول عملك.",
+                "free_consultation_btn": "احصل على استشارة مجانية",
+                "footer_description": "شريكك لنجاح التسويق الرقمي. نحن نحقق نتائج مهمة.",
+                "footer_quick_links": "روابط سريعة",
+                "footer_services": "الخدمات",
+                "footer_contact_info": "معلومات الاتصال",
+                "footer_address": "123 Marketing Lane, Suite 456, City, State",
+                "footer_copyright": "© 2024 Stackly Digital Marketing. جميع الحقوق محفوظة."
+            },
+            "he": {
+                "home": "בית",
+                "about_us": "אודותינו",
+                "services": "שירותים",
+                "seo_content": "קידום אתרים ותוכן",
+                "ppc_management": "ניהול PPC",
+                "social_media_marketing": "שיווק במדיה חברתית",
+                "web_development": "פיתוח אתרים",
+                "email_marketing": "שיווק במייל",
+                "analytics_reporting": "אנליטיקס ודוחות",
+                "blog": "בלוג",
+                "contact_us": "צור קשר",
+                "login": "התחברות",
+                "sign_up_login": "הרשמה/התחברות",
+                "admin_login": "התחברות מנהל",
+                "logout": "התנתקות",
+                "hero_title": "אנליטיקס ודוחות",
+                "hero_paragraph": "קבל תמונה ברורה, מונעת נתונים של הביצועים שלך כדי לקבל החלטות שיווקיות חכמות יותר.",
+                "make_every_decision_heading": "הפוך כל החלטה לסופרת",
+                "make_every_decision_subheading": "אנו הופכים נתוני גלם לתובנות מעשיות לצמיחה.",
+                "make_every_decision_p1": "בעולם השיווק הדיגיטלי, נתונים הם הנכס החזק ביותר שלך. שירותי האנליטיקס והדוחות שלנו מספקים לך תמונה שקופה ומקיפה של ביצועי הקמפיין שלך. אנחנו לא רק נותנים לך מספרים; אנחנו מספקים תובנות מעשיות שעוזרות לך להבין מה עובד והיכן להשקיע בהמשך.",
+                "make_every_decision_p2": "אנו מקימים מעקב מתקדם, יוצרים לוחות מחוונים מותאמים אישית ומספקים דוחות קבועים וקלים להבנה כדי שתוכל לראות את ההשפעה האמיתית של מאמצי השיווק שלך ולתכנן בביטחון לעתיד.",
+                "key_features_heading": "תכונות מפתח של השירות שלנו",
+                "custom_dashboards_h4": "לוחות מחוונים מותאמים אישית",
+                "custom_dashboards_p": "אנו בונים לוחות מחוונים מותאמים אישית שעוקבים אחר מדדי הביצועים החשובים ביותר שלך בזמן אמת.",
+                "performance_reporting_h4": "דוחות ביצועים",
+                "performance_reporting_p": "קבל דוחות קבועים ומקיפים עם תובנות ברורות לגבי תוצאות הקמפיינים שלך.",
+                "attribution_modeling_h4": "מודל ייחוס",
+                "attribution_modeling_p": "הבן אילו ערוצים וקמפיינים באמת מניעים המרות והכנסות.",
+                "competitor_analysis_h4": "ניתוח מתחרים",
+                "competitor_analysis_p": "קבל תובנות לגבי האסטרטגיות של המתחרים שלך וזהה הזדמנויות חדשות לצמיחה.",
+                "proven_process_heading": "התהליך המוכח שלנו ב-4 שלבים",
+                "step_1_h4": "הגדרה ואינטגרציה",
+                "step_1_p": "אנו מחברים את כל כלי השיווק שלך ומקימים מעקב חזק כדי לאסוף את כל הנתונים הדרושים.",
+                "step_2_h4": "ניתוח ותובנות",
+                "step_2_p": "המומחים שלנו מנתחים את הנתונים כדי לחשוף מגמות, לזהות בעיות ולמצוא הזדמנויות צמיחה.",
+                "step_3_h4": "דוחות והמלצות",
+                "step_3_p": "אנו מספקים דוחות קבועים והמלצות ברורות וניתנות ליישום עבור הצוות שלך.",
+                "step_4_h4": "אופטימיזציה מתמשכת",
+                "step_4_p": "אנו משתמשים בתובנות כדי לחדד ולשפר באופן מתמיד את אסטרטגיות השיווק שלך לקבלת החזר השקעה טוב יותר.",
+                "ready_to_make_decisions_heading": "מוכן לקבל החלטות מונעות נתונים?",
+                "ready_to_make_decisions_p": "הפסק לנחש והתחל לצמוח עם הבנה ברורה של הביצועים שלך. צור קשר כדי ללמוד כיצד שירותי האנליטיקס שלנו יכולים לשנות את העסק שלך.",
+                "free_consultation_btn": "קבל ייעוץ חינם",
+                "footer_description": "השותף שלך להצלחה בשיווק דיגיטלי. אנו מספקים תוצאות שחשובות.",
+                "footer_quick_links": "קישורים מהירים",
+                "footer_services": "שירותים",
+                "footer_contact_info": "פרטי קשר",
+                "footer_address": "123 Marketing Lane, Suite 456, City, State",
+                "footer_copyright": "© 2024 Stackly Digital Marketing. כל הזכויות שמורות."
+            }
+        };
+
         const mobileToggle = document.getElementById('mobile-toggle');
         const nav = document.getElementById('site-nav');
         mobileToggle?.addEventListener('click', () => nav.classList.toggle('open'));
@@ -821,6 +1016,72 @@
                 profileDropdown.classList.remove('show');
             }
         });
+
+        // Language toggle script
+        const langToggle = document.getElementById('lang-toggle');
+        const rootElement = document.querySelector('html');
+
+        const updateLanguage = (lang) => {
+            const data = languageData[lang];
+            if (!data) return;
+
+            // Set page direction
+            if (lang === 'he' || lang === 'ar') {
+                rootElement.dir = 'rtl';
+            } else {
+                rootElement.dir = 'ltr';
+            }
+
+            // Update text content for all elements with a data-lang attribute
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (data[key]) {
+                    element.textContent = data[key];
+                }
+            });
+
+            // Handle specific cases like a.active link
+            document.querySelectorAll('.nav-links a.active').forEach(link => {
+                if (link.dataset.lang) {
+                    link.textContent = data[link.dataset.lang];
+                }
+            });
+        };
+
+        // Event listener for the language toggle
+        langToggle.addEventListener('change', (event) => {
+            const selectedLang = event.target.value;
+            updateLanguage(selectedLang);
+        });
+
+        // Initial language update on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            langToggle.value = savedLang;
+            updateLanguage(savedLang);
+        });
+        document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
+
     </script>
 </body>
 </html>

@@ -1,532 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stackly Digital Marketing - Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    /* CSS variables for a consistent dark theme */
-    :root {
-      --bg: #0b0d12;
-      --surface: #0f1219;
-      --glass: rgba(255,255,255,0.08);
-      --text: #e9eefc;
-      --muted: #a6b1d0;
-      --brand: #224DB7;
-      --brand-2: #5b8cff;
-      --accent: #00d1ff;
-      --card: #101522;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --hero-overlay-dark: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
-      --badge-bg: rgba(34,77,183,.15);
-      --badge-border: rgba(34,77,183,.35);
-      --badge-text: #cfe0ff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Digital Marketing - Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS variables for a consistent dark theme */
+        :root {
+            --bg: #0b0d12;
+            --surface: #0f1219;
+            --glass: rgba(255,255,255,0.08);
+            --text: #e9eefc;
+            --muted: #a6b1d0;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #00d1ff;
+            --card: #101522;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+        }
 
-    /* Light theme overrides for a dual-theme design */
-    body.light {
-      --bg: #f0f4f9;
-      --surface: #ffffff;
-      --glass: rgba(0,0,0,0.05);
-      --text: #1d2c41;
-      --muted: #5e6d8a;
-      --brand: #224DB7;
-      --brand-2: #5b8cff;
-      --accent: #008cff;
-      --card: #ffffff;
-      --shadow: 0 10px 30px rgba(0, 0, 0, .1);
-      --hero-overlay-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
-      --badge-bg: rgba(34,77,183,.05);
-      --badge-border: rgba(34,77,183,.2);
-      --badge-text: #224DB7;
-    }
-    
-    body {
-      margin: 0;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1200px, 92%); margin-inline: auto; }
+        /* Light theme overrides for a dual-theme design */
+        body.light {
+            --bg: #f0f4f9;
+            --surface: #ffffff;
+            --glass: rgba(0,0,0,0.05);
+            --text: #1d2c41;
+            --muted: #5e6d8a;
+            --brand: #224DB7;
+            --brand-2: #5b8cff;
+            --accent: #008cff;
+            --card: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .1);
+        }
 
-    /* ---------- Header (sticky, glass) ---------- */
-    .header { background-color: var(--surface); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); transition: background-color 0.3s ease; }
-    .logo-img { height: 40px; width: auto; margin-right: 8px; }
-    .nav-container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 700; color: var(--brand); display: flex; align-items: center; }
-    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-    .nav { flex-grow: 1; display: flex; justify-content: flex-end; margin-right: 1rem; }
-    .nav-links { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; align-items: center; }
-    .nav-links a { color: var(--muted); font-weight: 600; padding: 5px 0; transition: color .3s; position: relative; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
-.dropdown-menu {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  position: absolute;
-  top: 100%;
-  background: var(--card);
-  box-shadow: var(--shadow);
-  border-radius: 8px;
-  padding: 10px 0;
-  min-width: 150px;
-  list-style: none;
-}
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #3b00ff, #ff00d4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
 
-/* Show with delay */
-.nav-links li:hover > .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition-delay: 0.2s; /* adjust delay */
-}
+        /* Card Container */
+        .signup-card {
+            display: flex;
+            background: var(--bg-color);
+            width: 850px;
+            max-width: 90vw;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideUp 1s ease-in-out;
+        }
 
-    .dropdown-menu a { padding: 10px 15px; color: var(--text); display: block; transition: color 0.3s ease; }
-    .profile { position: relative; }
-    .profile-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #9B59B6; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; cursor: pointer; }
-    .profile-menu { display: none; position: block; top: 120%; right: 0; background: var(--card); box-shadow: var(--shadow); border-radius: 8px; overflow: hidden; transition: background-color 0.3s ease; }
-    .profile-menu a { display: block; padding: 10px 15px; color: var(--text); white-space: nowrap; transition: color 0.3s ease; }
-    .profile:hover .profile-menu { display: block; }
-    .mobile-menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
-    .theme-toggle { display: block; }
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
 
-    @media (max-width: 768px) {
-      .nav { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--surface); box-shadow: var(--shadow); padding: 1rem 0; }
-      .nav.open { display: block; }
-      .nav-links { flex-direction: column; gap: 1rem; }
-      .mobile-menu-toggle { display: block; }
-    }
+        /* Left Side (Animated) */
+        .signup-left {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(135deg, #3b00ff, #ff00d4);
+            color: white;
+            padding: 40px;
+            overflow: hidden;
+        }
 
-    /* ---------- Hero (video + gradient + CTA) ---------- */
-    .hero-section { position:relative; height: 86vh; min-height: 560px; overflow:hidden; border-bottom: 1px solid rgba(255,255,255,.06); }
-    .hero-bg-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: saturate(110%) contrast(105%); }
-    .hero-gradient { position:absolute; inset:0; background: var(--hero-overlay-dark); transition: background-color 0.3s ease; }
-    .hero-content { position:relative; z-index:1; height:100%; display:grid; place-items:center; text-align:center; padding: 0 16px; }
-    .hero-card { max-width: 900px; }
-    .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:999px; font-size:.82rem; color: var(--badge-text); background: var(--badge-bg); border:1px solid var(--badge-border); }
-    .hero-title { font-size: clamp(2rem, 5.2vw, 3.6rem); margin:16px 0 10px; line-height:1.05; letter-spacing:-.015em; }
-    .hero-sub { font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--text); margin: 0 0 24px; }
-    .hero-cta { display:inline-flex; gap:12px; }
-    .btn { display:inline-flex; align-items:center; gap:10px; padding: 14px 18px; border-radius: 12px; font-weight:700; transition: transform 0.3s ease; }
-    .btn-primary { background: linear-gradient(90deg, var(--brand), var(--brand-2)); color:#ffff; box-shadow: 0 8px 20px rgba(34,77,183,.35); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(34,77,183,.45); }
-    .btn-ghost { background: var(--glass); border:1px solid rgba(255,255,255,.14); color: var(--text); }
+        .signup-left h1 {
+            font-size: 32px;
+            margin-top: 20%;
+            margin-bottom: 10px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
 
-    /* ---------- Welcome (split) ---------- */
-    .welcome-image-section { padding: 64px 0; background: radial-gradient(1000px 400px at 10% -10%, rgba(34,77,183,.18), transparent), transparent; }
-    .welcome-content { display:grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items:center; }
-    .welcome-text h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin:0 0 12px; }
-    .welcome-text p { color: var(--muted); margin: 0 0 18px; }
-    .welcome-features { display:grid; gap:12px; }
-    .feature-item { display:flex; align-items:center; gap:10px; font-weight:600; color:var(--text); }
-    .feature-item i { color: var(--accent); }
-    .welcome-image img { border-radius: 16px; box-shadow: var(--shadow); }
+        .signup-left p {
+            font-size: 16px;
+            animation: fadeIn 1.4s ease-in-out;
+        }
 
-    /* ---------- Featured Campaigns ---------- */
-    .featured-section { padding: 70px 0; background: linear-gradient(180deg, #0c1018 0%, #0b0f17 100%); border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
-    .section-title { text-align:center; margin:0 0 34px; }
-    .section-title h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin:0; }
-    .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .card { background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius: 16px; overflow:hidden; box-shadow: var(--shadow); transition: transform .3s ease, box-shadow .3s ease, background-color 0.3s ease; }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,.5); }
-    .card img { height: 220px; width: 100%; object-fit: cover; }
-    .card-body { padding: 18px 18px 16px; }
-    .card-body h3 { margin: 2px 0 6px; font-size: 1.2rem; }
-    .meta { display:flex; align-items:center; gap:10px; color: var(--muted); font-size:.95rem; margin-bottom: 10px; }
-    .badges { display:flex; flex-wrap:wrap; gap:8px; margin: 10px 0 16px; }
-    .badge { padding:6px 10px; border-radius:999px; background: var(--badge-bg); border:1px solid var(--badge-border); color:var(--badge-text); font-weight:600; font-size:.86rem; }
-    .card-actions { display:flex; justify-content: space-between; align-items:center; gap:10px; }
-    .btn-mini { padding: 10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); font-weight:700; transition: background-color 0.3s ease; }
-    .btn-mini:hover { background: rgba(255,255,255,.1); }
+        /* Blobs Animation */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        .blob1 {
+            width: 150px;
+            height: 150px;
+            top: 15%;
+            left: 20%;
+        }
+        .blob2 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            right: 25%;
+        }
+        .blob3 {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            left: 70%;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    /* ---------- Services ---------- */
-    .services-section { padding: 70px 0; }
-    .services-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .service-card { background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius: 18px; padding: 26px; transition: transform .3s ease, background-color 0.3s ease; box-shadow: var(--shadow); text-align:center; }
-    .service-card:hover { transform: translateY(-6px); }
-    .icon-circle { width:64px; height:64px; display:grid; place-items:center; margin: 0 auto 12px; border-radius:50%; background: radial-gradient( circle at 30% 30%, rgba(0,209,255,.35), rgba(34,77,183,.45) ); border:1px solid rgba(255,255,255,.12); }
-    .service-card h3 { margin: 10px 0 8px; }
-    .service-card p { color: var(--muted); }
+        /* Right Side (Form) */
+        .signup-right {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff; /* Set solid white background */
+            color: #1d2c41; /* Set a dark text color for contrast */
+        }
 
-    /* ---------- Stats (animated counters) ---------- */
-    .stats-section { background: var(--bg); padding: 70px 0; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); transition: background-color 0.3s ease; }
-    .stats-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-    .stat-item { text-align:center; background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 26px; box-shadow: var(--shadow); transition: background-color 0.3s ease; }
-    .stat-number { font-size: 2rem; font-weight: 800; color: #a7c8ff; letter-spacing:.5px; }
-    .stat-label { color: var(--muted); margin-top:6px; }
+        .signup-right h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1d2c41; /* Explicit color for the heading */
+        }
 
-    /* ---------- Newsletter (form) ---------- */
-    .newsletter-section { position:relative; padding: 80px 0; text-align:center; background: url('https://i.pinimg.com/736x/1b/b5/d1/1bb5d14f4468dcc028286f74848d7300.jpg') center/cover no-repeat; }
-    .newsletter-overlay { position:absolute; inset:0; background: rgba(4,7,14,.55); }
-    .newsletter-inner { position:relative; z-index:2; }
-    .newsletter-title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin:0 0 8px; }
-    .newsletter-sub { color:var(--text); opacity:.9; margin:0 0 20px; }
-    .form { display:flex; gap:10px; justify-content:center; flex-wrap: wrap; }
-    .input { width: min(420px, 90vw); padding: 14px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.1); color:#fff; outline:none; transition: background-color 0.3s ease, color 0.3s ease; }
-    .input::placeholder { color:#d1d9ffaa; }
+        .signup-right form {
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* ---------- Footer ---------- */
-    .footer { background: var(--surface); border-top: 1px solid rgba(255,255,255,.06); transition: background-color 0.3s ease; }
-    .footer-content { display:grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 20px; padding: 46px 0; }
-    .footer h3, .footer h4 { margin-top:0; }
-    .footer p, .footer li { color: var(--muted); transition: color 0.3s ease; }
-    .social-links { display:flex; gap:12px; margin-top:10px; }
-    .social-links a { width:38px; height:38px; display:grid; place-items:center; border-radius:10px; background: var(--glass); border:1px solid var(--glass); transition: background-color 0.3s ease; }
-    .footer ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
-    .footer-bottom { border-top:1px solid rgba(255,255,255,.06); text-align:center; padding: 16px 0 22px; color: var(--muted); font-size:.95rem; }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
 
-    /* ---------- Utilities ---------- */
-    #featured-campaigns { scroll-margin-top: 100px; }
+        .form-group {
+            flex: 1;
+            margin-bottom: 15px;
+        }
 
-    /* ---------- Responsive ---------- */
-    @media (max-width: 1024px) {
-      .cards { grid-template-columns: repeat(2, 1fr); }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-content { grid-template-columns: 1.4fr 1fr 1fr; }
-      .nav-container { grid-template-columns: auto 1fr auto; }
-      .theme-toggle { display:block; }
-    }
-    @media (max-width: 780px) {
-      .mobile-menu-toggle { display:block; }
-      .nav { display:none; position:absolute; left:0; right:0; top:100%; background:var(--surface); box-shadow:var(--shadow); padding:1rem 0; }
-      .nav.open { display:block; }
-      .nav-links { flex-direction:column; align-items:flex-start; padding: 10px 12px 16px; }
-      .dropdown:hover .dropdown-menu { display:none; }
-      .dropdown .dropdown-toggle::after{ content: ""; }
-      .dropdown-menu { position:relative; border:none; background:transparent; padding:6px 0 10px; display:block; }
-      .welcome-content { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-content { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 420px) { .stats-grid { grid-template-columns: 1fr; } }
-  </style>
+        .signup-right label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+            color: #5e6d8a; /* Explicit color for labels */
+        }
+
+        .signup-right input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d4d8e3; /* Set a light border */
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            background-color: #ffffff; /* Ensure input background is white */
+            color: #1d2c41; /* Ensure input text is dark */
+            transition: border-color 0.3s ease;
+        }
+
+        .signup-right input:focus {
+            border-color: #224DB7;
+        }
+
+        .continue-btn {
+            background: linear-gradient(to right, #ff00d4, #3b00ff);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #224DB7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .signup-card {
+                flex-direction: column;
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .signup-left {
+                flex: none;
+                height: 200px;
+                padding: 20px;
+            }
+            
+            .signup-left h1 {
+                margin-top: 10%;
+                font-size: 24px;
+            }
+            
+            .signup-right {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container nav-container">
-      <a href="redesigned_index.html" class="logo">
-        <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-      </a>
-      <div class="nav-right">
-        <nav class="nav" id="site-nav">
-          <ul class="nav-links">
-            <li class="dropdown">
-              <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="redesigned_index.html">Home 1</a></li>
-                <li><a href="home3.html">Home 2</a></li>
-              </ul>
-            </li>
-            <li><a href="About us.html">About Us</a></li>
-            <li class="dropdown">
-              <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="Services.html">All Services</a></li>
-                <li><a href="social-media.html">Social Media Marketing</a></li>
-                <li><a href="seo.html">SEO Optimization</a></li>
-                <li><a href="ppc.html">PPC Advertising</a></li>
-                <li><a href="web-dev.html">web development</a></li>
-                <li><a href="email.html">Email Marketing</a></li>
-                <li><a href="analytics.html">Analytics & Reporting</a></li>
-              </ul>
-            </li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li class="dropdown">
-              <a href="signup.html">Login <i class="fas fa-chevron-down"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="login.html">Sign Up/Login</a></li>
-                <li><a href="sign admin.html">Admin Login</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <div class="profile-container" style="position: relative;">
-          <div class="profile-icon" id="profile-btn">
-            PS
-          </div>
-          <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
-            <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
-          </div>
-        </div>
-        <div class="theme-toggle">
-          <button id="theme-toggle" class="btn btn-secondary">
-            <i class="fas fa-moon"></i>
-          </button>
-        </div>
-        <div class="mobile-menu-toggle" id="mobile-toggle">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
-    </div>
-  </header>
 
-  <section class="hero-section">
-    <video autoplay muted loop playsinline class="hero-bg-video">
-      <source src="https://videos.pexels.com/video-files/5725960/5725960-uhd_2560_1440_30fps.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="hero-gradient"></div>
-    <div class="hero-content">
-      <div class="hero-card">
-        <span class="eyebrow"><i class="fa-solid fa-sparkles"></i> Performance-Driven Digital Growth</span>
-        <h1 class="hero-title">Grow Your Business Online</h1>
-        <p class="hero-sub">Transform your digital presence with data-driven marketing strategies that deliver real results and measurable growth.</p>
-        <div class="hero-cta">
-          <a href="featured-campaigns" class="btn btn-primary"><i class="fa-solid fa-bolt"></i> Explore Our Work</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="signup-card">
+    <div class="signup-left">
+        <h1>Join Stackly</h1>
+        <p>Create your account and start your digital marketing journey</p>
 
-  <section class="welcome-image-section">
-    <div class="container">
-      <div class="welcome-content">
-        <div class="welcome-text">
-          <h2>Fuel Your Digital Growth</h2>
-          <p>We help brands stand out in the digital world. From creative campaigns to data-driven strategies, we deliver results that matter and growth you can measure.</p>
-          <div class="welcome-features">
-            <div class="feature-item"><i class="fas fa-bullhorn"></i><span>Creative Campaigns</span></div>
-            <div class="feature-item"><i class="fas fa-chart-line"></i><span>Data-Driven Strategies</span></div>
-            <div class="feature-item"><i class="fas fa-users"></i><span>Targeted Audience Reach</span></div>
-          </div>
-        </div>
-        <div class="welcome-image">
-          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80" alt="Digital Marketing Strategy">
-        </div>
-      </div>
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
     </div>
-  </section>
 
-  <div id="featured-campaigns"></div>
-  <section class="featured-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Featured Campaigns</h2>
-      </div>
-      <div class="cards">
-        <article class="card">
-          <img src="https://i.pinimg.com/1200x/cb/88/d7/cb88d7323b243657060c9bb4546f065d.jpg" alt="Social Media Growth">
-          <div class="card-body">
-            <h3>Social Media Growth</h3>
-            <div class="meta"><i class="fas fa-bullhorn"></i> Instagram, Facebook</div>
-            <div class="badges">
-              <span class="badge">+150% Engagement</span>
-              <span class="badge">50K Followers</span>
-              <span class="badge">15K Likes</span>
+    <div class="signup-right">
+        <h2>Create Account</h2>
+        <form id="signupForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="" required>
+                </div>
             </div>
-            <div class="card-actions">
-              <a class="btn-mini" href="Services.html">View Details</a>
-              <a class="btn-mini" href="contact.html">Start Similar</a>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" name="email" placeholder="" required>
             </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="https://i.pinimg.com/736x/29/1d/d2/291dd2ffce7d1b3417610ef5f1e7d88c.jpg" alt="SEO Optimization">
-          <div class="card-body">
-            <h3>SEO Optimization</h3>
-            <div class="meta"><i class="fas fa-search"></i> Organic Search</div>
-            <div class="badges">
-              <span class="badge">Top 3 on Google</span>
-              <span class="badge">300% Traffic</span>
-              <span class="badge">120+ Backlinks</span>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                </div>
             </div>
-            <div class="card-actions">
-              <a class="btn-mini" href="Services.html">View Details</a>
-              <a class="btn-mini" href="contact.html">Start Similar</a>
+
+            <button type="submit" class="continue-btn">Create Account</button>
+            
+            <div class="login-link">
+                Already have an account? <a href="home1.html">Sign In</a>
             </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="https://i.pinimg.com/736x/53/1a/c9/531ac9b46b9a25f3c0a6b94f33b250c1.jpg" alt="Brand Awareness Ads">
-          <div class="card-body">
-            <h3>Brand Awareness Ads</h3>
-            <div class="meta"><i class="fas fa-ad"></i> Google & YouTube</div>
-            <div class="badges">
-              <span class="badge">5M+ Impressions</span>
-              <span class="badge">1.8M Views</span>
-              <span class="badge">75% Watch Rate</span>
-            </div>
-            <div class="card-actions">
-              <a class="btn-mini" href="Services.html">View Details</a>
-              <a class="btn-mini" href="contact.html">Start Similar</a>
-            </div>
-          </div>
-        </article>
-      </div>
+        </form>
     </div>
-  </section>
+</div>
 
-  <section class="services-section">
-    <div class="container">
-      <div class="section-title"><h2>Our Digital Marketing Services</h2></div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="icon-circle"><i class="fas fa-bullhorn"></i></div>
-          <h3>Media Marketing</h3>
-          <p>Boost your brand presence and engagement across platforms like Instagram, Facebook, and LinkedIn.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon-circle"><i class="fas fa-search-dollar"></i></div>
-          <h3>SEO Optimization</h3>
-          <p>Rank higher on search engines and drive organic traffic with our proven SEO strategies.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon-circle"><i class="fas fa-chart-pie"></i></div>
-          <h3>Data-Driven</h3>
-          <p>Leverage analytics to create campaigns that deliver measurable results and higher ROI.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="stats-section">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number" data-target="1000000">0</div>
-          <div class="stat-label">Ad Impressions Delivered</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="5000">0</div>
-          <div class="stat-label">Leads Generated</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="10">0</div>
-          <div class="stat-label">Years in Digital Marketing</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="95">0</div>
-          <div class="stat-label">Client Retention Rate (%)</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="newsletter-section">
-    <div class="newsletter-overlay"></div>
-    <div class="container newsletter-inner">
-      <h2 class="newsletter-title">Get in Touch</h2>
-      <p class="newsletter-sub">We'd love to hear from you. Let's start a conversation about your digital needs.</p>
-      <form class="form" onsubmit="event.preventDefault(); window.location.href='contact.html';">
-        <input class="input" type="email" placeholder="Enter your email" required>
-        <button class="btn btn-primary" type="submit"><i class="fa-regular fa-envelope"></i> Contact Us</button>
-      </form>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div>
-           <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-          <p>Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
-         
-        </div>
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="redesigned_index.html">Home</a></li>
-            <li><a href="About us.html">About Us</a></li>
-            <li><a href="Services.html">Services</a></li>
-            <li><a href="blog.html">Blog</a></li>
-
-            <li><a href="contact.html">Contact</a></li>
-          
-          </ul>
-        </div>
-        <div>
-          <h4>Services</h4>
-          <ul>
-           <li>
-                <li><a href="seo.html">SEO</a></li>
-                <li><a href="ppc.html">PPC</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-                <li><a href="web-dev.html">Web Development</a></li>
-                 <li><a href="email.html">email marketing</a></li>
-                  <li><a href="analytics.html">Analytics</a></li>
-        </div>
-        <div>
-          <h4>Contact Info</h4>
-          <ul>
-            <li><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
-            <li><i class="fas fa-phone"></i> (555) 123-4567</li>
-            <li><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile nav toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const nav = document.getElementById('site-nav');
-    mobileToggle?.addEventListener('click', ()=> nav.classList.toggle('open'));
-
-    // Theme toggle (simple demo toggling body class)
-    document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
-      document.body.classList.toggle('light');
-    });
-
-    // Profile dropdown functionality
-    const profileBtn = document.getElementById('profile-btn');
-    const profileDropdown = document.getElementById('profile-dropdown');
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
     
-    profileBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-        profileDropdown.style.display = 'none';
-      }
-    });
-
-    // Logout function
-    function logout() {
-      // Add your logout logic here
-      alert('Logged out successfully!');
-      window.location.href = 'login.html';
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
     }
-
-    // Animated counters when visible
-    const counters = document.querySelectorAll('.stat-number');
-    const animateCount = (el) => {
-      const target = +el.dataset.target;
-      const duration = 1600;
-      const start = performance.now();
-      const formatter = (n)=>{
-        if (target >= 1000000) return Intl.NumberFormat('en', {notation:'compact'}).format(n);
-        return Intl.NumberFormat('en').format(n);
-      };
-      function tick(now){
-        const p = Math.min(1, (now - start) / duration);
-        const value = Math.floor(target * (0.2 + 0.8 * (p)));
-        el.textContent = formatter(value);
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
+    
+    if (password.length < 6) {
+        alert('Password must be at least 6 characters long!');
+        return;
+    }
+    
+    // Store user data in localStorage (in real app, this would be server-side)
+    const userData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        signupDate: new Date().toISOString()
     };
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); io.unobserve(e.target); } });
-    }, { threshold: .4 });
-    counters.forEach(c=> io.observe(c));
-  </script>
+    
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    alert('Account created successfully! Welcome to Stackly Digital Marketing.');
+    window.location.href = 'login.html'; // Redirect to home or dashboard page
+});
+</script>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stackly Digital Marketing - Home</title>
+  <title data-lang="hero_title">Stackly Digital Marketing - Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -173,7 +173,15 @@
         .cta-image-content button:hover {
             background-color: #00b3e6;
         }
-
+        .lang-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: var(--card);
+            color: var(--text);
+            border: 1px solid var(--glass);
+            cursor: pointer;
+            font-size: 1rem;
+        }
     
 
   
@@ -216,44 +224,69 @@
       .footer-content { grid-template-columns: 1fr; }
     }
     @media (max-width: 420px) { .stats-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
   </style>
 </head>
 <body>
   <header class="header">
     <div class="container nav-container">
-      <a href="redesigned_index.html" class="logo">
+      <a href="home1.html" class="logo">
         <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
       </a>
       <div class="nav-right">
         <nav class="nav" id="site-nav">
           <ul class="nav-links">
             <li class="dropdown">
-              <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+              <a href="home1.html" data-lang="home">Home <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="redesigned_index.html">Home 1</a></li>
-                <li><a href="home3.html">Home 2</a></li>
+                <li><a href="home1.html" data-lang="home_1">Home 1</a></li>
+                <li><a href="home3.html" data-lang="home_2">Home 2</a></li>
               </ul>
             </li>
-            <li><a href="About us.html">About Us</a></li>
+            <li><a href="About us.html" data-lang="about_us">About Us</a></li>
             <li class="dropdown">
-              <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+              <a href="Services.html" data-lang="services">Services <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="Services.html">All Services</a></li>
-                <li><a href="social-media.html">Social Media Marketing</a></li>
-                <li><a href="seo.html">SEO Optimization</a></li>
-                <li><a href="ppc.html">PPC Advertising</a></li>
-                <li><a href="web-dev.html">web development</a></li>
-                <li><a href="email.html">Email Marketing</a></li>
-                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                <li><a href="Services.html" data-lang="all_services">All Services</a></li>
+                <li><a href="social-media.html" data-lang="social_media_marketing">Social Media Marketing</a></li>
+                <li><a href="seo.html" data-lang="seo_optimization">SEO Optimization</a></li>
+                <li><a href="ppc.html" data-lang="ppc_advertising">PPC Advertising</a></li>
+                <li><a href="web-dev.html" data-lang="web_development">Web Development</a></li>
+                <li><a href="email.html" data-lang="email_marketing">Email Marketing</a></li>
+                <li><a href="analytics.html" data-lang="analytics_reporting">Analytics & Reporting</a></li>
               </ul>
             </li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="blog.html" data-lang="blog">Blog</a></li>
+            <li><a href="contact.html" data-lang="contact_us">Contact Us</a></li>
             <li class="dropdown">
-              <a href="signup.html">Login <i class="fas fa-chevron-down"></i></a>
+              <a href="index.html" data-lang="login">Login <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="login.html">Sign Up/Login</a></li>
-                <li><a href="sign admin.html">Admin Login</a></li>
+                <li><a href="index.html" data-lang="sign_up_login">Sign Up/Login</a></li>
+                <li><a href="sign admin.html" data-lang="admin_login">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -263,13 +296,20 @@
             PS
           </div>
           <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
-            <a href="#" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+            <a href="#" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;" data-lang="logout">Logout</a>
           </div>
         </div>
         <div class="theme-toggle">
           <button id="theme-toggle" class="btn btn-secondary">
             <i class="fas fa-moon"></i>
           </button>
+        </div>
+        <div class="lang-toggle-container">
+          <select id="lang-toggle" class="lang-select">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="he">עברית</option>
+          </select>
         </div>
         <div class="mobile-menu-toggle" id="mobile-toggle">
           <i class="fas fa-bars"></i>
@@ -283,20 +323,20 @@
         <section class="section article-section">
             <div class="container">
                 <div class="article-header">
-                    <h1 class="article-title">SEO Trends to Watch in 2024</h1>
-                    <p class="article-meta">Published on August 18, 2024 by John Smith</p>
+                    <h1 class="article-title" data-lang="article_title">SEO Trends to Watch in 2024</h1>
+                    <p class="article-meta" data-lang="article_meta">Published on August 18, 2024 by John Smith</p>
                 </div>
                 <img class="article-image" src="https://cdn.pixabay.com/photo/2015/05/08/14/47/seo-758264_1280.jpg" alt="Article image showing SEO trends" />
                 <div class="article-content">
-                    <p>The world of SEO is in constant motion, with search engines continually updating their algorithms to provide the best user experience. To stay ahead of the competition in 2024, it's crucial to adapt to these changes and focus on the strategies that will yield the highest returns. Here’s a look at the top trends shaping SEO today.</p>
-                    <h2>The Rise of Visual and Voice Search</h2>
-                    <p>Visual and voice search are no longer niche features; they are becoming mainstream. Users are increasingly searching for information using images and spoken queries. Optimizing your content and images for these search methods by using descriptive alt text, clear filenames, and structured data will be essential for capturing a broader audience.</p>
-                    <h2>E-A-T and User Experience</h2>
-                    <p>Google's E-A-T (Expertise, Authoritativeness, Trustworthiness) guidelines continue to grow in importance. Creating high-quality, well-researched content from credible sources is vital for ranking. Furthermore, user experience (UX) signals like site speed, mobile-friendliness, and intuitive navigation will play a larger role in how search engines rank your site.</p>
-                    <h2>Core Web Vitals</h2>
-                    <p>Google's Core Web Vitals, which measure a page's loading performance, interactivity, and visual stability, are now a significant ranking factor. Improving these metrics—such as Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative Layout Shift (CLS)—is a must for any website looking to maintain or improve its search rankings.</p>
-                    <h2>Semantic Search and Long-Tail Keywords</h2>
-                    <p>Search engines are becoming more sophisticated at understanding the context and intent behind queries, not just the keywords. This shift towards semantic search means that creating comprehensive, in-depth content that answers related questions and covers a topic thoroughly will be more effective than simply stuffing keywords. Focusing on long-tail keywords that address specific user queries will also be a key strategy.</p>
+                    <p data-lang="article_p1">The world of SEO is in constant motion, with search engines continually updating their algorithms to provide the best user experience. To stay ahead of the competition in 2024, it's crucial to adapt to these changes and focus on the strategies that will yield the highest returns. Here’s a look at the top trends shaping SEO today.</p>
+                    <h2 data-lang="visual_heading">The Rise of Visual and Voice Search</h2>
+                    <p data-lang="visual_p1">Visual and voice search are no longer niche features; they are becoming mainstream. Users are increasingly searching for information using images and spoken queries. Optimizing your content and images for these search methods by using descriptive alt text, clear filenames, and structured data will be essential for capturing a broader audience.</p>
+                    <h2 data-lang="eat_heading">E-A-T and User Experience</h2>
+                    <p data-lang="eat_p1">Google's E-A-T (Expertise, Authoritativeness, Trustworthiness) guidelines continue to grow in importance. Creating high-quality, well-researched content from credible sources is vital for ranking. Furthermore, user experience (UX) signals like site speed, mobile-friendliness, and intuitive navigation will play a larger role in how search engines rank your site.</p>
+                    <h2 data-lang="core_vitals_heading">Core Web Vitals</h2>
+                    <p data-lang="core_vitals_p1">Google's Core Web Vitals, which measure a page's loading performance, interactivity, and visual stability, are now a significant ranking factor. Improving these metrics—such as Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative Layout Shift (CLS)—is a must for any website looking to maintain or improve its search rankings.</p>
+                    <h2 data-lang="semantic_heading">Semantic Search and Long-Tail Keywords</h2>
+                    <p data-lang="semantic_p1">Search engines are becoming more sophisticated at understanding the context and intent behind queries, not just the keywords. This shift towards semantic search means that creating comprehensive, in-depth content that answers related questions and covers a topic thoroughly will be more effective than simply stuffing keywords. Focusing on long-tail keywords that address specific user queries will also be a key strategy.</p>
                 </div>
             </div>
         </section>
@@ -304,9 +344,9 @@
             <div class="container">
                 <div class="cta-image-section">
                     <div class="cta-image-content">
-                        <h2>Ready to Elevate Your Digital Presence?</h2>
-                        <p>Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
-                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                        <h2 data-lang="cta_heading">Ready to Elevate Your Digital Presence?</h2>
+                        <p data-lang="cta_p">Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
+                        <a href="contact.html" class="btn btn-primary" data-lang="cta_btn">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -318,44 +358,195 @@
       <div class="footer-content">
         <div>
            <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-          <p>Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
+          <p data-lang="footer_description">Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
          
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-lang="footer_quick_links">Quick Links</h4>
           <ul>
-            <li><a href="redesigned_index.html">Home</a></li>
-            <li><a href="About us.html">About Us</a></li>
-            <li><a href="Services.html">Services</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="home1.html" data-lang="home">Home</a></li>
+            <li><a href="About us.html" data-lang="about_us">About Us</a></li>
+            <li><a href="Services.html" data-lang="services">Services</a></li>
+            <li><a href="contact.html" data-lang="contact">Contact</a></li>
           
           </ul>
         </div>
         <div>
-          <h4>Services</h4>
+          <h4 data-lang="footer_services">Services</h4>
           <ul>
            <li>
-                <li><a href="seo.html">SEO</a></li>
-                <li><a href="ppc.html">PPC</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-                <li><a href="web-dev.html">Web Development</a></li>
-                 <li><a href="web-dev.html">email marketing</a></li>
-                  <li><a href="web-dev.html">Analytics</a></li>
+                <li><a href="seo.html" data-lang="seo">SEO</a></li>
+                <li><a href="ppc.html" data-lang="ppc">PPC</a></li>
+                <li><a href="social-media.html" data-lang="social_media">Social Media</a></li>
+                <li><a href="web-dev.html" data-lang="web_dev">Web Development</a></li>
+                 <li><a href="web-dev.html" data-lang="email_marketing">email marketing</a></li>
+                  <li><a href="web-dev.html" data-lang="analytics">Analytics</a></li>
         </div>
         <div>
-          <h4>Contact Info</h4>
+          <h4 data-lang="footer_contact_info">Contact Info</h4>
           <ul>
-            <li><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
-            <li><i class="fas fa-phone"></i> (555) 123-4567</li>
-            <li><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> <span data-lang="footer_address">123 Digital Marketing Blvd, City, State 12345</span></li>
+            <li><i class="fas fa-phone"></i> <span data-lang="footer_phone">(555) 123-4567</span></li>
+            <li><i class="fas fa-envelope"></i> <span data-lang="footer_email">info@stacklydigital.com</span></li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+      <div class="footer-bottom" data-lang="footer_copyright">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
     </div>
   </footer>
 
   <script>
+    // Language toggle data
+    const languageData = {
+        "en": {
+            "home": "Home",
+            "home_1": "Home 1",
+            "home_2": "Home 2",
+            "about_us": "About Us",
+            "services": "Services",
+            "all_services": "All Services",
+            "social_media_marketing": "Social Media Marketing",
+            "seo_optimization": "SEO Optimization",
+            "ppc_advertising": "PPC Advertising",
+            "web_development": "Web Development",
+            "email_marketing": "Email Marketing",
+            "analytics_reporting": "Analytics & Reporting",
+            "blog": "Blog",
+            "contact_us": "Contact Us",
+            "login": "Login",
+            "sign_up_login": "Sign Up/Login",
+            "admin_login": "Admin Login",
+            "logout": "Logout",
+            "hero_title": "Stackly Digital Marketing - Home",
+            "article_title": "SEO Trends to Watch in 2024",
+            "article_meta": "Published on August 18, 2024 by John Smith",
+            "article_p1": "The world of SEO is in constant motion, with search engines continually updating their algorithms to provide the best user experience. To stay ahead of the competition in 2024, it's crucial to adapt to these changes and focus on the strategies that will yield the highest returns. Here’s a look at the top trends shaping SEO today.",
+            "visual_heading": "The Rise of Visual and Voice Search",
+            "visual_p1": "Visual and voice search are no longer niche features; they are becoming mainstream. Users are increasingly searching for information using images and spoken queries. Optimizing your content and images for these search methods by using descriptive alt text, clear filenames, and structured data will be essential for capturing a broader audience.",
+            "eat_heading": "E-A-T and User Experience",
+            "eat_p1": "Google's E-A-T (Expertise, Authoritativeness, Trustworthiness) guidelines continue to grow in importance. Creating high-quality, well-researched content from credible sources is vital for ranking. Furthermore, user experience (UX) signals like site speed, mobile-friendliness, and intuitive navigation will play a larger role in how search engines rank your site.",
+            "core_vitals_heading": "Core Web Vitals",
+            "core_vitals_p1": "Google's Core Web Vitals, which measure a page's loading performance, interactivity, and visual stability, are now a significant ranking factor. Improving these metrics—such as Largest Contentful Paint (LCP), First Input Delay (FID), and Cumulative Layout Shift (CLS)—is a must for any website looking to maintain or improve its search rankings.",
+            "semantic_heading": "Semantic Search and Long-Tail Keywords",
+            "semantic_p1": "Search engines are becoming more sophisticated at understanding the context and intent behind queries, not just the keywords. This shift towards semantic search means that creating comprehensive, in-depth content that answers related questions and covers a topic thoroughly will be more effective than simply stuffing keywords. Focusing on long-tail keywords that address specific user queries will also be a key strategy.",
+            "cta_heading": "Ready to Elevate Your Digital Presence?",
+            "cta_p": "Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.",
+            "cta_btn": "Contact Us",
+            "footer_description": "Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.",
+            "footer_quick_links": "Quick Links",
+            "footer_services": "Services",
+            "footer_contact_info": "Contact Info",
+            "footer_address": "123 Digital Marketing Blvd, City, State 12345",
+            "footer_phone": "(555) 123-4567",
+            "footer_email": "info@stacklydigital.com",
+            "footer_copyright": "© 2025 Stackly Digital Marketing. All rights reserved.",
+            "contact": "Contact",
+            "seo": "SEO",
+            "ppc": "PPC",
+            "social_media": "Social Media",
+            "web_dev": "Web Development",
+            "analytics": "Analytics"
+        },
+        "ar": {
+            "home": "الرئيسية",
+            "home_1": "الصفحة الرئيسية 1",
+            "home_2": "الصفحة الرئيسية 2",
+            "about_us": "من نحن",
+            "services": "الخدمات",
+            "all_services": "جميع الخدمات",
+            "social_media_marketing": "التسويق عبر وسائل التواصل الاجتماعي",
+            "seo_optimization": "تحسين محركات البحث",
+            "ppc_advertising": "إعلانات الدفع بالنقرة",
+            "web_development": "تطوير الويب",
+            "email_marketing": "التسويق عبر البريد الإلكتروني",
+            "analytics_reporting": "التحليلات والتقارير",
+            "blog": "المدونة",
+            "contact_us": "اتصل بنا",
+            "login": "تسجيل الدخول",
+            "sign_up_login": "التسجيل/تسجيل الدخول",
+            "admin_login": "تسجيل دخول المسؤول",
+            "logout": "تسجيل الخروج",
+            "hero_title": "ستكلي للتسويق الرقمي - الرئيسية",
+            "article_title": "اتجاهات تحسين محركات البحث لمتابعتها في عام 2024",
+            "article_meta": "نُشر في 18 أغسطس 2024 بواسطة جون سميث",
+            "article_p1": "عالم تحسين محركات البحث (SEO) في حركة مستمرة، حيث تقوم محركات البحث بتحديث خوارزمياتها باستمرار لتقديم أفضل تجربة للمستخدم. للبقاء في صدارة المنافسة في عام 2024، من الضروري التكيف مع هذه التغييرات والتركيز على الاستراتيجيات التي ستحقق أعلى العوائد. إليك نظرة على أهم الاتجاهات التي تشكل عالم تحسين محركات البحث اليوم.",
+            "visual_heading": "صعود البحث المرئي والصوتي",
+            "visual_p1": "لم يعد البحث المرئي والصوتي ميزات متخصصة؛ لقد أصبحا سائدين. يتزايد استخدام المستخدمين للصور والاستفسارات المنطوقة للبحث عن المعلومات. سيكون تحسين المحتوى والصور الخاصة بك لطرق البحث هذه باستخدام النص البديل الوصفي، وأسماء الملفات الواضحة، والبيانات المنظمة أمرًا ضروريًا لجذب جمهور أوسع.",
+            "eat_heading": "E-A-T وتجربة المستخدم",
+            "eat_p1": "تستمر إرشادات E-A-T (الخبرة، المصداقية، الجدارة بالثقة) من جوجل في النمو في الأهمية. يعد إنشاء محتوى عالي الجودة ومُبحث جيدًا من مصادر موثوقة أمرًا حيويًا للترتيب. علاوة على ذلك، ستلعب إشارات تجربة المستخدم (UX) مثل سرعة الموقع، والتوافق مع الأجهزة المحمولة، والتنقل السهل دورًا أكبر في كيفية ترتيب محركات البحث لموقعك.",
+            "core_vitals_heading": "مقاييس الويب الأساسية",
+            "core_vitals_p1": "أصبحت مقاييس الويب الأساسية من جوجل، التي تقيس أداء تحميل الصفحة، والتفاعل، والاستقرار المرئي، عامل ترتيب مهم. يعد تحسين هذه المقاييس — مثل أكبر عرض محتوى مرئي (LCP)، وأول تأخير في الإدخال (FID)، والتغير التراكمي في التخطيط (CLS) — أمرًا ضروريًا لأي موقع ويب يتطلع إلى الحفاظ على أو تحسين تصنيفه في نتائج البحث.",
+            "semantic_heading": "البحث الدلالي والكلمات الرئيسية طويلة الذيل",
+            "semantic_p1": "تصبح محركات البحث أكثر تطورًا في فهم السياق والنية وراء الاستعلامات، وليس مجرد الكلمات الرئيسية. هذا التحول نحو البحث الدلالي يعني أن إنشاء محتوى شامل وعميق يجيب على الأسئلة ذات الصلة ويغطي الموضوع بشكل شامل سيكون أكثر فعالية من مجرد حشو الكلمات الرئيسية. كما أن التركيز على الكلمات الرئيسية طويلة الذيل التي تعالج استفسارات المستخدم المحددة سيكون استراتيجية رئيسية.",
+            "cta_heading": "هل أنت مستعد لرفع مستوى وجودك الرقمي؟",
+            "cta_p": "فريق الخبراء لدينا هنا لمساعدتك في تحقيق أهداف عملك. اتصل بنا للحصول على استشارة مجانية.",
+            "cta_btn": "اتصل بنا",
+            "footer_description": "شريكك الموثوق في النمو الرقمي. نحن نقدم حلول تسويق مبتكرة وخبرة لمساعدة عملك على الازدهار عبر الإنترنت.",
+            "footer_quick_links": "روابط سريعة",
+            "footer_services": "الخدمات",
+            "footer_contact_info": "معلومات الاتصال",
+            "footer_address": "123 شارع التسويق الرقمي، المدينة، الولاية 12345",
+            "footer_phone": " (555) 123-4567+",
+            "footer_email": "info@stacklydigital.com",
+            "footer_copyright": "© 2025 Stackly Digital Marketing. جميع الحقوق محفوظة.",
+            "contact": "اتصل بنا",
+            "seo": "تحسين محركات البحث",
+            "ppc": "دفع بالنقرة",
+            "social_media": "وسائل التواصل الاجتماعي",
+            "web_dev": "تطوير الويب",
+            "analytics": "تحليلات"
+        },
+        "he": {
+            "home": "בית",
+            "home_1": "בית 1",
+            "home_2": "בית 2",
+            "about_us": "אודותינו",
+            "services": "שירותים",
+            "all_services": "כל השירותים",
+            "social_media_marketing": "שיווק במדיה חברתית",
+            "seo_optimization": "אופטימיזציית SEO",
+            "ppc_advertising": "פרסום PPC",
+            "web_development": "פיתוח אתרים",
+            "email_marketing": "שיווק במייל",
+            "analytics_reporting": "אנליטיקס ודוחות",
+            "blog": "בלוג",
+            "contact_us": "צור קשר",
+            "login": "התחברות",
+            "sign_up_login": "הרשמה/התחברות",
+            "admin_login": "התחברות מנהל",
+            "logout": "התנתקות",
+            "hero_title": "סטאקלי שיווק דיגיטלי - בית",
+            "article_title": "מגמות SEO שכדאי לעקוב אחריהן ב-2024",
+            "article_meta": "פורסם ב-18 באוגוסט 2024 על ידי ג'ון סמית'",
+            "article_p1": "עולם ה-SEO נמצא בתנועה מתמדת, כאשר מנועי חיפוש מעדכנים ללא הרף את האלגוריתמים שלהם כדי לספק את חווית המשתמש הטובה ביותר. כדי להישאר לפני המתחרים ב-2024, חיוני להסתגל לשינויים אלה ולהתמקד באסטרטגיות שיניבו את התשואות הגבוהות ביותר. הנה מבט על המגמות המובילות שמעצבות את ה-SEO כיום.",
+            "visual_heading": "עליית החיפוש החזותי והקולי",
+            "visual_p1": "חיפוש חזותי וקולי כבר אינם תכונות נישה; הם הופכים למיינסטרים. משתמשים מחפשים מידע יותר ויותר באמצעות תמונות ושאילתות מדוברות. אופטימיזציה של התוכן והתמונות שלך לשיטות חיפוש אלה באמצעות שימוש בטקסט חלופי תיאורי, שמות קבצים ברורים ונתונים מובנים תהיה חיונית ללכידת קהל רחב יותר.",
+            "eat_heading": "E-A-T וחווית משתמש",
+            "eat_p1": "הנחיות E-A-T (מומחיות, סמכותיות, אמינות) של גוגל ממשיכות לגדול בחשיבותן. יצירת תוכן איכותי ומחקר היטב ממקורות מהימנים חיונית לדירוג. יתר על כן, אותות חווית משתמש (UX) כמו מהירות האתר, ידידותיות למובייל וניווט אינטואיטיבי ישחקו תפקיד גדול יותר באופן שבו מנועי חיפוש מדרגים את האתר שלך.",
+            "core_vitals_heading": "מדדי ליבה",
+            "core_vitals_p1": "מדדי הליבה של גוגל, המודדים את ביצועי הטעינה של דף, אינטראקטיביות ויציבות חזותית, הם כעת גורם דירוג משמעותי. שיפור מדדים אלה - כגון Largest Contentful Paint (LCP), First Input Delay (FID) ו-Cumulative Layout Shift (CLS) - הוא חובה עבור כל אתר המעוניין לשמור או לשפר את דירוג החיפוש שלו.",
+            "semantic_heading": "חיפוש סמנטי ומילות מפתח ארוכות זנב",
+            "semantic_p1": "מנועי חיפוש הופכים מתוחכמים יותר בהבנת ההקשר והכוונה שמאחורי שאילתות, לא רק מילות המפתח. מעבר זה לכיוון חיפוש סמנטי פירושו שיצירת תוכן מקיף ומעמיק שעונה על שאלות קשורות ומכסה נושא ביסודיות תהיה יעילה יותר מאשר פשוט דחיסת מילות מפתח. התמקדות במילות מפתח ארוכות זנב שמתייחסות לשאילתות משתמש ספציפיות תהיה גם אסטרטגיה מרכזית.",
+            "cta_heading": "מוכן להעלות את הנוכחות הדיגיטלית שלך?",
+            "cta_p": "צוות המומחים שלנו כאן כדי לעזור לך להשיג את המטרות העסקיות שלך. צור קשר לייעוץ חינם.",
+            "cta_btn": "צור קשר",
+            "footer_description": "השותף האמין שלך לצמיחה דיגיטלית. אנו מספקים פתרונות שיווק חדשניים ומומחיות כדי לעזור לעסק שלך לשגשג באינטרנט.",
+            "footer_quick_links": "קישורים מהירים",
+            "footer_services": "שירותים",
+            "footer_contact_info": "פרטי התקשרות",
+            "footer_address": "123 שדרת השיווק הדיגיטלי, עיר, מדינה 12345",
+            "footer_phone": " (555) 123-4567+",
+            "footer_email": "info@stacklydigital.com",
+            "footer_copyright": "© 2025 סטאקלי שיווק דיגיטלי. כל הזכויות שמורות.",
+            "contact": "צור קשר",
+            "seo": "קידום אתרים",
+            "ppc": "PPC",
+            "social_media": "מדיה חברתית",
+            "web_dev": "פיתוח אתרים",
+            "analytics": "אנליטיקס"
+        }
+    };
+
     // Mobile nav toggle
     const mobileToggle = document.getElementById('mobile-toggle');
     const nav = document.getElementById('site-nav');
@@ -411,6 +602,65 @@
       entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); io.unobserve(e.target); } });
     }, { threshold: .4 });
     counters.forEach(c=> io.observe(c));
+
+    // Language toggle script
+    const langToggle = document.getElementById('lang-toggle');
+    const rootElement = document.querySelector('html');
+
+    const updateLanguage = (lang) => {
+      const data = languageData[lang];
+      if (!data) return;
+
+      // Set page direction
+      if (lang === 'he' || lang === 'ar') {
+        rootElement.dir = 'rtl';
+      } else {
+        rootElement.dir = 'ltr';
+      }
+
+      // Update text content for all elements with a data-lang attribute
+      document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        if (data[key]) {
+          element.textContent = data[key];
+        }
+      });
+    };
+
+    // Event listener for the language toggle
+    langToggle.addEventListener('change', (event) => {
+      const selectedLang = event.target.value;
+      updateLanguage(selectedLang);
+    });
+
+    // Initial language update on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('lang') || 'en';
+      langToggle.value = savedLang;
+      updateLanguage(savedLang);
+    });
+    // Mobile dropdown toggle for navigation
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
   </script>
 </body>
 </html>

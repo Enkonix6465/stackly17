@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Chart.js for the pie chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* CSS Variables for a consistent dark theme, inspired by the other provided files */
         :root {
@@ -53,6 +55,11 @@
             width: 100%;
         }
 
+        /* For Right-to-Left languages, reverse the sidebar layout */
+        [dir="rtl"] .dashboard-container {
+            flex-direction: row-reverse;
+        }
+
         /* Sidebar Navigation */
         .sidebar {
             width: 250px;
@@ -72,6 +79,18 @@
             color: var(--brand-2);
             text-align: center;
             margin-bottom: 16px;
+        }
+        
+        /* New: Current User ID display */
+        .user-id-display {
+            font-size: 0.75rem;
+            color: var(--muted);
+            word-break: break-all;
+            margin-bottom: 16px;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            text-align: center;
         }
 
         .nav-menu {
@@ -93,6 +112,11 @@
             color: var(--muted);
             font-weight: 500;
             transition: all 0.2s ease;
+        }
+
+        [dir="rtl"] .nav-item a {
+            flex-direction: row-reverse;
+            gap: 12px;
         }
 
         .nav-item a:hover {
@@ -124,6 +148,15 @@
             margin-bottom: 20px;
         }
 
+        [dir="rtl"] .top-bar {
+            justify-content: flex-start;
+        }
+
+        [dir="rtl"] .top-bar .profile-menu-dropdown {
+            left: 0;
+            right: auto;
+        }
+
         .top-bar .profile-menu {
             position: relative;
             cursor: pointer;
@@ -145,18 +178,6 @@
             display: block;
         }
 
-        .top-bar .profile-menu-dropdown a {
-            display: block;
-            padding: 10px 15px;
-            color: var(--text);
-            text-decoration: none;
-            border-radius: 6px;
-        }
-
-        .top-bar .profile-menu-dropdown a:hover {
-            background-color: var(--surface);
-        }
-
         .theme-toggle-btn {
             background: none;
             border: none;
@@ -164,6 +185,21 @@
             color: var(--text);
             font-size: 1.5rem;
             transition: color 0.3s ease;
+        }
+        /* Login/Logout Button Styling */
+        .auth-button {
+            background-color: var(--brand);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .auth-button:hover {
+            background-color: var(--brand-2);
         }
 
         .section-header {
@@ -233,6 +269,15 @@
             line-height: 1;
         }
         
+        /* Pie Chart Container */
+        .chart-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        
         /* Table Styling */
         .data-table {
             width: 100%;
@@ -246,6 +291,10 @@
             padding: 16px;
             text-align: left;
             border-bottom: 1px solid var(--surface);
+        }
+
+        [dir="rtl"] .data-table th, [dir="rtl"] .data-table td {
+            text-align: right;
         }
         
         .data-table th {
@@ -330,6 +379,11 @@
         .btn-icon:hover {
             color: var(--text);
         }
+        
+        [dir="rtl"] .btn-icon {
+            margin-left: 8px;
+            margin-right: 0;
+        }
 
         /* Modal Styling */
         .modal {
@@ -363,6 +417,10 @@
             font-size: 2rem;
             cursor: pointer;
             transition: color 0.3s ease;
+        }
+        [dir="rtl"] .close-btn {
+            left: 15px;
+            right: auto;
         }
 
         .close-btn:hover {
@@ -403,6 +461,9 @@
             font-weight: 500;
             transition: background-color 0.2s ease;
         }
+        [dir="rtl"] .alert-item {
+            flex-direction: row-reverse;
+        }
 
         .alert-item.info {
             background-color: var(--brand);
@@ -426,6 +487,22 @@
             display: block;
         }
 
+        /* Log Item Styling */
+        .log-item {
+            display: block;
+            background-color: var(--surface);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .log-item .log-time {
+            color: var(--text);
+            font-weight: 600;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .dashboard-container {
@@ -438,6 +515,8 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                /* Adjust height for mobile */
+                height: auto;
             }
 
             .sidebar-logo {
@@ -445,15 +524,16 @@
             }
 
             .nav-menu {
-                display: none;
+                display: none; /* Hide by default on mobile */
                 flex-direction: column;
                 position: absolute;
-                top: 80px;
+                top: 80px; /* Position below the sidebar */
                 left: 0;
                 width: 100%;
                 background-color: var(--surface);
                 padding: 16px;
                 gap: 4px;
+                z-index: 99;
             }
 
             .nav-menu.open {
@@ -470,116 +550,86 @@
                 gap: 12px;
             }
         }
+        
+        /* Language Toggle styling for correct positioning */
+        .language-toggle {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--surface);
+            background-color: var(--surface);
+            color: var(--text);
+        }
     </style>
 </head>
 <body>
-    <!-- Main dashboard container -->
     <div class="dashboard-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-logo">Stackly Digital</div>
+            <div id="userIdDisplay" class="user-id-display"></div>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#" data-section="dashboard" class="active">
-                        <i class="fas fa-chart-line"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" data-section="campaigns">
-                        <i class="fas fa-bullhorn"></i> Campaigns
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" data-section="users">
-                        <i class="fas fa-users"></i> Users
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" data-section="analytics">
-                        <i class="fas fa-chart-area"></i> Analytics
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" data-section="logs">
-                        <i class="fas fa-history"></i> Logs
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" data-section="settings">
-                        <i class="fas fa-cog"></i> Settings
-                    </a>
-                </li>
+                <li class="nav-item"><a href="#" data-section="dashboard" class="active"><i class="fas fa-chart-line"></i> <span data-i18n="dashboard">Dashboard</span></a></li>
+                <li class="nav-item"><a href="#" data-section="campaigns"><i class="fas fa-bullhorn"></i> <span data-i18n="campaigns">Campaigns</span></a></li>
+                <li class="nav-item"><a href="#" data-section="users"><i class="fas fa-users"></i> <span data-i18n="users">Users</span></a></li>
+                <li class="nav-item"><a href="#" data-section="analytics"><i class="fas fa-chart-area"></i> <span data-i18n="analytics">Analytics</span></a></li>
+                <li class="nav-item"><a href="#" data-section="logs"><i class="fas fa-history"></i> <span data-i18n="logs">Logs</span></a></li>
+                <li class="nav-item"><a href="#" data-section="settings"><i class="fas fa-cog"></i> <span data-i18n="settings">Settings</span></a></li>
             </ul>
         </aside>
 
         <!-- Main Content Area -->
         <main class="main-content">
             <div class="top-bar">
+                <select id="language-toggle" class="language-toggle">
+                    <option value="en">English</option>
+                    <option value="ar">العربية</option>
+                    <option value="he">עברית</option>
+                </select>
+                <!-- Add a theme toggle button -->
                 <button id="theme-toggle" class="theme-toggle-btn">
-                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
                 </button>
-                <div class="profile-menu">
-                    <a href="#"><i class="fas fa-user-circle"></i> Admin User</a>
-                    <div class="profile-menu-dropdown">
-                        <a href="#" onclick="logout()">Logout</a>
-                    </div>
-                </div>
+                <button id="auth-button" class="auth-button">Login</button>
             </div>
 
             <!-- Dashboard Section -->
             <section id="dashboard" class="admin-section active">
                 <div class="section-header">
-                    <h1>Dashboard</h1>
+                    <h1 data-i18n="dashboard">Dashboard</h1>
                 </div>
                 <div class="card-grid">
                     <div class="card">
-                        <h3><i class="fas fa-rocket"></i> Active Campaigns</h3>
-                        <p class="stat-number">42</p>
+                        <h3 data-i18n="active_users"><i class="fas fa-user"></i> Active Users</h3>
+                        <p id="active-users-count" class="stat-number">0</p>
                     </div>
                     <div class="card">
-                        <h3><i class="fas fa-dollar-sign"></i> Total Budget</h3>
-                        <p class="stat-number">$150,000</p>
+                        <h3 data-i18n="total_users"><i class="fas fa-users"></i> Total Users</h3>
+                        <p id="total-users-count" class="stat-number">0</p>
                     </div>
                     <div class="card">
-                        <h3><i class="fas fa-user-plus"></i> New Leads (last 30 days)</h3>
-                        <p class="stat-number">1,250</p>
+                        <h3 data-i18n="user_status_chart"><i class="fas fa-chart-pie"></i> User Status</h3>
+                        <div class="chart-container">
+                             <canvas id="userStatusChart"></canvas>
+                        </div>
                     </div>
                     <div class="card">
-                        <h3><i class="fas fa-user"></i> Active Users</h3>
-                        <p class="stat-number">25</p>
+                        <h3 data-i18n="last_login"><i class="fas fa-sign-in-alt"></i> Last Login</h3>
+                        <p id="last-login-time" class="stat-number">N/A</p>
                     </div>
                 </div>
-                
                 <div class="section-header">
-                    <h2>Alerts & Notifications</h2>
+                    <h2 data-i18n="alerts_notifications">Alerts & Notifications</h2>
                 </div>
                 <div class="card">
                     <ul class="alert-list">
                         <li class="alert-item success">
-                            <i class="fas fa-check-circle"></i> Campaign 'Q3 Product Launch' reached 100% of its goal.
+                            <i class="fas fa-check-circle"></i> <span data-i18n="campaign_goal">Campaign 'Q3 Product Launch' reached 100% of its goal.</span>
                         </li>
                         <li class="alert-item info">
-                            <i class="fas fa-info-circle"></i> 'New Client Onboarding' campaign will go live in 24 hours.
+                            <i class="fas fa-info-circle"></i> <span data-i18n="campaign_live"> 'New Client Onboarding' campaign will go live in 24 hours.</span>
                         </li>
                         <li class="alert-item warning">
-                            <i class="fas fa-exclamation-triangle"></i> Campaign 'Holiday Sale 2024' is running low on budget.
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="section-header">
-                    <h2>Recent Activity</h2>
-                </div>
-                <div class="card">
-                    <ul class="activity-feed" style="list-style:none; padding: 0; margin: 0;">
-                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
-                            <i class="fas fa-check-circle" style="color: #2ecc71;"></i> Campaign 'Summer Sale' went live.
-                        </li>
-                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
-                            <i class="fas fa-pause-circle" style="color: #f39c12;"></i> Campaign 'Winter Ads' paused due to budget cap.
-                        </li>
-                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
-                            <i class="fas fa-user-plus" style="color: #3498db;"></i> New client 'TechCorp' added to the system.
+                            <i class="fas fa-exclamation-triangle"></i> <span data-i18n="campaign_low_budget">Campaign 'Holiday Sale 2024' is running low on budget.</span>
                         </li>
                     </ul>
                 </div>
@@ -588,10 +638,10 @@
             <!-- Campaigns Section -->
             <section id="campaigns" class="admin-section">
                 <div class="section-header">
-                    <h1>Campaigns</h1>
+                    <h1 data-i18n="campaigns">Campaigns</h1>
                     <div class="quick-actions">
                         <a href="#" class="btn" id="add-campaign-btn">
-                            <i class="fas fa-plus"></i> Create New Campaign
+                            <i class="fas fa-plus"></i> <span data-i18n="create_campaign">Create New Campaign</span>
                         </a>
                     </div>
                 </div>
@@ -599,19 +649,19 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Campaign Name</th>
-                                <th>Client</th>
-                                <th>Status</th>
-                                <th>Start Date</th>
-                                <th>Budget</th>
-                                <th>Actions</th>
+                                <th data-i18n="campaign_name">Campaign Name</th>
+                                <th data-i18n="client">Client</th>
+                                <th data-i18n="status">Status</th>
+                                <th data-i18n="start_date">Start Date</th>
+                                <th data-i18n="budget">Budget</th>
+                                <th data-i18n="actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Q3 Product Launch</td>
                                 <td>Innovate Inc.</td>
-                                <td><span class="status-badge status-active">Active</span></td>
+                                <td><span class="status-badge status-active" data-i18n="status_active">Active</span></td>
                                 <td>2024-07-01</td>
                                 <td>$25,000</td>
                                 <td>
@@ -622,7 +672,7 @@
                             <tr>
                                 <td>Holiday Sale 2024</td>
                                 <td>Fashionista Co.</td>
-                                <td><span class="status-badge status-paused">Paused</span></td>
+                                <td><span class="status-badge status-paused" data-i18n="status_paused">Paused</span></td>
                                 <td>2024-05-15</td>
                                 <td>$12,000</td>
                                 <td>
@@ -633,7 +683,7 @@
                             <tr>
                                 <td>New Client Onboarding</td>
                                 <td>TechCorp</td>
-                                <td><span class="status-badge status-draft">Draft</span></td>
+                                <td><span class="status-badge status-draft" data-i18n="status_draft">Draft</span></td>
                                 <td>2024-08-16</td>
                                 <td>$5,000</td>
                                 <td>
@@ -649,10 +699,10 @@
             <!-- User Management Section -->
             <section id="users" class="admin-section">
                 <div class="section-header">
-                    <h1>User Management</h1>
+                    <h1 data-i18n="users">User Management</h1>
                     <div class="quick-actions">
                         <a href="#" class="btn" id="add-user-btn">
-                            <i class="fas fa-user-plus"></i> Add New User
+                            <i class="fas fa-user-plus"></i> <span data-i18n="add_user">Add New User</span>
                         </a>
                     </div>
                 </div>
@@ -660,19 +710,19 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th data-i18n="name">Name</th>
+                                <th data-i18n="email">Email</th>
+                                <th data-i18n="role">Role</th>
+                                <th data-i18n="status">Status</th>
+                                <th data-i18n="actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Admin User</td>
                                 <td>admin@stackly.com</td>
-                                <td><span class="status-badge status-admin">Admin</span></td>
-                                <td><span class="status-badge status-active">Active</span></td>
+                                <td><span class="status-badge status-admin" data-i18n="role_admin">Admin</span></td>
+                                <td><span class="status-badge status-active" data-i18n="status_active">Active</span></td>
                                 <td>
                                     <button class="btn-icon" onclick="showModal('edit', 'Admin User')"><i class="fas fa-pen"></i></button>
                                     <button class="btn-icon" onclick="showModal('delete', 'Admin User')"><i class="fas fa-trash"></i></button>
@@ -681,21 +731,11 @@
                             <tr>
                                 <td>John Doe</td>
                                 <td>john.d@client.com</td>
-                                <td><span class="status-badge status-user">User</span></td>
-                                <td><span class="status-badge status-active">Active</span></td>
+                                <td><span class="status-badge status-user" data-i18n="role_user">User</span></td>
+                                <td><span class="status-badge status-active" data-i18n="status_active">Active</span></td>
                                 <td>
                                     <button class="btn-icon" onclick="showModal('edit', 'John Doe')"><i class="fas fa-pen"></i></button>
                                     <button class="btn-icon" onclick="showModal('delete', 'John Doe')"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jane Smith</td>
-                                <td>jane.s@client.com</td>
-                                <td><span class="status-badge status-user">User</span></td>
-                                <td><span class="status-badge status-paused">Paused</span></td>
-                                <td>
-                                    <button class="btn-icon" onclick="showModal('edit', 'Jane Smith')"><i class="fas fa-pen"></i></button>
-                                    <button class="btn-icon" onclick="showModal('delete', 'Jane Smith')"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -703,36 +743,18 @@
                 </div>
             </section>
 
-            <!-- Analytics Section -->
+            <!-- Analytics Section with the Pie Chart -->
             <section id="analytics" class="admin-section">
                 <div class="section-header">
-                    <h1>Analytics</h1>
+                    <h1 data-i18n="analytics">Analytics</h1>
                 </div>
                 <div class="card-grid">
                     <div class="card">
-                        <h3><i class="fas fa-link"></i> Website Visitors</h3>
-                        <p class="stat-number" id="visitor-count">0</p>
-                        <p class="text-muted">Total number of unique visitors to your website.</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-envelope-open-text"></i> Digital Marketing Inquiries</h3>
-                        <p class="stat-number">385</p>
-                        <p class="text-muted">Total inquiries submitted via forms or contact pages.</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-chart-pie"></i> Conversion Rate</h3>
-                        <p class="stat-number">4.5%</p>
-                        <p class="text-muted">Percentage of website visitors who become leads.</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-users"></i> Audience Demographics</h3>
-                        <p class="stat-number">35% Male, 65% Female</p>
-                        <p class="text-muted">Distribution of your target audience.</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-chart-bar"></i> Traffic Sources</h3>
-                        <p class="stat-number">55% Organic, 30% Social, 15% Paid</p>
-                        <p class="text-muted">Breakdown of how visitors find your site.</p>
+                        <h3 data-i18n="user_status_chart"><i class="fas fa-chart-pie"></i> Real-time User Status</h3>
+                        <p data-i18n="chart_info">This chart reflects the live login/logout status across all open tabs or windows for this app.</p>
+                        <div class="chart-container">
+                             <canvas id="userStatusChartAnalytics"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -740,248 +762,587 @@
             <!-- Logs Section -->
             <section id="logs" class="admin-section">
                 <div class="section-header">
-                    <h1>Activity Logs</h1>
+                    <h1 data-i18n="logs">Logs</h1>
                 </div>
                 <div class="card">
-                    <ul class="activity-feed" id="log-list" style="list-style:none; padding: 0; margin: 0;">
-                        <li style="border-bottom: 1px solid var(--surface); padding: 12px 0;">
-                            <i class="fas fa-calendar-check" style="color: #27ae60;"></i> [2024-08-16 10:30] Campaign 'Q3 Launch' status updated to 'Active'.
-                        </li>
-                    </ul>
+                    <ul id="log-list" style="list-style: none; padding: 0;"></ul>
                 </div>
             </section>
 
             <!-- Settings Section -->
             <section id="settings" class="admin-section">
                 <div class="section-header">
-                    <h1>Settings</h1>
+                    <h1 data-i18n="settings">Settings</h1>
                 </div>
-                <div class="card-grid">
-                    <div class="card">
-                        <h3><i class="fas fa-user-circle"></i> Profile Settings</h3>
-                        <form>
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" value="Admin User">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" value="admin@stackly.com">
-                            </div>
-                            <button type="submit" class="btn">Update Profile</button>
-                        </form>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-shield-alt"></i> Security</h3>
-                        <form>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox"> Enable Two-Factor Authentication
-                                </label>
-                            </div>
-                            <button type="submit" class="btn">Save Security</button>
-                        </form>
-                    </div>
+                <div class="card">
+                    <h3 data-i18n="account_settings">Account Settings</h3>
+                    <p data-i18n="settings_info">Manage your account preferences and security here.</p>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Custom Modal -->
-    <div id="custom-modal" class="modal">
+    <!-- Modal for forms/actions -->
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2 id="modal-title"></h2>
             <p id="modal-message"></p>
-            <div id="modal-buttons" style="display: flex; gap: 10px; margin-top: 20px;"></div>
+            <div id="modal-form-container"></div>
         </div>
     </div>
-    
+
     <script>
-        // JavaScript for the dashboard functionality
         document.addEventListener('DOMContentLoaded', () => {
-            const navItems = document.querySelectorAll('.nav-item a');
+            const sidebarLinks = document.querySelectorAll('.nav-menu a');
             const sections = document.querySelectorAll('.admin-section');
-            const modal = document.getElementById('custom-modal');
+            const modal = document.getElementById('modal');
             const modalTitle = document.getElementById('modal-title');
             const modalMessage = document.getElementById('modal-message');
-            const modalButtons = document.getElementById('modal-buttons');
-            const closeBtn = document.querySelector('.close-btn');
-            const addCampaignBtn = document.getElementById('add-campaign-btn');
-            const addUserBtn = document.getElementById('add-user-btn');
+            const modalFormContainer = document.getElementById('modal-form-container');
+            const languageToggle = document.getElementById('language-toggle');
+            const authButton = document.getElementById('auth-button');
+            const userIdDisplay = document.getElementById('userIdDisplay');
+            const logList = document.getElementById('log-list');
+            const themeToggleBtn = document.getElementById('theme-toggle'); // Select the theme toggle button
 
-            // Elements for real-time data
-            const visitorCountEl = document.getElementById('visitor-count');
-            const logListEl = document.getElementById('log-list');
+            // Global Chart instances
+            let userStatusChart = null; // Changed to null to indicate no chart yet
+            let userStatusChartAnalytics = null; // Added for the analytics section chart
 
-            // --- Local Storage Functions for Analytics & Logs ---
-            // Function to get data from local storage, with a fallback
-            const getData = (key, defaultValue) => {
-                try {
-                    const data = localStorage.getItem(key);
-                    return data ? JSON.parse(data) : defaultValue;
-                } catch (e) {
-                    console.error('Error parsing data from localStorage', e);
-                    return defaultValue;
+            // Translation dictionary for multiple languages
+            const translations = {
+                en: {
+                    dashboard: "Dashboard",
+                    campaigns: "Campaigns",
+                    users: "Users",
+                    analytics: "Analytics",
+                    logs: "Logs",
+                    settings: "Settings",
+                    logged_in: "Logged In",
+                    logged_out: "Logged Out",
+                    active_users: "Active Users",
+                    total_users: "Total Users",
+                    last_login: "Last Login",
+                    user_status_chart: "User Status",
+                    chart_info: "This chart reflects the live login/logout status across all open tabs or windows for this app.",
+                    alerts_notifications: "Alerts & Notifications",
+                    campaign_goal: "Campaign 'Q3 Product Launch' reached 100% of its goal.",
+                    campaign_live: "'New Client Onboarding' campaign will go live in 24 hours.",
+                    campaign_low_budget: "Campaign 'Holiday Sale 2024' is running low on budget.",
+                    create_campaign: "Create New Campaign",
+                    campaign_name: "Campaign Name",
+                    client: "Client",
+                    status: "Status",
+                    start_date: "Start Date",
+                    budget: "Budget",
+                    actions: "Actions",
+                    status_active: "Active",
+                    status_paused: "Paused",
+                    status_draft: "Draft",
+                    add_user: "Add New User",
+                    name: "Name",
+                    email: "Email",
+                    role: "Role",
+                    role_admin: "Admin",
+                    role_user: "User",
+                    modal_edit_title: "Edit {item}",
+                    modal_edit_message: "Please enter new details for this item.",
+                    modal_delete_title: "Delete {item}",
+                    modal_delete_message: "Are you sure you want to delete {item}? This action cannot be undone.",
+                    save_changes: "Save Changes",
+                    confirm_delete: "Confirm Delete",
+                    cancel: "Cancel",
+                    action_completed: "Action completed successfully!",
+                    login_button: "Login",
+                    logout_button: "Logout",
+                    new_user_login: "New user logged in.",
+                    user_logout: "User logged out.",
+                    user_login: "User logged in.",
+                    log_item: "{type}: User {id} {status} at {time}"
+                },
+                ar: {
+                    dashboard: "لوحة التحكم",
+                    campaigns: "الحملات",
+                    users: "المستخدمون",
+                    analytics: "التحليلات",
+                    logs: "السجلات",
+                    settings: "الإعدادات",
+                    logged_in: "تسجيل الدخول",
+                    logged_out: "تسجيل الخروج",
+                    active_users: "المستخدمون النشطون",
+                    total_users: "إجمالي المستخدمين",
+                    last_login: "آخر تسجيل دخول",
+                    user_status_chart: "حالة المستخدم",
+                    chart_info: "يعكس هذا الرسم البياني حالة تسجيل الدخول/الخروج المباشرة عبر جميع علامات التبويب أو النوافذ المفتوحة لهذا التطبيق.",
+                    alerts_notifications: "التنبيهات والإشعارات",
+                    campaign_goal: "حملة 'Q3 Product Launch' وصلت إلى 100% من هدفها.",
+                    campaign_live: "حملة 'New Client Onboarding' ستنطلق خلال 24 ساعة.",
+                    campaign_low_budget: "ميزانية حملة 'Holiday Sale 2024' منخفضة.",
+                    create_campaign: "إنشاء حملة جديدة",
+                    campaign_name: "اسم الحملة",
+                    client: "العميل",
+                    status: "الحالة",
+                    start_date: "تاريخ البدء",
+                    budget: "الميزانية",
+                    actions: "الإجراءات",
+                    status_active: "نشط",
+                    status_paused: "متوقف مؤقتا",
+                    status_draft: "مسودة",
+                    add_user: "إضافة مستخدم جديد",
+                    name: "الاسم",
+                    email: "البريد الإلكتروني",
+                    role: "الدور",
+                    role_admin: "مسؤول",
+                    role_user: "مستخدم",
+                    modal_edit_title: "تعديل {item}",
+                    modal_edit_message: "الرجاء إدخال تفاصيل جديدة لهذا العنصر.",
+                    modal_delete_title: "حذف {item}",
+                    modal_delete_message: "هل أنت متأكد أنك تريد حذف {item}؟ لا يمكن التراجع عن هذا الإجراء.",
+                    save_changes: "حفظ التغييرات",
+                    confirm_delete: "تأكيد الحذف",
+                    cancel: "إلغاء",
+                    action_completed: "اكتمل الإجراء بنجاح!",
+                    login_button: "تسجيل دخول",
+                    logout_button: "تسجيل خروج",
+                    new_user_login: "تم تسجيل دخول مستخدم جديد.",
+                    user_logout: "تم تسجيل خروج المستخدم.",
+                    user_login: "تم تسجيل دخول المستخدم.",
+                    log_item: "{type}: المستخدم {id} {status} في {time}"
+                },
+                he: {
+                    dashboard: "לוח מחוונים",
+                    campaigns: "קמפיינים",
+                    users: "משתמשים",
+                    analytics: "אנליטיקה",
+                    logs: "יומנים",
+                    settings: "הגדרות",
+                    logged_in: "מחובר",
+                    logged_out: "מנותק",
+                    active_users: "משתמשים פעילים",
+                    total_users: "סה\"כ משתמשים",
+                    last_login: "כניסה אחרונה",
+                    user_status_chart: "סטטוס משתמש",
+                    chart_info: "תרשים זה משקף את מצב הכניסה/יציאה בזמן אמת בכל הלשוניות או החלונות הפתוחים עבור יישום זה.",
+                    alerts_notifications: "התראות ועדכונים",
+                    campaign_goal: "הקמפיין 'Q3 Product Launch' הגיע ל-100% מהיעד שלו.",
+                    campaign_live: "קמפיין 'New Client Onboarding' יעלה לאוויר בתוך 24 שעות.",
+                    campaign_low_budget: "תקציב הקמפיין 'Holiday Sale 2024' נמוך.",
+                    create_campaign: "צור קמפיין חדש",
+                    campaign_name: "שם הקמפיין",
+                    client: "לקוח",
+                    status: "סטטוס",
+                    start_date: "תאריך התחלה",
+                    budget: "תקציב",
+                    actions: "פעולות",
+                    status_active: "פעיל",
+                    status_paused: "מושהה",
+                    status_draft: "טיוטה",
+                    add_user: "הוסף משתמש חדש",
+                    name: "שם",
+                    email: "אימייל",
+                    role: "תפקיד",
+                    role_admin: "אדמין",
+                    role_user: "משתמש",
+                    modal_edit_title: "ערוך {item}",
+                    modal_edit_message: "אנא הזן פרטים חדשים עבור פריט זה.",
+                    modal_delete_title: "מחק {item}",
+                    modal_delete_message: "האם אתה בטוח שברצונך למחוק את {item}? לא ניתן לבטל פעולה זו.",
+                    save_changes: "שמור שינויים",
+                    confirm_delete: "אשר מחיקה",
+                    cancel: "ביטול",
+                    action_completed: "הפעולה הושלמה בהצלחה!",
+                    login_button: "התחבר",
+                    logout_button: "התנתק",
+                    new_user_login: "משתמש חדש התחבר.",
+                    user_logout: "משתמש התנתק.",
+                    user_login: "משתמש התחבר.",
+                    log_item: "{type}: משתמש {id} {status} ב-{time}"
                 }
             };
 
-            // Function to set data in local storage
-            const setData = (key, data) => {
-                try {
-                    localStorage.setItem(key, JSON.stringify(data));
-                } catch (e) {
-                    console.error('Error saving data to localStorage', e);
+            // Function to change language
+            const setLanguage = (lang) => {
+                const elements = document.querySelectorAll('[data-i18n]');
+                const body = document.body;
+                
+                // Set text direction based on language
+                if (lang === 'ar' || lang === 'he') {
+                    body.setAttribute('dir', 'rtl');
+                } else {
+                    body.setAttribute('dir', 'ltr');
                 }
-            };
-            
-            // Increment website visitor count on page load
-            let visitorCount = getData('visitorCount', 0);
-            visitorCount++;
-            setData('visitorCount', visitorCount);
-            visitorCountEl.textContent = visitorCount;
 
-            // Record a login event and store it
-            const recordLogin = () => {
-                const now = new Date();
-                const timestamp = now.toLocaleString();
-                const newLog = {
-                    type: 'login',
-                    message: 'Admin user logged in to the dashboard.',
-                    time: timestamp
-                };
-                let logs = getData('adminLogs', []);
-                logs.unshift(newLog); // Add to the beginning of the array
-                // Keep only the 10 most recent logs to prevent local storage overflow
-                if (logs.length > 10) {
-                    logs = logs.slice(0, 10);
-                }
-                setData('adminLogs', logs);
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+                // Update the auth button text
+                const currentStatus = getAuthStatus();
+                authButton.textContent = currentStatus === 'logged_in' ? translations[lang].logout_button : translations[lang].login_button;
             };
 
-            // Display logs on page load
-            const displayLogs = () => {
-                const logs = getData('adminLogs', []);
-                // Clear the default content
-                logListEl.innerHTML = ''; 
+            // Event listener for language toggle
+            languageToggle.addEventListener('change', (event) => {
+                setLanguage(event.target.value);
+            });
+
+            // --- Local Storage Functions for User Data ---
+            const USERS_KEY = 'admin_dashboard_users';
+            const LOGS_KEY = 'admin_dashboard_logs';
+            const SESSION_USER_KEY = 'admin_dashboard_session_user';
+
+            const getStoredUsers = () => {
+                const users = localStorage.getItem(USERS_KEY);
+                return users ? JSON.parse(users) : {};
+            };
+
+            const saveUsers = (users) => {
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            };
+
+            const getStoredLogs = () => {
+                const logs = localStorage.getItem(LOGS_KEY);
+                return logs ? JSON.parse(logs) : [];
+            };
+
+            const saveLogs = (logs) => {
+                localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
+            };
+
+            const getAuthStatus = () => {
+                const sessionUser = sessionStorage.getItem(SESSION_USER_KEY);
+                if (sessionUser) {
+                    const users = getStoredUsers();
+                    const user = users[sessionUser];
+                    return user && user.status === 'logged_in' ? 'logged_in' : 'logged_out';
+                }
+                return 'logged_out';
+            };
+
+            const updateUserData = (userId, status) => {
+                const users = getStoredUsers();
+                if (!users[userId]) {
+                    // This is a new user
+                    users[userId] = { id: userId, status: status, last_login: new Date().toISOString() };
+                } else {
+                    // Update existing user
+                    users[userId].status = status;
+                    if (status === 'logged_in') {
+                         users[userId].last_login = new Date().toISOString();
+                    }
+                }
+                saveUsers(users);
+                
+                // Log the event with a timestamp
+                const logs = getStoredLogs();
+                const logType = status === 'logged_in' ? (users[userId] && users[userId].last_login ? 'login' : 'new_login') : 'logout';
+                logs.push({ 
+                    id: userId, 
+                    status, 
+                    type: logType,
+                    timestamp: new Date().toISOString() 
+                });
+                saveLogs(logs);
+            };
+
+            // --- UI Update & Chart Functions ---
+            const updateDashboardStats = () => {
+                const users = getStoredUsers();
+                const userCount = Object.keys(users).length;
+                let activeCount = 0;
+                for (const userId in users) {
+                    if (users[userId].status === 'logged_in') {
+                        activeCount++;
+                    }
+                }
+                document.getElementById('total-users-count').textContent = userCount;
+                document.getElementById('active-users-count').textContent = activeCount;
+
+                // Update the pie charts
+                drawPieChart(activeCount, userCount - activeCount);
+                drawPieChartAnalytics(activeCount, userCount - activeCount);
+                
+                // Update log list
+                const logs = getStoredLogs();
+                // Clear the existing log list
+                logList.innerHTML = ''; 
+                // Add new log items, formatted with timestamps
                 logs.forEach(log => {
-                    const li = document.createElement('li');
-                    li.style.borderBottom = '1px solid var(--surface)';
-                    li.style.padding = '12px 0';
-                    li.innerHTML = `<i class="fas fa-sign-in-alt" style="color: #3498db;"></i> [${log.time}] ${log.message}`;
-                    logListEl.appendChild(li);
+                    const listItem = document.createElement('li');
+                    listItem.className = 'log-item';
+                    const time = new Date(log.timestamp).toLocaleString();
+                    const logMessage = `User ID: ${log.id.substring(0, 8)}... | Action: ${log.status} | Time: ${time}`;
+                    listItem.textContent = logMessage;
+                    logList.prepend(listItem); // Prepend to show most recent logs first
                 });
             };
 
-            // This function is for demonstration and is called when the admin page loads.
-            // In a real application, you'd call this from a server-side login function.
-            recordLogin();
-            displayLogs();
-            
-            // --- End of Local Storage Functions ---
+            // This function draws the chart on the main dashboard page
+            const drawPieChart = (active, inactive) => {
+                const chartData = {
+                    labels: [
+                        translations[languageToggle.value].logged_in,
+                        translations[languageToggle.value].logged_out
+                    ],
+                    datasets: [{
+                        label: translations[languageToggle.value].user_status_chart,
+                        data: [active, inactive],
+                        backgroundColor: [
+                            '#27ae60',
+                            '#f39c12'
+                        ],
+                        hoverOffset: 4
+                    }]
+                };
 
-
-            // Function to show a section based on data-section attribute
-            const showSection = (sectionId) => {
-                navItems.forEach(item => item.classList.remove('active'));
-                sections.forEach(section => section.classList.remove('active'));
+                const chartConfig = {
+                    type: 'pie',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: 'var(--text)'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.raw;
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
                 
-                const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
+                // Update existing chart or create a new one
+                const ctx = document.getElementById('userStatusChart').getContext('2d');
+                if (userStatusChart) {
+                    userStatusChart.data = chartData;
+                    userStatusChart.update();
+                } else {
+                    userStatusChart = new Chart(ctx, chartConfig);
                 }
             };
             
-            // Set initial active section to 'dashboard'
-            showSection('dashboard');
+            // This function draws the chart in the analytics section
+            const drawPieChartAnalytics = (active, inactive) => {
+                const chartData = {
+                    labels: [
+                        translations[languageToggle.value].logged_in,
+                        translations[languageToggle.value].logged_out
+                    ],
+                    datasets: [{
+                        label: translations[languageToggle.value].user_status_chart,
+                        data: [active, inactive],
+                        backgroundColor: [
+                            '#27ae60',
+                            '#f39c12'
+                        ],
+                        hoverOffset: 4
+                    }]
+                };
 
-            // Event listeners for navigation items
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
+                const chartConfig = {
+                    type: 'pie',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: 'var(--text)'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.raw;
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+                
+                const ctx = document.getElementById('userStatusChartAnalytics').getContext('2d');
+                // Check if the chart instance exists before trying to destroy it
+                if (userStatusChartAnalytics) {
+                    userStatusChartAnalytics.data = chartData;
+                    userStatusChartAnalytics.update();
+                } else {
+                    userStatusChartAnalytics = new Chart(ctx, chartConfig);
+                }
+            };
+            
+            // --- Event Listeners and Initial Setup ---
+            
+            // Handle login/logout
+            authButton.addEventListener('click', () => {
+                const currentStatus = getAuthStatus();
+                if (currentStatus === 'logged_in') {
+                    // Logout process
+                    const userId = sessionStorage.getItem(SESSION_USER_KEY);
+                    if (userId) {
+                        updateUserData(userId, 'logged_out');
+                        sessionStorage.removeItem(SESSION_USER_KEY);
+                    }
+                    authButton.textContent = translations[languageToggle.value].login_button;
+                    userIdDisplay.textContent = 'User ID: N/A';
+                    showMessageBox(translations[languageToggle.value].user_logout);
+                    // Redirect to sign-admin.html after logging out
+                    window.location.href = 'sign admin.html';
+                } else {
+                    // Login process - generate or get a persistent user ID
+                    let userId = localStorage.getItem('local_user_id');
+                    if (!userId) {
+                        userId = crypto.randomUUID();
+                        localStorage.setItem('local_user_id', userId);
+                    }
+                    sessionStorage.setItem(SESSION_USER_KEY, userId);
+                    updateUserData(userId, 'logged_in');
+                    authButton.textContent = translations[languageToggle.value].logout_button;
+                    userIdDisplay.textContent = `User ID: ${userId}`;
+                    showMessageBox(translations[languageToggle.value].user_login);
+                }
+                updateDashboardStats(); // Update stats on click
+            });
+            
+            // Listen for changes in localStorage from other tabs/windows
+            window.addEventListener('storage', (event) => {
+                if (event.key === USERS_KEY || event.key === LOGS_KEY) {
+                    updateDashboardStats();
+                }
+            });
+            
+            // Initialize on page load
+            const init = () => {
+                // Check if user is logged in from a previous session
+                const userId = sessionStorage.getItem(SESSION_USER_KEY);
+                if (userId) {
+                    updateUserData(userId, 'logged_in'); // Mark as logged in on page load
+                    authButton.textContent = translations[languageToggle.value].logout_button;
+                    userIdDisplay.textContent = `User ID: ${userId}`;
+                } else {
+                    authButton.textContent = translations[languageToggle.value].login_button;
+                    userIdDisplay.textContent = 'User ID: N/A';
+                }
+                updateDashboardStats();
+                setLanguage(languageToggle.value);
+            };
+            
+            // Initial language setting on page load
+            init();
+
+            // Function to show a specific section
+            const showSection = (sectionId) => {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                }
+            };
+
+            // Sidebar navigation
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const sectionId = item.getAttribute('data-section');
+                    // Remove active class from all links
+                    sidebarLinks.forEach(item => item.classList.remove('active'));
+                    // Add active class to the clicked link
+                    link.classList.add('active');
+                    // Show the corresponding section
+                    const sectionId = link.getAttribute('data-section');
                     showSection(sectionId);
                 });
             });
 
-            // Function to show a custom modal (replacing alert/confirm)
-            const showModal = (action, item) => {
+            // Modal functionality
+            window.showModal = (action, item) => {
                 modal.style.display = 'flex';
-                modalButtons.innerHTML = ''; // Clear previous buttons
+                modalFormContainer.innerHTML = ''; // Clear any previous form
+                
+                const lang = languageToggle.value;
 
                 if (action === 'edit') {
-                    modalTitle.textContent = `Edit ${item}`;
-                    modalMessage.textContent = `This would open a form to edit the data for "${item}".`;
-                    modalButtons.innerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
-                } else if (action === 'delete') {
-                    modalTitle.textContent = `Delete ${item}?`;
-                    modalMessage.textContent = `Are you sure you want to delete "${item}"? This action cannot be undone.`;
-                    modalButtons.innerHTML = `
-                        <button class="btn" style="background-color: #e74c3c;" onclick="confirmDelete('${item}')">Confirm Delete</button>
-                        <button class="btn" style="background-color: #7f8c8d;" onclick="closeModal()">Cancel</button>
+                    modalTitle.textContent = translations[lang].modal_edit_title.replace('{item}', item);
+                    modalMessage.textContent = translations[lang].modal_edit_message;
+                    modalFormContainer.innerHTML = `
+                        <div class="form-group">
+                            <label for="edit-name"><span data-i18n="name">Name</span>:</label>
+                            <input type="text" id="edit-name" name="edit-name" value="${item}" required>
+                        </div>
+                        <button class="btn" onclick="submitModal()"><span data-i18n="save_changes">Save Changes</span></button>
                     `;
-                } else if (action === 'add-campaign') {
-                    modalTitle.textContent = 'Create New Campaign';
-                    modalMessage.textContent = `This would show a form to add a new campaign.`;
-                    modalButtons.innerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
-                } else if (action === 'add-user') {
-                    modalTitle.textContent = 'Add New User';
-                    modalMessage.textContent = `This would show a form to add a new user.`;
-                    modalButtons.innerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
+                } else if (action === 'delete') {
+                    modalTitle.textContent = translations[lang].modal_delete_title.replace('{item}', item);
+                    modalMessage.textContent = translations[lang].modal_delete_message.replace('{item}', item);
+                    modalFormContainer.innerHTML = `
+                        <button class="btn" onclick="submitModal()"><span data-i18n="confirm_delete">Confirm Delete</span></button>
+                        <button class="btn-icon" onclick="closeModal()"><span data-i18n="cancel">Cancel</span></button>
+                    `;
                 }
+                setLanguage(lang); // Re-run setLanguage to translate modal content
             };
-            
-            // Function to confirm delete action
-            window.confirmDelete = (item) => {
-                console.log(`Deleting ${item}...`);
-                // In a real app, this is where you would make an API call to delete the item
-                // For this example, we'll just show a message.
-                closeModal();
-                showMessage(`"${item}" deleted successfully!`);
-            };
-            
-            // Function to close the modal
-            const closeModal = () => {
+
+            window.closeModal = () => {
                 modal.style.display = 'none';
             };
-            window.closeModal = closeModal; // Expose to global scope for button click
 
-            // Event listener for the "Create New Campaign" button
-            addCampaignBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                showModal('add-campaign');
-            });
+            window.submitModal = () => {
+                showMessageBox(translations[languageToggle.value].action_completed);
+                closeModal();
+            };
+
+            // Add Campaign and Add User buttons
+            const addCampaignBtn = document.getElementById('add-campaign-btn');
+            const addUserBtn = document.getElementById('add-user-btn');
+
+            if (addCampaignBtn) {
+                addCampaignBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showModal('edit', 'New Campaign');
+                });
+            }
+
+            if (addUserBtn) {
+                addUserBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showModal('edit', 'New User');
+                });
+            }
             
-            // Event listener for the "Add New User" button
-            addUserBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                showModal('add-user');
-            });
-
-            // Event listener for closing modal
-            closeBtn.addEventListener('click', closeModal);
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // Function to show a temporary message box
-            const showMessage = (message) => {
+            // Message Box Functionality
+            const showMessageBox = (message) => {
                 const messageBox = document.createElement('div');
                 messageBox.className = 'message-box';
                 messageBox.textContent = message;
                 document.body.appendChild(messageBox);
-                
+
                 // Animate in
                 setTimeout(() => {
                     messageBox.style.opacity = '1';
                 }, 100);
-                
+
                 // Animate out and remove
                 setTimeout(() => {
                     messageBox.style.opacity = '0';
@@ -992,21 +1353,14 @@
             };
 
             // Theme Toggle Functionality
-            const themeToggleBtn = document.getElementById('theme-toggle');
             const body = document.body;
-
-            themeToggleBtn.addEventListener('click', () => {
-                body.classList.toggle('light-mode');
-                const isLight = body.classList.contains('light-mode');
-                themeToggleBtn.querySelector('i').className = isLight ? 'fas fa-moon' : 'fas fa-sun';
-            });
-
-            // Logout Functionality
-            window.logout = () => {
-                // In a real application, you would clear the user session here (e.g., Firebase auth.signOut())
-                console.log('User logged out.');
-                window.location.href = 'index.html'; // Redirect to the main page
-            };
+            if (themeToggleBtn) { // Check if the element exists before adding a listener
+                themeToggleBtn.addEventListener('click', () => {
+                    body.classList.toggle('light-mode');
+                    const isLight = body.classList.contains('light-mode');
+                    themeToggleBtn.querySelector('i').className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+                });
+            }
         });
     </script>
 </body>

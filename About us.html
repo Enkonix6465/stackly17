@@ -283,6 +283,20 @@
                 display: block;
             }
         }
+        .language-select {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 10px;
+        }
+        
+        .language-select select {
+            background-color: var(--card);
+            color: var(--text);
+            border: 1px solid var(--muted);
+            border-radius: 5px;
+            padding: 5px;
+        }
 
         /* Sections */
         .section {
@@ -737,6 +751,39 @@
             animation: fadeUp 1s ease-out forwards;
             animation-delay: 1.5s;
         }
+
+        .profile-dropdown.active {
+            display: block !important;
+        }
+        .profile-container {
+          position: relative;
+        }
+        @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
+ 
     </style>
 </head>
 <body>
@@ -751,42 +798,51 @@
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-translate="nav-home">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-translate="nav-home-1">Home 1</a></li>
+                                <li><a href="home3.html" data-translate="nav-home-2">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html" class="active">About Us</a></li>
+                        <li><a href="About us.html" class="active" data-translate="nav-about">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" data-translate="nav-services">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                               <li><a href="Services.html">All Services</a></li>
-                               <li><a href="social-media.html">Social Media Marketing</a></li>
-                               <li><a href="seo.html">SEO Optimization</a></li>
-                               <li><a href="ppc.html">PPC Advertising</a></li>
-                               <li><a href="web-dev.html">web development</a></li>
-                               <li><a href="email.html">Email Marketing</a></li>
-                               <li><a href="analytics.html">Analytics & Reporting</a></li>
+                               <li><a href="Services.html" data-translate="nav-all-services">All Services</a></li>
+                               <li><a href="social-media.html" data-translate="nav-social-media">Social Media Marketing</a></li>
+                               <li><a href="seo.html" data-translate="nav-seo">SEO Optimization</a></li>
+                               <li><a href="ppc.html" data-translate="nav-ppc">PPC Advertising</a></li>
+                               <li><a href="web-dev.html" data-translate="nav-web-dev">web development</a></li>
+                               <li><a href="email.html" data-translate="nav-email">Email Marketing</a></li>
+                               <li><a href="analytics.html" data-translate="nav-analytics">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-translate="nav-blog">Blog</a></li>
+                        <li><a href="contact.html" data-translate="nav-contact">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="login.html">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="login.html" data-translate="nav-login">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="login.html" data-translate="nav-signup-login">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-translate="nav-admin-login">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
+                <div class="language-select">
+                    <select id="language-switcher">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="he">עִברִית</option>
+                    </select>
+                </div>
                 <div class="profile-container" style="position: relative;">
-                    <div class="profile-icon" id="profile-btn">
-                      PS
-                    </div>
-                    <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
-                      <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+                    <button id="profile-btn" class="profile-icon" style="display:none;">
+                      <span id="initials-display"></span>
+                    </button>
+                    <div id="profile-dropdown" class="dropdown-menu">
+                      <a href="#" data-translate="nav-profile">Profile</a>
+                      <a href="#" data-translate="nav-settings">Settings</a>
+                      <button id="logout-btn" data-translate="nav-logout">Logout</button>
                     </div>
                 </div>
                 
@@ -810,20 +866,20 @@
             </video>
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in">About Us</h1>
-                    <p class="hero-paragraph animate-fade-up">
+                    <h1 class="hero-title animate-slide-in" data-translate="hero-title">About Us</h1>
+                    <p class="hero-paragraph animate-fade-up" data-translate="hero-paragraph">
                         Our mission is rooted in trust, transparency, and delivering value at every step of your property journey.
                     </p>
-                    <a href="contact.html" class="hero-button animate-fade-up-delayed">Reach Out Today</a>
+                    <a href="contact.html" class="hero-button animate-fade-up-delayed" data-translate="hero-button">Reach Out Today</a>
                 </div>
             </div>
         </section>
         <section class="section">
             <div class="container story-section">
                 <div class="story-content animated-element animate-slide-in-left">
-                    <h2 class="section-heading">Our Story</h2>
-                    <p class="section-subheading">From a small startup to a leading agency, our journey is one of passion, innovation, and client success.</p>
-                    <p>Founded in 2018 by a group of marketing enthusiasts, Stackly Digital Marketing was born out of a shared belief that effective digital marketing should be accessible and transparent. We started with a mission to help small businesses compete with industry giants by leveraging smart, data-driven strategies.</p>
+                    <h2 class="section-heading" data-translate="story-heading">Our Story</h2>
+                    <p class="section-subheading" data-translate="story-subheading">From a small startup to a leading agency, our journey is one of passion, innovation, and client success.</p>
+                    <p data-translate="story-text">Founded in 2018 by a group of marketing enthusiasts, Stackly Digital Marketing was born out of a shared belief that effective digital marketing should be accessible and transparent. We started with a mission to help small businesses compete with industry giants by leveraging smart, data-driven strategies.</p>
                  
                 </div>
                 <div class="story-image animated-element animate-slide-in-right">
@@ -834,13 +890,13 @@
 
         <section class="section">
             <div class="container">
-                <h2 class="section-heading animated-element animate-fade-in-up">Meet the Team</h2>
-                <p class="section-subheading animated-element animate-fade-in-up">Our diverse team of experts brings a wide range of skills and a commitment to excellence.</p>
+                <h2 class="section-heading animated-element animate-fade-in-up" data-translate="team-heading">Meet the Team</h2>
+                <p class="section-subheading animated-element animate-fade-in-up" data-translate="team-subheading">Our diverse team of experts brings a wide range of skills and a commitment to excellence.</p>
                 <div class="team-grid">
                     <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
                         <img src="https://i.pinimg.com/1200x/52/09/f6/5209f6863f1e5a4e552bdbbc30bf20fb.jpg" alt="Profile picture of Jane Doe.">
                         <h4>Jane Doe</h4>
-                        <p>Founder & CEO</p>
+                        <p data-translate="team-jane-title">Founder & CEO</p>
                         <div class="social-icons">
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -849,7 +905,7 @@
                     <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
                         <img src="https://i.pinimg.com/736x/88/ae/fb/88aefb54ee3f3e7191b3df89b5230ad0.jpg" alt="Profile picture of John Smith.">
                         <h4>John Smith</h4>
-                        <p>Lead Strategist</p>
+                        <p data-translate="team-john-title">Lead Strategist</p>
                         <div class="social-icons">
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -858,7 +914,7 @@
                     <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
                         <img src="https://i.pinimg.com/736x/a1/33/65/a13365ea6314be632e999b14b0f23da3.jpg" alt="Profile picture of Alice Lee.">
                         <h4>Alice Lee</h4>
-                        <p>Creative Director</p>
+                        <p data-translate="team-alice-title">Creative Director</p>
                         <div class="social-icons">
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -867,7 +923,7 @@
                     <div class="team-member animated-element animate-fade-in-up" style="animation-delay: 0.4s;">
                         <img src="https://i.pinimg.com/736x/90/1e/9c/901e9c722dfc110924863b61ae7d64a2.jpg" alt="Profile picture of Michael Kim.">
                         <h4>Michael Kim</h4>
-                        <p>SEO Specialist</p>
+                        <p data-translate="team-michael-title">SEO Specialist</p>
                         <div class="social-icons">
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -879,28 +935,28 @@
 
         <section class="section">
             <div class="container">
-                <h2 class="section-heading animated-element animate-fade-in-up">Our Core Values</h2>
-                <p class="section-subheading animated-element animate-fade-in-up">These principles guide our work and define our commitment to our clients and each other.</p>
+                <h2 class="section-heading animated-element animate-fade-in-up" data-translate="values-heading">Our Core Values</h2>
+                <p class="section-subheading animated-element animate-fade-in-up" data-translate="values-subheading">These principles guide our work and define our commitment to our clients and each other.</p>
                 <div class="values-grid">
                     <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
                         <i class="fas fa-lightbulb"></i>
-                        <h3>Innovation</h3>
-                        <p>We embrace change and are constantly seeking new and creative ways to solve problems.</p>
+                        <h3 data-translate="value-innovation-title">Innovation</h3>
+                        <p data-translate="value-innovation-text">We embrace change and are constantly seeking new and creative ways to solve problems.</p>
                     </div>
                     <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
                         <i class="fas fa-handshake"></i>
-                        <h3>Integrity</h3>
-                        <p>We believe in honesty, transparency, and building trust in every interaction.</p>
+                        <h3 data-translate="value-integrity-title">Integrity</h3>
+                        <p data-translate="value-integrity-text">We believe in honesty, transparency, and building trust in every interaction.</p>
                     </div>
                     <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
                         <i class="fas fa-users-cog"></i>
-                        <h3>Collaboration</h3>
-                        <p>We work together as a cohesive unit and partner closely with our clients to achieve shared goals.</p>
+                        <h3 data-translate="value-collaboration-title">Collaboration</h3>
+                        <p data-translate="value-collaboration-text">We work together as a cohesive unit and partner closely with our clients to achieve shared goals.</p>
                     </div>
                     <div class="value-card animated-element animate-fade-in-up" style="animation-delay: 0.4s;">
                         <i class="fas fa-chart-line"></i>
-                        <h3>Results-Driven</h3>
-                        <p>Our focus is on delivering tangible, measurable outcomes that contribute to your success.</p>
+                        <h3 data-translate="value-results-title">Results-Driven</h3>
+                        <p data-translate="value-results-text">Our focus is on delivering tangible, measurable outcomes that contribute to your success.</p>
                     </div>
                 </div>
             </div>
@@ -908,36 +964,36 @@
         
         <section class="section">
             <div class="container">
-                <h2 class="section-heading animated-element animate-fade-in-up">Our Journey So Far</h2>
-                <p class="section-subheading animated-element animate-fade-in-up">A look back at our key achievements and moments that define our growth.</p>
+                <h2 class="section-heading animated-element animate-fade-in-up" data-translate="milestones-heading">Our Journey So Far</h2>
+                <p class="section-subheading animated-element animate-fade-in-up" data-translate="milestones-subheading">A look back at our key achievements and moments that define our growth.</p>
                 <img src="https://www.shutterstock.com/image-vector/infographic-sales-funnel-diagram-template-600nw-2454300497.jpg" alt="A graphical timeline showing company milestones." class="milestones-image animated-element animate-fade-in" style="animation-delay: 0.5s;">
                 <div class="milestones-grid" style="margin-top: 3rem;">
                     <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.6s;">
                         <div class="milestone-year">2018</div>
                         <div class="milestone-content">
-                            <h4>Company Founded</h4>
-                            <p>Stackly Digital Marketing is launched with a focus on web design and SEO.</p>
+                            <h4 data-translate="milestone-2018-title">Company Founded</h4>
+                            <p data-translate="milestone-2018-text">Stackly Digital Marketing is launched with a focus on web design and SEO.</p>
                         </div>
                     </div>
                     <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.7s;">
                         <div class="milestone-year">2019</div>
                         <div class="milestone-content">
-                            <h4>First Major Client</h4>
-                            <p>Successfully executed a full-scale digital campaign for a national retail brand.</p>
+                            <h4 data-translate="milestone-2019-title">First Major Client</h4>
+                            <p data-translate="milestone-2019-text">Successfully executed a full-scale digital campaign for a national retail brand.</p>
                         </div>
                     </div>
                     <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.8s;">
                         <div class="milestone-year">2021</div>
                         <div class="milestone-content">
-                            <h4>Team Expansion</h4>
-                            <p>Expanded our team by 50% to include dedicated PPC and social media experts.</p>
+                            <h4 data-translate="milestone-2021-title">Team Expansion</h4>
+                            <p data-translate="milestone-2021-text">Expanded our team by 50% to include dedicated PPC and social media experts.</p>
                         </div>
                     </div>
                     <div class="milestone animated-element animate-fade-in-up" style="animation-delay: 0.9s;">
                         <div class="milestone-year">2023</div>
                         <div class="milestone-content">
-                            <h4>Award Recognition</h4>
-                            <p>Awarded "Best Small Digital Agency" by industry publications.</p>
+                            <h4 data-translate="milestone-2023-title">Award Recognition</h4>
+                            <p data-translate="milestone-2023-text">Awarded "Best Small Digital Agency" by industry publications.</p>
                         </div>
                     </div>
                 </div>
@@ -946,28 +1002,28 @@
 
         <section class="section choose-us-section">
             <div class="container">
-                <h2 class="section-heading animated-element animate-fade-in-up">Why Partner With Us?</h2>
-                <p class="section-subheading animated-element animate-fade-in-up">We are committed to delivering exceptional results and a seamless client experience.</p>
+                <h2 class="section-heading animated-element animate-fade-in-up" data-translate="why-choose-us-heading">Why Partner With Us?</h2>
+                <p class="section-subheading animated-element animate-fade-in-up" data-translate="why-choose-us-subheading">We are committed to delivering exceptional results and a seamless client experience.</p>
                 <div class="choose-us-grid">
                     <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
                         <i class="fas fa-bullseye"></i>
                         <div class="choose-us-text">
-                            <h3>Data-Driven Strategies</h3>
-                            <p>Every decision we make is backed by thorough research and analytics to ensure maximum ROI.</p>
+                            <h3 data-translate="choose-us-data-title">Data-Driven Strategies</h3>
+                            <p data-translate="choose-us-data-text">Every decision we make is backed by thorough research and analytics to ensure maximum ROI.</p>
                         </div>
                     </div>
                     <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
                         <i class="fas fa-gem"></i>
                         <div class="choose-us-text">
-                            <h3>Transparent Reporting</h3>
-                            <p>We provide clear, easy-to-understand reports so you always know how your campaigns are performing.</p>
+                            <h3 data-translate="choose-us-transparent-title">Transparent Reporting</h3>
+                            <p data-translate="choose-us-transparent-text">We provide clear, easy-to-understand reports so you always know how your campaigns are performing.</p>
                         </div>
                     </div>
                     <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
                         <i class="fas fa-headset"></i>
                         <div class="choose-us-text">
-                            <h3>Dedicated Support</h3>
-                            <p>Our team is always available to answer your questions and provide personalized guidance.</p>
+                            <h3 data-translate="choose-us-support-title">Dedicated Support</h3>
+                            <p data-translate="choose-us-support-text">Our team is always available to answer your questions and provide personalized guidance.</p>
                         </div>
                     </div>
                 </div>
@@ -981,31 +1037,31 @@
             <div class="logo">
                 <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
             </div>
-            <p>Your partner for digital marketing success. We deliver results that matter.</p>
+            <p data-translate="footer-description">Your partner for digital marketing success. We deliver results that matter.</p>
         </div>
         <div class="footer-section">
-            <h4>Quick Links</h4>
+            <h4 data-translate="footer-quick-links-title">Quick Links</h4>
             <ul>
-                <li><a href="redesigned_index.html">Home</a></li>
-                <li><a href="About us.html">About Us</a></li>
-                <li><a href="Services.html">services</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="redesigned_index.html" data-translate="footer-home">Home</a></li>
+                <li><a href="About us.html" data-translate="footer-about">About Us</a></li>
+                <li><a href="Services.html" data-translate="footer-services">services</a></li>
+                <li><a href="blog.html" data-translate="footer-blog">Blog</a></li>
+                <li><a href="contact.html" data-translate="footer-contact">Contact</a></li>
             </ul>
         </div>
         <div class="footer-section">
-            <h4>Services</h4>
+            <h4 data-translate="footer-services-title">Services</h4>
             <ul>
-                <li><a href="seo.html">SEO</a></li>
-                <li><a href="ppc.html">PPC</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-                <li><a href="web-dev.html">Web Development</a></li>
-                 <li><a href="email.html">email marketing</a></li>
-                  <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="seo.html" data-translate="footer-seo">SEO</a></li>
+                <li><a href="ppc.html" data-translate="footer-ppc">PPC</a></li>
+                <li><a href="social-media.html" data-translate="footer-social-media">Social Media</a></li>
+                <li><a href="web-dev.html" data-translate="footer-web-dev">Web Development</a></li>
+                 <li><a href="email.html" data-translate="footer-email">email marketing</a></li>
+                  <li><a href="analytics.html" data-translate="footer-analytics">Analytics</a></li>
             </ul>
         </div>
         <div class="footer-section">
-            <h4>Contact Info</h4>
+            <h4 data-translate="footer-contact-info-title">Contact Info</h4>
             <ul>
                 <li><a href="#">info@stackly.com</a></li>
                 <li><a href="#">+1 (555) 123-4567</a></li>
@@ -1014,11 +1070,269 @@
         </div>
     </div>
     <div class="footer-bottom">
-        &copy; 2024 Stackly Digital Marketing. All rights reserved.
+        <span data-translate="footer-copyright">&copy; 2024 Stackly Digital Marketing. All rights reserved.</span>
     </div>
 </footer>
 
     <script>
+        // Language translation dictionary
+        const translations = {
+            en: {
+                "nav-home": "Home",
+                "nav-home-1": "Home 1",
+                "nav-home-2": "Home 2",
+                "nav-about": "About Us",
+                "nav-services": "Services",
+                "nav-all-services": "All Services",
+                "nav-social-media": "Social Media Marketing",
+                "nav-seo": "SEO Optimization",
+                "nav-ppc": "PPC Advertising",
+                "nav-web-dev": "Web Development",
+                "nav-email": "Email Marketing",
+                "nav-analytics": "Analytics & Reporting",
+                "nav-blog": "Blog",
+                "nav-contact": "Contact Us",
+                "nav-login": "Login",
+                "nav-signup-login": "Sign Up/Login",
+                "nav-admin-login": "Admin Login",
+                "nav-logout": "Logout",
+                "nav-profile": "Profile",
+                "nav-settings": "Settings",
+                "hero-title": "About Us",
+                "hero-paragraph": "Our mission is rooted in trust, transparency, and delivering value at every step of your property journey.",
+                "hero-button": "Reach Out Today",
+                "story-heading": "Our Story",
+                "story-subheading": "From a small startup to a leading agency, our journey is one of passion, innovation, and client success.",
+                "story-text": "Founded in 2018 by a group of marketing enthusiasts, Stackly Digital Marketing was born out of a shared belief that effective digital marketing should be accessible and transparent. We started with a mission to help small businesses compete with industry giants by leveraging smart, data-driven strategies.",
+                "team-heading": "Meet the Team",
+                "team-subheading": "Our diverse team of experts brings a wide range of skills and a commitment to excellence.",
+                "team-jane-title": "Founder & CEO",
+                "team-john-title": "Lead Strategist",
+                "team-alice-title": "Creative Director",
+                "team-michael-title": "SEO Specialist",
+                "values-heading": "Our Core Values",
+                "values-subheading": "These principles guide our work and define our commitment to our clients and each other.",
+                "value-innovation-title": "Innovation",
+                "value-innovation-text": "We embrace change and are constantly seeking new and creative ways to solve problems.",
+                "value-integrity-title": "Integrity",
+                "value-integrity-text": "We believe in honesty, transparency, and building trust in every interaction.",
+                "value-collaboration-title": "Collaboration",
+                "value-collaboration-text": "We work together as a cohesive unit and partner closely with our clients to achieve shared goals.",
+                "value-results-title": "Results-Driven",
+                "value-results-text": "Our focus is on delivering tangible, measurable outcomes that contribute to your success.",
+                "milestones-heading": "Our Journey So Far",
+                "milestones-subheading": "A look back at our key achievements and moments that define our growth.",
+                "milestone-2018-title": "Company Founded",
+                "milestone-2018-text": "Stackly Digital Marketing is launched with a focus on web design and SEO.",
+                "milestone-2019-title": "First Major Client",
+                "milestone-2019-text": "Successfully executed a full-scale digital campaign for a national retail brand.",
+                "milestone-2021-title": "Team Expansion",
+                "milestone-2021-text": "Expanded our team by 50% to include dedicated PPC and social media experts.",
+                "milestone-2023-title": "Award Recognition",
+                "milestone-2023-text": "Awarded \"Best Small Digital Agency\" by industry publications.",
+                "why-choose-us-heading": "Why Partner With Us?",
+                "why-choose-us-subheading": "We are committed to delivering exceptional results and a seamless client experience.",
+                "choose-us-data-title": "Data-Driven Strategies",
+                "choose-us-data-text": "Every decision we make is backed by thorough research and analytics to ensure maximum ROI.",
+                "choose-us-transparent-title": "Transparent Reporting",
+                "choose-us-transparent-text": "We provide clear, easy-to-understand reports so you always know how your campaigns are performing.",
+                "choose-us-support-title": "Dedicated Support",
+                "choose-us-support-text": "Our team is always available to answer your questions and provide personalized guidance.",
+                "footer-description": "Your partner for digital marketing success. We deliver results that matter.",
+                "footer-quick-links-title": "Quick Links",
+                "footer-home": "Home",
+                "footer-about": "About Us",
+                "footer-services": "services",
+                "footer-blog": "Blog",
+                "footer-contact": "Contact",
+                "footer-services-title": "Services",
+                "footer-seo": "SEO",
+                "footer-ppc": "PPC",
+                "footer-social-media": "Social Media",
+                "footer-web-dev": "Web Development",
+                "footer-email": "email marketing",
+                "footer-analytics": "Analytics",
+                "footer-contact-info-title": "Contact Info",
+                "footer-copyright": "© 2024 Stackly Digital Marketing. All rights reserved."
+            },
+            ar: {
+                "nav-home": "الرئيسية",
+                "nav-home-1": "الرئيسية 1",
+                "nav-home-2": "الرئيسية 2",
+                "nav-about": "من نحن",
+                "nav-services": "الخدمات",
+                "nav-all-services": "جميع الخدمات",
+                "nav-social-media": "التسويق عبر وسائل التواصل الاجتماعي",
+                "nav-seo": "تحسين محركات البحث",
+                "nav-ppc": "إعلانات الدفع بالنقرة",
+                "nav-web-dev": "تطوير الويب",
+                "nav-email": "التسويق عبر البريد الإلكتروني",
+                "nav-analytics": "التحليلات والتقارير",
+                "nav-blog": "المدونة",
+                "nav-contact": "اتصل بنا",
+                "nav-login": "تسجيل الدخول",
+                "nav-signup-login": "التسجيل / تسجيل الدخول",
+                "nav-admin-login": "تسجيل دخول المسؤول",
+                "nav-logout": "تسجيل الخروج",
+                "nav-profile": "الملف الشخصي",
+                "nav-settings": "الإعدادات",
+                "hero-title": "من نحن",
+                "hero-paragraph": "مهمتنا متجذرة في الثقة والشفافية وتقديم القيمة في كل خطوة من رحلة عملك.",
+                "hero-button": "تواصل معنا اليوم",
+                "story-heading": "قصتنا",
+                "story-subheading": "من شركة ناشئة صغيرة إلى وكالة رائدة، رحلتنا هي رحلة شغف وابتكار ونجاح العملاء.",
+                "story-text": "تأسست في عام 2018 من قبل مجموعة من عشاق التسويق، ولدت Stackly Digital Marketing من قناعة مشتركة بأن التسويق الرقمي الفعال يجب أن يكون متاحًا وشفافًا. بدأنا بمهمة لمساعدة الشركات الصغيرة على التنافس مع عمالقة الصناعة من خلال الاستفادة من استراتيجيات ذكية تعتمد على البيانات.",
+                "team-heading": "قابل فريق العمل",
+                "team-subheading": "فريقنا المتنوع من الخبراء يجلب مجموعة واسعة من المهارات والالتزام بالتميز.",
+                "team-jane-title": "المؤسس والرئيس التنفيذي",
+                "team-john-title": "كبير الاستراتيجيين",
+                "team-alice-title": "المدير الإبداعي",
+                "team-michael-title": "متخصص تحسين محركات البحث",
+                "values-heading": "قيمنا الأساسية",
+                "values-subheading": "هذه المبادئ توجه عملنا وتحدد التزامنا تجاه عملائنا وبعضنا البعض.",
+                "value-innovation-title": "الابتكار",
+                "value-innovation-text": "نحن نتبنى التغيير ونسعى باستمرار لإيجاد طرق جديدة ومبتكرة لحل المشكلات.",
+                "value-integrity-title": "النزاهة",
+                "value-integrity-text": "نحن نؤمن بالصدق والشفافية وبناء الثقة في كل تفاعل.",
+                "value-collaboration-title": "التعاون",
+                "value-collaboration-text": "نعمل معًا كوحدة متماسكة ونتعاون عن كثب مع عملائنا لتحقيق الأهداف المشتركة.",
+                "value-results-title": "التركيز على النتائج",
+                "value-results-text": "ينصب تركيزنا على تحقيق نتائج ملموسة وقابلة للقياس تساهم في نجاحك.",
+                "milestones-heading": "رحلتنا حتى الآن",
+                "milestones-subheading": "نظرة إلى إنجازاتنا الرئيسية واللحظات التي تحدد نمونا.",
+                "milestone-2018-title": "تأسيس الشركة",
+                "milestone-2018-text": "تم إطلاق Stackly Digital Marketing مع التركيز على تصميم الويب وتحسين محركات البحث.",
+                "milestone-2019-title": "أول عميل رئيسي",
+                "milestone-2019-text": "تم تنفيذ حملة رقمية واسعة النطاق بنجاح لعلامة تجارية وطنية للبيع بالتجزئة.",
+                "milestone-2021-title": "توسع الفريق",
+                "milestone-2021-text": "قمنا بتوسيع فريقنا بنسبة 50٪ ليشمل خبراء متخصصين في إعلانات الدفع بالنقرة ووسائل التواصل الاجتماعي.",
+                "milestone-2023-title": "تكريم",
+                "milestone-2023-text": "حصلت على جائزة \"أفضل وكالة رقمية صغيرة\" من قبل منشورات الصناعة.",
+                "why-choose-us-heading": "لماذا تختارنا؟",
+                "why-choose-us-subheading": "نحن ملتزمون بتقديم نتائج استثنائية وتجربة عميل سلسة.",
+                "choose-us-data-title": "استراتيجيات قائمة على البيانات",
+                "choose-us-data-text": "كل قرار نتخذه مدعوم ببحث وتحليلات شاملة لضمان أقصى عائد على الاستثمار.",
+                "choose-us-transparent-title": "تقارير شفافة",
+                "choose-us-transparent-text": "نقدم تقارير واضحة وسهلة الفهم حتى تعرف دائمًا كيفية أداء حملاتك.",
+                "choose-us-support-title": "دعم مخصص",
+                "choose-us-support-text": "فريقنا متاح دائمًا للإجابة على أسئلتك وتقديم توجيه شخصي.",
+                "footer-description": "شريكك لنجاح التسويق الرقمي. نقدم نتائج مهمة.",
+                "footer-quick-links-title": "روابط سريعة",
+                "footer-home": "الرئيسية",
+                "footer-about": "من نحن",
+                "footer-services": "الخدمات",
+                "footer-blog": "المدونة",
+                "footer-contact": "اتصل بنا",
+                "footer-services-title": "الخدمات",
+                "footer-seo": "تحسين محركات البحث",
+                "footer-ppc": "إعلانات الدفع بالنقرة",
+                "footer-social-media": "وسائل التواصل الاجتماعي",
+                "footer-web-dev": "تطوير الويب",
+                "footer-email": "التسويق عبر البريد الإلكتروني",
+                "footer-analytics": "التحليلات",
+                "footer-contact-info-title": "معلومات الاتصال",
+                "footer-copyright": "© 2024 Stackly Digital Marketing. جميع الحقوق محفوظة."
+            },
+            he: {
+                "nav-home": "בית",
+                "nav-home-1": "בית 1",
+                "nav-home-2": "בית 2",
+                "nav-about": "אודותינו",
+                "nav-services": "שירותים",
+                "nav-all-services": "כל השירותים",
+                "nav-social-media": "שיווק ברשתות חברתיות",
+                "nav-seo": "אופטימיציית SEO",
+                "nav-ppc": "פרסום PPC",
+                "nav-web-dev": "פיתוח אתרים",
+                "nav-email": "שיווק בדוא\"ל",
+                "nav-analytics": "אנליטיקה ודיווח",
+                "nav-blog": "בלוג",
+                "nav-contact": "צור קשר",
+                "nav-login": "התחברות",
+                "nav-signup-login": "הירשם/התחבר",
+                "nav-admin-login": "התחברות מנהל",
+                "nav-logout": "התנתק",
+                "nav-profile": "פרופיל",
+                "nav-settings": "הגדרות",
+                "hero-title": "אודותינו",
+                "hero-paragraph": "המשימה שלנו מושרשת באמון, שקיפות, ואספקת ערך בכל שלב במסע הנכסים שלך.",
+                "hero-button": "צור קשר עוד היום",
+                "story-heading": "הסיפור שלנו",
+                "story-subheading": "מסטארט-אפ קטן לסוכנות מובילה, המסע שלנו הוא מסע של תשוקה, חדשנות, והצלחת הלקוחות.",
+                "story-text": "נוסדה בשנת 2018 על ידי קבוצה של חובבי שיווק, Stackly Digital Marketing נולדה מתוך אמונה משותפת ששיווק דיגיטלי יעיל צריך להיות נגיש ושקוף. התחלנו עם משימה לעזור לעסקים קטנים להתחרות בענקיות התעשייה על ידי שימוש באסטרטגיות חכמות מונעות נתונים.",
+                "team-heading": "הכירו את הצוות",
+                "team-subheading": "הצוות המגוון של המומחים שלנו מביא מגוון רחב של כישורים ומחויבות למצוינות.",
+                "team-jane-title": "מייסדת ומנכ\"לית",
+                "team-john-title": "אסטרטג ראשי",
+                "team-alice-title": "מנהלת קריאייטיב",
+                "team-michael-title": "מומחה SEO",
+                "values-heading": "ערכי הליבה שלנו",
+                "values-subheading": "עקרונות אלה מנחים את העבודה שלנו ומגדירים את המחויבות שלנו ללקוחותינו ולזה לזה.",
+                "value-innovation-title": "חדשנות",
+                "value-innovation-text": "אנו מאמצים שינוי ומחפשים כל הזמן דרכים חדשות ויצירתיות לפתור בעיות.",
+                "value-integrity-title": "יושרה",
+                "value-integrity-text": "אנו מאמינים ביושר, שקיפות, ובניית אמון בכל אינטראקציה.",
+                "value-collaboration-title": "שיתוף פעולה",
+                "value-collaboration-text": "אנו עובדים יחד כיחידה מגובשת ומשתפים פעולה באופן הדוק עם לקוחותינו כדי להשיג יעדים משותפים.",
+                "value-results-title": "מונחי תוצאות",
+                "value-results-text": "ההתמקדות שלנו היא באספקת תוצאות מוחשיות, מדידות התורמות להצלחתך.",
+                "milestones-heading": "המסע שלנו עד כה",
+                "milestones-subheading": "מבט לאחור על ההישגים והרגעים המרכזיים שמגדירים את הצמיחה שלנו.",
+                "milestone-2018-title": "הקמת החברה",
+                "milestone-2018-text": "Stackly Digital Marketing הושקה עם התמקדות בעיצוב אתרים ו-SEO.",
+                "milestone-2019-title": "הלקוח המרכזי הראשון",
+                "milestone-2019-text": "בוצעה בהצלחה קמפיין דיגיטלי בקנה מידה מלא עבור מותג קמעונאות לאומי.",
+                "milestone-2021-title": "התרחבות צוות",
+                "milestone-2021-text": "הרחבנו את הצוות שלנו ב-50% כדי לכלול מומחי PPC ומדיה חברתית ייעודיים.",
+                "milestone-2023-title": "הכרה ופרסים",
+                "milestone-2023-text": "זכינו בפרס \"הסוכנות הדיגיטלית הקטנה הטובה ביותר\" על ידי פרסומים בתעשייה.",
+                "why-choose-us-heading": "למה לבחור בנו?",
+                "why-choose-us-subheading": "אנו מחויבים לספק תוצאות יוצאות דופן וחווית לקוח חלקה.",
+                "choose-us-data-title": "אסטרטגיות מונעות נתונים",
+                "choose-us-data-text": "כל החלטה שאנו מקבלים מגובה במחקר ואנליטיקה יסודיים כדי להבטיח החזר השקעה מרבי.",
+                "choose-us-transparent-title": "דיווח שקוף",
+                "choose-us-transparent-text": "אנו מספקים דוחות ברורים וקלים להבנה כדי שתדע תמיד איך הקמפיינים שלך מתפקדים.",
+                "choose-us-support-title": "תמיכה ייעודית",
+                "choose-us-support-text": "הצוות שלנו זמין תמיד לענות על שאלותיך ולספק הדרכה מותאמת אישית.",
+                "footer-description": "השותף שלך להצלחה בשיווק דיגיטלי. אנו מספקים תוצאות שחשובות.",
+                "footer-quick-links-title": "קישורים מהירים",
+                "footer-home": "בית",
+                "footer-about": "אודותינו",
+                "footer-services": "שירותים",
+                "footer-blog": "בלוג",
+                "footer-contact": "צור קשר",
+                "footer-services-title": "שירותים",
+                "footer-seo": "SEO",
+                "footer-ppc": "PPC",
+                "footer-social-media": "מדיה חברתית",
+                "footer-web-dev": "פיתוח אתרים",
+                "footer-email": "שיווק בדוא\"ל",
+                "footer-analytics": "אנליטיקה",
+                "footer-contact-info-title": "פרטי התקשרות",
+                "footer-copyright": "© 2024 Stackly Digital Marketing. כל הזכויות שמורות."
+            }
+        };
+
+        const languageSwitcher = document.getElementById('language-switcher');
+        
+        languageSwitcher?.addEventListener('change', (event) => {
+            const newLang = event.target.value;
+            setLanguage(newLang);
+        });
+
+        function setLanguage(lang) {
+            document.body.dir = (lang === 'ar' || lang === 'he') ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            
+            // Loop through all elements with a data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+    
         // Mobile nav toggle
         const mobileToggle = document.getElementById('mobile-toggle');
         const nav = document.getElementById('site-nav');
@@ -1032,26 +1346,90 @@
         // Profile dropdown functionality
         const profileBtn = document.getElementById('profile-btn');
         const profileDropdown = document.getElementById('profile-dropdown');
+        const initialsDisplay = document.getElementById('initials-display');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Function to generate and display initials from local storage
+        function updateProfileButton() {
+            const userData = JSON.parse(localStorage.getItem('userData') || "{}");
         
+            if (userData && userData.firstName && userData.lastName) {
+                const firstNameInitial = userData.firstName.charAt(0);
+                const lastNameInitial = userData.lastName.charAt(0);
+                const initials = `${firstNameInitial}${lastNameInitial}`.toUpperCase();
+        
+                initialsDisplay.textContent = initials;
+                profileBtn.style.display = 'flex'; // Show the button
+            } else {
+                profileBtn.style.display = 'none';
+            }
+        }
+        
+        // Function to show/hide the dropdown menu
+        function toggleDropdown() {
+            profileDropdown.classList.toggle('active');
+        }
+
+        // Function to handle logout
+        function handleLogout() {
+            localStorage.removeItem('userData');
+            localStorage.removeItem('isLoggedIn');
+        
+            console.log('User logged out. Local storage cleared.');
+        
+            // Create and display a custom message box
+            const messageBox = document.createElement('div');
+            messageBox.innerHTML = 'Logged out successfully! <i class="fas fa-check-circle"></i>';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: var(--brand);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: fadeOut 3s forwards;
+            `;
+            document.body.appendChild(messageBox);
+        
+            // Define a simple fade-out animation
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `
+                @keyframes fadeOut {
+                0% { opacity: 1; transform: translateY(0); }
+                80% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+            
+            // Navigate to the login page after a delay
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000); // 2-second delay to show the message
+        }
+
+        // Add event listeners to the buttons
         profileBtn?.addEventListener('click', (e) => {
-          e.stopPropagation();
-          profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
+            e.stopPropagation();
+            toggleDropdown();
         });
+
+        // The logout button is now a button, so this event listener works as intended
+        logoutBtn?.addEventListener('click', handleLogout);
 
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-          if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-            profileDropdown.style.display = 'none';
-          }
+            if (profileBtn && profileDropdown && !profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
         });
-
-        // Logout function
-        function logout() {
-          // Add your logout logic here
-          alert('Logged out successfully!');
-          window.location.href = 'login.html';
-        }
-
+        
         // Function to handle the animated elements on scroll
         const animateOnScroll = () => {
             const elements = document.querySelectorAll('.animated-element');
@@ -1079,8 +1457,40 @@
             });
         };
 
-        // Run the animation function once the window has loaded
-        window.onload = animateOnScroll;
+        // Initialize the profile button and animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+             // Example usage: uncomment this line to simulate a logged-in user
+             // saveUserToLocalStorage('John', 'Smith');
+            updateProfileButton();
+            animateOnScroll();
+            // Set initial language based on the browser's language or default to English
+            const browserLang = navigator.language.split('-')[0];
+            const initialLang = (browserLang === 'ar' || browserLang === 'he') ? browserLang : 'en';
+            languageSwitcher.value = initialLang;
+            setLanguage(initialLang);
+        });
+        // Mobile dropdown toggle for navigation
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stackly Digital Marketing - Home</title>
+  <title data-lang="hero_title">Stackly Digital Marketing - Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -173,7 +173,15 @@
         .cta-image-content button:hover {
             background-color: #00b3e6;
         }
-
+        .lang-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: var(--card);
+            color: var(--text);
+            border: 1px solid var(--glass);
+            cursor: pointer;
+            font-size: 1rem;
+        }
     
 
   
@@ -216,60 +224,99 @@
       .footer-content { grid-template-columns: 1fr; }
     }
     @media (max-width: 420px) { .stats-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
   </style>
 </head>
 <body>
   <header class="header">
     <div class="container nav-container">
-      <a href="redesigned_index.html" class="logo">
+      <a href="home1.html" class="logo">
         <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
       </a>
       <div class="nav-right">
         <nav class="nav" id="site-nav">
           <ul class="nav-links">
             <li class="dropdown">
-              <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+              <a href="home1.html" data-lang="home">Home <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="redesigned_index.html">Home 1</a></li>
-                <li><a href="home3.html">Home 2</a></li>
+                <li><a href="home1.html" data-lang="home_1">Home 1</a></li>
+                <li><a href="home3.html" data-lang="home_2">Home 2</a></li>
               </ul>
             </li>
-            <li><a href="About us.html">About Us</a></li>
+            <li><a href="About us.html" data-lang="about_us">About Us</a></li>
             <li class="dropdown">
-              <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+              <a href="Services.html" data-lang="services">Services <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="Services.html">All Services</a></li>
-                <li><a href="social-media.html">Social Media Marketing</a></li>
-                <li><a href="seo.html">SEO Optimization</a></li>
-                <li><a href="ppc.html">PPC Advertising</a></li>
-                <li><a href="web-dev.html">web development</a></li>
-                <li><a href="email.html">Email Marketing</a></li>
-                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                <li><a href="Services.html" data-lang="all_services">All Services</a></li>
+                <li><a href="social-media.html" data-lang="social_media_marketing">Social Media Marketing</a></li>
+                <li><a href="seo.html" data-lang="seo_optimization">SEO Optimization</a></li>
+                <li><a href="ppc.html" data-lang="ppc_advertising">PPC Advertising</a></li>
+                <li><a href="web-dev.html" data-lang="web_development">Web Development</a></li>
+                <li><a href="email.html" data-lang="email_marketing">Email Marketing</a></li>
+                <li><a href="analytics.html" data-lang="analytics_reporting">Analytics & Reporting</a></li>
               </ul>
             </li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="blog.html" data-lang="blog">Blog</a></li>
+            <li><a href="contact.html" data-lang="contact_us">Contact Us</a></li>
             <li class="dropdown">
-              <a href="signup.html">Login <i class="fas fa-chevron-down"></i></a>
+              <a href="index.html" data-lang="login">Login <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="login.html">Sign Up/Login</a></li>
-                <li><a href="sign admin.html">Admin Login</a></li>
+                <li><a href="index.html" data-lang="sign_up_login">Sign Up/Login</a></li>
+                <li><a href="sign admin.html" data-lang="admin_login">Admin Login</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <div class="profile-container" style="position: relative;">
-          <div class="profile-icon" id="profile-btn">
-            PS
-          </div>
+        
+<div class="profile-container" style="position: relative;">
+  <button id="profile-btn" class="profile-icon">
+    <span id="initials-display"></span>
+  </button>
+  <div class="profile-menu" id="profile-dropdown">
+    <p id="full-name-display" style="padding:10px; margin:0; font-weight:600;"></p>
+    <a href="login.html" id="logout-btn" data-translate="logout-button">Logout</a>
+  </div>
+</div>
+
           <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
-            <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+            <a href="index.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;" data-lang="logout">Logout</a>
           </div>
         </div>
         <div class="theme-toggle">
           <button id="theme-toggle" class="btn btn-secondary">
             <i class="fas fa-moon"></i>
           </button>
+        </div>
+        <div class="lang-toggle-container">
+          <select id="lang-toggle" class="lang-select">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="he">עברית</option>
+          </select>
         </div>
         <div class="mobile-menu-toggle" id="mobile-toggle">
           <i class="fas fa-bars"></i>
@@ -281,20 +328,20 @@
    <section class="section article-section">
             <div class="container">
                 <div class="article-header">
-                    <h1 class="article-title">The Role of AI in Modern Marketing</h1>
-                    <p class="article-meta">Published on August 18, 2024 by Jane Doe</p>
+                    <h1 class="article-title" data-lang="article_title">The Role of AI in Modern Marketing</h1>
+                    <p class="article-meta" data-lang="article_meta">Published on August 18, 2024 by Jane Doe</p>
                 </div>
                 <img class="article-image" src="https://cdn.pixabay.com/photo/2023/05/08/08/41/ai-7977960_1280.jpg" alt="Article image showing AI in modern marketing" />
                 <div class="article-content">
-                    <p>Artificial intelligence is no longer a futuristic concept; it's a fundamental tool reshaping the digital marketing landscape. From automating repetitive tasks to providing deep insights into consumer behavior, AI is empowering marketers to create more effective and personalized campaigns. This shift is not about replacing human creativity but enhancing it with data-driven precision.</p>
-                    <h2>AI-Powered Personalization</h2>
-                    <p>One of the most significant impacts of AI is its ability to deliver hyper-personalized experiences. AI algorithms can analyze vast amounts of customer data—including browsing history, purchase behavior, and demographics—to segment audiences with unprecedented accuracy. This allows marketers to serve highly relevant content, product recommendations, and offers, leading to higher engagement and conversion rates.</p>
-                    <h2>Automated Content Creation</h2>
-                    <p>AI-powered tools are now capable of generating various forms of content, from social media posts and email newsletters to blog outlines and ad copy. While these tools still require human oversight, they can dramatically speed up the content creation process, freeing up creative teams to focus on strategy and high-level ideas. This allows businesses to maintain a consistent content flow without a massive increase in resources.</p>
-                    <h2>Predictive Analytics and SEO</h2>
-                    <p>AI is also revolutionizing search engine optimization (SEO) by moving beyond simple keyword analysis. Predictive analytics can forecast future search trends, helping marketers optimize their content before a topic becomes saturated. AI tools can analyze competitor strategies, identify opportunities, and even suggest improvements to on-page elements, ensuring that your content ranks higher and reaches the right audience.</p>
-                    <h2>Challenges and the Future</h2>
-                    <p>Despite its benefits, the integration of AI in marketing is not without its challenges. Data privacy concerns, the need for skilled talent, and the ethical implications of using AI are all critical considerations. However, as the technology becomes more sophisticated and accessible, AI will continue to be an indispensable partner for marketers, driving innovation and shaping the future of digital engagement.</p>
+                    <p data-lang="article_p1">Artificial intelligence is no longer a futuristic concept; it's a fundamental tool reshaping the digital marketing landscape. From automating repetitive tasks to providing deep insights into consumer behavior, AI is empowering marketers to create more effective and personalized campaigns. This shift is not about replacing human creativity but enhancing it with data-driven precision.</p>
+                    <h2 data-lang="ai_personalization_heading">AI-Powered Personalization</h2>
+                    <p data-lang="ai_personalization_p1">One of the most significant impacts of AI is its ability to deliver hyper-personalized experiences. AI algorithms can analyze vast amounts of customer data—including browsing history, purchase behavior, and demographics—to segment audiences with unprecedented accuracy. This allows marketers to serve highly relevant content, product recommendations, and offers, leading to higher engagement and conversion rates.</p>
+                    <h2 data-lang="automated_content_heading">Automated Content Creation</h2>
+                    <p data-lang="automated_content_p1">AI-powered tools are now capable of generating various forms of content, from social media posts and email newsletters to blog outlines and ad copy. While these tools still require human oversight, they can dramatically speed up the content creation process, freeing up creative teams to focus on strategy and high-level ideas. This allows businesses to maintain a consistent content flow without a massive increase in resources.</p>
+                    <h2 data-lang="predictive_analytics_heading">Predictive Analytics and SEO</h2>
+                    <p data-lang="predictive_analytics_p1">AI is also revolutionizing search engine optimization (SEO) by moving beyond simple keyword analysis. Predictive analytics can forecast future search trends, helping marketers optimize their content before a topic becomes saturated. AI tools can analyze competitor strategies, identify opportunities, and even suggest improvements to on-page elements, ensuring that your content ranks higher and reaches the right audience.</p>
+                    <h2 data-lang="challenges_heading">Challenges and the Future</h2>
+                    <p data-lang="challenges_p1">Despite its benefits, the integration of AI in marketing is not without its challenges. Data privacy concerns, the need for skilled talent, and the ethical implications of using AI are all critical considerations. However, as the technology becomes more sophisticated and accessible, AI will continue to be an indispensable partner for marketers, driving innovation and shaping the future of digital engagement.</p>
                 </div>
             </div>
         </section>
@@ -302,9 +349,9 @@
             <div class="container">
                 <div class="cta-image-section">
                     <div class="cta-image-content">
-                        <h2>Ready to Elevate Your Digital Presence?</h2>
-                        <p>Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
-                        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                        <h2 data-lang="cta_heading">Ready to Elevate Your Digital Presence?</h2>
+                        <p data-lang="cta_p">Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
+                        <a href="contact.html" class="btn btn-primary" data-lang="cta_btn">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -316,44 +363,195 @@
       <div class="footer-content">
         <div>
            <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-          <p>Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
+          <p data-lang="footer_description">Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
          
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-lang="footer_quick_links">Quick Links</h4>
           <ul>
-            <li><a href="redesigned_index.html">Home</a></li>
-            <li><a href="About us.html">About Us</a></li>
-            <li><a href="Services.html">Services</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="home1.html" data-lang="home">Home</a></li>
+            <li><a href="About us.html" data-lang="about_us">About Us</a></li>
+            <li><a href="Services.html" data-lang="services">Services</a></li>
+            <li><a href="contact.html" data-lang="contact">Contact</a></li>
           
           </ul>
         </div>
         <div>
-          <h4>Services</h4>
+          <h4 data-lang="footer_services">Services</h4>
           <ul>
            <li>
-                <li><a href="seo.html">SEO</a></li>
-                <li><a href="ppc.html">PPC</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-                <li><a href="web-dev.html">Web Development</a></li>
-                 <li><a href="web-dev.html">email marketing</a></li>
-                  <li><a href="web-dev.html">Analytics</a></li>
+                <li><a href="seo.html" data-lang="seo">SEO</a></li>
+                <li><a href="ppc.html" data-lang="ppc">PPC</a></li>
+                <li><a href="social-media.html" data-lang="social_media">Social Media</a></li>
+                <li><a href="web-dev.html" data-lang="web_dev">Web Development</a></li>
+                 <li><a href="web-dev.html" data-lang="email_marketing">email marketing</a></li>
+                  <li><a href="web-dev.html" data-lang="analytics">Analytics</a></li>
         </div>
         <div>
-          <h4>Contact Info</h4>
+          <h4 data-lang="footer_contact_info">Contact Info</h4>
           <ul>
-            <li><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
-            <li><i class="fas fa-phone"></i> (555) 123-4567</li>
-            <li><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> <span data-lang="footer_address">123 Digital Marketing Blvd, City, State 12345</span></li>
+            <li><i class="fas fa-phone"></i> <span data-lang="footer_phone">(555) 123-4567</span></li>
+            <li><i class="fas fa-envelope"></i> <span data-lang="footer_email">info@stacklydigital.com</span></li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+      <div class="footer-bottom" data-lang="footer_copyright">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
     </div>
   </footer>
 
   <script>
+    // Language toggle data
+    const languageData = {
+        "en": {
+            "home": "Home",
+            "home_1": "Home 1",
+            "home_2": "Home 2",
+            "about_us": "About Us",
+            "services": "Services",
+            "all_services": "All Services",
+            "social_media_marketing": "Social Media Marketing",
+            "seo_optimization": "SEO Optimization",
+            "ppc_advertising": "PPC Advertising",
+            "web_development": "Web Development",
+            "email_marketing": "Email Marketing",
+            "analytics_reporting": "Analytics & Reporting",
+            "blog": "Blog",
+            "contact_us": "Contact Us",
+            "login": "Login",
+            "sign_up_login": "Sign Up/Login",
+            "admin_login": "Admin Login",
+            "logout": "Logout",
+            "hero_title": "Stackly Digital Marketing - Home",
+            "article_title": "The Role of AI in Modern Marketing",
+            "article_meta": "Published on August 18, 2024 by Jane Doe",
+            "article_p1": "Artificial intelligence is no longer a futuristic concept; it's a fundamental tool reshaping the digital marketing landscape. From automating repetitive tasks to providing deep insights into consumer behavior, AI is empowering marketers to create more effective and personalized campaigns. This shift is not about replacing human creativity but enhancing it with data-driven precision.",
+            "ai_personalization_heading": "AI-Powered Personalization",
+            "ai_personalization_p1": "One of the most significant impacts of AI is its ability to deliver hyper-personalized experiences. AI algorithms can analyze vast amounts of customer data—including browsing history, purchase behavior, and demographics—to segment audiences with unprecedented accuracy. This allows marketers to serve highly relevant content, product recommendations, and offers, leading to higher engagement and conversion rates.",
+            "automated_content_heading": "Automated Content Creation",
+            "automated_content_p1": "AI-powered tools are now capable of generating various forms of content, from social media posts and email newsletters to blog outlines and ad copy. While these tools still require human oversight, they can dramatically speed up the content creation process, freeing up creative teams to focus on strategy and high-level ideas. This allows businesses to maintain a consistent content flow without a massive increase in resources.",
+            "predictive_analytics_heading": "Predictive Analytics and SEO",
+            "predictive_analytics_p1": "AI is also revolutionizing search engine optimization (SEO) by moving beyond simple keyword analysis. Predictive analytics can forecast future search trends, helping marketers optimize their content before a topic becomes saturated. AI tools can analyze competitor strategies, identify opportunities, and even suggest improvements to on-page elements, ensuring that your content ranks higher and reaches the right audience.",
+            "challenges_heading": "Challenges and the Future",
+            "challenges_p1": "Despite its benefits, the integration of AI in marketing is not without its challenges. Data privacy concerns, the need for skilled talent, and the ethical implications of using AI are all critical considerations. However, as the technology becomes more sophisticated and accessible, AI will continue to be an indispensable partner for marketers, driving innovation and shaping the future of digital engagement.",
+            "cta_heading": "Ready to Elevate Your Digital Presence?",
+            "cta_p": "Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.",
+            "cta_btn": "Contact Us",
+            "footer_description": "Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.",
+            "footer_quick_links": "Quick Links",
+            "footer_services": "Services",
+            "footer_contact_info": "Contact Info",
+            "footer_address": "123 Digital Marketing Blvd, City, State 12345",
+            "footer_phone": "(555) 123-4567",
+            "footer_email": "info@stacklydigital.com",
+            "footer_copyright": "© 2025 Stackly Digital Marketing. All rights reserved.",
+            "contact": "Contact",
+            "seo": "SEO",
+            "ppc": "PPC",
+            "social_media": "Social Media",
+            "web_dev": "Web Development",
+            "analytics": "Analytics"
+        },
+        "ar": {
+            "home": "الرئيسية",
+            "home_1": "الصفحة الرئيسية 1",
+            "home_2": "الصفحة الرئيسية 2",
+            "about_us": "من نحن",
+            "services": "الخدمات",
+            "all_services": "جميع الخدمات",
+            "social_media_marketing": "التسويق عبر وسائل التواصل الاجتماعي",
+            "seo_optimization": "تحسين محركات البحث",
+            "ppc_advertising": "إعلانات الدفع بالنقرة",
+            "web_development": "تطوير الويب",
+            "email_marketing": "التسويق عبر البريد الإلكتروني",
+            "analytics_reporting": "التحليلات والتقارير",
+            "blog": "المدونة",
+            "contact_us": "اتصل بنا",
+            "login": "تسجيل الدخول",
+            "sign_up_login": "التسجيل/تسجيل الدخول",
+            "admin_login": "تسجيل دخول المسؤول",
+            "logout": "تسجيل الخروج",
+            "hero_title": "ستكلي للتسويق الرقمي - الرئيسية",
+            "article_title": "دور الذكاء الاصطناعي في التسويق الحديث",
+            "article_meta": "نُشر في 18 أغسطس 2024 بواسطة جين دو",
+            "article_p1": "لم يعد الذكاء الاصطناعي مجرد مفهوم مستقبلي؛ بل هو أداة أساسية تعيد تشكيل مشهد التسويق الرقمي. من أتمتة المهام المتكررة إلى توفير رؤى عميقة حول سلوك المستهلك، يمكّن الذكاء الاصطناعي المسوقين من إنشاء حملات أكثر فعالية وشخصية. لا يتعلق هذا التحول باستبدال الإبداع البشري، بل بتعزيزه بدقة مدفوعة بالبيانات.",
+            "ai_personalization_heading": "التخصيص المدعوم بالذكاء الاصطناعي",
+            "ai_personalization_p1": "أحد أهم تأثيرات الذكاء الاصطناعي هو قدرته على تقديم تجارب مخصصة للغاية. يمكن لخوارزميات الذكاء الاصطناعي تحليل كميات هائلة من بيانات العملاء - بما في ذلك سجل التصفح، وسلوك الشراء، والتركيبة السكانية - لتقسيم الجماهير بدقة غير مسبوقة. يتيح ذلك للمسوقين تقديم محتوى وتوصيات منتجات وعروض ذات صلة للغاية، مما يؤدي إلى ارتفاع معدلات التفاعل والتحويل.",
+            "automated_content_heading": "إنشاء المحتوى الآلي",
+            "automated_content_p1": "أصبحت الأدوات المدعومة بالذكاء الاصطناعي الآن قادرة على إنشاء أشكال مختلفة من المحتوى، من منشورات وسائل التواصل الاجتماعي والنشرات الإخبارية عبر البريد الإلكتروني إلى مخططات المدونات ونسخ الإعلانات. في حين أن هذه الأدوات لا تزال تتطلب إشرافًا بشريًا، إلا أنها يمكن أن تسرع بشكل كبير من عملية إنشاء المحتوى، مما يحرر الفرق الإبداعية للتركيز على الاستراتيجية والأفكار عالية المستوى. يتيح ذلك للشركات الحفاظ على تدفق محتوى ثابت دون زيادة هائلة في الموارد.",
+            "predictive_analytics_heading": "التحليلات التنبؤية وتحسين محركات البحث",
+            "predictive_analytics_p1": "يُحدث الذكاء الاصطناعي أيضًا ثورة في تحسين محركات البحث (SEO) من خلال تجاوز تحليل الكلمات الرئيسية البسيط. يمكن للتحليلات التنبؤية التنبؤ باتجاهات البحث المستقبلية، مما يساعد المسوقين على تحسين محتواهم قبل أن يصبح الموضوع مشبعًا. يمكن لأدوات الذكاء الاصطناعي تحليل استراتيجيات المنافسين، وتحديد الفرص، وحتى اقتراح تحسينات على العناصر الموجودة على الصفحة، مما يضمن أن محتواك يحتل مرتبة أعلى ويصل إلى الجمهور المناسب.",
+            "challenges_heading": "التحديات والمستقبل",
+            "challenges_p1": "على الرغم من فوائده، فإن دمج الذكاء الاصطناعي في التسويق لا يخلو من التحديات. تعتبر مخاوف خصوصية البيانات، والحاجة إلى المواهب الماهرة، والآثار الأخلاقية لاستخدام الذكاء الاصطناعي كلها اعتبارات حاسمة. ومع ذلك، مع أن تصبح التكنولوجيا أكثر تطوراً وسهولة في الوصول، سيظل الذكاء الاصطناعي شريكًا لا غنى عنه للمسوقين، مما يدفع الابتكار ويشكل مستقبل التفاعل الرقمي.",
+            "cta_heading": "هل أنت مستعد لرفع مستوى وجودك الرقمي؟",
+            "cta_p": "فريق الخبراء لدينا هنا لمساعدتك على تحقيق أهداف عملك. اتصل بنا للحصول على استشارة مجانية.",
+            "cta_btn": "اتصل بنا",
+            "footer_description": "شريكك الموثوق في النمو الرقمي. نحن نقدم حلول تسويق مبتكرة وخبرة لمساعدة عملك على الازدهار عبر الإنترنت.",
+            "footer_quick_links": "روابط سريعة",
+            "footer_services": "الخدمات",
+            "footer_contact_info": "معلومات الاتصال",
+            "footer_address": "123 شارع التسويق الرقمي، المدينة، الولاية 12345",
+            "footer_phone": " (555) 123-4567+",
+            "footer_email": "info@stacklydigital.com",
+            "footer_copyright": "© 2025 Stackly Digital Marketing. جميع الحقوق محفوظة.",
+            "contact": "اتصل بنا",
+            "seo": "تحسين محركات البحث",
+            "ppc": "دفع بالنقرة",
+            "social_media": "وسائل التواصل الاجتماعي",
+            "web_dev": "تطوير الويب",
+            "analytics": "تحليلات"
+        },
+        "he": {
+            "home": "בית",
+            "home_1": "בית 1",
+            "home_2": "בית 2",
+            "about_us": "אודותינו",
+            "services": "שירותים",
+            "all_services": "כל השירותים",
+            "social_media_marketing": "שיווק במדיה חברתית",
+            "seo_optimization": "אופטימיזציית SEO",
+            "ppc_advertising": "פרסום PPC",
+            "web_development": "פיתוח אתרים",
+            "email_marketing": "שיווק במייל",
+            "analytics_reporting": "אנליטיקס ודוחות",
+            "blog": "בלוג",
+            "contact_us": "צור קשר",
+            "login": "התחברות",
+            "sign_up_login": "הרשמה/התחברות",
+            "admin_login": "התחברות מנהל",
+            "logout": "התנתקות",
+            "hero_title": "סטאקלי שיווק דיגיטלי - בית",
+            "article_title": "תפקיד הבינה המלאכותית בשיווק המודרני",
+            "article_meta": "פורסם ב-18 באוגוסט 2024 על ידי ג'יין דו",
+            "article_p1": "בינה מלאכותית כבר אינה קונספט עתידני; היא כלי בסיסי המעצב מחדש את נוף השיווק הדיגיטלי. החל מאוטומציה של משימות חוזרות ועד למתן תובנות עמוקות על התנהגות צרכנים, AI מעצים משווקים ליצור קמפיינים יעילים ומותאמים אישית יותר. שינוי זה אינו עוסק בהחלפת יצירתיות אנושית אלא בשיפורה בדיוק מונע נתונים.",
+            "ai_personalization_heading": "התאמה אישית מבוססת AI",
+            "ai_personalization_p1": "אחת ההשפעות המשמעותיות ביותר של AI היא היכולת שלו לספק חוויות מותאמות אישית במיוחד. אלגוריתמי AI יכולים לנתח כמויות עצומות של נתוני לקוחות - כולל היסטוריית גלישה, התנהגות רכישה ודמוגרפיה - כדי לפלח קהלים בדיוק חסר תקדים. זה מאפשר למשווקים להגיש תוכן, המלצות מוצרים והצעות רלוונטיים במיוחד, מה שמוביל לשיעורי מעורבות והמרה גבוהים יותר.",
+            "automated_content_heading": "יצירת תוכן אוטומטית",
+            "automated_content_p1": "כלים מבוססי AI מסוגלים כעת לייצר צורות שונות של תוכן, החל מפוסטים במדיה חברתית וניוזלטרים במייל ועד למתארים של בלוגים וקופירייטינג. בעוד שכלים אלה עדיין דורשים פיקוח אנושי, הם יכולים להאיץ באופן דרמטי את תהליך יצירת התוכן, ולשחרר צוותים יצירתיים להתמקד באסטרטגיה וברעיונות ברמה גבוהה. זה מאפשר לעסקים לשמור על זרימת תוכן עקבית ללא עלייה מאסיבית במשאבים.",
+            "predictive_analytics_heading": "אנליטיקה חזויה ו-SEO",
+            "predictive_analytics_p1": "AI גם מחולל מהפכה באופטימיזציה למנועי חיפוש (SEO) על ידי מעבר לניתוח מילות מפתח פשוט. אנליטיקה חזויה יכולה לחזות מגמות חיפוש עתידיות, ולעזור למשווקים לייעל את התוכן שלהם לפני שנושא מסוים הופך רווי. כלי AI יכולים לנתח אסטרטגיות של מתחרים, לזהות הזדמנויות ואף להציע שיפורים לאלמנטים בדף, מה שמבטיח שהתוכן שלך מדורג גבוה יותר ומגיע לקהל הנכון.",
+            "challenges_heading": "אתגרים והעתיד",
+            "challenges_p1": "למרות יתרונותיה, השילוב של AI בשיווק אינו חף מאתגרים. חששות פרטיות נתונים, הצורך בכישרון מיומן וההשלכות האתיות של שימוש ב-AI הם כולם שיקולים קריטיים. עם זאת, ככל שהטכנולוגיה הופכת מתוחכמת ונגישה יותר, AI ימשיך להיות שותף הכרחי עבור משווקים, מניע חדשנות ומעצב את עתיד המעורבות הדיגיטלית.",
+            "cta_heading": "מוכן לשדרג את הנוכחות הדיגיטלית שלך?",
+            "cta_p": "צוות המומחים שלנו כאן כדי לעזור לך להשיג את היעדים העסקיים שלך. צור קשר לקבלת ייעוץ חינם.",
+            "cta_btn": "צור קשר",
+            "footer_description": "השותף האמין שלך לצמיחה דיגיטלית. אנו מספקים פתרונות שיווק חדשניים ומומחיות כדי לעזור לעסק שלך לשגשג באינטרנט.",
+            "footer_quick_links": "קישורים מהירים",
+            "footer_services": "שירותים",
+            "footer_contact_info": "פרטי התקשרות",
+            "footer_address": "123 שדרת השיווק הדיגיטלי, עיר, מדינה 12345",
+            "footer_phone": " (555) 123-4567+",
+            "footer_email": "info@stacklydigital.com",
+            "footer_copyright": "© 2025 סטאקלי שיווק דיגיטלי. כל הזכויות שמורות.",
+            "contact": "צור קשר",
+            "seo": "קידום אתרים",
+            "ppc": "PPC",
+            "social_media": "מדיה חברתית",
+            "web_dev": "פיתוח אתרים",
+            "analytics": "אנליטיקס"
+        }
+    };
+
     // Mobile nav toggle
     const mobileToggle = document.getElementById('mobile-toggle');
     const nav = document.getElementById('site-nav');
@@ -409,6 +607,109 @@
       entries.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); io.unobserve(e.target); } });
     }, { threshold: .4 });
     counters.forEach(c=> io.observe(c));
-  </script>
+
+    // Language toggle script
+    const langToggle = document.getElementById('lang-toggle');
+    const rootElement = document.querySelector('html');
+
+    const updateLanguage = (lang) => {
+      const data = languageData[lang];
+      if (!data) return;
+
+      // Set page direction
+      if (lang === 'he' || lang === 'ar') {
+        rootElement.dir = 'rtl';
+      } else {
+        rootElement.dir = 'ltr';
+      }
+
+      // Update text content for all elements with a data-lang attribute
+      document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        if (data[key]) {
+          element.textContent = data[key];
+        }
+      });
+    };
+
+    // Event listener for the language toggle
+    langToggle.addEventListener('change', (event) => {
+      const selectedLang = event.target.value;
+      updateLanguage(selectedLang);
+    });
+
+    // Initial language update on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('lang') || 'en';
+      langToggle.value = savedLang;
+      updateLanguage(savedLang);
+    });
+  
+// Profile dropdown + initials + full name (from localStorage.userData)
+function getUserInitials(name) {
+  if (!name) return "U";
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0][0];
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const profileBtn = document.getElementById("profile-btn");
+  const profileDropdown = document.getElementById("profile-dropdown");
+  const initialsDisplay = document.getElementById("initials-display");
+  const fullNameDisplay = document.getElementById("full-name-display");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  // Read userData from localStorage
+  let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  let storedName = "Guest User";
+  if (userData.firstName && userData.lastName) {
+    storedName = userData.firstName + " " + userData.lastName;
+  }
+
+  if (initialsDisplay) initialsDisplay.textContent = getUserInitials(storedName);
+  if (fullNameDisplay) fullNameDisplay.textContent = storedName;
+
+  if (profileBtn && profileDropdown) {
+    profileBtn.addEventListener("click", () => {
+      profileDropdown.classList.toggle("active");
+    });
+    document.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove("active");
+      }
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("userData");
+      window.location.href = "login.html";
+    });
+  }
+});
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
+
+</script>
 </body>
 </html>

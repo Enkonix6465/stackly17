@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -226,6 +226,21 @@
             font-size: 1.5rem;
             cursor: pointer;
             margin-left: 1rem;
+        }
+
+        /* Language Toggle Styles */
+        .lang-toggle {
+            position: relative;
+        }
+
+        .lang-toggle select {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--muted);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         /* Mobile navigation */
@@ -577,12 +592,37 @@
             opacity: 1;
             transform: translateY(0) translateX(0) !important;
         }
+        @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
     </style>
 </head>
 <body>
     <header class="header">
         <div class="container nav-container">
-            <a href="redesigned_index.html" class="logo">
+            <a href="home1.html" class="logo">
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
@@ -591,41 +631,46 @@
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-translate="navHome">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-translate="home1">Home 1</a></li>
+                                <li><a href="home3.html" data-translate="home2">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html">About Us</a></li>
+                        <li><a href="About us.html" data-translate="navAbout">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html" class="active">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" class="active" data-translate="navServices">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                                <li><a href="seo.html" data-translate="seoLink">SEO & Content</a></li>
+                                <li><a href="ppc.html" data-translate="ppcLink">PPC Management</a></li>
+                                <li><a href="social-media.html" data-translate="socialLink">Social Media Marketing</a></li>
+                                <li><a href="web-dev.html" data-translate="webDevLink">Web Development</a></li>
+                                <li><a href="email.html" data-translate="emailLink">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-translate="analyticsLink">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-translate="navBlog">Blog</a></li>
+                        <li><a href="contact.html" data-translate="navContact">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="#">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="index.html" data-translate="navLogin">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="index.html" data-translate="loginLink">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-translate="adminLoginLink">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
+                <div class="lang-toggle">
+                    <select id="language-selector">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="he">עברית</option>
+                    </select>
+                </div>
                 <div class="profile-dropdown" id="profile-dropdown">
-                    <div class="profile-icon">
-                        <span>PS</span>
-                    </div>
+                    <div class="profile-icon"><span id="initials-display"></span></div>
                     <ul class="profile-dropdown-content">
-                        <li><a href="signup.html">Logout</a></li>
+                        <li><a href="index.html" data-translate="logoutLink">Logout</a></li>
                     </ul>
                 </div>
                 <div class="theme-toggle">
@@ -649,9 +694,9 @@
 
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in">
+                    <h1 class="hero-title animate-slide-in" data-translate="heroTitle">
 SEO & Content Marketing</h1>
-                    <p class="hero-paragraph animate-fade-up">
+                    <p class="hero-paragraph animate-fade-up" data-translate="heroParagraph">
 Improve your search engine rankings and attract valuable organic traffic with our expert strategies.
                     </p>
                 </div>
@@ -659,10 +704,10 @@ Improve your search engine rankings and attract valuable organic traffic with ou
         </section>
         <section class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Boost Your Visibility & Authority</h2>
-                <h3 class="section-subheading" style="margin-bottom: 1.5rem;">We help you become a trusted resource in your industry.</h3>
-                <p>Our SEO and content marketing services are designed to build a powerful online presence. We focus on creating high-quality, relevant content that not only ranks well on search engines but also provides genuine value to your audience, establishing your brand as a leader.</p>
-                <p>We handle everything from keyword research and on-page optimization to content creation and link building to ensure you get the best possible results.</p>
+                <h2 class="section-heading" data-translate="boostTitle">Boost Your Visibility & Authority</h2>
+                <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-translate="boostSubtitle">We help you become a trusted resource in your industry.</h3>
+                <p data-translate="boostPara1">Our SEO and content marketing services are designed to build a powerful online presence. We focus on creating high-quality, relevant content that not only ranks well on search engines but also provides genuine value to your audience, establishing your brand as a leader.</p>
+                <p data-translate="boostPara2">We handle everything from keyword research and on-page optimization to content creation and link building to ensure you get the best possible results.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/9e/30/c5/9e30c5cc8bc91496277038e875ea8ad5.jpg" alt="A photo of a person analyzing SEO data." />
@@ -671,27 +716,27 @@ Improve your search engine rankings and attract valuable organic traffic with ou
 
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Key Features of Our Service</h2>
+                <h2 class="section-heading" data-translate="featuresTitle">Key Features of Our Service</h2>
                 <div class="icon-grid">
                     <div class="icon-item">
                         <i class="fas fa-search"></i>
-                        <h4>Keyword Research</h4>
-                        <p>Identify the most valuable keywords your audience is searching for to guide your content strategy.</p>
+                        <h4 data-translate="feature1Title">Keyword Research</h4>
+                        <p data-translate="feature1Desc">Identify the most valuable keywords your audience is searching for to guide your content strategy.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-pen-nib"></i>
-                        <h4>Content Creation</h4>
-                        <p>Produce high-quality articles, blog posts, videos, and infographics that engage and inform your readers.</p>
+                        <h4 data-translate="feature2Title">Content Creation</h4>
+                        <p data-translate="feature2Desc">Produce high-quality articles, blog posts, videos, and infographics that engage and inform your readers.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-chart-line"></i>
-                        <h4>On-Page SEO</h4>
-                        <p>Optimize every page of your website to ensure it's technically sound and perfectly aligned with search engine best practices.</p>
+                        <h4 data-translate="feature3Title">On-Page SEO</h4>
+                        <p data-translate="feature3Desc">Optimize every page of your website to ensure it's technically sound and perfectly aligned with search engine best practices.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-link"></i>
-                        <h4>Link Building</h4>
-                        <p>Earn high-authority backlinks that signal to Google that your site is a credible source of information.</p>
+                        <h4 data-translate="feature4Title">Link Building</h4>
+                        <p data-translate="feature4Desc">Earn high-authority backlinks that signal to Google that your site is a credible source of information.</p>
                     </div>
                 </div>
             </div>
@@ -699,27 +744,27 @@ Improve your search engine rankings and attract valuable organic traffic with ou
         
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Our Proven 4-Step Process</h2>
+                <h2 class="section-heading" data-translate="processTitle">Our Proven 4-Step Process</h2>
                 <div class="process-steps">
                     <div class="process-step">
                         <div class="step-number">01</div>
-                        <h4>Discovery & Audit</h4>
-                        <p>We begin by auditing your current website and analyzing your competitors to identify opportunities.</p>
+                        <h4 data-translate="step1Title">Discovery & Audit</h4>
+                        <p data-translate="step1Desc">We begin by auditing your current website and analyzing your competitors to identify opportunities.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">02</div>
-                        <h4>Strategy & Planning</h4>
-                        <p>We develop a customized SEO and content strategy tailored to your specific goals and audience.</p>
+                        <h4 data-translate="step2Title">Strategy & Planning</h4>
+                        <p data-translate="step2Desc">We develop a customized SEO and content strategy tailored to your specific goals and audience.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">03</div>
-                        <h4>Execution & Optimization</h4>
-                        <p>Our team implements the plan, creating and publishing content, and continually optimizing for performance.</p>
+                        <h4 data-translate="step3Title">Execution & Optimization</h4>
+                        <p data-translate="step3Desc">Our team implements the plan, creating and publishing content, and continually optimizing for performance.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">04</div>
-                        <h4>Reporting & Analysis</h4>
-                        <p>We provide detailed reports and insights to show the ROI of your investment and plan for the future.</p>
+                        <h4 data-translate="step4Title">Reporting & Analysis</h4>
+                        <p data-translate="step4Desc">We provide detailed reports and insights to show the ROI of your investment and plan for the future.</p>
                     </div>
                 </div>
             </div>
@@ -727,9 +772,9 @@ Improve your search engine rankings and attract valuable organic traffic with ou
 
         <section class="section full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Ready to Grow Your Organic Traffic?</h2>
-                <p>Let's discuss how a powerful SEO and content strategy can help your business reach new heights. Our team is ready to build a custom plan just for you.</p>
-                <a href="contact.html" class="btn">Get a Free Consultation</a>
+                <h2 class="section-heading" data-translate="ctaTitle">Ready to Grow Your Organic Traffic?</h2>
+                <p data-translate="ctaText">Let's discuss how a powerful SEO and content strategy can help your business reach new heights. Our team is ready to build a custom plan just for you.</p>
+                <a href="contact.html" class="btn" data-translate="ctaButton">Get a Free Consultation</a>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/6d/35/95/6d3595a2839f66ba371637d5f7e9fa30.jpg" alt="An image of a team collaborating on a strategy." />
@@ -743,40 +788,40 @@ Improve your search engine rankings and attract valuable organic traffic with ou
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
-                <p>Your partner for digital marketing success. We deliver results that matter.</p>
+                <p data-translate="footerMission">Your partner for digital marketing success. We deliver results that matter.</p>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4 data-translate="footerQuickLinks">Quick Links</h4>
                 <ul>
-                    <li><a href="redesigned_index.html">Home</a></li>
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="Services.html">services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home1.html" data-translate="footerHome">Home</a></li>
+                    <li><a href="About us.html" data-translate="footerAbout">About Us</a></li>
+                    <li><a href="Services.html" data-translate="footerServices">Services</a></li>
+                    <li><a href="blog.html" data-translate="footerBlog">Blog</a></li>
+                    <li><a href="contact.html" data-translate="footerContact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Services</h4>
+                <h4 data-translate="footerServicesTitle">Services</h4>
                 <ul>
-                    <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                    <li><a href="seo.html" data-translate="seoLink2">SEO & Content</a></li>
+                                <li><a href="ppc.html" data-translate="ppcLink2">PPC Management</a></li>
+                                <li><a href="social-media.html" data-translate="socialLink2">Social Media Marketing</a></li>
+                                <li><a href="web-dev.html" data-translate="webDevLink2">Web Development</a></li>
+                                <li><a href="email.html" data-translate="emailLink2">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-translate="analyticsLink2">Analytics & Reporting</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Contact Info</h4>
+                <h4 data-translate="footerContactInfo">Contact Info</h4>
                 <ul>
                     <li><a href="#">info@stackly.com</a></li>
                     <li><a href="#">+1 (555) 123-4567</a></li>
-                    <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+                    <li><a href="#" data-translate="footerAddress">123 Marketing Lane, Suite 456, City, State</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2024 Stackly Digital Marketing. All rights reserved.
+            &copy; 2024 Stackly Digital Marketing. <span data-translate="footerRights">All rights reserved.</span>
         </div>
     </footer>
 
@@ -824,6 +869,301 @@ Improve your search engine rankings and attract valuable organic traffic with ou
                 profileDropdown.classList.remove('show');
             }
         });
-    </script>
+        
+        // Language toggle script
+        const langSelector = document.getElementById('language-selector');
+        const translations = {
+            'en': {
+                // Navigation
+                navHome: 'Home',
+                navAbout: 'About Us',
+                navServices: 'Services',
+                navBlog: 'Blog',
+                navContact: 'Contact Us',
+                navLogin: 'Login',
+                home1: 'Home 1',
+                home2: 'Home 2',
+                seoLink: 'SEO & Content',
+                ppcLink: 'PPC Management',
+                socialLink: 'Social Media Marketing',
+                webDevLink: 'Web Development',
+                emailLink: 'Email Marketing',
+                analyticsLink: 'Analytics & Reporting',
+                loginLink: 'Sign Up/Login',
+                adminLoginLink: 'Admin Login',
+                logoutLink: 'Logout',
+                // Hero Section
+                heroTitle: 'SEO & Content Marketing',
+                heroParagraph: 'Improve your search engine rankings and attract valuable organic traffic with our expert strategies.',
+                // Boost Section
+                boostTitle: 'Boost Your Visibility & Authority',
+                boostSubtitle: 'We help you become a trusted resource in your industry.',
+                boostPara1: 'Our SEO and content marketing services are designed to build a powerful online presence. We focus on creating high-quality, relevant content that not only ranks well on search engines but also provides genuine value to your audience, establishing your brand as a leader.',
+                boostPara2: 'We handle everything from keyword research and on-page optimization to content creation and link building to ensure you get the best possible results.',
+                // Key Features Section
+                featuresTitle: 'Key Features of Our Service',
+                feature1Title: 'Keyword Research',
+                feature1Desc: 'Identify the most valuable keywords your audience is searching for to guide your content strategy.',
+                feature2Title: 'Content Creation',
+                feature2Desc: 'Produce high-quality articles, blog posts, videos, and infographics that engage and inform your readers.',
+                feature3Title: 'On-Page SEO',
+                feature3Desc: 'Optimize every page of your website to ensure it\'s technically sound and perfectly aligned with search engine best practices.',
+                feature4Title: 'Link Building',
+                feature4Desc: 'Earn high-authority backlinks that signal to Google that your site is a credible source of information.',
+                // Process Section
+                processTitle: 'Our Proven 4-Step Process',
+                step1Title: 'Discovery & Audit',
+                step1Desc: 'We begin by auditing your current website and analyzing your competitors to identify opportunities.',
+                step2Title: 'Strategy & Planning',
+                step2Desc: 'We develop a customized SEO and content strategy tailored to your specific goals and audience.',
+                step3Title: 'Execution & Optimization',
+                step3Desc: 'Our team implements the plan, creating and publishing content, and continually optimizing for performance.',
+                step4Title: 'Reporting & Analysis',
+                step4Desc: 'We provide detailed reports and insights to show the ROI of your investment and plan for the future.',
+                // CTA Section
+                ctaTitle: 'Ready to Grow Your Organic Traffic?',
+                ctaText: 'Let\'s discuss how a powerful SEO and content strategy can help your business reach new heights. Our team is ready to build a custom plan just for you.',
+                ctaButton: 'Get a Free Consultation',
+                // Footer
+                footerMission: 'Your partner for digital marketing success. We deliver results that matter.',
+                footerQuickLinks: 'Quick Links',
+                footerAbout: 'About Us',
+                footerServices: 'Services',
+                footerBlog: 'Blog',
+                footerContact: 'Contact',
+                footerServicesTitle: 'Services',
+                seoLink2: 'SEO & Content',
+                ppcLink2: 'PPC Management',
+                socialLink2: 'Social Media Marketing',
+                webDevLink2: 'Web Development',
+                emailLink2: 'Email Marketing',
+                analyticsLink2: 'Analytics & Reporting',
+                footerContactInfo: 'Contact Info',
+                footerAddress: '123 Marketing Lane, Suite 456, City, State',
+                footerRights: 'All rights reserved.'
+            },
+            'ar': {
+                // Navigation
+                navHome: 'الرئيسية',
+                navAbout: 'من نحن',
+                navServices: 'الخدمات',
+                navBlog: 'المدونة',
+                navContact: 'اتصل بنا',
+                navLogin: 'تسجيل الدخول',
+                home1: 'الرئيسية 1',
+                home2: 'الرئيسية 2',
+                seoLink: 'تحسين محركات البحث والمحتوى',
+                ppcLink: 'إدارة حملات الدفع بالنقرة',
+                socialLink: 'التسويق عبر وسائل التواصل الاجتماعي',
+                webDevLink: 'تطوير المواقع',
+                emailLink: 'التسويق عبر البريد الإلكتروني',
+                analyticsLink: 'التحليل والتقارير',
+                loginLink: 'التسجيل/تسجيل الدخول',
+                adminLoginLink: 'تسجيل دخول المسؤول',
+                logoutLink: 'تسجيل الخروج',
+                // Hero Section
+                heroTitle: 'تحسين محركات البحث وتسويق المحتوى',
+                heroParagraph: 'عزز ترتيب موقعك في محركات البحث واجذب زيارات عضوية قيمة من خلال استراتيجياتنا الخبيرة.',
+                // Boost Section
+                boostTitle: 'عزز رؤيتك وسلطتك',
+                boostSubtitle: 'نحن نساعدك على أن تصبح مصدرًا موثوقًا به في صناعتك.',
+                boostPara1: 'تم تصميم خدماتنا لتحسين محركات البحث وتسويق المحتوى لبناء حضور قوي على الإنترنت. نركز على إنشاء محتوى عالي الجودة ووثيق الصلة لا يحتل مرتبة جيدة في محركات البحث فحسب، بل يوفر أيضًا قيمة حقيقية لجمهورك، مما يرسخ علامتك التجارية كرائد.',
+                boostPara2: 'نتعامل مع كل شيء بدءًا من البحث عن الكلمات الرئيسية والتحسين على الصفحة إلى إنشاء المحتوى وبناء الروابط لضمان حصولك على أفضل النتائج الممكنة.',
+                // Key Features Section
+                featuresTitle: 'الميزات الرئيسية لخدماتنا',
+                feature1Title: 'البحث عن الكلمات الرئيسية',
+                feature1Desc: 'تحديد الكلمات الرئيسية الأكثر قيمة التي يبحث عنها جمهورك لتوجيه استراتيجية المحتوى الخاصة بك.',
+                feature2Title: 'إنشاء المحتوى',
+                feature2Desc: 'إنتاج مقالات عالية الجودة، ومنشورات مدونة، ومقاطع فيديو، ورسوم بيانية جذابة ومفيدة لقرائك.',
+                feature3Title: 'تحسين محركات البحث على الصفحة',
+                feature3Desc: 'تحسين كل صفحة من صفحات موقعك للتأكد من أنها سليمة تقنيًا ومتوافقة تمامًا مع أفضل ممارسات محركات البحث.',
+                feature4Title: 'بناء الروابط',
+                feature4Desc: 'الحصول على روابط خلفية ذات سلطة عالية تشير إلى جوجل بأن موقعك هو مصدر موثوق للمعلومات.',
+                // Process Section
+                processTitle: 'عمليتنا المجربة المكونة من 4 خطوات',
+                step1Title: 'الاكتشاف والتدقيق',
+                step1Desc: 'نبدأ بتدقيق موقعك الحالي وتحليل منافسيك لتحديد الفرص.',
+                step2Title: 'الاستراتيجية والتخطيط',
+                step2Desc: 'نطور استراتيجية مخصصة لتحسين محركات البحث والمحتوى مصممة خصيصًا لأهدافك وجمهورك.',
+                step3Title: 'التنفيذ والتحسين',
+                step3Desc: 'يقوم فريقنا بتنفيذ الخطة، وإنشاء ونشر المحتوى، والتحسين المستمر للأداء.',
+                step4Title: 'التقارير والتحليل',
+                step4Desc: 'نقدم تقارير مفصلة ورؤى لإظهار عائد الاستثمار الخاص بك والتخطيط للمستقبل.',
+                // CTA Section
+                ctaTitle: 'هل أنت مستعد لزيادة زياراتك العضوية؟',
+                ctaText: 'دعنا نناقش كيف يمكن لاستراتيجية قوية لتحسين محركات البحث والمحتوى أن تساعد عملك على الوصول إلى آفاق جديدة. فريقنا جاهز لبناء خطة مخصصة لك فقط.',
+                ctaButton: 'احصل على استشارة مجانية',
+                // Footer
+                footerMission: 'شريكك لنجاح التسويق الرقمي. نقدم نتائج مهمة.',
+                footerQuickLinks: 'روابط سريعة',
+                footerAbout: 'من نحن',
+                footerServices: 'الخدمات',
+                footerBlog: 'المدونة',
+                footerContact: 'اتصل بنا',
+                footerServicesTitle: 'الخدمات',
+                seoLink2: 'تحسين محركات البحث والمحتوى',
+                ppcLink2: 'إدارة حملات الدفع بالنقرة',
+                socialLink2: 'التسويق عبر وسائل التواصل الاجتماعي',
+                webDevLink2: 'تطوير المواقع',
+                emailLink2: 'التسويق عبر البريد الإلكتروني',
+                analyticsLink2: 'التحليل والتقارير',
+                footerContactInfo: 'معلومات الاتصال',
+                footerAddress: '123 ماركتينج لين، جناح 456، المدينة، الولاية',
+                footerRights: 'جميع الحقوق محفوظة.'
+            },
+            'he': {
+                // Navigation
+                navHome: 'בית',
+                navAbout: 'אודותינו',
+                navServices: 'שירותים',
+                navBlog: 'בלוג',
+                navContact: 'צור קשר',
+                navLogin: 'התחברות',
+                home1: 'בית 1',
+                home2: 'בית 2',
+                seoLink: 'קידום אתרים ותוכן',
+                ppcLink: 'ניהול קמפיינים PPC',
+                socialLink: 'שיווק במדיה חברתית',
+                webDevLink: 'פיתוח אתרים',
+                emailLink: 'שיווק בדוא"ל',
+                analyticsLink: 'ניתוח ודיווח',
+                loginLink: 'הרשמה/התחברות',
+                adminLoginLink: 'התחברות מנהל',
+                logoutLink: 'התנתקות',
+                // Hero Section
+                heroTitle: 'קידום אתרים ושיווק תוכן',
+                heroParagraph: 'שפר את דירוג מנועי החיפוש שלך ומשוך תנועה אורגנית יקרת ערך עם האסטרטגיות המומחיות שלנו.',
+                // Boost Section
+                boostTitle: 'שפר את הנראות והסמכות שלך',
+                boostSubtitle: 'אנו עוזרים לך להפוך למשאב מהימן בתעשייה שלך.',
+                boostPara1: 'שירותי ה-SEO ושיווק התוכן שלנו נועדו לבנות נוכחות מקוונת חזקה. אנו מתמקדים ביצירת תוכן איכותי ורלוונטי שלא רק מדורג היטב במנועי חיפוש אלא גם מספק ערך אמיתי לקהל שלך, ומבסס את המותג שלך כמוביל.',
+                boostPara2: 'אנו מטפלים בכל דבר, החל ממחקר מילות מפתח ואופטימיזציה של דפים ועד יצירת תוכן ובניית קישורים כדי להבטיח שתקבל את התוצאות הטובות ביותר האפשריות.',
+                // Key Features Section
+                featuresTitle: 'תכונות עיקריות של השירות שלנו',
+                feature1Title: 'מחקר מילות מפתח',
+                feature1Desc: 'זיהוי מילות המפתח היקרות ביותר שהקהל שלך מחפש כדי להנחות את אסטרטגיית התוכן שלך.',
+                feature2Title: 'יצירת תוכן',
+                feature2Desc: 'ייצור מאמרים באיכות גבוהה, פוסטים בבלוג, סרטונים ואינפוגרפיקה המרתקים ומודיעים לקוראים שלך.',
+                feature3Title: 'אופטימיזציית דף',
+                feature3Desc: 'אופטימיזציה של כל דף באתר שלך כדי לוודא שהוא תקין מבחינה טכנית ומיושר באופן מושלם עם שיטות העבודה המומלצות של מנועי חיפוש.',
+                feature4Title: 'בניית קישורים',
+                feature4Desc: 'השגת קישורי גב (backlinks) בעלי סמכות גבוהה המאותתים לגוגל שהאתר שלך הוא מקור מידע אמין.',
+                // Process Section
+                processTitle: 'התהליך המוכח שלנו ב-4 שלבים',
+                step1Title: 'גילוי וביקורת',
+                step1Desc: 'אנו מתחילים בביקורת על האתר הנוכחי שלך וניתוח המתחרים שלך כדי לזהות הזדמנויות.',
+                step2Title: 'אסטרטגיה ותכנון',
+                step2Desc: 'אנו מפתחים אסטרטגיית SEO ותוכן מותאמת אישית המותאמת למטרות ולקהל הספציפיים שלך.',
+                step3Title: 'ביצוע ואופטימיזציה',
+                step3Desc: 'הצוות שלנו מיישם את התוכנית, יוצר ומפרסם תוכן, ומשפר אותו באופן מתמיד לביצועים.',
+                step4Title: 'דיווח וניתוח',
+                step4Desc: 'אנו מספקים דוחות מפורטים ותובנות כדי להראות את החזר ההשקעה שלך ולתכנן את העתיד.',
+                // CTA Section
+                ctaTitle: 'מוכן להגביר את התנועה האורגנית שלך?',
+                ctaText: 'בוא נדון כיצד אסטרטגיית SEO ותוכן חזקה יכולה לעזור לעסק שלך להגיע לגבהים חדשים. הצוות שלנו מוכן לבנות תוכנית מותאמת אישית רק בשבילך.',
+                ctaButton: 'קבל ייעוץ חינם',
+                // Footer
+                footerMission: 'השותף שלך להצלחה בשיווק דיגיטלי. אנו מספקים תוצאות שחשובות.',
+                footerQuickLinks: 'קישורים מהירים',
+                footerAbout: 'אודותינו',
+                footerServices: 'שירותים',
+                footerBlog: 'בלוג',
+                footerContact: 'צור קשר',
+                footerServicesTitle: 'שירותים',
+                seoLink2: 'קידום אתרים ותוכן',
+                ppcLink2: 'ניהול קמפיינים PPC',
+                socialLink2: 'שיווק במדיה חברתית',
+                webDevLink2: 'פיתוח אתרים',
+                emailLink2: 'שיווק בדוא"ל',
+                analyticsLink2: 'ניתוח ודיווח',
+                footerContactInfo: 'פרטי יצירת קשר',
+                footerAddress: '123 נתיב שיווק, סוויטה 456, עיר, מדינה',
+                footerRights: 'כל הזכויות שמורות.'
+            }
+        };
+
+        const updateLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            if (lang === 'ar' || lang === 'he') {
+                document.documentElement.dir = 'rtl';
+                document.body.classList.add('rtl');
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.body.classList.remove('rtl');
+            }
+
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        };
+
+        // Set initial language and add event listener
+        updateLanguage(langSelector.value);
+        langSelector.addEventListener('change', (event) => {
+            updateLanguage(event.target.value);
+        });
+    
+// Profile dropdown + initials + full name (from localStorage.userData)
+function getUserInitials(name) {
+  if (!name) return "U";
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0][0];
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const profileBtn = document.getElementById("profile-btn");
+  const profileDropdown = document.getElementById("profile-dropdown");
+  const initialsDisplay = document.getElementById("initials-display");
+  const fullNameDisplay = document.getElementById("full-name-display");
+
+  // Read userData from localStorage
+  let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  let storedName = "Guest User";
+  if (userData.firstName && userData.lastName) {
+    storedName = userData.firstName + " " + userData.lastName;
+  }
+
+  if (initialsDisplay) initialsDisplay.textContent = getUserInitials(storedName);
+  if (fullNameDisplay) fullNameDisplay.textContent = storedName;
+
+  if (profileBtn && profileDropdown) {
+    profileBtn.addEventListener("click", () => {
+      profileDropdown.classList.toggle("active");
+    });
+    document.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove("active");
+      }
+    });
+  }
+});
+// Mobile dropdown toggle for navigation
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
+
+</script>
 </body>
 </html>

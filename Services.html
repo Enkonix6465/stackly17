@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stackly Digital Marketing - About Us</title>
+    <title>Stackly Digital Marketing - Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -359,6 +359,24 @@
             cursor: pointer;
             margin-left: 1rem;
         }
+        
+        /* Language selector styles */
+        .language-selector {
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .language-selector select {
+            background-color: var(--card);
+            color: var(--text);
+            border: 1px solid var(--muted);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
 
         /* Mobile navigation */
         @media (max-width: 768px) {
@@ -630,25 +648,27 @@
         }
 
         /* Service Cards Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            text-align: left;
-            margin-top: 3rem;
-        }
+      .services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem; /* adds spacing between cards */
+}
 
-        .service-card {
-            background: var(--card);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        }
+
+       /* Space inside service cards */
+.service-card {
+  padding-bottom: 2rem; /* ensures room for CTA */
+}
+
+/* Space above the CTA button */
+.service-card .btn {
+  margin-top: 0.75rem; /* separates from paragraph */
+}
+.service-card .btn {
+  position: static; /* default: ensures no overlay */
+  display: inline-block;
+}
+
 
         .service-card:hover {
             transform: translateY(-10px);
@@ -856,6 +876,32 @@
         .animate-slide-in-right {
             animation: slideInRight 0.8s ease-out forwards;
         }
+        @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
+ 
     </style>
 </head>
 <body>
@@ -864,39 +910,38 @@
             <a href="#" class="logo">
                  <div class="logo">
                 <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
-                <!-- Updated color for the header name -->
-            </div>
+                </div>
             </a>
             <div class="nav-right">
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-translate="home">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-translate="home1">Home 1</a></li>
+                                <li><a href="home3.html" data-translate="home2">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html" class="active">About Us</a></li>
+                        <li><a href="About us.html" class="active" data-translate="about-us">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" data-translate="services">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="Services.html">All Services</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="seo.html">SEO Optimization</a></li>
-                                <li><a href="ppc.html">PPC Advertising</a></li>
-                                <li><a href="web-dev.html">web development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                                <li><a href="Services.html" data-translate="all-services">All Services</a></li>
+                                <li><a href="social-media.html" data-translate="social-media-marketing">Social Media Marketing</a></li>
+                                <li><a href="seo.html" data-translate="seo-optimization">SEO Optimization</a></li>
+                                <li><a href="ppc.html" data-translate="ppc-advertising">PPC Advertising</a></li>
+                                <li><a href="web-dev.html" data-translate="web-development">web development</a></li>
+                                <li><a href="email.html" data-translate="email-marketing">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-translate="analytics-reporting">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-translate="blog">Blog</a></li>
+                        <li><a href="contact.html" data-translate="contact-us">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="login.html">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="index.html" data-translate="login">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="index.html" data-translate="signup-login">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-translate="admin-login">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -905,6 +950,13 @@
                     <button id="theme-toggle" class="btn btn-secondary">
                         <i class="fas fa-moon"></i>
                     </button>
+                </div>
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="he">עִברִית</option>
+                    </select>
                 </div>
                 <div class="mobile-menu-toggle" id="mobile-toggle">
                     <i class="fas fa-bars"></i>
@@ -915,7 +967,7 @@
                       PS
                     </div>
                     <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
-                      <a href="signup.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+                      <a href="index.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;" data-translate="logout">Logout</a>
                     </div>
                 </div>
                 
@@ -932,11 +984,11 @@
 
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in">Services</h1>
-                    <p class="hero-paragraph animate-fade-up">
+                    <h1 class="hero-title animate-slide-in" data-translate="hero-title">Services</h1>
+                    <p class="hero-paragraph animate-fade-up" data-translate="hero-paragraph">
                        Drive organic growth and build your authority online. We craft a comprehensive strategy that combines expert search engine optimization.
                     </p>
-                    <a href="contact.html" class="hero-button animate-fade-up-delayed">Reach Out Today</a>
+                    <a href="contact.html" class="hero-button animate-fade-up-delayed" data-translate="reach-out-today">Reach Out Today</a>
                 </div>
             </div>
         </section>
@@ -945,28 +997,28 @@
 
         <section class="section choose-us-section">
             <div class="container">
-                <h2 class="section-heading animated-element animate-fade-in-up">Why Partner With Us?</h2>
-                <p class="section-subheading animated-element animate-fade-in-up">We are committed to delivering exceptional results and a seamless client experience.</p>
+                <h2 class="section-heading animated-element animate-fade-in-up" data-translate="why-partner-heading">Why Partner With Us?</h2>
+                <p class="section-subheading animated-element animate-fade-in-up" data-translate="why-partner-subheading">We are committed to delivering exceptional results and a seamless client experience.</p>
                 <div class="choose-us-grid">
                     <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
                         <i class="fas fa-bullseye"></i>
                         <div class="choose-us-text">
-                            <h3>Data-Driven Strategies</h3>
-                            <p>Every decision we make is backed by thorough research and analytics to ensure maximum ROI.</p>
+                            <h3 data-translate="data-driven-strategies-title">Data-Driven Strategies</h3>
+                            <p data-translate="data-driven-strategies-desc">Every decision we make is backed by thorough research and analytics to ensure maximum ROI.</p>
                         </div>
                     </div>
                     <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
                         <i class="fas fa-gem"></i>
                         <div class="choose-us-text">
-                            <h3>Transparent Reporting</h3>
-                            <p>We provide clear, easy-to-understand reports so you always know how your campaigns are performing.</p>
+                            <h3 data-translate="transparent-reporting-title">Transparent Reporting</h3>
+                            <p data-translate="transparent-reporting-desc">We provide clear, easy-to-understand reports so you always know how your campaigns are performing.</p>
                         </div>
                     </div>
                     <div class="choose-us-item animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
                         <i class="fas fa-headset"></i>
                         <div class="choose-us-text">
-                            <h3>Dedicated Support</h3>
-                            <p>Our team is always available to answer your questions and provide personalized guidance.</p>
+                            <h3 data-translate="dedicated-support-title">Dedicated Support</h3>
+                            <p data-translate="dedicated-support-desc">Our team is always available to answer your questions and provide personalized guidance.</p>
                         </div>
                     </div>
                 </div>
@@ -975,44 +1027,44 @@
 
         <section id="services-cards" class="section">
             <div class="container">
-                <h2 class="section-heading animated-element animate-fade-in-up">Our Core Digital Marketing Services</h2>
-                <p class="section-subheading animated-element animate-fade-in-up">From strategy to execution, we've got you covered with a comprehensive suite of digital solutions.</p>
+                <h2 class="section-heading animated-element animate-fade-in-up" data-translate="core-services-heading">Our Core Digital Marketing Services</h2>
+                <p class="section-subheading animated-element animate-fade-in-up" data-translate="core-services-subheading">From strategy to execution, we've got you covered with a comprehensive suite of digital solutions.</p>
                 <div class="services-grid">
                     <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
                         <img src="https://i.pinimg.com/1200x/93/63/4a/93634ab9dfe46f95561b88a182a97e3b.jpg" alt="A photo of a person analyzing SEO data." />
-                        <h3>SEO & Content Marketing</h3>
-                        <p>Improve your search engine rankings and attract more organic traffic. We create high-quality, relevant content that positions your brand as an industry leader.</p>
-                        <a href="seo.html" class="btn">Learn More</a>
+                        <h3 data-translate="seo-title">SEO & Content Marketing</h3>
+                        <p data-translate="seo-desc">Improve your search engine rankings and attract more organic traffic. We create high-quality, relevant content that positions your brand as an industry leader.</p>
+                        <a href="seo.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
                     <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
                         <img src="https://i.pinimg.com/736x/e1/03/64/e103646b6a667786b2b010e94c989241.jpg" alt="A photo of a person working on ad campaigns." />
-                        <h3>PPC Management</h3>
-                        <p>Drive immediate results with targeted pay-per-click advertising. We manage your campaigns on platforms like Google Ads and Bing to ensure you get the best return on your ad spend.</p>
-                        <a href="ppc.html" class="btn">Learn More</a>
+                        <h3 data-translate="ppc-title">PPC Management</h3>
+                        <p data-translate="ppc-desc">Drive immediate results with targeted pay-per-click advertising. We manage your campaigns on platforms like Google Ads and Bing to ensure you get the best return on your ad spend.</p>
+                        <a href="ppc.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
                     <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
                         <img src="https://i.pinimg.com/736x/f8/bb/26/f8bb26f7387644df73e2660ab988ea81.jpg" alt="A photo of social media icons." />
-                        <h3>Social Media Marketing</h3>
-                        <p>Build a strong brand presence and engage with your community. We create and execute social media strategies that increase brand awareness and generate leads.</p>
-                        <a href="social-media.html" class="btn">Learn More</a>
+                        <h3 data-translate="social-media-title">Social Media Marketing</h3>
+                        <p data-translate="social-media-desc">Build a strong brand presence and engage with your community. We create and execute social media strategies that increase brand awareness and generate leads.</p>
+                        <a href="social-media.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
                     <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.4s;">
                         <img src="https://i.pinimg.com/736x/2b/c1/c9/2bc1c9c6efc3c194e67f30bfb0aa5e22.jpg" alt="A photo of a laptop with code on the screen." />
-                        <h3>Web Development</h3>
-                        <p>Your website is your digital storefront. We design and develop responsive, user-friendly websites that are optimized for performance, security, and search engines.</p>
-                        <a href="web-dev.html" class="btn">Learn More</a>
+                        <h3 data-translate="web-dev-title">Web Development</h3>
+                        <p data-translate="web-dev-desc">Your website is your digital storefront. We design and develop responsive, user-friendly websites that are optimized for performance, security, and search engines.</p>
+                        <a href="web-dev.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
                     <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.5s;">
                         <img src="https://i.pinimg.com/1200x/8c/3c/5c/8c3c5c02210e92bbe2afff9484badcec.jpg" alt="A photo of an email marketing interface." />
-                        <h3>Email Marketing</h3>
-                        <p>Connect directly with your audience through personalized email campaigns. We craft compelling emails and build automated sequences to nurture leads and drive conversions.</p>
-                        <a href="email.html" class="btn">Learn More</a>
+                        <h3 data-translate="email-title">Email Marketing</h3>
+                        <p data-translate="email-desc">Connect directly with your audience through personalized email campaigns. We craft compelling emails and build automated sequences to nurture leads and drive conversions.</p>
+                        <a href="email.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
                     <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.6s;">
                         <img src="https://i.pinimg.com/736x/64/27/28/642728ea3b6feafa6ca22a5b31914e7f.jpg" alt="A photo of a data dashboard." />
-                        <h3>Analytics & Reporting</h3>
-                        <p>We provide a clear view of your campaign performance with detailed analytics and regular reporting. Our insights help you make data-driven decisions for future growth.</p>
-                        <a href="analytics.html" class="btn">Learn More</a>
+                        <h3 data-translate="analytics-title">Analytics & Reporting</h3>
+                        <p data-translate="analytics-desc">We provide a clear view of your campaign performance with detailed analytics and regular reporting. Our insights help you make data-driven decisions for future growth.</p>
+                        <a href="analytics.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -1020,9 +1072,9 @@
 
         <section id="strategy" class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Understanding Digital Marketing</h2>
-                <h3 class="section-subheading">Strategic Planning is Key</h3>
-                <p>Digital marketing is more than just running ads; it's about a holistic strategy that aligns with your business goals. We start by understanding your target audience, analyzing competitors, and defining clear objectives. This foundation ensures every campaign is purposeful and drives measurable results.</p>
+                <h2 class="section-heading" data-translate="understanding-title">Understanding Digital Marketing</h2>
+                <h3 class="section-subheading" data-translate="strategic-planning-title">Strategic Planning is Key</h3>
+                <p data-translate="strategic-planning-desc">Digital marketing is more than just running ads; it's about a holistic strategy that aligns with your business goals. We start by understanding your target audience, analyzing competitors, and defining clear objectives. This foundation ensures every campaign is purposeful and drives measurable results.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/1200x/f6/9f/8a/f69f8aded90c13e633ecfab6c598b9d5.jpg" alt="An image showing a person creating a strategic plan." />
@@ -1031,8 +1083,8 @@
 
         <section id="content" class="full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h3 class="section-subheading">Why Content Matters</h3>
-                <p>Content is the cornerstone of any effective digital strategy. It's how you communicate with your audience, build trust, and establish authority. From blog posts and videos to podcasts and infographics, we help you create engaging, high-value content that attracts, informs, and converts your audience.</p>
+                <h3 class="section-subheading" data-translate="why-content-matters-title">Why Content Matters</h3>
+                <p data-translate="why-content-matters-desc">Content is the cornerstone of any effective digital strategy. It's how you communicate with your audience, build trust, and establish authority. From blog posts and videos to podcasts and infographics, we help you create engaging, high-value content that attracts, informs, and converts your audience.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/b0/41/ab/b041abab5f12ce21f693f0bf2e1f895b.jpg" alt="An image of a content creator working on various formats." />
@@ -1041,8 +1093,8 @@
 
         <section id="social-power" class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h3 class="section-subheading">Connecting on Social Media</h3>
-                <p>Social media is a powerful tool for building a community and driving brand loyalty. It allows for direct engagement with your customers and provides valuable insights into their preferences. We help you craft authentic social media campaigns that resonate with your followers and turn them into brand advocates.</p>
+                <h3 class="section-subheading" data-translate="connecting-social-title">Connecting on Social Media</h3>
+                <p data-translate="connecting-social-desc">Social media is a powerful tool for building a community and driving brand loyalty. It allows for direct engagement with your customers and provides valuable insights into their preferences. We help you craft authentic social media campaigns that resonate with your followers and turn them into brand advocates.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/1200x/56/9c/a3/569ca39720ec1fa7e8fe8325e0f1f442.jpg" alt="An image of people connecting through social media." />
@@ -1051,8 +1103,8 @@
 
         <section id="data-driven" class="full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h3 class="section-subheading">Making Decisions with Data</h3>
-                <p>In digital marketing, every action can be measured. We use robust analytics tools to track campaign performance, understand user behavior, and identify opportunities for improvement. Our data-driven approach ensures that your marketing efforts are always optimized for the best possible return on investment.</p>
+                <h3 class="section-subheading" data-translate="data-driven-decision-title">Making Decisions with Data</h3>
+                <p data-translate="data-driven-decision-desc">In digital marketing, every action can be measured. We use robust analytics tools to track campaign performance, understand user behavior, and identify opportunities for improvement. Our data-driven approach ensures that your marketing efforts are always optimized for the best possible return on investment.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/1200x/63/d9/31/63d9312343bc6d160e597b25c2abd43f.jpg" alt="An image of a data dashboard with charts and graphs." />
@@ -1066,44 +1118,293 @@
             <div class="logo">
                 <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
             </div>
-            <p>Your partner for digital marketing success. We deliver results that matter.</p>
+            <p data-translate="footer-tagline">Your partner for digital marketing success. We deliver results that matter.</p>
         </div>
         <div class="footer-section">
-            <h4>Quick Links</h4>
+            <h4 data-translate="quick-links-title">Quick Links</h4>
             <ul>
-                <li><a href="redesigned_index.html">Home</a></li>
-                <li><a href="About us.html">About Us</a></li>
-                <li><a href="Services.html">services</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="home1.html" data-translate="home">Home</a></li>
+                <li><a href="About us.html" data-translate="about-us">About Us</a></li>
+                <li><a href="Services.html" data-translate="services-link">services</a></li>
+                <li><a href="blog.html" data-translate="blog">Blog</a></li>
+                <li><a href="contact.html" data-translate="contact">Contact</a></li>
             </ul>
         </div>
         <div class="footer-section">
-            <h4>Services</h4>
+            <h4 data-translate="services-title">Services</h4>
             <ul>
-                <li><a href="seo.html">SEO</a></li>
-                <li><a href="ppc.html">PPC</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-                <li><a href="web-dev.html">Web Development</a></li>
-                 <li><a href="email.html">email marketing</a></li>
-                  <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="seo.html" data-translate="seo">SEO</a></li>
+                <li><a href="ppc.html" data-translate="ppc">PPC</a></li>
+                <li><a href="social-media.html" data-translate="social-media">Social Media</a></li>
+                <li><a href="web-dev.html" data-translate="web-development-footer">Web Development</a></li>
+                 <li><a href="email.html" data-translate="email-marketing-footer">email marketing</a></li>
+                  <li><a href="analytics.html" data-translate="analytics-footer">Analytics</a></li>
             </ul>
         </div>
         <div class="footer-section">
-            <h4>Contact Info</h4>
+            <h4 data-translate="contact-info-title">Contact Info</h4>
             <ul>
-                <li><a href="#">info@stackly.com</a></li>
-                <li><a href="#">+1 (555) 123-4567</a></li>
-                <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+                <li><a href="#" data-translate="email-info">info@stackly.com</a></li>
+                <li><a href="#" data-translate="phone-info">+1 (555) 123-4567</a></li>
+                <li><a href="#" data-translate="address-info">123 Marketing Lane, Suite 456, City, State</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        &copy; 2024 Stackly Digital Marketing. All rights reserved.
+        <span data-translate="copyright">&copy; 2024 Stackly Digital Marketing. All rights reserved.</span>
     </div>
 </footer>
 
     <script>
+        // Dictionary for all translations
+        const translations = {
+            "en": {
+                "hero-title": "Services",
+                "hero-paragraph": "Drive organic growth and build your authority online. We craft a comprehensive strategy that combines expert search engine optimization.",
+                "reach-out-today": "Reach Out Today",
+                "why-partner-heading": "Why Partner With Us?",
+                "why-partner-subheading": "We are committed to delivering exceptional results and a seamless client experience.",
+                "data-driven-strategies-title": "Data-Driven Strategies",
+                "data-driven-strategies-desc": "Every decision we make is backed by thorough research and analytics to ensure maximum ROI.",
+                "transparent-reporting-title": "Transparent Reporting",
+                "transparent-reporting-desc": "We provide clear, easy-to-understand reports so you always know how your campaigns are performing.",
+                "dedicated-support-title": "Dedicated Support",
+                "dedicated-support-desc": "Our team is always available to answer your questions and provide personalized guidance.",
+                "core-services-heading": "Our Core Digital Marketing Services",
+                "core-services-subheading": "From strategy to execution, we've got you covered with a comprehensive suite of digital solutions.",
+                "seo-title": "SEO & Content Marketing",
+                "seo-desc": "Improve your search engine rankings and attract more organic traffic. We create high-quality, relevant content that positions your brand as an industry leader.",
+                "ppc-title": "PPC Management",
+                "ppc-desc": "Drive immediate results with targeted pay-per-click advertising. We manage your campaigns on platforms like Google Ads and Bing to ensure you get the best return on your ad spend.",
+                "social-media-title": "Social Media Marketing",
+                "social-media-desc": "Build a strong brand presence and engage with your community. We create and execute social media strategies that increase brand awareness and generate leads.",
+                "web-dev-title": "Web Development",
+                "web-dev-desc": "Your website is your digital storefront. We design and develop responsive, user-friendly websites that are optimized for performance, security, and search engines.",
+                "email-title": "Email Marketing",
+                "email-desc": "Connect directly with your audience through personalized email campaigns. We craft compelling emails and build automated sequences to nurture leads and drive conversions.",
+                "analytics-title": "Analytics & Reporting",
+                "analytics-desc": "We provide a clear view of your campaign performance with detailed analytics and regular reporting. Our insights help you make data-driven decisions for future growth.",
+                "learn-more": "Learn More",
+                "understanding-title": "Understanding Digital Marketing",
+                "strategic-planning-title": "Strategic Planning is Key",
+                "strategic-planning-desc": "Digital marketing is more than just running ads; it's about a holistic strategy that aligns with your business goals. We start by understanding your target audience, analyzing competitors, and defining clear objectives. This foundation ensures every campaign is purposeful and drives measurable results.",
+                "why-content-matters-title": "Why Content Matters",
+                "why-content-matters-desc": "Content is the cornerstone of any effective digital strategy. It's how you communicate with your audience, build trust, and establish authority. From blog posts and videos to podcasts and infographics, we help you create engaging, high-value content that attracts, informs, and converts your audience.",
+                "connecting-social-title": "Connecting on Social Media",
+                "connecting-social-desc": "Social media is a powerful tool for building a community and driving brand loyalty. It allows for direct engagement with your customers and provides valuable insights into their preferences. We help you craft authentic social media campaigns that resonate with your followers and turn them into brand advocates.",
+                "data-driven-decision-title": "Making Decisions with Data",
+                "data-driven-decision-desc": "In digital marketing, every action can be measured. We use robust analytics tools to track campaign performance, understand user behavior, and identify opportunities for improvement. Our data-driven approach ensures that your marketing efforts are always optimized for the best possible return on investment.",
+                "home": "Home",
+                "home1": "Home 1",
+                "home2": "Home 2",
+                "about-us": "About Us",
+                "services": "Services",
+                "all-services": "All Services",
+                "social-media-marketing": "Social Media Marketing",
+                "seo-optimization": "SEO Optimization",
+                "ppc-advertising": "PPC Advertising",
+                "web-development": "web development",
+                "email-marketing": "Email Marketing",
+                "analytics-reporting": "Analytics & Reporting",
+                "blog": "Blog",
+                "contact-us": "Contact Us",
+                "login": "Login",
+                "signup-login": "Sign Up/Login",
+                "admin-login": "Admin Login",
+                "logout": "Logout",
+                "footer-tagline": "Your partner for digital marketing success. We deliver results that matter.",
+                "quick-links-title": "Quick Links",
+                "services-link": "services",
+                "contact": "Contact",
+                "services-title": "Services",
+                "seo": "SEO",
+                "ppc": "PPC",
+                "social-media": "Social Media",
+                "web-development-footer": "Web Development",
+                "email-marketing-footer": "email marketing",
+                "analytics-footer": "Analytics",
+                "contact-info-title": "Contact Info",
+                "email-info": "info@stackly.com",
+                "phone-info": "+1 (555) 123-4567",
+                "address-info": "123 Marketing Lane, Suite 456, City, State",
+                "copyright": "&copy; 2024 Stackly Digital Marketing. All rights reserved."
+            },
+            "ar": {
+                "hero-title": "الخدمات",
+                "hero-paragraph": "حقق النمو العضوي وعزز سلطتك عبر الإنترنت. نحن نضع استراتيجية شاملة تجمع بين تحسين محركات البحث الخبير.",
+                "reach-out-today": "تواصل معنا اليوم",
+                "why-partner-heading": "لماذا تتعاون معنا؟",
+                "why-partner-subheading": "نحن ملتزمون بتقديم نتائج استثنائية وتجربة عميل سلسة.",
+                "data-driven-strategies-title": "استراتيجيات قائمة على البيانات",
+                "data-driven-strategies-desc": "كل قرار نتخذه مدعوم ببحث وتحليل شامل لضمان أقصى عائد على الاستثمار.",
+                "transparent-reporting-title": "تقارير شفافة",
+                "transparent-reporting-desc": "نحن نقدم تقارير واضحة وسهلة الفهم حتى تعرف دائمًا كيفية أداء حملاتك.",
+                "dedicated-support-title": "دعم مخصص",
+                "dedicated-support-desc": "فريقنا متاح دائمًا للإجابة على أسئلتك وتقديم إرشادات شخصية.",
+                "core-services-heading": "خدماتنا الأساسية في التسويق الرقمي",
+                "core-services-subheading": "من الاستراتيجية إلى التنفيذ، نوفر لك مجموعة شاملة من الحلول الرقمية.",
+                "seo-title": "تحسين محركات البحث وتسويق المحتوى",
+                "seo-desc": "حسن تصنيفاتك في محركات البحث واجذب المزيد من الزيارات العضوية. نحن ننشئ محتوى عالي الجودة وملائم يضع علامتك التجارية كرائدة في الصناعة.",
+                "ppc-title": "إدارة إعلانات الدفع بالنقرة",
+                "ppc-desc": "حقق نتائج فورية مع إعلانات الدفع بالنقرة المستهدفة. نحن ندير حملاتك على منصات مثل إعلانات جوجل و بينج لضمان حصولك على أفضل عائد على إنفاقك الإعلاني.",
+                "social-media-title": "التسويق عبر وسائل التواصل الاجتماعي",
+                "social-media-desc": "ابنِ حضورًا قويًا لعلامتك التجارية وتفاعل مع مجتمعك. نحن ننشئ وننفذ استراتيجيات وسائل التواصل الاجتماعي التي تزيد من الوعي بالعلامة التجارية وتولد العملاء المحتملين.",
+                "web-dev-title": "تطوير الويب",
+                "web-dev-desc": "موقعك الإلكتروني هو واجهتك الرقمية. نحن نصمم ونطور مواقع ويب سريعة الاستجابة وسهلة الاستخدام محسّنة للأداء والأمان ومحركات البحث.",
+                "email-title": "التسويق عبر البريد الإلكتروني",
+                "email-desc": "تواصل مباشرة مع جمهورك من خلال حملات البريد الإلكتروني المخصصة. نحن نصمم رسائل بريد إلكتروني جذابة ونبني تسلسلات آلية لرعاية العملاء المحتملين وزيادة التحويلات.",
+                "analytics-title": "التحليلات والتقارير",
+                "analytics-desc": "نحن نقدم رؤية واضحة لأداء حملاتك من خلال تحليلات مفصلة وتقارير منتظمة. تساعدك رؤيتنا على اتخاذ قرارات مبنية على البيانات لتحقيق النمو المستقبلي.",
+                "learn-more": "تعلم المزيد",
+                "understanding-title": "فهم التسويق الرقمي",
+                "strategic-planning-title": "التخطيط الاستراتيجي هو الأساس",
+                "strategic-planning-desc": "التسويق الرقمي هو أكثر من مجرد تشغيل الإعلانات؛ إنه يتعلق باستراتيجية شاملة تتوافق مع أهداف عملك. نبدأ بفهم جمهورك المستهدف، وتحليل المنافسين، وتحديد أهداف واضحة. يضمن هذا الأساس أن كل حملة هادفة وتحقق نتائج قابلة للقياس.",
+                "why-content-matters-title": "لماذا المحتوى مهم",
+                "why-content-matters-desc": "المحتوى هو حجر الزاوية في أي استراتيجية رقمية فعالة. إنه كيفية تواصلك مع جمهورك، وبناء الثقة، وترسيخ السلطة. من منشورات المدونات ومقاطع الفيديو إلى البودكاست والرسوم البيانية، نساعدك على إنشاء محتوى جذاب وذو قيمة عالية يجذب جمهورك، ويثقفه، ويحوله.",
+                "connecting-social-title": "التواصل عبر وسائل التواصل الاجتماعي",
+                "connecting-social-desc": "وسائل التواصل الاجتماعي هي أداة قوية لبناء مجتمع وتعزيز ولاء العلامة التجارية. تتيح التفاعل المباشر مع عملائك وتوفر رؤى قيمة حول تفضيلاتهم. نساعدك على صياغة حملات وسائل تواصل اجتماعي أصيلة تلقى صدى لدى متابعيك وتحولهم إلى دعاة للعلامة التجارية.",
+                "data-driven-decision-title": "اتخاذ القرارات بالبيانات",
+                "data-driven-decision-desc": "في التسويق الرقمي، يمكن قياس كل إجراء. نستخدم أدوات تحليل قوية لتتبع أداء الحملة، وفهم سلوك المستخدم، وتحديد فرص التحسين. يضمن نهجنا القائم على البيانات أن جهودك التسويقية يتم تحسينها دائمًا لتحقيق أفضل عائد ممكن على الاستثمار.",
+                "home": "الرئيسية",
+                "home1": "الرئيسية 1",
+                "home2": "الرئيسية 2",
+                "about-us": "من نحن",
+                "services": "الخدمات",
+                "all-services": "جميع الخدمات",
+                "social-media-marketing": "التسويق عبر وسائل التواصل الاجتماعي",
+                "seo-optimization": "تحسين محركات البحث",
+                "ppc-advertising": "إعلانات الدفع بالنقرة",
+                "web-development": "تطوير الويب",
+                "email-marketing": "التسويق عبر البريد الإلكتروني",
+                "analytics-reporting": "التحليلات والتقارير",
+                "blog": "المدونة",
+                "contact-us": "تواصل معنا",
+                "login": "تسجيل الدخول",
+                "signup-login": "تسجيل/دخول",
+                "admin-login": "دخول المدير",
+                "logout": "تسجيل الخروج",
+                "footer-tagline": "شريكك لتحقيق النجاح في التسويق الرقمي. نقدم نتائج مهمة.",
+                "quick-links-title": "روابط سريعة",
+                "services-link": "الخدمات",
+                "contact": "اتصل",
+                "services-title": "الخدمات",
+                "seo": "تحسين محركات البحث",
+                "ppc": "الدفع بالنقرة",
+                "social-media": "وسائل التواصل الاجتماعي",
+                "web-development-footer": "تطوير الويب",
+                "email-marketing-footer": "التسويق عبر البريد الإلكتروني",
+                "analytics-footer": "التحليلات",
+                "contact-info-title": "معلومات الاتصال",
+                "email-info": "info@stackly.com",
+                "phone-info": "+1 (555) 123-4567",
+                "address-info": "123 Marketing Lane, Suite 456, City, State",
+                "copyright": "&copy; 2024 Stackly Digital Marketing. جميع الحقوق محفوظة."
+            },
+            "he": {
+                "hero-title": "שירותים",
+                "hero-paragraph": "השג צמיחה אורגנית ובנה את הסמכות שלך באינטרנט. אנחנו יוצרים אסטרטגיה מקיפה המשלבת אופטימיזציית מנועי חיפוש מומחית.",
+                "reach-out-today": "פנה אלינו היום",
+                "why-partner-heading": "למה לעבוד איתנו?",
+                "why-partner-subheading": "אנו מחויבים לספק תוצאות יוצאות דופן וחווית לקוח חלקה.",
+                "data-driven-strategies-title": "אסטרטגיות מונעות נתונים",
+                "data-driven-strategies-desc": "כל החלטה שאנו מקבלים מגובה במחקר וניתוח יסודיים כדי להבטיח החזר ROI מרבי.",
+                "transparent-reporting-title": "דיווח שקוף",
+                "transparent-reporting-desc": "אנו מספקים דוחות ברורים וקלים להבנה כדי שתמיד תדע איך הקמפיינים שלך מתפקדים.",
+                "dedicated-support-title": "תמיכה ייעודית",
+                "dedicated-support-desc": "הצוות שלנו תמיד זמין לענות על שאלותיך ולספק הדרכה אישית.",
+                "core-services-heading": "שירותי השיווק הדיגיטלי הליבה שלנו",
+                "core-services-subheading": "מאסטרטגיה ועד לביצוע, אנו מכסים אותך עם מגוון מקיף של פתרונות דיגיטליים.",
+                "seo-title": "קידום אתרים ושיווק תוכן",
+                "seo-desc": "שפר את הדירוג שלך במנועי החיפוש ומשוך יותר תנועה אורגנית. אנו יוצרים תוכן איכותי ורלוונטי הממצב את המותג שלך כמוביל בתעשייה.",
+                "ppc-title": "ניהול קמפיינים PPC",
+                "ppc-desc": "השג תוצאות מיידיות עם פרסום ממוקד של תשלום לפי קליק. אנו מנהלים את הקמפיינים שלך בפלטפורמות כמו גוגל אדס ובינג כדי להבטיח שתקבל את ההחזר הטוב ביותר על הוצאות הפרסום שלך.",
+                "social-media-title": "שיווק במדיה חברתית",
+                "social-media-desc": "בנה נוכחות מותג חזקה וצור קשר עם הקהילה שלך. אנו יוצרים ומיישמים אסטרטגיות מדיה חברתית המגדילות את המודעות למותג ומייצרות לידים.",
+                "web-dev-title": "פיתוח אתרים",
+                "web-dev-desc": "האתר שלך הוא החנות הדיגיטלית שלך. אנו מעצבים ומפתחים אתרים רספונסיביים וידידותיים למשתמש המותאמים לביצועים, אבטחה ומנועי חיפוש.",
+                "email-title": "שיווק בדוא\"ל",
+                "email-desc": "צור קשר ישיר עם הקהל שלך באמצעות קמפיינים מותאמים אישית בדוא\"ל. אנו יוצרים מיילים משכנעים ובונים רצפים אוטומטיים כדי לטפח לידים ולהגדיל המרות.",
+                "analytics-title": "ניתוח ודיווח",
+                "analytics-desc": "אנו מספקים תמונה ברורה של ביצועי הקמפיין שלך באמצעות ניתוח מפורט ודיווח קבוע. התובנות שלנו עוזרות לך לקבל החלטות מונעות נתונים לצמיחה עתידית.",
+                "learn-more": "למד עוד",
+                "understanding-title": "הבנת שיווק דיגיטלי",
+                "strategic-planning-title": "תכנון אסטרטגי הוא המפתח",
+                "strategic-planning-desc": "שיווק דיגיטלי הוא יותר מאשר רק הפעלת מודעות; מדובר באסטרטגיה הוליסטית המתיישרת עם יעדי העסק שלך. אנו מתחילים בהבנת קהל היעד שלך, ניתוח מתחרים והגדרת יעדים ברורים. בסיס זה מבטיח שכל קמפיין יהיה בעל מטרה ויניב תוצאות מדידות.",
+                "why-content-matters-title": "מדוע תוכן חשוב",
+                "why-content-matters-desc": "תוכן הוא אבן היסוד של כל אסטרטגיה דיגיטלית יעילה. כך אתה מתקשר עם הקהל שלך, בונה אמון ומבסס סמכות. מפוסטים בבלוג וסרטונים ועד לפודקאסטים ואינפוגרפיקות, אנו עוזרים לך ליצור תוכן מרתק ובעל ערך גבוה שמושך, מלמד וממיר את הקהל שלך.",
+                "connecting-social-title": "התחברות במדיה חברתית",
+                "connecting-social-desc": "מדיה חברתית היא כלי רב עוצמה לבניית קהילה ולהנעת נאמנות למותג. היא מאפשרת מעורבות ישירה עם הלקוחות שלך ומספקת תובנות יקרות ערך לגבי העדפותיהם. אנו עוזרים לך ליצור קמפיינים אותנטיים במדיה חברתית שמהדהדים עם העוקבים שלך והופכים אותם לתומכי מותג.",
+                "data-driven-decision-title": "קבלת החלטות מונעת נתונים",
+                "data-driven-decision-desc": "בשיווק דיגיטלי, ניתן למדוד כל פעולה. אנו משתמשים בכלי ניתוח חזקים כדי לעקוב אחר ביצועי הקמפיין, להבין את התנהגות המשתמשים ולזהות הזדמנויות לשיפור. הגישה המונעת נתונים שלנו מבטיחה שמאמצי השיווק שלך תמיד מותאמים להחזר ההשקעה הטוב ביותר האפשרי.",
+                "home": "בית",
+                "home1": "בית 1",
+                "home2": "בית 2",
+                "about-us": "אודותינו",
+                "services": "שירותים",
+                "all-services": "כל השירותים",
+                "social-media-marketing": "שיווק במדיה חברתית",
+                "seo-optimization": "אופטימיזציית מנועי חיפוש",
+                "ppc-advertising": "פרסום מבוסס PPC",
+                "web-development": "פיתוח אתרים",
+                "email-marketing": "שיווק בדוא\"ל",
+                "analytics-reporting": "ניתוח ודיווח",
+                "blog": "בלוג",
+                "contact-us": "צור קשר",
+                "login": "כניסה",
+                "signup-login": "הרשמה/כניסה",
+                "admin-login": "כניסת מנהל",
+                "logout": "התנתק",
+                "footer-tagline": "השותף שלך להצלחה בשיווק דיגיטלי. אנו מספקים תוצאות שחשובות.",
+                "quick-links-title": "קישורים מהירים",
+                "services-link": "שירותים",
+                "contact": "צור קשר",
+                "services-title": "שירותים",
+                "seo": "קידום אתרים",
+                "ppc": "PPC",
+                "social-media": "מדיה חברתית",
+                "web-development-footer": "פיתוח אתרים",
+                "email-marketing-footer": "שיווק בדוא\"ל",
+                "analytics-footer": "ניתוח",
+                "contact-info-title": "פרטי קשר",
+                "email-info": "info@stackly.com",
+                "phone-info": "+1 (555) 123-4567",
+                "address-info": "123 Marketing Lane, Suite 456, City, State",
+                "copyright": "&copy; 2024 Stackly Digital Marketing. כל הזכויות שמורות."
+            }
+        };
+
+        const elementsToTranslate = document.querySelectorAll('[data-translate]');
+        const languageSelect = document.getElementById('language-select');
+
+        function updateLanguage(lang) {
+            document.documentElement.lang = lang;
+            const direction = (lang === 'ar' || lang === 'he') ? 'rtl' : 'ltr';
+            document.body.style.direction = direction;
+
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (key === 'copyright' || key === 'email-info' || key === 'phone-info' || key === 'address-info') {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+        }
+
+        // Event listener for language selection
+        languageSelect.addEventListener('change', (event) => {
+            updateLanguage(event.target.value);
+        });
+
+        // Set default language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const defaultLang = 'en';
+            languageSelect.value = defaultLang;
+            updateLanguage(defaultLang);
+        });
+
         // Mobile nav toggle
         const mobileToggle = document.getElementById('mobile-toggle');
         const nav = document.getElementById('site-nav');
@@ -1166,6 +1467,28 @@
           window.location.href = 'login.html';
         }
         
+// Mobile dropdown toggle for navigation
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
     </script>
 </body>
 </html>

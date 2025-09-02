@@ -117,28 +117,25 @@
             background-color: var(--brand);
         }
        .dropdown-menu {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  position: absolute;
-  top: 100%;
-  background: var(--card);
-  box-shadow: var(--shadow);
-  border-radius: 8px;
-  padding: 10px 0;
-  min-width: 150px;
-  list-style: none;
-}
-
-/* Show with delay */
-.nav-links li:hover > .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition-delay: 0.2s; /* adjust delay */
-}
-
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(10px);
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+          position: absolute;
+          top: 100%;
+          background: var(--card);
+          box-shadow: var(--shadow);
+          border-radius: 8px;
+          padding: 10px 0;
+          min-width: 150px;
+          list-style: none;
+        }
+        .nav-links li:hover > .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+          transition-delay: 0.2s;
+        }
         .dropdown-menu a {
             padding: 10px 15px;
             color: var(--text);
@@ -147,12 +144,10 @@
         .dropdown-menu a:hover {
             background-color: var(--surface);
         }
-        /* New Styles for Profile Dropdown */
         .profile-dropdown {
             position: relative;
             display: inline-block;
         }
-
         .profile-icon {
             width: 40px;
             height: 40px;
@@ -166,7 +161,6 @@
             font-size: 1rem;
             cursor: pointer;
         }
-
         .profile-dropdown-content {
             display: none;
             position: absolute;
@@ -181,7 +175,6 @@
             list-style-type: none;
             padding: 5px 0;
         }
-
         .profile-dropdown-content a {
             color: var(--text);
             padding: 12px 16px;
@@ -189,20 +182,56 @@
             display: block;
             text-align: left;
         }
-
         .profile-dropdown-content a:hover {
             background-color: var(--surface);
         }
-
         .profile-dropdown.show .profile-dropdown-content {
             display: block;
         }
-        /* End of New Styles */
         .mobile-menu-toggle {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
             margin-left: 1rem;
+        }
+        .language-toggle {
+            position: relative;
+            z-index: 10;
+        }
+        .language-button {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            padding: 5px 0;
+            min-width: 120px;
+        }
+        .language-dropdown.show {
+            display: block;
+        }
+        .language-dropdown a {
+            display: block;
+            padding: 8px 15px;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .language-dropdown a:hover {
+            background-color: var(--surface);
         }
         @media (max-width: 768px) {
             .nav-right {
@@ -243,6 +272,15 @@
             .mobile-menu-toggle {
                 display: block;
             }
+            .language-toggle {
+                position: static;
+                width: 100%;
+            }
+            .language-dropdown {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+            }
         }
         .section {
             padding: 5rem 0;
@@ -259,151 +297,132 @@
             color: var(--muted);
             margin-bottom: 3rem;
         }
-        /* Hero Section */
-.hero-section {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-}
-
-.hero-bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-}
-
-.hero-content {
-    text-align: center;
-    color: #fff;
-    max-width: 800px;
-}
-
-.hero-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    opacity: 0;
-}
-
-.hero-paragraph {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    opacity: 0;
-}
-
-.hero-button {
-    display: inline-block;
-    padding: 12px 30px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background-color: #224DB7;
-    border: none;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    opacity: 0;
-}
-
-.hero-button:hover {
-    background-color: #000;
-    transform: scale(1.05);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-slide-in {
-    animation: slideIn 1s ease-out forwards;
-    animation-delay: 0.5s;
-}
-
-.animate-fade-up {
-    animation: fadeUp 1s ease-out forwards;
-    animation-delay: 1s;
-}
-
-.animate-fade-up-delayed {
-    animation: fadeUp 1s ease-out forwards;
-    animation-delay: 1.5s;
-}
-
-.animate-slide-in,
-.animate-fade-up,
-.animate-fade-up-delayed {
-    animation-fill-mode: both;
-}
-
-.animated-element {
-    opacity: 0;
-    transition: opacity 0.5s, transform 0.5s;
-}
-
-.visible {
-    opacity: 1;
-    transform: translateY(0) translateX(0) !important;
-}
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        .hero-content {
+            text-align: center;
+            color: #fff;
+            max-width: 800px;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+        .hero-paragraph {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+        .hero-button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: #224DB7;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+        }
+        .hero-button:hover {
+            background-color: #000;
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-slide-in {
+            animation: slideIn 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        .animate-fade-up {
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        .animate-fade-up-delayed {
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+        .animate-slide-in,
+        .animate-fade-up,
+        .animate-fade-up-delayed {
+            animation-fill-mode: both;
+        }
+        .animated-element {
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0) !important;
+        }
         .full-width-section {
             display: flex;
             align-items: center;
@@ -558,6 +577,31 @@
         .animate-fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
         }
+        @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
     </style>
 </head>
 <body>
@@ -572,47 +616,57 @@
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-lang="home">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-lang="home1">Home 1</a></li>
+                                <li><a href="home3.html" data-lang="home2">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html">About Us</a></li>
+                        <li><a href="About us.html" data-lang="about-us">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html" class="active">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" class="active" data-lang="services">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                                <li><a href="seo.html" data-lang="seo">SEO & Content</a></li>
+                                <li><a href="ppc.html" data-lang="ppc">PPC Management</a></li>
+                                <li><a href="social-media.html" data-lang="social-media">Social Media Marketing</a></li>
+                                <li><a href="web-dev.html" data-lang="web-dev">Web Development</a></li>
+                                <li><a href="email.html" data-lang="email">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-lang="analytics">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-lang="blog">Blog</a></li>
+                        <li><a href="contact.html" data-lang="contact-us">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="#">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="index.html" data-lang="login">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="index.html" data-lang="sign-up-login">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-lang="admin-login">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
                 <div class="profile-dropdown" id="profile-dropdown">
-                    <div class="profile-icon">
-                        <span>JS</span>
-                    </div>
+                    <div class="profile-icon"><span id="initials-display"></span></div>
                     <ul class="profile-dropdown-content">
-                        <li><a href="#logout">Logout</a></li>
+                        <li><a href="index.html" data-lang="logout">Logout</a></li>
                     </ul>
                 </div>
                 <div class="theme-toggle">
                     <button id="theme-toggle" class="btn btn-secondary">
                         <i class="fas fa-moon"></i>
                     </button>
+                </div>
+                <div class="language-toggle">
+                    <button class="language-button" id="language-button">
+                        <i class="fas fa-globe"></i>
+                        <span id="current-lang">EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" data-lang-code="en">English</a>
+                        <a href="#" data-lang-code="ar">Arabic</a>
+                        <a href="#" data-lang-code="he">Hebrew</a>
+                    </div>
                 </div>
                 <div class="mobile-menu-toggle" id="mobile-toggle">
                     <i class="fas fa-bars"></i>
@@ -621,29 +675,28 @@
         </div>
     </header>
     <main>
-       <section class="hero-section">
-    <video autoplay muted loop playsinline class="hero-bg-video">
-        <source src="https://videos.pexels.com/video-files/4433139/4433139-uhd_2560_1440_25fps.mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <h1 class="hero-title animate-slide-in">
-                PPC Management
-            </h1>
-            <p class="hero-paragraph animate-fade-up">
-                Improve your online visibility and drive immediate, targeted traffic with our expert pay-per-click strategies.
-            </p>
-        </div>
-    </div>
-</section>
+        <section class="hero-section">
+            <video autoplay muted loop playsinline class="hero-bg-video">
+                <source src="https://videos.pexels.com/video-files/4433139/4433139-uhd_2560_1440_25fps.mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-slide-in" data-lang="hero-title">
+                        PPC Management
+                    </h1>
+                    <p class="hero-paragraph animate-fade-up" data-lang="hero-paragraph">
+                        Improve your online visibility and drive immediate, targeted traffic with our expert pay-per-click strategies.
+                    </p>
+                </div>
+            </div>
+        </section>
         <section class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Get Seen Instantly</h2>
-                <h3 class="section-subheading" style="margin-bottom: 1.5rem;">We connect you with customers who are ready to buy.</h3>
-                <p>Our PPC management services are designed to put your business in front of your ideal audience at the exact moment they're searching for what you offer. We create and manage highly effective campaigns on platforms like Google Ads and Bing, ensuring every click counts towards your business goals.</p>
-                <p>From strategic keyword bidding to creative ad copy, we handle all the details to ensure your ads convert and generate a high return on your investment.</p>
+                <h2 class="section-heading" data-lang="get-seen-instantly-heading">Get Seen Instantly</h2>
+                <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-lang="get-seen-instantly-subheading">We connect you with customers who are ready to buy.</h3>
+                <p data-lang="get-seen-instantly-p1">Our PPC management services are designed to put your business in front of your ideal audience at the exact moment they're searching for what you offer. We create and manage highly effective campaigns on platforms like Google Ads and Bing, ensuring every click counts towards your business goals.</p>
+                <p data-lang="get-seen-instantly-p2">From strategic keyword bidding to creative ad copy, we handle all the details to ensure your ads convert and generate a high return on your investment.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/e1/03/64/e103646b6a667786b2b010e94c989241.jpg" alt="A photo of a person managing an online advertising dashboard." />
@@ -651,63 +704,63 @@
         </section>
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">What Our PPC Service Includes</h2>
+                <h2 class="section-heading" data-lang="what-service-includes-heading">What Our PPC Service Includes</h2>
                 <div class="icon-grid">
                     <div class="icon-item">
                         <i class="fas fa-dollar-sign"></i>
-                        <h4>Campaign Strategy</h4>
-                        <p>Develop a clear strategy with defined goals, target audience, and competitive analysis.</p>
+                        <h4 data-lang="campaign-strategy-title">Campaign Strategy</h4>
+                        <p data-lang="campaign-strategy-text">Develop a clear strategy with defined goals, target audience, and competitive analysis.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-search-plus"></i>
-                        <h4>Ad Creation & Testing</h4>
-                        <p>Craft compelling ad copy and visuals, and test different variations to find what performs best.</p>
+                        <h4 data-lang="ad-creation-title">Ad Creation & Testing</h4>
+                        <p data-lang="ad-creation-text">Craft compelling ad copy and visuals, and test different variations to find what performs best.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-bullseye"></i>
-                        <h4>Audience Targeting</h4>
-                        <p>Ensure your ads are seen by the right people at the right time using precise targeting methods.</p>
+                        <h4 data-lang="audience-targeting-title">Audience Targeting</h4>
+                        <p data-lang="audience-targeting-text">Ensure your ads are seen by the right people at the right time using precise targeting methods.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-chart-bar"></i>
-                        <h4>Performance Monitoring</h4>
-                        <p>Constantly monitor and optimize bids, keywords, and ad placement to maximize your budget efficiency.</p>
+                        <h4 data-lang="performance-monitoring-title">Performance Monitoring</h4>
+                        <p data-lang="performance-monitoring-text">Constantly monitor and optimize bids, keywords, and ad placement to maximize your budget efficiency.</p>
                     </div>
                 </div>
             </div>
         </section>
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Our Proven 4-Step Process</h2>
+                <h2 class="section-heading" data-lang="proven-process-heading">Our Proven 4-Step Process</h2>
                 <div class="process-steps">
                     <div class="process-step">
                         <div class="step-number">01</div>
-                        <h4>Discovery & Strategy</h4>
-                        <p>We analyze your business and market to build a strategic PPC plan with clear objectives.</p>
+                        <h4 data-lang="discovery-title">Discovery & Strategy</h4>
+                        <p data-lang="discovery-text">We analyze your business and market to build a strategic PPC plan with clear objectives.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">02</div>
-                        <h4>Campaign Launch</h4>
-                        <p>We set up and launch your campaigns with optimized keywords, ad groups, and ad copy.</p>
+                        <h4 data-lang="launch-title">Campaign Launch</h4>
+                        <p data-lang="launch-text">We set up and launch your campaigns with optimized keywords, ad groups, and ad copy.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">03</div>
-                        <h4>Optimization & Management</h4>
-                        <p>We actively manage and optimize your campaigns daily to improve performance and reduce cost.</p>
+                        <h4 data-lang="optimization-title">Optimization & Management</h4>
+                        <p data-lang="optimization-text">We actively manage and optimize your campaigns daily to improve performance and reduce cost.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">04</div>
-                        <h4>Reporting & Insights</h4>
-                        <p>You receive regular, transparent reports on campaign performance and ROI, with actionable insights.</p>
+                        <h4 data-lang="reporting-title">Reporting & Insights</h4>
+                        <p data-lang="reporting-text">You receive regular, transparent reports on campaign performance and ROI, with actionable insights.</p>
                     </div>
                 </div>
             </div>
         </section>
         <section class="section full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Ready for a Surge in Traffic?</h2>
-                <p>Our team is here to manage your PPC campaigns and deliver a steady stream of qualified leads to your business. Let's start building your success story today.</p>
-                <a href="contact.html" class="btn">Get a Free Consultation</a>
+                <h2 class="section-heading" data-lang="traffic-surge-heading">Ready for a Surge in Traffic?</h2>
+                <p data-lang="traffic-surge-text">Our team is here to manage your PPC campaigns and deliver a steady stream of qualified leads to your business. Let's start building your success story today.</p>
+                <a href="contact.html" class="btn" data-lang="consultation-button">Get a Free Consultation</a>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/6d/35/95/6d3595a2839f66ba371637d5f7e9fa30.jpg" alt="An image of a team collaborating on a strategy." />
@@ -720,39 +773,39 @@
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
-                <p>Your partner for digital marketing success. We deliver results that matter.</p>
+                <p data-lang="footer-tagline">Your partner for digital marketing success. We deliver results that matter.</p>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4 data-lang="quick-links-title">Quick Links</h4>
                 <ul>
-                    <li><a href="redesigned_index.html">Home</a></li>
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="Services.html">services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home1.html" data-lang="home-footer">Home</a></li>
+                    <li><a href="About us.html" data-lang="about-us-footer">About Us</a></li>
+                    <li><a href="Services.html" data-lang="services-footer">services</a></li>
+                    <li><a href="blog.html" data-lang="blog-footer">Blog</a></li>
+                    <li><a href="contact.html" data-lang="contact-footer">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Services</h4>
+                <h4 data-lang="services-title">Services</h4>
                 <ul>
-                    <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                    <li><a href="seo.html" data-lang="seo-footer">SEO & Content</a></li>
+                    <li><a href="ppc.html" data-lang="ppc-footer">PPC Management</a></li>
+                    <li><a href="social-media.html" data-lang="social-media-footer">Social Media Marketing</a></li>
+                    <li><a href="web-dev.html" data-lang="web-dev-footer">Web Development</a></li>
+                    <li><a href="email.html" data-lang="email-footer">Email Marketing</a></li>
+                    <li><a href="analytics.html" data-lang="analytics-footer">Analytics & Reporting</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Contact Info</h4>
+                <h4 data-lang="contact-info-title">Contact Info</h4>
                 <ul>
-                    <li><a href="#">info@stackly.com</a></li>
-                    <li><a href="#">+1 (555) 123-4567</a></li>
-                    <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+                    <li><a href="#" data-lang="email-contact">info@stackly.com</a></li>
+                    <li><a href="#" data-lang="phone-contact">+1 (555) 123-4567</a></li>
+                    <li><a href="#" data-lang="address-contact">123 Marketing Lane, Suite 456, City, State</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-lang="footer-copyright">
             &copy; 2024 Stackly Digital Marketing. All rights reserved.
         </div>
     </footer>
@@ -783,23 +836,316 @@
             });
         };
         window.onload = animateOnScroll;
-        
-        // New script for profile dropdown
+
         const profileDropdown = document.getElementById('profile-dropdown');
         const profileIcon = profileDropdown.querySelector('.profile-icon');
         const dropdownContent = profileDropdown.querySelector('.profile-dropdown-content');
-
         profileIcon.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevents the click from bubbling up to the document
+            event.stopPropagation();
             profileDropdown.classList.toggle('show');
         });
-
-        // Close the dropdown if the user clicks outside of it
         document.addEventListener('click', function(event) {
             if (!profileDropdown.contains(event.target)) {
                 profileDropdown.classList.remove('show');
             }
         });
-    </script>
+
+        const languageButton = document.getElementById('language-button');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const currentLangSpan = document.getElementById('current-lang');
+        const pageBody = document.querySelector('body');
+
+        const translations = {
+            'en': {
+                'home': 'Home',
+                'home1': 'Home 1',
+                'home2': 'Home 2',
+                'about-us': 'About Us',
+                'services': 'Services',
+                'seo': 'SEO & Content',
+                'ppc': 'PPC Management',
+                'social-media': 'Social Media Marketing',
+                'web-dev': 'Web Development',
+                'email': 'Email Marketing',
+                'analytics': 'Analytics & Reporting',
+                'blog': 'Blog',
+                'contact-us': 'Contact Us',
+                'login': 'Login',
+                'sign-up-login': 'Sign Up/Login',
+                'admin-login': 'Admin Login',
+                'logout': 'Logout',
+                'hero-title': 'PPC Management',
+                'hero-paragraph': 'Improve your online visibility and drive immediate, targeted traffic with our expert pay-per-click strategies.',
+                'get-seen-instantly-heading': 'Get Seen Instantly',
+                'get-seen-instantly-subheading': 'We connect you with customers who are ready to buy.',
+                'get-seen-instantly-p1': 'Our PPC management services are designed to put your business in front of your ideal audience at the exact moment they\'re searching for what you offer. We create and manage highly effective campaigns on platforms like Google Ads and Bing, ensuring every click counts towards your business goals.',
+                'get-seen-instantly-p2': 'From strategic keyword bidding to creative ad copy, we handle all the details to ensure your ads convert and generate a high return on your investment.',
+                'what-service-includes-heading': 'What Our PPC Service Includes',
+                'campaign-strategy-title': 'Campaign Strategy',
+                'campaign-strategy-text': 'Develop a clear strategy with defined goals, target audience, and competitive analysis.',
+                'ad-creation-title': 'Ad Creation & Testing',
+                'ad-creation-text': 'Craft compelling ad copy and visuals, and test different variations to find what performs best.',
+                'audience-targeting-title': 'Audience Targeting',
+                'audience-targeting-text': 'Ensure your ads are seen by the right people at the right time using precise targeting methods.',
+                'performance-monitoring-title': 'Performance Monitoring',
+                'performance-monitoring-text': 'Constantly monitor and optimize bids, keywords, and ad placement to maximize your budget efficiency.',
+                'proven-process-heading': 'Our Proven 4-Step Process',
+                'discovery-title': 'Discovery & Strategy',
+                'discovery-text': 'We analyze your business and market to build a strategic PPC plan with clear objectives.',
+                'launch-title': 'Campaign Launch',
+                'launch-text': 'We set up and launch your campaigns with optimized keywords, ad groups, and ad copy.',
+                'optimization-title': 'Optimization & Management',
+                'optimization-text': 'We actively manage and optimize your campaigns daily to improve performance and reduce cost.',
+                'reporting-title': 'Reporting & Insights',
+                'reporting-text': 'You receive regular, transparent reports on campaign performance and ROI, with actionable insights.',
+                'traffic-surge-heading': 'Ready for a Surge in Traffic?',
+                'traffic-surge-text': 'Our team is here to manage your PPC campaigns and deliver a steady stream of qualified leads to your business. Let\'s start building your success story today.',
+                'consultation-button': 'Get a Free Consultation',
+                'footer-tagline': 'Your partner for digital marketing success. We deliver results that matter.',
+                'quick-links-title': 'Quick Links',
+                'home-footer': 'Home',
+                'about-us-footer': 'About Us',
+                'services-footer': 'services',
+                'blog-footer': 'Blog',
+                'contact-footer': 'Contact',
+                'services-title': 'Services',
+                'seo-footer': 'SEO & Content',
+                'ppc-footer': 'PPC Management',
+                'social-media-footer': 'Social Media Marketing',
+                'web-dev-footer': 'Web Development',
+                'email-footer': 'Email Marketing',
+                'analytics-footer': 'Analytics & Reporting',
+                'contact-info-title': 'Contact Info',
+                'email-contact': 'info@stackly.com',
+                'phone-contact': '+1 (555) 123-4567',
+                'address-contact': '123 Marketing Lane, Suite 456, City, State',
+                'footer-copyright': '© 2024 Stackly Digital Marketing. All rights reserved.'
+            },
+            'ar': {
+                'home': 'الرئيسية',
+                'home1': 'الرئيسية 1',
+                'home2': 'الرئيسية 2',
+                'about-us': 'من نحن',
+                'services': 'الخدمات',
+                'seo': 'تحسين محركات البحث والمحتوى',
+                'ppc': 'إدارة حملات الدفع بالنقرة',
+                'social-media': 'التسويق عبر وسائل التواصل الاجتماعي',
+                'web-dev': 'تطوير الويب',
+                'email': 'التسويق عبر البريد الإلكتروني',
+                'analytics': 'التحليلات والتقارير',
+                'blog': 'المدونة',
+                'contact-us': 'اتصل بنا',
+                'login': 'تسجيل الدخول',
+                'sign-up-login': 'التسجيل/تسجيل الدخول',
+                'admin-login': 'تسجيل دخول المسؤول',
+                'logout': 'تسجيل الخروج',
+                'hero-title': 'إدارة حملات الدفع بالنقرة',
+                'hero-paragraph': 'عزز ظهورك عبر الإنترنت واجذب زيارات فورية ومستهدفة باستخدام استراتيجياتنا الخبيرة للدفع بالنقرة.',
+                'get-seen-instantly-heading': 'احصل على رؤية فورية',
+                'get-seen-instantly-subheading': 'نحن نصلك بالعملاء المستعدين للشراء.',
+                'get-seen-instantly-p1': 'تم تصميم خدمات إدارة حملات الدفع بالنقرة لدينا لوضع عملك أمام جمهورك المثالي في اللحظة التي يبحثون فيها عما تقدمه. نقوم بإنشاء وإدارة حملات فعالة للغاية على منصات مثل إعلانات Google و Bing، مما يضمن أن كل نقرة تساهم في تحقيق أهداف عملك.',
+                'get-seen-instantly-p2': 'من استراتيجية عروض الكلمات الرئيسية إلى كتابة الإعلانات الإبداعية، نتعامل مع كل التفاصيل لضمان أن إعلاناتك تحقق التحويل وتولد عائدًا مرتفعًا على استثمارك.',
+                'what-service-includes-heading': 'ما تتضمنه خدمة الدفع بالنقرة لدينا',
+                'campaign-strategy-title': 'استراتيجية الحملة',
+                'campaign-strategy-text': 'تطوير استراتيجية واضحة مع أهداف محددة، جمهور مستهدف، وتحليل المنافسين.',
+                'ad-creation-title': 'إنشاء الإعلانات والاختبار',
+                'ad-creation-text': 'صياغة نصوص إعلانية وصور جذابة، واختبار متغيرات مختلفة للعثور على الأفضل أداءً.',
+                'audience-targeting-title': 'استهداف الجمهور',
+                'audience-targeting-text': 'ضمان رؤية إعلاناتك من قبل الأشخاص المناسبين في الوقت المناسب باستخدام طرق استهداف دقيقة.',
+                'performance-monitoring-title': 'مراقبة الأداء',
+                'performance-monitoring-text': 'مراقبة وتحسين العروض، الكلمات الرئيسية، وموضع الإعلان باستمرار لزيادة كفاءة ميزانيتك.',
+                'proven-process-heading': 'عمليتنا المجربة المكونة من 4 خطوات',
+                'discovery-title': 'الاكتشاف والاستراتيجية',
+                'discovery-text': 'نقوم بتحليل عملك وسوقك لبناء خطة PPC استراتيجية بأهداف واضحة.',
+                'launch-title': 'إطلاق الحملة',
+                'launch-text': 'نقوم بإعداد وإطلاق حملاتك بكلمات رئيسية محسّنة، مجموعات إعلانية، ونصوص إعلانية.',
+                'optimization-title': 'التحسين والإدارة',
+                'optimization-text': 'ندير ونحسن حملاتك بانتظام لتحسين الأداء وتقليل التكلفة.',
+                'reporting-title': 'التقارير والإحصائيات',
+                'reporting-text': 'تتلقى تقارير شفافة ومنتظمة حول أداء الحملة وعائد الاستثمار، مع رؤى قابلة للتنفيذ.',
+                'traffic-surge-heading': 'هل أنت جاهز لزيادة كبيرة في الزيارات؟',
+                'traffic-surge-text': 'فريقنا هنا لإدارة حملات الدفع بالنقرة الخاصة بك وتقديم تدفق مستمر من العملاء المحتملين المؤهلين لعملك. دعنا نبدأ في بناء قصة نجاحك اليوم.',
+                'consultation-button': 'احصل على استشارة مجانية',
+                'footer-tagline': 'شريكك لنجاح التسويق الرقمي. نحن نقدم نتائج تهمك.',
+                'quick-links-title': 'روابط سريعة',
+                'home-footer': 'الرئيسية',
+                'about-us-footer': 'من نحن',
+                'services-footer': 'الخدمات',
+                'blog-footer': 'المدونة',
+                'contact-footer': 'اتصل بنا',
+                'services-title': 'الخدمات',
+                'seo-footer': 'تحسين محركات البحث والمحتوى',
+                'ppc-footer': 'إدارة حملات الدفع بالنقرة',
+                'social-media-footer': 'التسويق عبر وسائل التواصل الاجتماعي',
+                'web-dev-footer': 'تطوير الويب',
+                'email-footer': 'التسويق عبر البريد الإلكتروني',
+                'analytics-footer': 'التحليلات والتقارير',
+                'contact-info-title': 'معلومات الاتصال',
+                'email-contact': 'info@stackly.com',
+                'phone-contact': '+1 (555) 123-4567',
+                'address-contact': '123 Marketing Lane, Suite 456, City, State',
+                'footer-copyright': '© 2024 Stackly Digital Marketing. جميع الحقوق محفوظة.'
+            },
+            'he': {
+                'home': 'ראשי',
+                'home1': 'ראשי 1',
+                'home2': 'ראשי 2',
+                'about-us': 'אודותינו',
+                'services': 'שירותים',
+                'seo': 'קידום אתרים ותוכן',
+                'ppc': 'ניהול קמפיינים PPC',
+                'social-media': 'שיווק במדיה חברתית',
+                'web-dev': 'פיתוח אתרים',
+                'email': 'שיווק בדוא"ל',
+                'analytics': 'אנליטיקס ודיווח',
+                'blog': 'בלוג',
+                'contact-us': 'צור קשר',
+                'login': 'התחברות',
+                'sign-up-login': 'הרשמה/התחברות',
+                'admin-login': 'התחברות מנהל',
+                'logout': 'התנתקות',
+                'hero-title': 'ניהול קמפיינים PPC',
+                'hero-paragraph': 'שפר את הנראות המקוונת שלך והבא תנועה מיידית וממוקדת עם אסטרטגיות המומחים שלנו של תשלום לפי קליק.',
+                'get-seen-instantly-heading': 'היראה מיד',
+                'get-seen-instantly-subheading': 'אנו מחברים אותך ללקוחות שמוכנים לקנות.',
+                'get-seen-instantly-p1': 'שירותי ניהול קמפיינים PPC שלנו נועדו לשים את העסק שלך מול הקהל האידיאלי שלך ברגע המדויק שהם מחפשים את מה שאתה מציע. אנו יוצרים ומנהלים קמפיינים יעילים ביותר בפלטפורמות כמו Google Ads ו-Bing, ומבטיחים שכל קליק נספר לקראת היעדים העסקיים שלך.',
+                'get-seen-instantly-p2': 'מניהול אסטרטגי של הצעות מחיר למילות מפתח ועד לכתיבת מודעות יצירתית, אנו מטפלים בכל הפרטים כדי להבטיח שהמודעות שלך ממירות ומייצרות החזר השקעה גבוה.',
+                'what-service-includes-heading': 'מה כולל שירות ה-PPC שלנו',
+                'campaign-strategy-title': 'אסטרטגיית קמפיין',
+                'campaign-strategy-text': 'פיתוח אסטרטגיה ברורה עם יעדים מוגדרים, קהל יעד וניתוח תחרותי.',
+                'ad-creation-title': 'יצירת מודעות ובדיקה',
+                'ad-creation-text': 'ניסוח טקסטים וויזואלים מרתקים למודעות, ובדיקת וריאציות שונות כדי למצוא את מה שמניב את התוצאות הטובות ביותר.',
+                'audience-targeting-title': 'טרגוט קהל',
+                'audience-targeting-text': 'ודא שהמודעות שלך נראות על ידי האנשים הנכונים בזמן הנכון באמצעות שיטות טרגוט מדויקות.',
+                'performance-monitoring-title': 'ניטור ביצועים',
+                'performance-monitoring-text': 'ניטור וייעול מתמיד של הצעות מחיר, מילות מפתח ומיקום מודעות כדי למקסם את יעילות התקציב שלך.',
+                'proven-process-heading': 'תהליך ה-4 שלבים המוכח שלנו',
+                'discovery-title': 'גילוי ואסטרטגיה',
+                'discovery-text': 'אנו מנתחים את העסק והשוק שלך כדי לבנות תוכנית PPC אסטרטגית עם יעדים ברורים.',
+                'launch-title': 'השקת קמפיין',
+                'launch-text': 'אנו מקימים ומשיקים את הקמפיינים שלך עם מילות מפתח, קבוצות מודעות וטקסטים למודעות אופטימליים.',
+                'optimization-title': 'אופטימיזציה וניהול',
+                'optimization-text': 'אנו מנהלים ומייעלים באופן פעיל את הקמפיינים שלך מדי יום כדי לשפר את הביצועים ולהפחית עלויות.',
+                'reporting-title': 'דיווח ותובנות',
+                'reporting-text': 'אתה מקבל דוחות שקופים וסדירים על ביצועי הקמפיין והחזר ההשקעה, עם תובנות מעשיות.',
+                'traffic-surge-heading': 'מוכן לעלייה בתנועה?',
+                'traffic-surge-text': 'הצוות שלנו כאן כדי לנהל את קמפייני ה-PPC שלך ולספק זרם יציב של לידים מוסמכים לעסק שלך. בואו נתחיל לבנות את סיפור ההצלחה שלכם היום.',
+                'consultation-button': 'קבל ייעוץ חינם',
+                'footer-tagline': 'השותף שלך להצלחה בשיווק דיגיטלי. אנו מספקים תוצאות שחשובות.',
+                'quick-links-title': 'קישורים מהירים',
+                'home-footer': 'ראשי',
+                'about-us-footer': 'אודותינו',
+                'services-footer': 'שירותים',
+                'blog-footer': 'בלוג',
+                'contact-footer': 'צור קשר',
+                'services-title': 'שירותים',
+                'seo-footer': 'קידום אתרים ותוכן',
+                'ppc-footer': 'ניהול קמפיינים PPC',
+                'social-media-footer': 'שיווק במדיה חברתית',
+                'web-dev-footer': 'פיתוח אתרים',
+                'email-footer': 'שיווק בדוא"ל',
+                'analytics-footer': 'אנליטיקס ודיווח',
+                'contact-info-title': 'פרטי התקשרות',
+                'email-contact': 'info@stackly.com',
+                'phone-contact': '+1 (555) 123-4567',
+                'address-contact': '123 Marketing Lane, Suite 456, City, State',
+                'footer-copyright': '© 2024 Stackly Digital Marketing. כל הזכויות שמורות.'
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            currentLangSpan.textContent = lang.toUpperCase();
+            // Set body direction for RTL languages
+            if (lang === 'ar' || lang === 'he') {
+                pageBody.style.direction = 'rtl';
+            } else {
+                pageBody.style.direction = 'ltr';
+            }
+        }
+
+        languageButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+        });
+
+        document.querySelectorAll('.language-dropdown a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const langCode = e.target.getAttribute('data-lang-code');
+                setLanguage(langCode);
+                languageDropdown.classList.remove('show');
+            });
+        });
+
+        document.addEventListener('click', () => {
+            languageDropdown.classList.remove('show');
+        });
+
+        setLanguage('en');
+    
+// Profile dropdown + initials + full name (from localStorage.userData)
+function getUserInitials(name) {
+  if (!name) return "U";
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0][0];
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const profileBtn = document.getElementById("profile-btn");
+  const profileDropdown = document.getElementById("profile-dropdown");
+  const initialsDisplay = document.getElementById("initials-display");
+  const fullNameDisplay = document.getElementById("full-name-display");
+
+  // Read userData from localStorage
+  let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  let storedName = "Guest User";
+  if (userData.firstName && userData.lastName) {
+    storedName = userData.firstName + " " + userData.lastName;
+  }
+
+  if (initialsDisplay) initialsDisplay.textContent = getUserInitials(storedName);
+  if (fullNameDisplay) fullNameDisplay.textContent = storedName;
+
+  if (profileBtn && profileDropdown) {
+    profileBtn.addEventListener("click", () => {
+      profileDropdown.classList.toggle("active");
+    });
+    document.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove("active");
+      }
+    });
+  }
+});
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
+
+</script>
 </body>
 </html>

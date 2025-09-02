@@ -249,51 +249,55 @@
             <button type="submit" class="continue-btn">Sign In</button>
             
             <div class="signup-link">
-                Don't have an account? <a href="signup.html">Sign Up</a>
+                Don't have an account? <a href="index.html">Sign Up</a>
             </div>
         </form>
     </div>
 </div>
 
+
 <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    if (!email || !password) {
+        alert('Please enter both email and password.');
+        return;
+    }
+    
+    // Check for admin credentials
+    if (email === 'admin@enkonix.in' && password === 'admin123') {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userRole', 'admin');
+        localStorage.setItem('userData', JSON.stringify({
+            firstName: 'Admin',
+            lastName: 'User',
+            email: 'admin@enkonix.in',
+            role: 'admin'
+        }));
+        alert('Admin login successful! Redirecting to dashboard...');
+        window.location.href = 'admin.html';
+    } else {
+        // Regular user login
+        let storedData = JSON.parse(localStorage.getItem('userData') || "{}");
         
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        if (!email || !password) {
-            alert('Please enter both email and password.');
-            return;
-        }
-        
-        // Check for admin credentials
-        if (email === 'admin@enkonix.in' && password === 'admin123') {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userRole', 'admin');
-            localStorage.setItem('userData', JSON.stringify({
-                firstName: 'Admin',
-                lastName: 'User',
-                email: 'admin@enkonix.in',
-                role: 'admin'
-            }));
-            alert('Admin login successful! Redirecting to dashboard...');
-            window.location.href = 'admin.html';
-        } else {
-            // Regular user login (simplified - in real app would validate against database)
+        if (storedData.email && storedData.email === email) {
+            // Use the signup info
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('userRole', 'user');
-            localStorage.setItem('userData', JSON.stringify({
-                firstName: 'User',
-                lastName: 'Account',
-                email: email,
-                role: 'user'
-            }));
-            alert('Login successful! Welcome to Stackly Digital Marketing.');
+            alert('Login successful! Welcome back, ' + storedData.firstName + '.');
+            window.location.href = 'blog.html'; // redirect to user dashboard
+        } else {
+            alert('No account found with this email. Please sign up first.');
             window.location.href = 'index.html';
         }
-    });
+    }
+});
 </script>
+
 
 </body>
 </html>

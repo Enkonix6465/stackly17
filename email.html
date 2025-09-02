@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stackly - Email Marketing</title>
+    <title data-lang="hero_title">Stackly - Email Marketing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -136,27 +136,27 @@
         }
 
        .dropdown-menu {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  position: absolute;
-  top: 100%;
-  background: var(--card);
-  box-shadow: var(--shadow);
-  border-radius: 8px;
-  padding: 10px 0;
-  min-width: 150px;
-  list-style: none;
-}
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            position: absolute;
+            top: 100%;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 150px;
+            list-style: none;
+        }
 
-/* Show with delay */
-.nav-links li:hover > .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition-delay: 0.2s; /* adjust delay */
-}
+        /* Show with delay */
+        .nav-links li:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0.2s; /* adjust delay */
+        }
 
 
         .dropdown-menu a {
@@ -226,6 +226,16 @@
             font-size: 1.5rem;
             cursor: pointer;
             margin-left: 1rem;
+        }
+        
+        .lang-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: var(--card);
+            color: var(--text);
+            border: 1px solid var(--glass);
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         /* Mobile navigation */
@@ -575,12 +585,37 @@
             animation: fadeUp 1s ease-out forwards;
             animation-delay: 1.5s;
         }
+        @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
     </style>
 </head>
 <body>
     <header class="header">
         <div class="container nav-container">
-            <a href="redesigned_index.html" class="logo">
+            <a href="home1.html" class="logo">
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
@@ -589,31 +624,31 @@
                 <nav class="nav" id="site-nav">
                     <ul class="nav-links">
                         <li class="dropdown">
-                            <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+                            <a href="home1.html" data-lang="home">Home <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="redesigned_index.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
+                                <li><a href="home1.html" data-lang="home">Home 1</a></li>
+                                <li><a href="home3.html" data-lang="home">Home 2</a></li>
                             </ul>
                         </li>
-                        <li><a href="About us.html">About Us</a></li>
+                        <li><a href="About us.html" data-lang="about_us">About Us</a></li>
                         <li class="dropdown">
-                            <a href="Services.html" class="active">Services <i class="fas fa-chevron-down"></i></a>
+                            <a href="Services.html" class="active" data-lang="services">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                                <li><a href="seo.html" data-lang="seo_content">SEO & Content</a></li>
+                                <li><a href="ppc.html" data-lang="ppc_management">PPC Management</a></li>
+                                <li><a href="social-media.html" data-lang="social_media_marketing">Social Media Marketing</a></li>
+                                <li><a href="web-dev.html" data-lang="web_development">Web Development</a></li>
+                                <li><a href="email.html" data-lang="email_marketing">Email Marketing</a></li>
+                                <li><a href="analytics.html" data-lang="analytics_reporting">Analytics & Reporting</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-lang="blog">Blog</a></li>
+                        <li><a href="contact.html" data-lang="contact_us">Contact Us</a></li>
                         <li class="dropdown">
-                            <a href="login.html">Login <i class="fas fa-chevron-down"></i></a>
+                            <a href="login.html" data-lang="login">Login <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.html">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html">Admin Login</a></li>
+                                <li><a href="index.html" data-lang="sign_up_login">Sign Up/Login</a></li>
+                                <li><a href="sign admin.html" data-lang="admin_login">Admin Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -623,13 +658,20 @@
                         <span>PS</span>
                     </div>
                     <ul class="profile-dropdown-content">
-                        <li><a href="signup.html">Logout</a></li>
+                        <li><a href="index.html" data-lang="logout">Logout</a></li>
                     </ul>
                 </div>
                 <div class="theme-toggle">
                     <button id="theme-toggle" class="btn btn-secondary">
                         <i class="fas fa-moon"></i>
                     </button>
+                </div>
+                <div class="lang-toggle-container">
+                    <select id="lang-toggle" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="he">עברית</option>
+                    </select>
                 </div>
                 <div class="mobile-menu-toggle" id="mobile-toggle">
                     <i class="fas fa-bars"></i>
@@ -647,8 +689,8 @@
 
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in">Email Marketing</h1>
-                    <p class="hero-paragraph animate-fade-up">
+                    <h1 class="hero-title animate-slide-in" data-lang="hero_title">Email Marketing</h1>
+                    <p class="hero-paragraph animate-fade-up" data-lang="hero_paragraph">
                         Build lasting customer relationships and drive conversions with strategic and personalized email campaigns.
                     </p>
                 </div>
@@ -656,10 +698,10 @@
         </section>
         <section class="full-width-section animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Nurture Your Audience</h2>
-                <h3 class="section-subheading" style="margin-bottom: 1.5rem;">We turn subscribers into loyal customers.</h3>
-                <p>Email marketing is one of the most effective ways to communicate directly with your audience. We help you create high-impact email campaigns that build trust and drive sales. Our services include list management, automation, and A/B testing to ensure your messages are always relevant and timely.</p>
-                <p>From welcome sequences to promotional newsletters and abandoned cart reminders, we craft compelling email content that speaks to your audience and motivates them to take action.</p>
+                <h2 class="section-heading" data-lang="nurture_audience_heading">Nurture Your Audience</h2>
+                <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-lang="nurture_audience_subheading">We turn subscribers into loyal customers.</h3>
+                <p data-lang="nurture_audience_p1">Email marketing is one of the most effective ways to communicate directly with your audience. We help you create high-impact email campaigns that build trust and drive sales. Our services include list management, automation, and A/B testing to ensure your messages are always relevant and timely.</p>
+                <p data-lang="nurture_audience_p2">From welcome sequences to promotional newsletters and abandoned cart reminders, we craft compelling email content that speaks to your audience and motivates them to take action.</p>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/1200x/12/1b/a6/121ba6723b434a567c53f5aca4d9d44a.jpg" alt="A photo of an email marketing interface." />
@@ -668,27 +710,27 @@
 
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Key Features of Our Service</h2>
+                <h2 class="section-heading" data-lang="key_features_heading">Key Features of Our Service</h2>
                 <div class="icon-grid">
                     <div class="icon-item">
                         <i class="fas fa-list-ul"></i>
-                        <h4>Audience Segmentation</h4>
-                        <p>Divide your audience into targeted groups to send personalized, relevant messages.</p>
+                        <h4 data-lang="audience_segmentation_h4">Audience Segmentation</h4>
+                        <p data-lang="audience_segmentation_p">Divide your audience into targeted groups to send personalized, relevant messages.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-robot"></i>
-                        <h4>Marketing Automation</h4>
-                        <p>Set up automated email sequences that nurture leads and re-engage customers at the perfect time.</p>
+                        <h4 data-lang="marketing_automation_h4">Marketing Automation</h4>
+                        <p data-lang="marketing_automation_p">Set up automated email sequences that nurture leads and re-engage customers at the perfect time.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-envelope-open-text"></i>
-                        <h4>High-Converting Content</h4>
-                        <p>We write compelling copy and design beautiful email templates that increase open and click-through rates.</p>
+                        <h4 data-lang="high_converting_content_h4">High-Converting Content</h4>
+                        <p data-lang="high_converting_content_p">We write compelling copy and design beautiful email templates that increase open and click-through rates.</p>
                     </div>
                     <div class="icon-item">
                         <i class="fas fa-chart-pie"></i>
-                        <h4>A/B Testing</h4>
-                        <p>We test different subject lines, content, and calls to action to continually optimize performance.</p>
+                        <h4 data-lang="ab_testing_h4">A/B Testing</h4>
+                        <p data-lang="ab_testing_p">We test different subject lines, content, and calls to action to continually optimize performance.</p>
                     </div>
                 </div>
             </div>
@@ -696,27 +738,27 @@
         
         <section class="section animated-element animate-fade-in-up">
             <div class="container">
-                <h2 class="section-heading">Our Proven 4-Step Process</h2>
+                <h2 class="section-heading" data-lang="proven_process_heading">Our Proven 4-Step Process</h2>
                 <div class="process-steps">
                     <div class="process-step">
                         <div class="step-number">01</div>
-                        <h4>Strategy & Planning</h4>
-                        <p>We work with you to define your goals and build a comprehensive email marketing strategy.</p>
+                        <h4 data-lang="step_1_h4">Strategy & Planning</h4>
+                        <p data-lang="step_1_p">We work with you to define your goals and build a comprehensive email marketing strategy.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">02</div>
-                        <h4>Implementation & Design</h4>
-                        <p>We set up your email platform, build your lists, and design custom templates.</p>
+                        <h4 data-lang="step_2_h4">Implementation & Design</h4>
+                        <p data-lang="step_2_p">We set up your email platform, build your lists, and design custom templates.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">03</div>
-                        <h4>Execution & Management</h4>
-                        <p>We manage your campaigns, including automation, list cleaning, and ongoing content creation.</p>
+                        <h4 data-lang="step_3_h4">Execution & Management</h4>
+                        <p data-lang="step_3_p">We manage your campaigns, including automation, list cleaning, and ongoing content creation.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-number">04</div>
-                        <h4>Analysis & Optimization</h4>
-                        <p>We provide detailed reports on campaign metrics and refine the strategy for better results.</p>
+                        <h4 data-lang="step_4_h4">Analysis & Optimization</h4>
+                        <p data-lang="step_4_p">We provide detailed reports on campaign metrics and refine the strategy for better results.</p>
                     </div>
                 </div>
             </div>
@@ -724,9 +766,9 @@
 
         <section class="section full-width-section reverse animated-element animate-fade-in-up">
             <div class="container full-width-content">
-                <h2 class="section-heading">Ready to Connect with Your Customers?</h2>
-                <p>An effective email marketing strategy can transform your business. Let's build a plan to convert your leads and build a loyal customer base.</p>
-                <a href="contact.html" class="btn">Get a Free Consultation</a>
+                <h2 class="section-heading" data-lang="ready_to_connect_heading">Ready to Connect with Your Customers?</h2>
+                <p data-lang="ready_to_connect_p">An effective email marketing strategy can transform your business. Let's build a plan to convert your leads and build a loyal customer base.</p>
+                <a href="contact.html" class="btn" data-lang="free_consultation_btn">Get a Free Consultation</a>
             </div>
             <div class="full-width-image">
                 <img src="https://i.pinimg.com/736x/6d/35/95/6d3595a2839f66ba371637d5f7e9fa30.jpg" alt="An image of a team collaborating on a strategy." />
@@ -740,44 +782,197 @@
                 <div class="logo">
                     <img src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo" class="logo-img">
                 </div>
-                <p>Your partner for digital marketing success. We deliver results that matter.</p>
+                <p data-lang="footer_description">Your partner for digital marketing success. We deliver results that matter.</p>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4 data-lang="footer_quick_links">Quick Links</h4>
                 <ul>
-                    <li><a href="redesigned_index.html">Home</a></li>
-                    <li><a href="About us.html">About Us</a></li>
-                    <li><a href="Services.html">services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home1.html" data-lang="home">Home</a></li>
+                    <li><a href="About us.html" data-lang="about_us">About Us</a></li>
+                    <li><a href="Services.html" data-lang="services">services</a></li>
+                    <li><a href="blog.html" data-lang="blog">Blog</a></li>
+                    <li><a href="contact.html" data-lang="contact_us">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Services</h4>
+                <h4 data-lang="footer_services">Services</h4>
                 <ul>
-                    <li><a href="seo.html">SEO & Content</a></li>
-                                <li><a href="ppc.html">PPC Management</a></li>
-                                <li><a href="social-media.html">Social Media Marketing</a></li>
-                                <li><a href="web-dev.html">Web Development</a></li>
-                                <li><a href="email.html">Email Marketing</a></li>
-                                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                    <li><a href="seo.html" data-lang="seo_content">SEO & Content</a></li>
+                    <li><a href="ppc.html" data-lang="ppc_management">PPC Management</a></li>
+                    <li><a href="social-media.html" data-lang="social_media_marketing">Social Media Marketing</a></li>
+                    <li><a href="web-dev.html" data-lang="web_development">Web Development</a></li>
+                    <li><a href="email.html" data-lang="email_marketing">Email Marketing</a></li>
+                    <li><a href="analytics.html" data-lang="analytics_reporting">Analytics & Reporting</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Contact Info</h4>
+                <h4 data-lang="footer_contact_info">Contact Info</h4>
                 <ul>
                     <li><a href="#">info@stackly.com</a></li>
                     <li><a href="#">+1 (555) 123-4567</a></li>
-                    <li><a href="#">123 Marketing Lane, Suite 456, City, State</a></li>
+                    <li><a href="#" data-lang="footer_address">123 Marketing Lane, Suite 456, City, State</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-lang="footer_copyright">
             &copy; 2024 Stackly Digital Marketing. All rights reserved.
         </div>
     </footer>
 
     <script>
+        const languageData = {
+            "ar": {
+                "home": "الرئيسية",
+                "about_us": "من نحن",
+                "services": "الخدمات",
+                "seo_content": "تحسين محركات البحث والمحتوى",
+                "ppc_management": "إدارة حملات الدفع لكل نقرة",
+                "social_media_marketing": "التسويق عبر وسائل التواصل الاجتماعي",
+                "web_development": "تطوير الويب",
+                "email_marketing": "التسويق عبر البريد الإلكتروني",
+                "analytics_reporting": "التحليلات والتقارير",
+                "blog": "المدونة",
+                "contact_us": "اتصل بنا",
+                "login": "تسجيل الدخول",
+                "sign_up_login": "التسجيل/تسجيل الدخول",
+                "admin_login": "تسجيل دخول المسؤول",
+                "logout": "تسجيل الخروج",
+                "hero_title": "التسويق عبر البريد الإلكتروني",
+                "hero_paragraph": "بناء علاقات دائمة مع العملاء وزيادة التحويلات من خلال حملات بريد إلكتروني استراتيجية وشخصية.",
+                "nurture_audience_heading": "تنمية جمهورك",
+                "nurture_audience_subheading": "نحن نحول المشتركين إلى عملاء أوفياء.",
+                "nurture_audience_p1": "يُعد التسويق عبر البريد الإلكتروني من أكثر الطرق فعالية للتواصل مباشرةً مع جمهورك. نحن نساعدك في إنشاء حملات بريد إلكتروني عالية التأثير تبني الثقة وتدفع المبيعات. تشمل خدماتنا إدارة القوائم، والأتمتة، واختبار A/B لضمان أن تكون رسائلك ذات صلة وفي الوقت المناسب دائمًا.",
+                "nurture_audience_p2": "بدءًا من التسلسلات الترحيبية إلى الرسائل الإخبارية الترويجية وتذكيرات سلة التسوق المتروكة، نصوغ محتوى بريد إلكتروني جذابًا يتحدث إلى جمهورك ويحفزهم على اتخاذ إجراء.",
+                "key_features_heading": "الميزات الرئيسية لخدمتنا",
+                "audience_segmentation_h4": "تجزئة الجمهور",
+                "audience_segmentation_p": "قسّم جمهورك إلى مجموعات مستهدفة لإرسال رسائل مخصصة وذات صلة.",
+                "marketing_automation_h4": "أتمتة التسويق",
+                "marketing_automation_p": "قم بإعداد تسلسلات بريد إلكتروني تلقائية لتنمية العملاء المحتملين وإعادة جذب العملاء في الوقت المثالي.",
+                "high_converting_content_h4": "محتوى عالي التحويل",
+                "high_converting_content_p": "نحن نكتب نصوصًا مقنعة ونصمم قوالب بريد إلكتروني جميلة تزيد من معدلات الفتح والنقر.",
+                "ab_testing_h4": "اختبار A/B",
+                "ab_testing_p": "نحن نختبر سطور موضوعات ومحتوى وعبارات تحث على اتخاذ إجراء مختلفة لتحسين الأداء باستمرار.",
+                "proven_process_heading": "عمليتنا المجربة المكونة من 4 خطوات",
+                "step_1_h4": "الاستراتيجية والتخطيط",
+                "step_1_p": "نعمل معك لتحديد أهدافك وبناء استراتيجية تسويق شاملة عبر البريد الإلكتروني.",
+                "step_2_h4": "التنفيذ والتصميم",
+                "step_2_p": "نقوم بإعداد منصة البريد الإلكتروني الخاصة بك، وبناء قوائمك، وتصميم قوالب مخصصة.",
+                "step_3_h4": "التنفيذ والإدارة",
+                "step_3_p": "ندير حملاتك، بما في ذلك الأتمتة، وتنظيف القوائم، وإنشاء المحتوى المستمر.",
+                "step_4_h4": "التحليل والتحسين",
+                "step_4_p": "نقدم تقارير مفصلة عن مقاييس الحملة ونقوم بتحسين الاستراتيجية للحصول على نتائج أفضل.",
+                "ready_to_connect_heading": "هل أنت مستعد للتواصل مع عملائك؟",
+                "ready_to_connect_p": "يمكن لاستراتيجية تسويق عبر البريد الإلكتروني فعالة أن تُحدث تحولًا في عملك. دعنا نضع خطة لتحويل عملائك المحتملين وبناء قاعدة عملاء أوفياء.",
+                "free_consultation_btn": "احصل على استشارة مجانية",
+                "footer_description": "شريكك لنجاح التسويق الرقمي. نحن نحقق نتائج مهمة.",
+                "footer_quick_links": "روابط سريعة",
+                "footer_services": "الخدمات",
+                "footer_contact_info": "معلومات الاتصال",
+                "footer_address": "123 Marketing Lane, Suite 456, City, State",
+                "footer_copyright": "© 2024 Stackly Digital Marketing. جميع الحقوق محفوظة."
+            },
+            "he": {
+                "home": "בית",
+                "about_us": "אודותינו",
+                "services": "שירותים",
+                "seo_content": "קידום אתרים ותוכן",
+                "ppc_management": "ניהול PPC",
+                "social_media_marketing": "שיווק ברשתות חברתיות",
+                "web_development": "פיתוח אתרים",
+                "email_marketing": "שיווק במייל",
+                "analytics_reporting": "אנליטיקס ודוחות",
+                "blog": "בלוג",
+                "contact_us": "צור קשר",
+                "login": "התחברות",
+                "sign_up_login": "הרשמה/התחברות",
+                "admin_login": "התחברות מנהל",
+                "logout": "התנתקות",
+                "hero_title": "שיווק במייל",
+                "hero_paragraph": "בנה קשרים ארוכי טווח עם לקוחות והנע המרות עם קמפיינים מייליים אסטרטגיים ומותאמים אישית.",
+                "nurture_audience_heading": "טפח את הקהל שלך",
+                "nurture_audience_subheading": "אנחנו הופכים מנויים ללקוחות נאמנים.",
+                "nurture_audience_p1": "שיווק במייל הוא אחת הדרכים היעילות ביותר לתקשר ישירות עם הקהל שלך. אנחנו עוזרים לך ליצור קמפיינים מייליים בעלי השפעה גבוהה שבונים אמון ומניעים מכירות. השירותים שלנו כוללים ניהול רשימות, אוטומציה ובדיקות A/B כדי להבטיח שההודעות שלך תמיד יהיו רלוונטיות ובזמן.",
+                "nurture_audience_p2": "החל מרצפי קבלת פנים ועד לניוזלטרים קידומיים ותזכורות לעגלות נטושות, אנחנו יוצרים תוכן מיילי מרתק שמדבר אל הקהל שלך ומניע אותו לפעולה.",
+                "key_features_heading": "תכונות מפתח של השירות שלנו",
+                "audience_segmentation_h4": "פילוח קהלים",
+                "audience_segmentation_p": "פלח את הקהל שלך לקבוצות ממוקדות כדי לשלוח הודעות מותאמות אישית ורלוונטיות.",
+                "marketing_automation_h4": "אוטומציה שיווקית",
+                "marketing_automation_p": "הגדר רצפי מיילים אוטומטיים שמטפחים לידים ומחזירים לקוחות למעורבות בזמן המושלם.",
+                "high_converting_content_h4": "תוכן ממיר במיוחד",
+                "high_converting_content_p": "אנחנו כותבים קופי משכנע ומעצבים תבניות מייל יפות שמגבירות את שיעורי הפתיחה וההקלקה.",
+                "ab_testing_h4": "בדיקות A/B",
+                "ab_testing_p": "אנחנו בודקים כותרות, תוכן וקריאות לפעולה שונות כדי לייעל את הביצועים באופן מתמיד.",
+                "proven_process_heading": "התהליך המוכח שלנו ב-4 שלבים",
+                "step_1_h4": "אסטרטגיה ותכנון",
+                "step_1_p": "אנחנו עובדים איתך כדי להגדיר את היעדים שלך ולבנות אסטרטגיית שיווק במייל מקיפה.",
+                "step_2_h4": "יישום ועיצוב",
+                "step_2_p": "אנחנו מגדירים את פלטפורמת המייל שלך, בונים את הרשימות שלך ומעצבים תבניות מותאמות אישית.",
+                "step_3_h4": "ביצוע וניהול",
+                "step_3_p": "אנחנו מנהלים את הקמפיינים שלך, כולל אוטומציה, ניקוי רשימות ויצירת תוכן שוטפת.",
+                "step_4_h4": "ניתוח ואופטימיזציה",
+                "step_4_p": "אנחנו מספקים דוחות מפורטים על מדדי הקמפיין ומחדדים את האסטרטגיה לתוצאות טובות יותר.",
+                "ready_to_connect_heading": "מוכן להתחבר ללקוחות שלך?",
+                "ready_to_connect_p": "אסטרטגיית שיווק במייל יעילה יכולה לשנות את העסק שלך. בוא נבנה תוכנית שתמיר את הלידים שלך ותבנה בסיס לקוחות נאמן.",
+                "free_consultation_btn": "קבל ייעוץ חינם",
+                "footer_description": "השותף שלך להצלחה בשיווק דיגיטלי. אנחנו מספקים תוצאות שחשובות.",
+                "footer_quick_links": "קישורים מהירים",
+                "footer_services": "שירותים",
+                "footer_contact_info": "פרטי קשר",
+                "footer_address": "123 Marketing Lane, Suite 456, City, State",
+                "footer_copyright": "© 2024 Stackly Digital Marketing. כל הזכויות שמורות."
+            },
+            "en": {
+                "home": "Home",
+                "about_us": "About Us",
+                "services": "Services",
+                "seo_content": "SEO & Content",
+                "ppc_management": "PPC Management",
+                "social_media_marketing": "Social Media Marketing",
+                "web_development": "Web Development",
+                "email_marketing": "Email Marketing",
+                "analytics_reporting": "Analytics & Reporting",
+                "blog": "Blog",
+                "contact_us": "Contact Us",
+                "login": "Login",
+                "sign_up_login": "Sign Up/Login",
+                "admin_login": "Admin Login",
+                "logout": "Logout",
+                "hero_title": "Email Marketing",
+                "hero_paragraph": "Build lasting customer relationships and drive conversions with strategic and personalized email campaigns.",
+                "nurture_audience_heading": "Nurture Your Audience",
+                "nurture_audience_subheading": "We turn subscribers into loyal customers.",
+                "nurture_audience_p1": "Email marketing is one of the most effective ways to communicate directly with your audience. We help you create high-impact email campaigns that build trust and drive sales. Our services include list management, automation, and A/B testing to ensure your messages are always relevant and timely.",
+                "nurture_audience_p2": "From welcome sequences to promotional newsletters and abandoned cart reminders, we craft compelling email content that speaks to your audience and motivates them to take action.",
+                "key_features_heading": "Key Features of Our Service",
+                "audience_segmentation_h4": "Audience Segmentation",
+                "audience_segmentation_p": "Divide your audience into targeted groups to send personalized, relevant messages.",
+                "marketing_automation_h4": "Marketing Automation",
+                "marketing_automation_p": "Set up automated email sequences that nurture leads and re-engage customers at the perfect time.",
+                "high_converting_content_h4": "High-Converting Content",
+                "high_converting_content_p": "We write compelling copy and design beautiful email templates that increase open and click-through rates.",
+                "ab_testing_h4": "A/B Testing",
+                "ab_testing_p": "We test different subject lines, content, and calls to action to continually optimize performance.",
+                "proven_process_heading": "Our Proven 4-Step Process",
+                "step_1_h4": "Strategy & Planning",
+                "step_1_p": "We work with you to define your goals and build a comprehensive email marketing strategy.",
+                "step_2_h4": "Implementation & Design",
+                "step_2_p": "We set up your email platform, build your lists, and design custom templates.",
+                "step_3_h4": "Execution & Management",
+                "step_3_p": "We manage your campaigns, including automation, list cleaning, and ongoing content creation.",
+                "step_4_h4": "Analysis & Optimization",
+                "step_4_p": "We provide detailed reports on campaign metrics and refine the strategy for better results.",
+                "ready_to_connect_heading": "Ready to Connect with Your Customers?",
+                "ready_to_connect_p": "An effective email marketing strategy can transform your business. Let's build a plan to convert your leads and build a loyal customer base.",
+                "free_consultation_btn": "Get a Free Consultation",
+                "footer_description": "Your partner for digital marketing success. We deliver results that matter.",
+                "footer_quick_links": "Quick Links",
+                "footer_services": "Services",
+                "footer_contact_info": "Contact Info",
+                "footer_address": "123 Marketing Lane, Suite 456, City, State",
+                "footer_copyright": "© 2024 Stackly Digital Marketing. All rights reserved."
+            }
+        };
+
         const mobileToggle = document.getElementById('mobile-toggle');
         const nav = document.getElementById('site-nav');
         mobileToggle?.addEventListener('click', () => nav.classList.toggle('open'));
@@ -821,6 +1016,71 @@
                 profileDropdown.classList.remove('show');
             }
         });
+
+        // Language toggle script
+        const langToggle = document.getElementById('lang-toggle');
+        const rootElement = document.querySelector('html');
+
+        const updateLanguage = (lang) => {
+            const data = languageData[lang];
+            if (!data) return;
+
+            // Set page direction
+            if (lang === 'he' || lang === 'ar') {
+                rootElement.dir = 'rtl';
+            } else {
+                rootElement.dir = 'ltr';
+            }
+
+            // Update text content for all elements with a data-lang attribute
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (data[key]) {
+                    element.textContent = data[key];
+                }
+            });
+
+            // Handle specific cases like a.active link
+            document.querySelectorAll('.nav-links a.active').forEach(link => {
+                if (link.dataset.lang) {
+                    link.textContent = data[link.dataset.lang];
+                }
+            });
+        };
+
+        // Event listener for the language toggle
+        langToggle.addEventListener('change', (event) => {
+            const selectedLang = event.target.value;
+            updateLanguage(selectedLang);
+        });
+
+        // Initial language update on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            langToggle.value = savedLang;
+            updateLanguage(savedLang);
+        });
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
     </script>
 </body>
 </html>

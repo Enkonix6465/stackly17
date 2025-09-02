@@ -69,27 +69,27 @@
     .nav-links a { color: var(--muted); font-weight: 600; padding: 5px 0; transition: color .3s; position: relative; }
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
     .dropdown-menu {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  position: absolute;
-  top: 100%;
-  background: var(--card);
-  box-shadow: var(--shadow);
-  border-radius: 8px;
-  padding: 10px 0;
-  min-width: 150px;
-  list-style: none;
-}
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      position: absolute;
+      top: 100%;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      padding: 10px 0;
+      min-width: 150px;
+      list-style: none;
+    }
 
-/* Show with delay */
-.nav-links li:hover > .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition-delay: 0.2s; /* adjust delay */
-}
+    /* Show with delay */
+    .nav-links li:hover > .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition-delay: 0.2s; /* adjust delay */
+    }
 
     .dropdown-menu a { padding: 10px 15px; color: var(--text); display: block; transition: color 0.3s ease; }
     .profile { position: relative; }
@@ -356,44 +356,69 @@
       .dropdown-menu { position:relative; border:none; background:transparent; padding:6px 0 10px; display:block; }
       .footer-content { grid-template-columns: 1fr; }
     }
+    @media (max-width: 780px) {
+  .dropdown-menu {
+    position: static;
+    background: var(--card);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+    margin-left: 16px;
+    min-width: 140px;
+    display: none; /* Hidden by default, shown by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .dropdown-menu li a {
+    color: var(--text);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--surface);
+    color: var(--brand);
+  }
+} 
   </style>
 </head>
 <body>
   <header class="header">
     <div class="container nav-container">
-      <a href="redesigned_index.html" class="logo">
+      <a href="home1.html" class="logo">
         <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
       </a>
       <div class="nav-right">
         <nav class="nav" id="site-nav">
           <ul class="nav-links">
             <li class="dropdown">
-              <a href="redesigned_index.html">Home <i class="fas fa-chevron-down"></i></a>
+              <a href="home1.html" data-lang-key="home">Home <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="redesigned_index.html">Home 1</a></li>
-                <li><a href="home3.html">Home 2</a></li>
+                <li><a href="home1.html" data-lang-key="home1">Home 1</a></li>
+                <li><a href="home3.html" data-lang-key="home2">Home 2</a></li>
               </ul>
             </li>
-            <li><a href="About us.html">About Us</a></li>
+            <li><a href="About us.html" data-lang-key="aboutUs">About Us</a></li>
             <li class="dropdown">
-              <a href="Services.html">Services <i class="fas fa-chevron-down"></i></a>
+              <a href="Services.html" data-lang-key="services">Services <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="Services.html">All Services</a></li>
-                <li><a href="social-media.html">Social Media Marketing</a></li>
-                <li><a href="seo.html">SEO Optimization</a></li>
-                <li><a href="ppc.html">PPC Advertising</a></li>
-                <li><a href="web-dev.html">web development</a></li>
-                <li><a href="email.html">Email Marketing</a></li>
-                <li><a href="analytics.html">Analytics & Reporting</a></li>
+                <li><a href="Services.html" data-lang-key="allServices">All Services</a></li>
+                <li><a href="social-media.html" data-lang-key="socialMedia">Social Media Marketing</a></li>
+                <li><a href="seo.html" data-lang-key="seo">SEO Optimization</a></li>
+                <li><a href="ppc.html" data-lang-key="ppc">PPC Advertising</a></li>
+                <li><a href="web-dev.html" data-lang-key="webDev">Web Development</a></li>
+                <li><a href="email.html" data-lang-key="emailMarketing">Email Marketing</a></li>
+                <li><a href="analytics.html" data-lang-key="analytics">Analytics & Reporting</a></li>
               </ul>
             </li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+            <li><a href="contact.html" data-lang-key="contactUs">Contact Us</a></li>
             <li class="dropdown">
-              <a href="signup.html">Login <i class="fas fa-chevron-down"></i></a>
+              <a href="index.html" data-lang-key="login">Login <i class="fas fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
-                <li><a href="login.html">Sign Up/Login</a></li>
-                <li><a href="sign admin.html">Admin Login</a></li>
+                <li><a href="login.html" data-lang-key="signUpLogin">Sign Up/Login</a></li>
+                <li><a href="sign admin.html" data-lang-key="adminLogin">Admin Login</a></li>
               </ul>
             </li>
           </ul>
@@ -402,9 +427,16 @@
           <div class="profile-icon" id="profile-btn">
             PS
           </div>
-          <div class="dropdown-menu" id="profile-dropdown" style="position: absolute; top: 100%; right: 0; background-color: var(--card); box-shadow: var(--shadow); border-radius: 8px; padding: 10px 0; min-width: 120px; margin-top: 10px; display: none;">
-            <a href="login.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;">Logout</a>
+          <div class="dropdown-menu profile-dropdown-menu" id="profile-dropdown">
+            <a href="login.html" onclick="logout()" style="padding: 10px 15px; color: var(--text); display: block;" data-lang-key="logout">Logout</a>
           </div>
+        </div>
+        <div class="language-switcher">
+          <select id="language-select" class="btn btn-mini">
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+            <option value="he">Hebrew</option>
+          </select>
         </div>
         <div class="theme-toggle">
           <button id="theme-toggle" class="btn btn-secondary">
@@ -427,39 +459,39 @@
         <div class="hero-gradient"></div>
         <div class="hero-content">
           <div class="hero-card">
-            <h1 class="hero-title">Our Blog</h1>
-            <p class="hero-sub">.</p>
+            <h1 class="hero-title" data-lang-key="blogTitle">Our Blog</h1>
+            <p class="hero-sub" data-lang-key="blogSubTitle">.</p>
           </div>
         </div>
       </section>
 
       <section class="section">
           <div class="container animated-element animate-fade-in-up">
-              <h2 class="section-heading">Latest Articles</h2>
-              <p class="section-subheading">A curated collection of our most recent and valuable posts.</p>
+              <h2 class="section-heading" data-lang-key="latestArticlesHeading">Latest Articles</h2>
+              <p class="section-subheading" data-lang-key="latestArticlesSubheading">A curated collection of our most recent and valuable posts.</p>
               <div class="blog-grid">
                   <div class="blog-card">
-                      <img src="https://i.pinimg.com/736x/99/6c/4e/996c4efb72e62aa0c7e00fff2bdc9c32.jpg" alt="Image of a person interacting with an AI interface." />
+                      <img src="https://i.pinimg.com/73x/99/6c/4e/996c4efb72e62aa0c7e00fff2bdc9c32.jpg" alt="Image of a person interacting with an AI interface." />
                       <div class="blog-content">
-                          <h3>The Role of AI in Modern Marketing</h3>
-                          <p>Explore how artificial intelligence is transforming how we connect with customers and drive conversions.</p>
-                          <a href="AI.html">Read More &rarr;</a>
+                          <h3 data-lang-key="article1Title">The Role of AI in Modern Marketing</h3>
+                          <p data-lang-key="article1Text">Explore how artificial intelligence is transforming how we connect with customers and drive conversions.</p>
+                          <a href="AI.html" data-lang-key="readMore">Read More &rarr;</a>
                       </div>
                   </div>
                   <div class="blog-card">
-                      <img src="https://i.pinimg.com/736x/d5/44/3d/d5443d71e44c3ffbb73bd492d1b667bd.jpg" alt="Image of a search engine optimization chart with rising trends." />
+                      <img src="https://i.pinimg.com/73x/77/2c/8d/772c8dc04ef0be5551c7d9dc358594e6.jpg" alt="Image of a search engine optimization chart with rising trends." />
                       <div class="blog-content">
-                          <h3>SEO Trends to Watch in 2024</h3>
-                          <p>An in-depth look at the key strategies you need to implement to stay ahead in search engine rankings.</p>
-                          <a href="SEO Trends .html">Read More &rarr;</a>
+                          <h3 data-lang-key="article2Title">SEO Trends to Watch in 2024</h3>
+                          <p data-lang-key="article2Text">An in-depth look at the key strategies you need to implement to stay ahead in search engine rankings.</p>
+                          <a href="SEO Trends .html" data-lang-key="readMore">Read More &rarr;</a>
                       </div>
                   </div>
                   <div class="blog-card">
                       <img src="https://i.pinimg.com/1200x/a1/40/c9/a140c95ee36f9538d72f20de73d688fc.jpg" alt="Image of a social media planner with various social media icons." />
                       <div class="blog-content">
-                          <h3>Creating a High-Impact Social Media Strategy</h3>
-                          <p>Learn to craft a social media plan that resonates with your audience and generates real engagement.</p>
-                          <a href="Social Media Strategy.html">Read More &rarr;</a>
+                          <h3 data-lang-key="article3Title">Creating a High-Impact Social Media Strategy</h3>
+                          <p data-lang-key="article3Text">Learn to craft a social media plan that resonates with your audience and generates real engagement.</p>
+                          <a href="Social Media Strategy.html" data-lang-key="readMore">Read More &rarr;</a>
                       </div>
                   </div>
               </div>
@@ -468,32 +500,32 @@
 
       <section class="section">
           <div class="container animated-element animate-fade-in-up">
-              <h2 class="section-heading">Explore By Category</h2>
-              <p class="section-subheading">Find the insights you need by topic.</p>
+              <h2 class="section-heading" data-lang-key="categoriesHeading">Explore By Category</h2>
+              <p class="section-subheading" data-lang-key="categoriesSubheading">Find the insights you need by topic.</p>
               <div class="categories-grid">
                   <div class="category-card">
                       <i class="fas fa-search-dollar"></i>
-                      <h4>SEO</h4>
+                      <h4 data-lang-key="categorySEO">SEO</h4>
                   </div>
                   <div class="category-card">
                       <i class="fas fa-ad"></i>
-                      <h4>PPC</h4>
+                      <h4 data-lang-key="categoryPPC">PPC</h4>
                   </div>
                   <div class="category-card">
                       <i class="fas fa-share-alt"></i>
-                      <h4>Social Media</h4>
+                      <h4 data-lang-key="categorySocial">Social Media</h4>
                   </div>
                   <div class="category-card">
                       <i class="fas fa-code"></i>
-                      <h4>Web Dev</h4>
+                      <h4 data-lang-key="categoryWebDev">Web Dev</h4>
                   </div>
                   <div class="category-card">
                       <i class="fas fa-envelope-open-text"></i>
-                      <h4>Email Marketing</h4>
+                      <h4 data-lang-key="categoryEmail">Email Marketing</h4>
                   </div>
                   <div class="category-card">
                       <i class="fas fa-chart-line"></i>
-                      <h4>Analytics</h4>
+                      <h4 data-lang-key="categoryAnalytics">Analytics</h4>
                   </div>
               </div>
           </div>
@@ -501,16 +533,16 @@
 
       <section class="section animated-element animate-fade-in-up">
           <div class="container">
-              <h2 class="section-heading">Featured Post</h2>
-              <p class="section-subheading">An in-depth guide to one of our most popular topics.</p>
+              <h2 class="section-heading" data-lang-key="featuredPostHeading">Featured Post</h2>
+              <p class="section-subheading" data-lang-key="featuredPostSubheading">An in-depth guide to one of our most popular topics.</p>
               <div class="featured-post-container">
                   <div class="featured-post-image">
-                      <img src="https://i.pinimg.com/736x/75/81/2e/75812e7c5d058420ab6b8a71de308f45.jpg" alt="Image representing a featured article." />
+                      <img src="https://i.pinimg.com/73x/75/81/2e/75812e7c5d058420ab6b8a71de308f45.jpg" alt="Image representing a featured article." />
                   </div>
                   <div class="featured-post-content">
-                      <h3>How to Master Content Marketing in a Competitive Market</h3>
-                      <p>Learn the secrets to creating a powerful content strategy that cuts through the noise and connects with your target audience. We cover everything from keyword research to distribution and performance tracking.</p>
-                      <a href="contact.html">Read the Full Post &rarr;</a>
+                      <h3 data-lang-key="featuredPostTitle">How to Master Content Marketing in a Competitive Market</h3>
+                      <p data-lang-key="featuredPostText">Learn the secrets to creating a powerful content strategy that cuts through the noise and connects with your target audience. We cover everything from keyword research to distribution and performance tracking.</p>
+                      <a href="contact.html" data-lang-key="readFullPost">Read the Full Post &rarr;</a>
                   </div>
               </div>
           </div>
@@ -520,9 +552,9 @@
           <div class="container animated-element animate-fade-in-up">
               <div class="cta-image-section">
                   <div class="cta-image-content">
-                      <h2>Ready to Elevate Your Digital Presence?</h2>
-                      <p>Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
-                      <button> <a href="contact.html" class="cta-button">Contact Us</a></button>
+                      <h2 data-lang-key="ctaHeading">Ready to Elevate Your Digital Presence?</h2>
+                      <p data-lang-key="ctaText">Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.</p>
+                      <button> <a href="contact.html" class="cta-button" data-lang-key="ctaButton">Contact Us</a></button>
                   </div>
               </div>
           </div>
@@ -534,108 +566,366 @@
       <div class="footer-content">
         <div>
            <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-          <p>Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
+          <p data-lang-key="footerText">Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
          
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4 data-lang-key="quickLinksHeading">Quick Links</h4>
           <ul>
-            <li><a href="redesigned_index.html">Home</a></li>
-            <li><a href="About us.html">About Us</a></li>
-            <li><a href="Services.html">Services</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-
-            <li><a href="contact.html">Contact</a></li>
-          
+            <li><a href="home1.html" data-lang-key="home">Home</a></li>
+            <li><a href="About us.html" data-lang-key="aboutUs">About Us</a></li>
+            <li><a href="Services.html" data-lang-key="services">Services</a></li>
+            <li><a href="blog.html" data-lang-key="blog">Blog</a></li>
+            <li><a href="contact.html" data-lang-key="contact">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4>Services</h4>
+          <h4 data-lang-key="servicesHeading">Services</h4>
           <ul>
            <li>
-                <li><a href="seo.html">SEO</a></li>
-                <li><a href="ppc.html">PPC</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-                <li><a href="web-dev.html">Web Development</a></li>
-                 <li><a href="email.html">email marketing</a></li>
-                  <li><a href="analytics.html">Analytics</a></li>
+                <a href="seo.html" data-lang-key="seo">SEO</a>
+            </li>
+            <li>
+                <a href="ppc.html" data-lang-key="ppc">PPC</a>
+            </li>
+            <li>
+                <a href="social-media.html" data-lang-key="socialMedia">Social Media</a>
+            </li>
+            <li>
+                <a href="web-dev.html" data-lang-key="webDev">Web Development</a>
+            </li>
+            <li>
+                 <a href="email.html" data-lang-key="emailMarketing">Email Marketing</a>
+            </li>
+            <li>
+                 <a href="analytics.html" data-lang-key="analytics">Analytics</a>
+            </li>
         </div>
         <div>
-          <h4>Contact Info</h4>
+          <h4 data-lang-key="contactInfoHeading">Contact Info</h4>
           <ul>
-            <li><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
-            <li><i class="fas fa-phone"></i> (555) 123-4567</li>
-            <li><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
+            <li data-lang-key="contactAddress"><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
+            <li data-lang-key="contactPhone"><i class="fas fa-phone"></i> (555) 123-4567</li>
+            <li data-lang-key="contactEmail"><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+      <div class="footer-bottom" data-lang-key="footerCopyright">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
     </div>
   </footer>
 
   <script>
-    // Mobile nav toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const nav = document.getElementById('site-nav');
-    mobileToggle?.addEventListener('click', ()=> nav.classList.toggle('open'));
-
-    // Theme toggle (simple demo toggling body class)
-    document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
-      document.body.classList.toggle('light');
-    });
-
-    // Profile dropdown functionality
-    const profileBtn = document.getElementById('profile-btn');
-    const profileDropdown = document.getElementById('profile-dropdown');
-    
-    profileBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-        profileDropdown.style.display = 'none';
-      }
-    });
-
-    // Logout function
-    function logout() {
-      // Add your logout logic here
-      alert('Logged out successfully!');
-      window.location.href = 'login.html';
-    }
-
-    // Function to handle the animated elements on scroll
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.animated-element');
-
-        // Set up a new IntersectionObserver
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                // If the element is visible, add the 'visible' class to trigger the animation
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Stop observing the element once it's visible to prevent re-animating
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            // Adjust the root margin to make the animation trigger earlier or later
-            rootMargin: '0px',
-            // Trigger when at least 20% of the element is visible
-            threshold: 0.2
-        });
-
-        // Loop through all elements and observe them
-        elements.forEach(element => {
-            observer.observe(element);
-        });
+    // Dictionary of translations
+    const translations = {
+        'en': {
+            'home': 'Home',
+            'home1': 'Home 1',
+            'home2': 'Home 2',
+            'aboutUs': 'About Us',
+            'services': 'Services',
+            'allServices': 'All Services',
+            'socialMedia': 'Social Media Marketing',
+            'seo': 'SEO Optimization',
+            'ppc': 'PPC Advertising',
+            'webDev': 'Web Development',
+            'emailMarketing': 'Email Marketing',
+            'analytics': 'Analytics & Reporting',
+            'blog': 'Blog',
+            'contactUs': 'Contact Us',
+            'login': 'Login',
+            'signUpLogin': 'Sign Up/Login',
+            'adminLogin': 'Admin Login',
+            'logout': 'Logout',
+            'blogTitle': 'Our Blog',
+            'blogSubTitle': '.',
+            'latestArticlesHeading': 'Latest Articles',
+            'latestArticlesSubheading': 'A curated collection of our most recent and valuable posts.',
+            'readMore': 'Read More →',
+            'categoriesHeading': 'Explore By Category',
+            'categoriesSubheading': 'Find the insights you need by topic.',
+            'categorySEO': 'SEO',
+            'categoryPPC': 'PPC',
+            'categorySocial': 'Social Media',
+            'categoryWebDev': 'Web Dev',
+            'categoryEmail': 'Email Marketing',
+            'categoryAnalytics': 'Analytics',
+            'featuredPostHeading': 'Featured Post',
+            'featuredPostSubheading': 'An in-depth guide to one of our most popular topics.',
+            'readFullPost': 'Read the Full Post →',
+            'ctaHeading': 'Ready to Elevate Your Digital Presence?',
+            'ctaText': 'Our team of experts is here to help you achieve your business goals. Contact us for a free consultation.',
+            'ctaButton': 'Contact Us',
+            'footerText': 'Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.',
+            'quickLinksHeading': 'Quick Links',
+            'servicesHeading': 'Services',
+            'contactInfoHeading': 'Contact Info',
+            'contactAddress': '123 Digital Marketing Blvd, City, State 12345',
+            'contactPhone': '(555) 123-4567',
+            'contactEmail': 'info@stacklydigital.com',
+            'footerCopyright': '© 2025 Stackly Digital Marketing. All rights reserved.',
+            'article1Title': 'The Role of AI in Modern Marketing',
+            'article1Text': 'Explore how artificial intelligence is transforming how we connect with customers and drive conversions.',
+            'article2Title': 'SEO Trends to Watch in 2024',
+            'article2Text': 'An in-depth look at the key strategies you need to implement to stay ahead in search engine rankings.',
+            'article3Title': 'Creating a High-Impact Social Media Strategy',
+            'article3Text': 'Learn to craft a social media plan that resonates with your audience and generates real engagement.',
+            'featuredPostTitle': 'How to Master Content Marketing in a Competitive Market',
+            'featuredPostText': 'Learn the secrets to creating a powerful content strategy that cuts through the noise and connects with your target audience. We cover everything from keyword research to distribution and performance tracking.',
+        },
+        'ar': {
+            'home': 'الرئيسية',
+            'home1': 'الرئيسية 1',
+            'home2': 'الرئيسية 2',
+            'aboutUs': 'من نحن',
+            'services': 'الخدمات',
+            'allServices': 'جميع الخدمات',
+            'socialMedia': 'التسويق عبر وسائل التواصل الاجتماعي',
+            'seo': 'تحسين محركات البحث',
+            'ppc': 'الإعلانات المدفوعة',
+            'webDev': 'تطوير الويب',
+            'emailMarketing': 'التسويق عبر البريد الإلكتروني',
+            'analytics': 'التحليلات والتقارير',
+            'blog': 'المدونة',
+            'contactUs': 'اتصل بنا',
+            'login': 'تسجيل الدخول',
+            'signUpLogin': 'تسجيل/دخول',
+            'adminLogin': 'دخول المسؤول',
+            'logout': 'تسجيل الخروج',
+            'blogTitle': 'مدونتنا',
+            'blogSubTitle': '.',
+            'latestArticlesHeading': 'أحدث المقالات',
+            'latestArticlesSubheading': 'مجموعة من أحدث وأهم منشوراتنا.',
+            'readMore': 'اقرأ المزيد →',
+            'categoriesHeading': 'استكشف حسب الفئة',
+            'categoriesSubheading': 'اعثر على الأفكار التي تحتاجها حسب الموضوع.',
+            'categorySEO': 'تحسين محركات البحث',
+            'categoryPPC': 'الإعلانات المدفوعة',
+            'categorySocial': 'وسائل التواصل الاجتماعي',
+            'categoryWebDev': 'تطوير الويب',
+            'categoryEmail': 'التسويق عبر البريد الإلكتروني',
+            'categoryAnalytics': 'التحليلات',
+            'featuredPostHeading': 'منشور مميز',
+            'featuredPostSubheading': 'دليل متعمق لأحد أكثر مواضيعنا شعبية.',
+            'readFullPost': 'اقرأ المنشور بالكامل →',
+            'ctaHeading': 'هل أنت مستعد لرفع مستوى وجودك الرقمي؟',
+            'ctaText': 'فريق الخبراء لدينا هنا لمساعدتك على تحقيق أهداف عملك. اتصل بنا للحصول على استشارة مجانية.',
+            'ctaButton': 'اتصل بنا',
+            'footerText': 'شريكك الموثوق في النمو الرقمي. نقدم حلولًا تسويقية مبتكرة وخبرة لمساعدة عملك على الازدهار عبر الإنترنت.',
+            'quickLinksHeading': 'روابط سريعة',
+            'servicesHeading': 'الخدمات',
+            'contactInfoHeading': 'معلومات الاتصال',
+            'contactAddress': '123 Digital Marketing Blvd, City, State 12345',
+            'contactPhone': '(555) 123-4567',
+            'contactEmail': 'info@stacklydigital.com',
+            'footerCopyright': '© 2025 Stackly Digital Marketing. جميع الحقوق محفوظة.',
+            'article1Title': 'دور الذكاء الاصطناعي في التسويق الحديث',
+            'article1Text': 'استكشف كيف يغير الذكاء الاصطناعي طريقة تواصلنا مع العملاء وقيادة التحويلات.',
+            'article2Title': 'اتجاهات تحسين محركات البحث التي يجب مراقبتها في عام 2024',
+            'article2Text': 'نظرة متعمقة على الاستراتيجيات الرئيسية التي تحتاج إلى تطبيقها للبقاء في الصدارة في تصنيفات محركات البحث.',
+            'article3Title': 'إنشاء استراتيجية وسائل التواصل الاجتماعي عالية التأثير',
+            'article3Text': 'تعلم كيفية صياغة خطة وسائل التواصل الاجتماعي التي تتفاعل مع جمهورك وتولد مشاركة حقيقية.',
+            'featuredPostTitle': 'كيفية إتقان تسويق المحتوى في سوق تنافسية',
+            'featuredPostText': 'تعلم أسرار إنشاء استراتيجية محتوى قوية تتجاوز الضوضاء وتتصل بجمهورك المستهدف. نغطي كل شيء من البحث عن الكلمات الرئيسية إلى التوزيع وتتبع الأداء.',
+        },
+        'he': {
+            'title': 'Stackly שיווק דיגיטלי - בלוג',
+            'home': 'בית',
+            'home1': 'בית 1',
+            'home2': 'בית 2',
+            'aboutUs': 'אודותינו',
+            'services': 'שירותים',
+            'allServices': 'כל השירותים',
+            'socialMedia': 'שיווק במדיה חברתית',
+            'seo': 'אופטימיזציית SEO',
+            'ppc': 'פרסום PPC',
+            'webDev': 'פיתוח אתרים',
+            'emailMarketing': 'שיווק במייל',
+            'analytics': 'אנליטיקה ודיווח',
+            'blog': 'בלוג',
+            'contactUs': 'צור קשר',
+            'login': 'התחברות',
+            'signUpLogin': 'הרשמה/התחברות',
+            'adminLogin': 'התחברות מנהל',
+            'logout': 'התנתקות',
+            'blogTitle': 'הבלוג שלנו',
+            'blogSubTitle': '.',
+            'latestArticlesHeading': 'מאמרים אחרונים',
+            'latestArticlesSubheading': 'אוסף של הפוסטים האחרונים והיקרים ביותר שלנו.',
+            'readMore': 'קרא עוד →',
+            'categoriesHeading': 'חקור לפי קטגוריה',
+            'categoriesSubheading': 'מצא את התובנות שאתה צריך לפי נושא.',
+            'categorySEO': 'SEO',
+            'categoryPPC': 'PPC',
+            'categorySocial': 'מדיה חברתית',
+            'categoryWebDev': 'פיתוח אתרים',
+            'categoryEmail': 'שיווק במייל',
+            'categoryAnalytics': 'אנליטיקה',
+            'featuredPostHeading': 'פוסט מומלץ',
+            'featuredPostSubheading': 'מדריך מעמיק לאחד הנושאים הפופולריים ביותר שלנו.',
+            'readFullPost': 'קרא את הפוסט המלא →',
+            'ctaHeading': 'מוכן להעלות את הנוכחות הדיגיטלית שלך?',
+            'ctaText': 'צוות המומחים שלנו כאן כדי לעזור לך להשיג את המטרות העסקיות שלך. צור איתנו קשר לייעוץ חינם.',
+            'ctaButton': 'צור קשר',
+            'footerText': 'השותף המהימן שלך לצמיחה דיגיטלית. אנו מספקים פתרונות שיווק חדשניים ומומחיות כדי לעזור לעסק שלך לשגשג באינטרנט.',
+            'quickLinksHeading': 'קישורים מהירים',
+            'servicesHeading': 'שירותים',
+            'contactInfoHeading': 'פרטי התקשרות',
+            'contactAddress': '123 Digital Marketing Blvd, City, State 12345',
+            'contactPhone': '(555) 123-4567',
+            'contactEmail': 'info@stacklydigital.com',
+            'footerCopyright': '© 2025 Stackly Digital Marketing. כל הזכויות שמורות.',
+            'article1Title': 'תפקיד הבינה המלאכותית בשיווק המודרני',
+            'article1Text': 'חקור כיצד בינה מלאכותית משנה את הדרך בה אנו מתחברים ללקוחות ומניעים המרות.',
+            'article2Title': 'מגמות SEO שכדאי לעקוב אחריהן ב-2024',
+            'article2Text': 'מבט מעמיק על האסטרטגיות המרכזיות שאתה צריך ליישם כדי להישאר בחוד החנית בדירוגי מנועי החיפוש.',
+            'article3Title': 'יצירת אסטרטגיית מדיה חברתית בעלת השפעה גבוהה',
+            'article3Text': 'למד ליצור תוכנית מדיה חברתית שמתאימה לקהל שלך ומייצרת מעורבות אמיתית.',
+            'featuredPostTitle': 'איך לשלוט בשיווק תוכן בשוק תחרותי',
+            'featuredPostText': 'למד את הסודות ליצירת אסטרטגיית תוכן חזקה שחותכת את הרעש ומתחברת לקהל היעד שלך. אנו מכסים הכל, ממחקר מילות מפתח ועד הפצה ומעקב אחר ביצועים.',
+        }
     };
 
-    // Run the animation function once the window has loaded
-    window.onload = animateOnScroll;
+    function setLanguage(lang) {
+        // Set body direction based on language
+        if (lang === 'ar' || lang === 'he') {
+            document.body.style.direction = 'rtl';
+        } else {
+            document.body.style.direction = 'ltr';
+        }
+
+        // Update all elements with a data-lang-key attribute
+        document.querySelectorAll('[data-lang-key]').forEach(element => {
+            const key = element.getAttribute('data-lang-key');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+    }
+
+    // Set initial language on page load
+    window.addEventListener('load', () => {
+        const langSelect = document.getElementById('language-select');
+        setLanguage(langSelect.value);
+
+        // Add event listener to the language select dropdown
+        langSelect.addEventListener('change', (event) => {
+            setLanguage(event.target.value);
+        });
+
+        // Mobile nav toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const nav = document.getElementById('site-nav');
+        mobileToggle?.addEventListener('click', () => nav.classList.toggle('open'));
+
+        // Theme toggle (simple demo toggling body class)
+        document.getElementById('theme-toggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+        });
+
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        const initialsDisplay = document.getElementById('initials-display');
+
+        // --- UPDATED CODE: Fetch and display user initials from localStorage ---
+        function getUserInitials(firstName, lastName) {
+            let initials = '';
+            if (firstName) {
+                initials += firstName.charAt(0);
+            }
+            if (lastName) {
+                initials += lastName.charAt(0);
+            }
+            return initials.toUpperCase() || 'PS';
+        }
+
+        const userDataString = localStorage.getItem('userData');
+        if (userDataString) {
+            try {
+                const userData = JSON.parse(userDataString);
+                if (profileBtn) {
+                    profileBtn.textContent = getUserInitials(userData.firstName, userData.lastName);
+                }
+            } catch (e) {
+                console.error("Failed to parse user data from localStorage", e);
+                if (profileBtn) {
+                    profileBtn.textContent = 'PS';
+                }
+            }
+        } else {
+            if (profileBtn) {
+                profileBtn.textContent = 'PS';
+            }
+        }
+        // --- END UPDATED CODE ---
+
+        // Profile dropdown functionality
+        profileBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+            profileDropdown.classList.remove('active');
+          }
+        });
+
+        // Logout function
+        function logout() {
+          // Add your logout logic here
+          console.log('Logged out successfully!');
+          window.location.href = 'login.html';
+        }
+        
+        // Function to handle the animated elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animated-element');
+            
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.2
+            });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        };
+        
+        // Run the animation function once the window has loaded
+        animateOnScroll();
+    });
+    
+    
+// Mobile dropdown toggle for navigation
+document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(e) {
+    // Only run on mobile
+    if (window.innerWidth <= 780) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
+});
+
+// Hide dropdowns when resizing to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 780) {
+    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+      menu.style.display = '';
+    });
+  }
+});
   </script>
 </body>
 </html>
