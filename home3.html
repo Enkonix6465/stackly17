@@ -46,39 +46,94 @@
         }
         
         body {
-          margin: 0;
-          font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-          background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-          color: var(--text);
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0;
+            font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        
-        /* RTL layout for Arabic and Hebrew */
-        body.rtl {
-            direction: rtl;
-            text-align: right;
-        }
-        
-        body.rtl .nav-links {
-            padding-right: 0;
-            padding-left: 10px;
-        }
-        
-        body.rtl .nav-links a {
-            padding-right: 0;
-            padding-left: 5px;
-        }
-
-        body.rtl .dropdown-menu {
-            right: auto;
-            left: 0;
-        }
-        
         a { color: inherit; text-decoration: none; }
         img { max-width: 100%; display: block; }
         .container { width: min(1200px, 92%); margin-inline: auto; }
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); margin: 0; }
+
+        /* Keyframes for hero text animation */
+        @keyframes fadeInSlideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        /* Hero section text animations */
+        .hero-section .eyebrow {
+          animation: fadeInSlideUp 0.8s ease-out forwards;
+          animation-delay: 0.2s;
+          opacity: 0;
+        }
+        .hero-section .hero-title {
+          animation: fadeInSlideUp 0.8s ease-out forwards;
+          animation-delay: 0.4s;
+          opacity: 0;
+        }
+        .hero-section .hero-sub {
+          animation: fadeInSlideUp 0.8s ease-out forwards;
+          animation-delay: 0.6s;
+          opacity: 0;
+        }
+        .hero-section .hero-cta {
+          animation: fadeInSlideUp 0.8s ease-out forwards;
+          animation-delay: 0.8s;
+          opacity: 0;
+        }
+
+        /* New scroll animation styles */
+        .animate-me {
+            opacity: 0;
+            transform: translateX(var(--translate-x, 0));
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .animate-me.card {
+            transition-delay: var(--delay, 0s);
+        }
+        .animate-me.service-card {
+            transition-delay: var(--delay, 0s);
+        }
+        .animate-me.stat-item {
+            transition-delay: var(--delay, 0s);
+        }
+
+        /* CTA button pulse animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 77, 183, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(34, 77, 183, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 77, 183, 0);
+            }
+        }
+        .btn-primary.cta-pulse {
+            animation: pulse 2s infinite;
+        }
 
         /* ---------- Header (sticky, glass) ---------- */
         .header { background-color: var(--surface); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); transition: background-color 0.3s ease; }
@@ -90,120 +145,37 @@
         .nav-links { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; align-items: center; }
         .nav-links a { color: var(--muted); font-weight: 600; padding: 5px 0; transition: color .3s; position: relative; }
         .nav-links a:hover, .nav-links a.active { color: var(--text); }
-        .dropdown-menu {
-          opacity: 0;
-          visibility: hidden;
-          transform: translateY(10px);
-          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-          position: absolute;
-          top: 100%;
-          background: var(--card);
-          box-shadow: var(--shadow);
-          border-radius: 8px;
-          padding: 10px 0;
-          min-width: 150px;
-          list-style: none;
-        }
+    .dropdown-menu {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      position: absolute;
+      top: 100%;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      padding: 10px 0;
+      min-width: 150px;
+      list-style: none;
+    }
 
-        /* Show with delay */
-        .nav-links li:hover > .dropdown-menu {
-          opacity: 1;
-          visibility: visible;
-          transform: translateY(0);
-          transition-delay: 0.2s; /* adjust delay */
-        }
-        .dropdown-menu.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
+    /* Show with delay */
+    .nav-links li:hover > .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition-delay: 0.2s; /* adjust delay */
+    }
+
         .dropdown-menu a { padding: 10px 15px; color: var(--text); display: block; transition: color 0.3s ease; }
-        
-        .profile-container {
-            position: relative;
-        }
-
-        .profile-icon { 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            background-color: #9B59B6; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            font-weight: 700; 
-            cursor: pointer; 
-        }
-
-        .profile-menu {
-            display: none;
-            position: absolute;
-            top: 120%;
-            right: 0;
-            background: var(--card);
-            box-shadow: var(--shadow);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: background-color 0.3s ease;
-            min-width: 120px;
-            z-index: 10;
-        }
-
-        .profile-menu.active { 
-            display: block; 
-        }
-
-        .profile-menu a,
-        .profile-menu button {
-            display: block; 
-            padding: 10px 15px; 
-            color: var(--text); 
-            white-space: nowrap; 
-            transition: color 0.3s ease; 
-        }
-
-        .profile-menu a:hover,
-        .profile-menu button:hover {
-            color: var(--brand);
-        }
-
+        .profile { position: relative; }
+        .profile-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #9B59B6; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; cursor: pointer; }
+        .profile-menu { display: none; position: block; top: 120%; right: 0; background: var(--card); box-shadow: var(--shadow); border-radius: 8px; overflow: hidden; transition: background-color 0.3s ease; }
+        .profile-menu a { display: block; padding: 10px 15px; color: var(--text); white-space: nowrap; transition: color 0.3s ease; }
+        .profile:hover .profile-menu { display: block; }
         .mobile-menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
         .theme-toggle { display: block; }
-        .language-toggle .btn {
-            display: none;
-        }
-
-        .language-select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background: var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23a6b1d0"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>') no-repeat right 0.75rem center;
-            background-size: 1rem;
-            color: var(--text);
-            border: 1px solid var(--muted);
-            border-radius: 8px;
-            padding: 8px 12px;
-            padding-right: 2.5rem; /* Space for the custom arrow */
-            font-size: 0.9rem;
-            cursor: pointer;
-            outline: none;
-            min-width: 120px;
-            transition: border-color 0.3s ease;
-        }
-        
-        .language-select:hover {
-            border-color: var(--brand);
-        }
-
-        /* RTL adjustments for the select arrow */
-        body.rtl .language-select {
-            background: var(--surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23a6b1d0"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>') no-repeat left 0.75rem center;
-            background-size: 1rem;
-            padding-left: 2.5rem;
-            padding-right: 12px;
-        }
 
         @media (max-width: 768px) {
           .nav { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--surface); box-shadow: var(--shadow); padding: 1rem 0; }
@@ -211,318 +183,110 @@
           .nav-links { flex-direction: column; gap: 1rem; }
           .mobile-menu-toggle { display: block; }
         }
-        
 
-        /* Global Reset */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-        }
+        /* ---------- Hero (video + gradient + CTA) ---------- */
+        .hero-section { position:relative; height: 86vh; min-height: 560px; overflow:hidden; border-bottom: 1px solid rgba(255,255,255,.06); }
+        .hero-bg-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: saturate(110%) contrast(105%); }
+        .hero-gradient { position:absolute; inset:0; background: var(--hero-overlay-dark); transition: background-color 0.3s ease; }
+        .hero-content { position:relative; z-index:1; height:100%; display:grid; place-items:center; text-align:center; padding: 0 16px; }
+        .hero-card { max-width: 900px; }
+        .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:999px; font-size:.82rem; color: var(--badge-text); background: var(--badge-bg); border:1px solid var(--badge-border); }
+        .hero-title { font-size: clamp(2rem, 5.2vw, 3.6rem); margin:16px 0 10px; line-height:1.05; letter-spacing:-.015em; }
+        .hero-sub { font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--text); margin: 0 0 24px; }
+        .hero-cta { display:inline-flex; gap:12px; }
+        .btn { display:inline-flex; align-items:center; gap:10px; padding: 14px 18px; border-radius: 12px; font-weight:700; transition: transform 0.3s ease; }
+        .btn-primary { background: linear-gradient(90deg, var(--brand), var(--brand-2)); color:#ffff; box-shadow: 0 8px 20px rgba(34,77,183,.35); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(34,77,183,.45); }
+        .btn-ghost { background: var(--glass); border:1px solid rgba(255,255,255,.14); color: var(--text); }
+        .hero-cta-2 { display:inline-flex; gap:12px; }
 
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-        }
+        /* Services section */
+        .services-section { padding: 64px 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .service-card { background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: 24px; text-align: center; transition: transform 0.3s ease, background-color 0.3s ease; box-shadow: var(--shadow); }
+        .service-card:hover { transform: translateY(-6px); }
+        .service-card .icon { font-size: 3rem; color: var(--brand); margin-bottom: 1rem; }
+        .service-card h3 { font-size: 1.3rem; margin-top: 0; margin-bottom: 0.5rem; }
+        .service-card p { color: var(--muted); font-size: 0.95rem; }
 
-        .hero-bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-        }
+        /* Mission section */
+        .mission-section { padding: 64px 0; background: var(--surface); transition: background-color 0.3s ease; }
+        .mission-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .mission-image img { border-radius: 12px; box-shadow: var(--shadow); }
+        .mission-text h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-top: 0; }
+        .mission-text p { color: var(--muted); line-height: 1.6; }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* optional dark overlay */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-        }
-
-        .hero-content {
-            text-align: center;
-            color: #fff;
-            max-width: 800px;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            opacity: 0;
-        }
-
-        .hero-paragraph {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            opacity: 0;
-        }
-
-        .hero-button {
-            display: inline-block;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            background-color: #224DB7;
-            border: none;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            opacity: 0;
-        }
-
-        .hero-button:hover {
-            background-color: #000;
-            transform: scale(1.05);
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-slide-in {
-            animation: slideIn 1s ease-out forwards;
-            animation-delay: 0.5s;
-        }
-
-        .animate-fade-up {
-            animation: fadeUp 1s ease-out forwards;
-            animation-delay: 1s;
-        }
-
-        .animate-fade-up-delayed {
-            animation: fadeUp 1s ease-out forwards;
-            animation-delay: 1.5s;
-        }
-        .animate-slide-in,
-        .animate-fade-up,
-        .animate-fade-up-delayed {
-            animation-fill-mode: both;
-        }
-        
-        /* Sections */
-        .section {
-            padding: 5rem 0;
-        }
-        .section-heading, .section-subheading {
-            text-align: center;
-        }
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            text-align: left;
-        }
-        
-        .service-card {
-            background-color: var(--card);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .service-card i {
-            font-size: 2.5rem;
-            color: var(--brand);
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem;
-        }
-
-        .service-card p {
-            color: var(--muted);
-        }
-
-        /* About Us Section */
-        .about-section {
-            background-color: var(--surface);
-            padding: 5rem 0;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-        }
-        
-        .about-image {
-            flex: 1;
-        }
-
-        .about-image img {
-            max-width: 100%;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-        
-        .about-content {
-            flex: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .about-section {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        /* Case Studies Section */
-        .case-studies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
+        /* Case studies */
+        .case-studies-section { padding: 64px 0; }
+        .case-studies-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
         .case-study-card {
-            background-color: var(--card);
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,.06);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
+        .case-study-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(34,77,183,.25);
+        }
+        .case-study-card img { width: 100%; height: 250px; object-fit: cover; }
+        .card-body { padding: 24px; }
+        .card-body h3 { margin-top: 0; margin-bottom: 0.5rem; }
+        .card-body p { color: var(--muted); }
+        .case-study-meta { display: flex; gap: 8px; margin-bottom: 12px; }
+        .case-study-meta span { background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--badge-text); font-size: 0.8rem; padding: 4px 8px; border-radius: 8px; }
 
-        .case-study-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .case-study-info {
-            padding: 1.5rem;
-        }
-        
-        .case-study-info h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin: 0 0 0.5rem;
-        }
-
-        .case-study-info p {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin: 0;
-        }
-        
-        /* Testimonials Section */
-        .testimonial-card {
-            background-color: var(--card);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .testimonial-card .author-info {
+        .case-study-filters {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 3rem;
         }
 
-        .testimonial-card .author-info img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .testimonial-quote {
-            font-style: italic;
-            font-size: 1.1rem;
+        .filter-btn {
+            background: transparent;
             color: var(--muted);
-            margin-bottom: 1rem;
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--text);
-        }
-        
-        .testimonial-role {
-            color: var(--muted);
+            border: 1px solid var(--muted);
+            padding: 10px 20px;
+            border-radius: 999px;
             font-size: 0.9rem;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background-color: var(--brand);
-            padding: 4rem 0;
-            color: #fff;
-            border-radius: 12px;
-            margin-top: 5rem;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-        
-        .cta-section h2 {
-            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
-        .cta-section p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
+        .filter-btn:hover {
+            color: var(--text);
+            border-color: var(--text);
         }
+
+        .filter-btn.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand);
+            box-shadow: 0 4px 10px rgba(34,77,183,.2);
+        }
+
+        /* Testimonials */
+        .testimonials-section { padding: 64px 0; background: var(--surface); text-align: center; }
+        .testimonial-card { max-width: 800px; margin: 0 auto; padding: 32px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+        .testimonial-text { font-size: 1.2rem; font-style: italic; color: var(--text); line-height: 1.6; }
+        .testimonial-author { margin-top: 20px; font-weight: 600; font-size: 1.1rem; }
+        .author-title { color: var(--muted); font-weight: normal; font-size: 0.9rem; }
+
+        /* CTA */
+        .cta-section { padding: 64px 0; text-align: center; }
+        .cta-section h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 16px; }
+        .cta-section p { color: var(--muted); max-width: 700px; margin: 0 auto 24px; }
 
         /* Footer */
-        .footer {
-            background: var(--surface);
-            border-top: 1px solid rgba(255,255,255,.06);
-            transition: background-color 0.3s ease;
-        }
-        .footer-content {
-            display:grid;
-            grid-template-columns: 2fr 1fr 1fr 1.4fr;
-            gap: 20px;
-            padding: 46px 0;
-        }
+        .footer { background: var(--surface); border-top: 1px solid rgba(255,255,255,.06); transition: background-color 0.3s ease; }
+        .footer-content { display:grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 20px; padding: 46px 0; }
         .footer h3, .footer h4 { margin-top:0; }
         .footer p, .footer li { color: var(--muted); transition: color 0.3s ease; }
         .social-links { display:flex; gap:12px; margin-top:10px; }
@@ -532,612 +296,605 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .mission-content { grid-template-columns: 1fr; text-align: center; }
+            .mission-text { order: 2; }
+            .mission-image { order: 1; }
             .footer-content { grid-template-columns: 1.4fr 1fr 1fr; }
-            .nav-container { grid-template-columns: auto 1fr auto; }
-            .theme-toggle { display:block; }
         }
-        @media (max-width: 780px) {
-            .mobile-menu-toggle { display:block; }
-            .nav { display:none; position:absolute; left:0; right:0; top:100%; background:var(--surface); box-shadow:var(--shadow); padding:1rem 0; }
-            .nav.open { display:block; }
-            .nav-links { flex-direction:column; align-items:flex-start; padding: 10px 12px 16px; }
-            .dropdown:hover .dropdown-menu { display:none; }
-            .dropdown .dropdown-toggle::after{ content: ""; }
-            .dropdown-menu { position:relative; border:none; background:transparent; padding:6px 0 10px; display:block; }
+        @media (max-width: 768px) {
             .footer-content { grid-template-columns: 1fr; }
         }
-        @media (max-width: 780px) {
-          .dropdown-menu {
-            position: static;
-            background: var(--card);
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            padding: 8px 0;
-            margin-left: 16px;
-            min-width: 140px;
-            display: none; /* Hidden by default, shown by JS */
-            opacity: 1;
-            visibility: visible;
-            transform: none;
-          }
-          .dropdown-menu li a {
-            color: var(--text);
-            padding: 10px 18px;
-            display: block;
-            font-weight: 500;
-          }
-          .dropdown-menu li a:hover {
-            background: var(--surface);
-            color: var(--brand);
-          }
-        } 
     </style>
-    
 </head>
 <body>
     <header class="header">
         <div class="container nav-container">
-            <a href="home1.html" class="logo">
-                <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-            </a>
-            <div class="nav-right">
-                <nav class="nav" id="site-nav">
-                    <ul class="nav-links">
-                        <li class="dropdown">
-                            <a href="home1.html" class="active" data-i18n="nav-home">Home <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="home1.html">Home 1</a></li>
-                                <li><a href="home3.html">Home 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="About us.html" data-i18n="nav-about">About Us</a></li>
-                        <li class="dropdown">
-                            <a href="Services.html" data-i18n="nav-services">Services <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="Services.html" data-i18n="nav-services-all">All Services</a></li>
-                                <li><a href="social-media.html" data-i18n="nav-social-media">Social Media Marketing</a></li>
-                                <li><a href="seo.html" data-i18n="nav-seo">SEO Optimization</a></li>
-                                <li><a href="ppc.html" data-i18n="nav-ppc">PPC Advertising</a></li>
-                                <li><a href="web-dev.html" data-i18n="nav-web-dev">Web Development</a></li>
-                                <li><a href="email.html" data-i18n="nav-email">Email Marketing</a></li>
-                                <li><a href="analytics.html" data-i18n="nav-analytics">Analytics & Reporting</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.html" data-i18n="nav-blog">Blog</a></li>
-                        <li><a href="contact.html" data-i18n="nav-contact">Contact Us</a></li>
-                        <li class="dropdown">
-                            <a href="index.html" data-i18n="nav-login">Login <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="index.html" data-i18n="nav-login-signup">Sign Up/Login</a></li>
-                                <li><a href="sign admin.html" data-i18n="nav-admin-login">Admin Login</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="language-toggle" style="position: relative;">
-                    <select id="language-select" class="language-select" style="
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        appearance: none;
-                        background: var(--surface);
-                        color: var(--text);
-                        border: 1px solid var(--muted);
-                        border-radius: 8px;
-                        padding: 8px 12px;
-                        font-size: 0.9rem;
-                        cursor: pointer;
-                        outline: none;
-                        min-width: 100px;
-                        transition: border-color 0.3s ease;
-                    ">
-                        <option value="en" selected>English</option>
-                        <option value="ar">العربية</option>
-                        <option value="he">עברית</option>
-                    </select>
-                </div>
-                <div class="profile-container">
-                    <div class="profile-icon" id="profile-btn">
-                      <span id="initials-display">PS</span>
-                    </div>
-                    <div class="profile-menu" id="profile-dropdown">
-                        <button id="logout-btn" style="padding: 10px 15px; color: var(--text); display: block; width: 100%; text-align: left; background: none; border: none; cursor: pointer;" data-i18n="profile-logout">Logout</button>
-                    </div>
-                </div>
-                <div class="theme-toggle">
-                    <button id="theme-toggle" class="btn btn-secondary">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </div>
-                <div class="mobile-menu-toggle" id="mobile-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero-section">
-            <video autoplay muted loop playsinline class="hero-bg-video">
-                <source src="https://videos.pexels.com/video-files/3044995/3044995-uhd_2560_1440_24fps.mp4">
-                Your browser does not support the video tag.
-            </video>
-        
-            <div class="hero-overlay">
-                <div class="hero-content">
-                    <h1 class="hero-title animate-slide-in" data-i18n="hero-title">Home</h1>
-                    <p class="hero-paragraph animate-fade-up" data-i18n="hero-paragraph">
-                       Stackly Digital Marketing helps businesses grow with data-driven strategies, creative content, and cutting-edge.
-                    </p>
-                    <a href="contact.html" class="hero-button animate-fade-up-delayed" data-i18n="hero-button">Reach Out Today</a>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <h2 class="section-heading" data-i18n="services-heading">Services We Offer</h2>
-                <p class="section-subheading" data-i18n="services-subheading">Our expertise spans a wide range of digital solutions tailored to your unique needs.</p>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <i class="fas fa-search-dollar"></i>
-                        <h3 data-i18n="service-seo-heading">SEO & Content Marketing</h3>
-                        <p data-i18n="service-seo-p">Boost your visibility and attract qualified leads with powerful search engine optimization.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3 data-i18n="service-ppc-heading">Paid Advertising (PPC)</h3>
-                        <p data-i18n="service-ppc-p">Launch targeted campaigns across platforms to drive instant traffic and conversions.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-bullhorn"></i>
-                        <h3 data-i18n="service-social-heading">Social Media Management</h3>
-                        <p data-i18n="service-social-p">Build a strong community and engage with your audience on all major social platforms.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-envelope-open-text"></i>
-                        <h3 data-i18n="service-email-heading">Email Marketing</h3>
-                        <p data-i18n="service-email-p">Nurture your leads and build customer loyalty with automated, personalized email campaigns.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3 data-i18n="service-web-dev-heading">Web Design & Development</h3>
-                        <p data-i18n="service-web-dev-p">Create stunning, high-performing websites optimized for user experience and conversion.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-edit"></i>
-                        <h3 data-i18n="service-analytics-heading">Analytics & Reporting</h3>
-                        <p data-i18n="service-analytics-p">Gain valuable insights and track your ROI with detailed, transparent performance reports.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section about-section">
-            <div class="about-image">
-                <img src="https://cdn.pixabay.com/photo/2016/11/19/21/01/analysis-1841158_1280.jpg" alt="A team of digital marketing professionals working together.">
-            </div>
-            <div class="about-content">
-                <h2 class="section-heading" data-i18n="about-heading">Our Mission</h2>
-                <p class="section-subheading" data-i18n="about-subheading">We are a team of passionate digital strategists dedicated to helping brands thrive in the online world.</p>
-                <p data-i18n="about-p">At Stackly Digital Marketing, we believe that a successful online presence is built on a foundation of solid strategy, creative execution, and continuous optimization. We partner with you to understand your goals and deliver measurable results that drive business growth.</p>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <h2 class="section-heading" data-i18n="case-studies-heading">Recent Case Studies</h2>
-                <p class="section-subheading" data-i18n="case-studies-subheading">See how we've helped our clients achieve their marketing goals and grow their business.</p>
-                <div class="case-studies-grid">
-                    <div class="case-study-card">
-                        <img src="https://cdn.pixabay.com/photo/2015/05/15/01/48/computer-767776_1280.jpg" alt="eCommerce dashboard with charts and graphs.">
-                        <div class="case-study-info">
-                            <h4 data-i18n="case-study-ecommerce-heading">E-commerce Sales Growth</h4>
-                            <p data-i18n="case-study-ecommerce-p">Increased monthly revenue by 150% through targeted PPC campaigns and SEO optimization.</p>
-                        </div>
-                    </div>
-                    <div class="case-study-card">
-                        <img src="https://cdn.pixabay.com/photo/2017/09/11/11/02/project-management-2738521_1280.jpg" alt="A funnel diagram showing lead conversion process.">
-                        <div class="case-study-info">
-                            <h4 data-i18n="case-study-saas-heading">Lead Generation for SaaS</h4>
-                            <p data-i18n="case-study-saas-p">Generated over 500 qualified leads in three months with a focused content marketing strategy.</p>
-                        </div>
-                    </div>
-                    <div class="case-study-card">
-                        <img src="https://cdn.pixabay.com/photo/2018/02/23/09/03/human-3175027_1280.jpg" alt="Social media icons and a large magnifying glass.">
-                        <div class="case-study-info">
-                            <h4 data-i18n="case-study-brand-heading">Brand Awareness Campaign</h4>
-                            <p data-i18n="case-study-brand-p">Achieved a 300% increase in social media engagement and brand reach within six months.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section about-section">
-            <div class="container">
-                <h2 class="section-heading" data-i18n="testimonials-heading">What Our Clients Say</h2>
-                <p class="section-subheading" data-i18n="testimonials-subheading">Don't just take our word for it—see what our partners have to say about our work.</p>
-                <div class="testimonial-card">
-                    <p class="testimonial-quote" data-i18n="testimonial-quote">"Working with Stackly has been a game-changer for our business. Their strategic approach and dedication to results are unparalleled. Our online presence has never been stronger."</p>
-                    <div class="author-info">
-                        <img src="https://i.pinimg.com/1200x/52/09/f6/5209f6863f1e5a4e552bdbbc30bf20fb.jpg" alt="Profile picture of Jane Doe.">
-                        <div>
-                            <p class="testimonial-author" data-i18n="testimonial-author">- Jane Doe</p>
-                            <p class="testimonial-role" data-i18n="testimonial-role">CEO of InnovateTech Solutions</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section cta-section">
-            <div class="container">
-                <h2 class="section-heading" data-i18n="cta-heading">Ready to Grow Your Business?</h2>
-                <p data-i18n="cta-p">Let's discuss how a tailored digital marketing strategy can help you achieve your goals.</p>
-                <a href="contact.html" class="btn btn-secondary" data-i18n="cta-button">Get in Touch</a>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="footer">
-        <div class="container footer-content">
-            <div>
-                <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
-                <p data-i18n="footer-tagline">Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
-            </div>
-            <div>
-                <h4 data-i18n="footer-quick-links-heading">Quick Links</h4>
-                <ul>
-                    <li><a href="index.html" data-i18n="nav-home">Home</a></li>
-                    <li><a href="About us.html" data-i18n="nav-about">About Us</a></li>
-                    <li><a href="Services.html" data-i18n="nav-services">Services</a></li>
-                    <li><a href="blog.html" data-i18n="nav-blog">Blog</a></li>
-                    <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 data-i18n="footer-services-heading">Services</h4>
-                <ul>
-                    <li><a href="seo.html" data-i18n="nav-seo">SEO</a></li>
-                    <li><a href="ppc.html" data-i18n="nav-ppc">PPC</a></li>
-                    <li><a href="social-media.html" data-i18n="nav-social-media">Social Media</a></li>
-                    <li><a href="web-dev.html" data-i18n="nav-web-dev">Web Development</a></li>
+          <a href="home3.html" class="logo">
+            <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
+          </a>
+          <div class="nav-right">
+            <nav class="nav" id="site-nav">
+              <ul class="nav-links">
+                <li class="dropdown">
+                  <a href="home3.html" data-i18n="nav-home">Home <i class="fas fa-chevron-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="home1.html" data-i18n="nav-home1">Home 1</a></li>
+                    <li><a href="home3.html" data-i18n="nav-home3">Home 2</a></li>
+                  </ul>
+                </li>
+                <li><a href="About us.html" data-i18n="nav-about">About Us</a></li>
+                <li class="dropdown">
+                  <a href="Services.html" data-i18n="nav-services">Services <i class="fas fa-chevron-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="Services.html" data-i18n="nav-allservices">All Services</a></li>
+                    <li><a href="social-media.html" data-i18n="nav-social">Social Media Marketing</a></li>
+                    <li><a href="seo.html" data-i18n="nav-seo">SEO Optimization</a></li>
+                    <li><a href="ppc.html" data-i18n="nav-ppc">PPC Advertising</a></li>
+                    <li><a href="web-dev.html" data-i18n="nav-webdev">Web Development</a></li>
                     <li><a href="email.html" data-i18n="nav-email">Email Marketing</a></li>
-                    <li><a href="analytics.html" data-i18n="nav-analytics">Analytics</a></li>
-                </ul>
+                    <li><a href="analytics.html" data-i18n="nav-analytics">Analytics & Reporting</a></li>
+                  </ul>
+                </li>
+                <li><a href="blog.html" data-i18n="nav-blog">Blog</a></li>
+                <li><a href="contact.html" data-i18n="nav-contact">Contact Us</a></li>
+                <li class="dropdown">
+                  <a href="index.html" data-i18n="nav-login">Login <i class="fas fa-chevron-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="index.html" data-i18n="nav-signup">Sign Up/Login</a></li>
+                    <li><a href="sign admin.html" data-i18n="nav-admin">Admin Login</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+            <div class="nav-right">
+              <div class="profile-container" style="position: relative;">
+                <button id="profile-btn" class="profile-icon">
+                  <span id="initials-display"></span>
+                </button>
+                <div class="profile-menu" id="profile-dropdown">
+                  <a href="login.html" id="logout-btn" data-i18n="logout-button">Logout</a>
+                </div>
+              </div>
+              <div class="theme-toggle">
+                <button id="theme-toggle" class="btn btn-secondary">
+                  <i class="fas fa-moon"></i>
+                </button>
+              </div>
+              <div class="language-toggle">
+                <select id="language-selector">
+                  <option value="en">English</option>
+                  <option value="ar">العربية</option>
+                  <option value="he">עברית</option>
+                </select>
+              </div>
+              <div class="mobile-menu-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+              </div>
             </div>
-            <div>
-                <h4 data-i18n="footer-contact-heading">Contact Info</h4>
-                <ul>
-                    <li data-i18n="footer-address"><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
-                    <li data-i18n="footer-phone"><i class="fas fa-phone"></i> (555) 123-4567</li>
-                    <li data-i18n="footer-email"><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
-                </ul>
+          </div>
+        </div>
+      </header>
+
+    <section class="hero-section">
+        <video autoplay muted loop playsinline class="hero-bg-video">
+            <source src="https://videos.pexels.com/video-files/3044995/3044995-uhd_2560_1440_24fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+            <div class="hero-card">
+                <span class="eyebrow" data-i18n="hero-eyebrow"><i class="fa-solid fa-sparkles"></i> Unlock Your Digital Potential</span>
+                <h1 class="hero-title" data-i18n="hero-title">Home</h1>
+                <p class="hero-sub" data-i18n="hero-subtitle">Stackly Digital Marketing helps businesses grow with data-driven strategies, creative content, and cutting-edge solutions.</p>
+                <div class="hero-cta">
+                    <a href="contact.html" class="btn btn-primary" data-i18n="hero-cta-button">Reach Out Today</a>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom" data-i18n="footer-copyright">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <div class="section-title text-center animate-me">
+                <h2 data-i18n="services-title">Services We Offer</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-me" data-service-id="seo">
+                    <div class="icon"><i class="fas fa-search-dollar"></i></div>
+                    <h3 data-i18n="service1-title">SEO & Content Marketing</h3>
+                    <p data-i18n="service1-text">Drive organic traffic and establish authority with our comprehensive search engine and content strategies.</p>
+                </div>
+                <div class="service-card animate-me" data-service-id="ppc">
+                    <div class="icon"><i class="fas fa-ad"></i></div>
+                    <h3 data-i18n="service2-title">Paid Advertising (PPC)</h3>
+                    <p data-i18n="service2-text">Get instant visibility and qualified leads with expertly managed pay-per-click campaigns on all major platforms.</p>
+                </div>
+                <div class="service-card animate-me" data-service-id="social">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3 data-i18n="service3-title">Social Media Management</h3>
+                    <p data-i18n="service3-text">Build a strong online community and engage your audience with compelling social media content.</p>
+                </div>
+                <div class="service-card animate-me" data-service-id="email">
+                    <div class="icon"><i class="fas fa-envelope-open-text"></i></div>
+                    <h3 data-i18n="service4-title">Email Marketing</h3>
+                    <p data-i18n="service4-text">Nurture leads and retain customers with personalized and automated email campaigns that convert.</p>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content animate-me">
+                <div class="mission-image">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/19/21/01/analysis-1841158_1280.jpg" alt="Our Mission">
+                </div>
+                <div class="mission-text">
+                    <h2 data-i18n="mission-title">Our Mission</h2>
+                    <p data-i18n="mission-paragraph1" class="intro">At Stackly Digital, our mission is simple: to empower brands to thrive in the online world. We believe that digital success is built on a foundation of solid strategy, creative execution, and continuous optimization. We're not just a service provider; we're your partner in growth.</p>
+                    <p data-i18n="mission-paragraph2" class="read-more-content" style="display:none;">Our team is composed of passionate experts who stay ahead of industry trends, ensuring that your business benefits from the latest and most effective marketing techniques. We are dedicated to delivering measurable results that translate into real-world business growth, building lasting relationships with our clients along the way.</p>
+                    <button id="read-more-btn" class="btn btn-ghost" data-i18n="read-more-button">Read More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="case-studies-section">
+        <div class="container">
+            <div class="section-title animate-me">
+                <h2 data-i18n="case-studies-title">Recent Case Studies</h2>
+            </div>
+            <div class="case-study-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="e-commerce">E-commerce</button>
+                <button class="filter-btn" data-filter="saas">SaaS</button>
+                <button class="filter-btn" data-filter="brand">Brand</button>
+            </div>
+            <div class="case-studies-grid">
+                <div class="case-study-card animate-me" data-category="e-commerce">
+                    <img src="https://cdn.pixabay.com/photo/2015/05/15/01/48/computer-767776_1280.jpg" alt="E-commerce Sales Growth">
+                    <div class="card-body">
+                        <div class="case-study-meta">
+                            <span data-i18n="case-study-ecom-tag">E-commerce</span>
+                            <span data-i18n="case-study-ecom-platform">Shopify</span>
+                        </div>
+                        <h3 data-i18n="case-study-ecom-title">E-commerce Sales Growth</h3>
+                        <p data-i18n="case-study-ecom-text">Increased monthly revenue by 150% through targeted PPC campaigns and SEO optimization.</p>
+                    </div>
+                </div>
+                <div class="case-study-card animate-me" data-category="saas">
+                    <img src="https://cdn.pixabay.com/photo/2017/09/11/11/02/project-management-2738521_1280.jpg" alt="Lead Generation for SaaS">
+                    <div class="card-body">
+                        <div class="case-study-meta">
+                            <span data-i18n="case-study-saas-tag">SaaS</span>
+                            <span data-i18n="case-study-saas-platform">HubSpot</span>
+                        </div>
+                        <h3 data-i18n="case-study-saas-title">Lead Generation for SaaS</h3>
+                        <p data-i18n="case-study-saas-text">Generated over 500 qualified leads in three months with a focused content marketing strategy.</p>
+                    </div>
+                </div>
+                <div class="case-study-card animate-me" data-category="brand">
+                    <img src="https://cdn.pixabay.com/photo/2018/02/23/09/03/human-3175027_1280.jpg" alt="Brand Awareness Campaign">
+                    <div class="card-body">
+                        <div class="case-study-meta">
+                            <span data-i18n="case-study-brand-tag">Brand Awareness</span>
+                            <span data-i18n="case-study-brand-platform">Social Media</span>
+                        </div>
+                        <h3 data-i18n="case-study-brand-title">Brand Awareness Campaign</h3>
+                        <p data-i18n="case-study-brand-text">Achieved a 300% increase in social media engagement and brand reach within six months.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-title text-center animate-me">
+                <h2 data-i18n="testimonials-title">What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card animate-me" data-i18n="testimonial1">
+                    <p class="testimonial-text">"Stackly Digital transformed our online presence. Their strategic approach and dedication to results are unparalleled. We've seen incredible growth since partnering with them."</p>
+                    <div class="testimonial-author">- Jane Doe, <span class="author-title">CEO of InnovateTech Solutions</span></div>
+                </div>
+                <div class="testimonial-card animate-me" data-i18n="testimonial2" style="display:none;">
+                    <p class="testimonial-text">"The team at Stackly is professional, creative, and highly effective. They helped us achieve our marketing goals ahead of schedule and within budget."</p>
+                    <div class="testimonial-author">- John Smith, <span class="author-title">Marketing Director at Global Co.</span></div>
+                </div>
+                <div class="testimonial-card animate-me" data-i18n="testimonial3" style="display:none;">
+                    <p class="testimonial-text">"We were struggling to generate leads online until we started working with Stackly Digital. Their expertise in content and SEO made all the difference."</p>
+                    <div class="testimonial-author">- Emily Chen, <span class="author-title">Founder of StartupX</span></div>
+                </div>
+            </div>
+            <div class="testimonial-dots" style="text-align:center; margin-top:20px;">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 data-i18n="cta-title">Ready to Boost Your Digital Presence?</h2>
+            <p data-i18n="cta-subtitle">Let's discuss a tailored digital marketing strategy to help your business reach new heights.</p>
+            <a href="contact.html" id="cta-button-pulse" class="btn btn-primary" data-i18n="cta-button">Get a Free Consultation</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <div>
+               <img class="logo-img" src="img/cropped-image-removebg-preview-2.png" alt="Stackly Logo">
+              <p data-i18n="footer-description">Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.</p>
+            </div>
+            <div>
+              <h4 data-i18n="footer-links-title">Quick Links</h4>
+              <ul>
+                <li><a href="home3.html" data-i18n="nav-home">Home</a></li>
+                <li><a href="About us.html" data-i18n="nav-about">About Us</a></li>
+                <li><a href="Services.html" data-i18n="nav-services">Services</a></li>
+                <li><a href="blog.html" data-i18n="nav-blog">Blog</a></li>
+                <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 data-i18n="footer-services-title">Services</h4>
+              <ul>
+                <li><a href="seo.html" data-i18n="nav-seo">SEO</a></li>
+                <li><a href="ppc.html" data-i18n="nav-ppc">PPC</a></li>
+                <li><a href="social-media.html" data-i18n="nav-social">Social Media</a></li>
+                <li><a href="web-dev.html" data-i18n="nav-webdev">Web Development</a></li>
+                 <li><a href="email.html" data-i18n="nav-email">Email Marketing</a></li>
+                  <li><a href="analytics.html" data-i18n="nav-analytics">Analytics</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 data-i18n="footer-contact-title">Contact Info</h4>
+              <ul>
+                <li data-i18n="footer-contact-address"><i class="fas fa-map-marker-alt"></i> 123 Digital Marketing Blvd, City, State 12345</li>
+                <li data-i18n="footer-contact-phone"><i class="fas fa-phone"></i> (555) 123-4567</li>
+                <li data-i18n="footer-contact-email"><i class="fas fa-envelope"></i> info@stacklydigital.com</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom" data-i18n="footer-rights">&copy; 2025 Stackly Digital Marketing. All rights reserved.</div>
+        </div>
     </footer>
 
     <script>
-        // Language Data
+        // Translation dictionary
         const translations = {
-            'en': {
-                'page-title': 'Stackly Digital Marketing - Home',
-                'nav-home': 'Home',
-                'nav-about': 'About Us',
-                'nav-services': 'Services',
-                'nav-services-all': 'All Services',
-                'nav-social-media': 'Social Media Marketing',
-                'nav-seo': 'SEO Optimization',
-                'nav-ppc': 'PPC Advertising',
-                'nav-web-dev': 'Web Development',
-                'nav-email': 'Email Marketing',
-                'nav-analytics': 'Analytics & Reporting',
-                'nav-blog': 'Blog',
-                'nav-contact': 'Contact Us',
-                'nav-login': 'Login',
-                'nav-login-signup': 'Sign Up/Login',
-                'nav-admin-login': 'Admin Login',
-                'profile-logout': 'Logout',
-                'hero-title': 'Home',
-                'hero-paragraph': 'Stackly Digital Marketing helps businesses grow with data-driven strategies, creative content, and cutting-edge.',
-                'hero-button': 'Reach Out Today',
-                'services-heading': 'Services We Offer',
-                'services-subheading': 'Our expertise spans a wide range of digital solutions tailored to your unique needs.',
-                'service-seo-heading': 'SEO & Content Marketing',
-                'service-seo-p': 'Boost your visibility and attract qualified leads with powerful search engine optimization.',
-                'service-ppc-heading': 'Paid Advertising (PPC)',
-                'service-ppc-p': 'Launch targeted campaigns across platforms to drive instant traffic and conversions.',
-                'service-social-heading': 'Social Media Management',
-                'service-social-p': 'Build a strong community and engage with your audience on all major social platforms.',
-                'service-email-heading': 'Email Marketing',
-                'service-email-p': 'Nurture your leads and build customer loyalty with automated, personalized email campaigns.',
-                'service-web-dev-heading': 'Web Design & Development',
-                'service-web-dev-p': 'Create stunning, high-performing websites optimized for user experience and conversion.',
-                'service-analytics-heading': 'Analytics & Reporting',
-                'service-analytics-p': 'Gain valuable insights and track your ROI with detailed, transparent performance reports.',
-                'about-heading': 'Our Mission',
-                'about-subheading': 'We are a team of passionate digital strategists dedicated to helping brands thrive in the online world.',
-                'about-p': 'At Stackly Digital Marketing, we believe that a successful online presence is built on a foundation of solid strategy, creative execution, and continuous optimization. We partner with you to understand your goals and deliver measurable results that drive business growth.',
-                'case-studies-heading': 'Recent Case Studies',
-                'case-studies-subheading': 'See how we\'ve helped our clients achieve their marketing goals and grow their business.',
-                'case-study-ecommerce-heading': 'E-commerce Sales Growth',
-                'case-study-ecommerce-p': 'Increased monthly revenue by 150% through targeted PPC campaigns and SEO optimization.',
-                'case-study-saas-heading': 'Lead Generation for SaaS',
-                'case-study-saas-p': 'Generated over 500 qualified leads in three months with a focused content marketing strategy.',
-                'case-study-brand-heading': 'Brand Awareness Campaign',
-                'case-study-brand-p': 'Achieved a 300% increase in social media engagement and brand reach within six months.',
-                'testimonials-heading': 'What Our Clients Say',
-                'testimonials-subheading': 'Don\'t just take our word for it—see what our partners have to say about our work.',
-                'testimonial-quote': '"Working with Stackly has been a game-changer for our business. Their strategic approach and dedication to results are unparalleled. Our online presence has never been stronger."',
-                'testimonial-author': '- Jane Doe',
-                'testimonial-role': 'CEO of InnovateTech Solutions',
-                'cta-heading': 'Ready to Grow Your Business?',
-                'cta-p': 'Let\'s discuss how a tailored digital marketing strategy can help you achieve your goals.',
-                'cta-button': 'Get in Touch',
-                'footer-tagline': 'Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.',
-                'footer-quick-links-heading': 'Quick Links',
-                'footer-services-heading': 'Services',
-                'footer-contact-heading': 'Contact Info',
-                'footer-address': '123 Digital Marketing Blvd, City, State 12345',
-                'footer-phone': '(555) 123-4567',
-                'footer-email': 'info@stacklydigital.com',
-                'footer-copyright': '© 2025 Stackly Digital Marketing. All rights reserved.'
+            "en": {
+                "page-title": "Stackly Digital Marketing - Home",
+                "nav-home": "Home",
+                "nav-home1": "Home 1",
+                "nav-home3": "Home 2",
+                "nav-about": "About Us",
+                "nav-services": "Services",
+                "nav-allservices": "All Services",
+                "nav-social": "Social Media Marketing",
+                "nav-seo": "SEO Optimization",
+                "nav-ppc": "PPC Advertising",
+                "nav-webdev": "Web Development",
+                "nav-email": "Email Marketing",
+                "nav-analytics": "Analytics & Reporting",
+                "nav-blog": "Blog",
+                "nav-contact": "Contact Us",
+                "nav-login": "Login",
+                "nav-signup": "Sign Up/Login",
+                "nav-admin": "Admin Login",
+                "logout-button": "Logout",
+                "hero-eyebrow": "Unlock Your Digital Potential",
+                "hero-title": "Home",
+                "hero-subtitle": "Stackly Digital Marketing helps businesses grow with data-driven strategies, creative content, and cutting-edge solutions.",
+                "hero-cta-button": "Reach Out Today",
+                "services-title": "Services We Offer",
+                "service1-title": "SEO & Content Marketing",
+                "service1-text": "Drive organic traffic and establish authority with our comprehensive search engine and content strategies.",
+                "service2-title": "Paid Advertising (PPC)",
+                "service2-text": "Get instant visibility and qualified leads with expertly managed pay-per-click campaigns on all major platforms.",
+                "service3-title": "Social Media Management",
+                "service3-text": "Build a strong online community and engage your audience with compelling social media content.",
+                "service4-title": "Email Marketing",
+                "service4-text": "Nurture leads and retain customers with personalized and automated email campaigns that convert.",
+                "service5-title": "Web Design & Development",
+                "service5-text": "Create a stunning, high-performing website that serves as the foundation of your digital presence.",
+                "service6-title": "Analytics & Reporting",
+                "service6-text": "Make smarter business decisions with clear, actionable insights from in-depth data analysis.",
+                "mission-title": "Our Mission",
+                "mission-paragraph1": "At Stackly Digital, our mission is simple: to empower brands to thrive in the online world. We believe that digital success is built on a foundation of solid strategy, creative execution, and continuous optimization. We're not just a service provider; we're your partner in growth.",
+                "mission-paragraph2": "Our team is composed of passionate experts who stay ahead of industry trends, ensuring that your business benefits from the latest and most effective marketing techniques. We are dedicated to delivering measurable results that translate into real-world business growth, building lasting relationships with our clients along the way.",
+                "read-more-button": "Read More",
+                "case-studies-title": "Recent Case Studies",
+                "case-study-ecom-tag": "E-commerce",
+                "case-study-ecom-platform": "Shopify",
+                "case-study-ecom-title": "E-commerce Sales Growth",
+                "case-study-ecom-text": "Increased monthly revenue by 150% through targeted PPC campaigns and SEO optimization.",
+                "case-study-saas-tag": "SaaS",
+                "case-study-saas-platform": "HubSpot",
+                "case-study-saas-title": "Lead Generation for SaaS",
+                "case-study-saas-text": "Generated over 500 qualified leads in three months with a focused content marketing strategy.",
+                "case-study-brand-tag": "Brand Awareness",
+                "case-study-brand-platform": "Social Media",
+                "case-study-brand-title": "Brand Awareness Campaign",
+                "case-study-brand-text": "Achieved a 300% increase in social media engagement and brand reach within six months.",
+                "testimonials-title": "What Our Clients Say",
+                "testimonial1": "\"Stackly Digital transformed our online presence. Their strategic approach and dedication to results are unparalleled. We've seen incredible growth since partnering with them.\"",
+                "testimonial2": "\"The team at Stackly is professional, creative, and highly effective. They helped us achieve our marketing goals ahead of schedule and within budget.\"",
+                "testimonial3": "\"We were struggling to generate leads online until we started working with Stackly Digital. Their expertise in content and SEO made all the difference.\"",
+                "cta-title": "Ready to Boost Your Digital Presence?",
+                "cta-subtitle": "Let's discuss a tailored digital marketing strategy to help your business reach new heights.",
+                "cta-button": "Get a Free Consultation",
+                "footer-description": "Your trusted partner in digital growth. We provide innovative marketing solutions and expertise to help your business thrive online.",
+                "footer-links-title": "Quick Links",
+                "footer-services-title": "Services",
+                "footer-contact-title": "Contact Info",
+                "footer-contact-address": "123 Digital Marketing Blvd, City, State 12345",
+                "footer-contact-phone": "(555) 123-4567",
+                "footer-contact-email": "info@stacklydigital.com",
+                "footer-rights": "© 2025 Stackly Digital Marketing. All rights reserved."
             },
-            'ar': {
-                'page-title': 'ستكلي للتسويق الرقمي - الرئيسية',
-                'nav-home': 'الرئيسية',
-                'nav-about': 'من نحن',
-                'nav-services': 'الخدمات',
-                'nav-services-all': 'جميع الخدمات',
-                'nav-social-media': 'تسويق عبر وسائل التواصل الاجتماعي',
-                'nav-seo': 'تحسين محركات البحث (SEO)',
-                'nav-ppc': 'الإعلانات المدفوعة (PPC)',
-                'nav-web-dev': 'تطوير المواقع',
-                'nav-email': 'التسويق عبر البريد الإلكتروني',
-                'nav-analytics': 'التحليلات والتقارير',
-                'nav-blog': 'المدونة',
-                'nav-contact': 'اتصل بنا',
-                'nav-login': 'تسجيل الدخول',
-                'nav-login-signup': 'التسجيل / تسجيل الدخول',
-                'nav-admin-login': 'دخول المسؤول',
-                'profile-logout': 'تسجيل خروج',
-                'hero-title': 'الرئيسية',
-                'hero-paragraph': 'تساعد ستكلي للتسويق الرقمي الشركات على النمو باستراتيجيات تعتمد على البيانات، ومحتوى إبداعي، وأحدث التقنيات.',
-                'hero-button': 'تواصل معنا اليوم',
-                'services-heading': 'الخدمات التي نقدمها',
-                'services-subheading': 'خبرتنا تمتد عبر مجموعة واسعة من الحلول الرقمية المصممة خصيصاً لاحتياجاتك الفريدة.',
-                'service-seo-heading': 'تحسين محركات البحث وتسويق المحتوى',
-                'service-seo-p': 'عزز ظهورك واجذب العملاء المحتملين المؤهلين من خلال تحسين محركات البحث القوي.',
-                'service-ppc-heading': 'الإعلانات المدفوعة (PPC)',
-                'service-ppc-p': 'أطلق حملات مستهدفة عبر المنصات لجلب زيارات وتحويلات فورية.',
-                'service-social-heading': 'إدارة وسائل التواصل الاجتماعي',
-                'service-social-p': 'ابنِ مجتمعاً قوياً وتفاعل مع جمهورك على جميع منصات التواصل الاجتماعي الرئيسية.',
-                'service-email-heading': 'التسويق عبر البريد الإلكتروني',
-                'service-email-p': 'عزز علاقاتك مع العملاء المحتملين وابنِ ولاء العملاء من خلال حملات بريد إلكتروني آلية وشخصية.',
-                'service-web-dev-heading': 'تصميم وتطوير المواقع',
-                'service-web-dev-p': 'أنشئ مواقع إلكترونية مذهلة وعالية الأداء ومحسّنة لتجربة المستخدم والتحويل.',
-                'service-analytics-heading': 'التحليلات والتقارير',
-                'service-analytics-p': 'احصل على رؤى قيمة وتتبع عائد الاستثمار الخاص بك من خلال تقارير أداء مفصلة وشفافة.',
-                'about-heading': 'مهمتنا',
-                'about-subheading': 'نحن فريق من الاستراتيجيين الرقميين المتحمسين لمساعدة العلامات التجارية على الازدهار في العالم الرقمي.',
-                'about-p': 'في ستكلي للتسويق الرقمي، نؤمن بأن الوجود الناجح عبر الإنترنت مبني على أساس من الاستراتيجية المتينة، والتنفيذ الإبداعي، والتحسين المستمر. نحن نتشارك معك لفهم أهدافك وتقديم نتائج قابلة للقياس تدفع نمو الأعمال.',
-                'case-studies-heading': 'دراسات حالة حديثة',
-                'case-studies-subheading': 'اطلع على كيفية مساعدتنا لعملائنا في تحقيق أهدافهم التسويقية وتنمية أعمالهم.',
-                'case-study-ecommerce-heading': 'نمو مبيعات التجارة الإلكترونية',
-                'case-study-ecommerce-p': 'زيادة الإيرادات الشهرية بنسبة 150% من خلال حملات الإعلانات المدفوعة المستهدفة وتحسين محركات البحث.',
-                'case-study-saas-heading': 'توليد عملاء محتملين للبرمجيات كخدمة (SaaS)',
-                'case-study-saas-p': 'تم توليد أكثر من 500 عميل محتمل مؤهل في ثلاثة أشهر من خلال استراتيجية تسويق محتوى مركزة.',
-                'case-study-brand-heading': 'حملة زيادة الوعي بالعلامة التجارية',
-                'case-study-brand-p': 'تم تحقيق زيادة بنسبة 300% في التفاعل عبر وسائل التواصل الاجتماعي والوصول للعلامة التجارية خلال ستة أشهر.',
-                'testimonials-heading': 'ماذا يقول عملاؤنا',
-                'testimonials-subheading': 'لا تأخذ كلامنا على محمل الجد فقط - انظر ما يقوله شركاؤنا عن عملنا.',
-                'testimonial-quote': '"كان العمل مع ستكلي بمثابة تغيير جذري لأعمالنا. نهجهم الاستراتيجي وتفانيهم في تحقيق النتائج لا مثيل لهما. وجودنا على الإنترنت لم يكن أقوى من أي وقت مضى."',
-                'testimonial-author': '- جين دو',
-                'testimonial-role': 'المدير التنفيذي لشركة InnovateTech Solutions',
-                'cta-heading': 'هل أنت مستعد لتنمية أعمالك؟',
-                'cta-p': 'دعنا نناقش كيف يمكن لاستراتيجية تسويق رقمي مصممة خصيصاً أن تساعدك على تحقيق أهدافك.',
-                'cta-button': 'تواصل معنا',
-                'footer-tagline': 'شريكك الموثوق في النمو الرقمي. نحن نقدم حلول تسويق مبتكرة وخبرة لمساعدة عملك على الازدهار عبر الإنترنت.',
-                'footer-quick-links-heading': 'روابط سريعة',
-                'footer-services-heading': 'الخدمات',
-                'footer-contact-heading': 'معلومات الاتصال',
-                'footer-address': '123 Digital Marketing Blvd, City, State 12345',
-                'footer-phone': '(555) 123-4567',
-                'footer-email': 'info@stacklydigital.com',
-                'footer-copyright': '© 2025 ستكلي للتسويق الرقمي. جميع الحقوق محفوظة.'
+            "ar": {
+                "page-title": "Stackly Digital Marketing - الرئيسية",
+                "nav-home": "الرئيسية",
+                "nav-home1": "الرئيسية 1",
+                "nav-home3": "الرئيسية 2",
+                "nav-about": "من نحن",
+                "nav-services": "الخدمات",
+                "nav-allservices": "كل الخدمات",
+                "nav-social": "التسويق عبر وسائل التواصل الاجتماعي",
+                "nav-seo": "تحسين محركات البحث",
+                "nav-ppc": "إعلانات الدفع بالنقرة",
+                "nav-webdev": "تطوير الويب",
+                "nav-email": "التسويق عبر البريد الإلكتروني",
+                "nav-analytics": "التحليلات والتقارير",
+                "nav-blog": "المدونة",
+                "nav-contact": "اتصل بنا",
+                "nav-login": "تسجيل الدخول",
+                "nav-signup": "التسجيل/تسجيل الدخول",
+                "nav-admin": "تسجيل دخول المسؤول",
+                "logout-button": "تسجيل الخروج",
+                "hero-eyebrow": "اطلق العنان لإمكانياتك الرقمية",
+                "hero-title": "الرئيسية",
+                "hero-subtitle": "Stackly Digital Marketing تساعد الشركات على النمو باستراتيجيات قائمة على البيانات، محتوى إبداعي، وحلول رائدة.",
+                "hero-cta-button": "تواصل معنا اليوم",
+                "services-title": "الخدمات التي نقدمها",
+                "service1-title": "SEO وتسويق المحتوى",
+                "service1-text": "جذب الزيارات العضوية وبناء السلطة عبر استراتيجيات محركات البحث والمحتوى الشاملة.",
+                "service2-title": "الإعلانات المدفوعة (PPC)",
+                "service2-text": "احصل على رؤية فورية وعملاء محتملين مؤهلين من خلال حملات الدفع بالنقرة المدارة بخبرة على جميع المنصات الرئيسية.",
+                "service3-title": "إدارة وسائل التواصل الاجتماعي",
+                "service3-text": "ابنِ مجتمعًا قويًا عبر الإنترنت وشارك جمهورك بمحتوى مقنع على وسائل التواصل الاجتماعي.",
+                "service4-title": "التسويق عبر البريد الإلكتروني",
+                "service4-text": "اهتم بالعملاء المحتملين واحتفظ بالعملاء الحاليين من خلال حملات بريد إلكتروني شخصية ومؤتمتة تحقق التحويل.",
+                "service5-title": "تصميم وتطوير الويب",
+                "service5-text": "أنشئ موقعًا إلكترونيًا مذهلاً وعالي الأداء ليكون أساس وجودك الرقمي.",
+                "service6-title": "التحليلات والتقارير",
+                "service6-text": "اتخذ قرارات عمل أكثر ذكاءً بفضل الرؤى الواضحة والقابلة للتنفيذ من التحليل الشامل للبيانات.",
+                "mission-title": "مهمتنا",
+                "mission-paragraph1": "في Stackly Digital، مهمتنا بسيطة: تمكين العلامات التجارية من الازدهار في العالم الرقمي. نحن نؤمن بأن النجاح الرقمي يُبنى على أساس استراتيجية قوية، تنفيذ إبداعي، وتحسين مستمر. نحن لسنا مجرد مزود خدمة؛ نحن شريكك في النمو.",
+                "mission-paragraph2": "يتكون فريقنا من خبراء شغوفين يواكبون أحدث اتجاهات الصناعة، مما يضمن استفادة عملك من أحدث وأكثر تقنيات التسويق فعالية. نحن ملتزمون بتقديم نتائج قابلة للقياس تتحول إلى نمو حقيقي للأعمال، وبناء علاقات دائمة مع عملائنا على طول الطريق.",
+                "read-more-button": "اقرأ المزيد",
+                "case-studies-title": "دراسات حالة حديثة",
+                "case-study-ecom-tag": "التجارة الإلكترونية",
+                "case-study-ecom-platform": "Shopify",
+                "case-study-ecom-title": "نمو مبيعات التجارة الإلكترونية",
+                "case-study-ecom-text": "زيادة الإيرادات الشهرية بنسبة 150% عبر حملات PPC مستهدفة وتحسين محركات البحث.",
+                "case-study-saas-tag": "برمجيات كخدمة",
+                "case-study-saas-platform": "HubSpot",
+                "case-study-saas-title": "توليد العملاء المحتملين لبرمجيات كخدمة",
+                "case-study-saas-text": "توليد أكثر من 500 عميل محتمل مؤهل في ثلاثة أشهر باستراتيجية تسويق محتوى مركزة.",
+                "case-study-brand-tag": "الوعي بالعلامة التجارية",
+                "case-study-brand-platform": "وسائل التواصل الاجتماعي",
+                "case-study-brand-title": "حملة الوعي بالعلامة التجارية",
+                "case-study-brand-text": "تحقيق زيادة بنسبة 300% في التفاعل عبر وسائل التواصل الاجتماعي والوصول للعلامة التجارية خلال ستة أشهر.",
+                "testimonials-title": "ماذا يقول عملاؤنا",
+                "testimonial1": "\"Stackly Digital غيرت وجودنا على الإنترنت. نهجهم الاستراتيجي وتفانيهم في تحقيق النتائج لا مثيل لهما. لقد شهدنا نموًا مذهلاً منذ شراكتنا معهم.\"",
+                "testimonial2": "\"فريق Stackly محترف، ومبدع، وفعال للغاية. لقد ساعدونا في تحقيق أهدافنا التسويقية قبل الموعد المحدد وفي حدود الميزانية.\"",
+                "testimonial3": "\"كنا نعاني من توليد العملاء المحتملين عبر الإنترنت حتى بدأنا العمل مع Stackly Digital. خبرتهم في المحتوى وتحسين محركات البحث أحدثت كل الفرق.\"",
+                "cta-title": "هل أنت مستعد لتعزيز وجودك الرقمي؟",
+                "cta-subtitle": "دعنا نناقش استراتيجية تسويق رقمي مصممة خصيصًا لمساعدة عملك على الوصول إلى آفاق جديدة.",
+                "cta-button": "احصل على استشارة مجانية",
+                "footer-description": "شريكك الموثوق في النمو الرقمي. نحن نقدم حلول تسويق مبتكرة وخبرة لمساعدة عملك على الازدهار عبر الإنترنت.",
+                "footer-links-title": "روابط سريعة",
+                "footer-services-title": "الخدمات",
+                "footer-contact-title": "معلومات الاتصال",
+                "footer-contact-address": "123 جادة التسويق الرقمي، المدينة، الولاية 12345",
+                "footer-contact-phone": "(555) 123-4567",
+                "footer-contact-email": "info@stacklydigital.com",
+                "footer-rights": "© 2025 Stackly Digital Marketing. جميع الحقوق محفوظة."
             },
-            'he': {
-                'page-title': 'סטקלי שיווק דיגיטלי - דף הבית',
-                'nav-home': 'דף הבית',
-                'nav-about': 'אודותינו',
-                'nav-services': 'שירותים',
-                'nav-services-all': 'כל השירותים',
-                'nav-social-media': 'שיווק במדיה חברתית',
-                'nav-seo': 'אופטימיזציה לקידום אתרים',
-                'nav-ppc': 'פרסום ממומן (PPC)',
-                'nav-web-dev': 'פיתוח אתרים',
-                'nav-email': 'שיווק במייל',
-                'nav-analytics': 'ניתוח ודוחות',
-                'nav-blog': 'בלוג',
-                'nav-contact': 'צרו קשר',
-                'nav-login': 'התחברות',
-                'nav-login-signup': 'הרשמה / התחברות',
-                'nav-admin-login': 'התחברות מנהל',
-                'profile-logout': 'התנתק',
-                'hero-title': 'דף הבית',
-                'hero-paragraph': 'סטקלי שיווק דיגיטלי מסייעת לעסקים לצמוח באמצעות אסטרטגיות מונעות נתונים, תוכן יצירתי וטכנולוגיות מתקדמות.',
-                'hero-button': 'צרו קשר היום',
-                'services-heading': 'השירותים שאנו מציעים',
-                'services-subheading': 'המומחיות שלנו משתרעת על מגוון רחב של פתרונות דיגיטליים המותאמים לצרכים הייחודיים שלכם.',
-                'service-seo-heading': 'קידום אתרים ושיווק תוכן',
-                'service-seo-p': 'שפרו את הנראות שלכם ומשכו לידים איכותיים עם קידום אתרים עוצמתי.',
-                'service-ppc-heading': 'פרסום ממומן (PPC)',
-                'service-ppc-p': 'הפעלת קמפיינים ממוקדים בפלטפורמות שונות כדי להניע תנועה מיידית והמרות.',
-                'service-social-heading': 'ניהול מדיה חברתית',
-                'service-social-p': 'בניית קהילה חזקה ואינטראקציה עם הקהל שלכם בכל פלטפורמות המדיה החברתית העיקריות.',
-                'service-email-heading': 'שיווק במייל',
-                'service-email-p': 'טיפוח לידים ובניית נאמנות לקוחות באמצעות קמפיינים אוטומטיים ומותאמים אישית במייל.',
-                'service-web-dev-heading': 'עיצוב ופיתוח אתרים',
-                'service-web-dev-p': 'יצירת אתרים מרהיבים ובעלי ביצועים גבוהים המותאמים לחוויית משתמש והמרה.',
-                'service-analytics-heading': 'ניתוח ודוחות',
-                'service-analytics-p': 'קבלת תובנות יקרות ערך ומעקב אחר ההחזר על ההשקעה שלכם באמצעות דוחות ביצועים מפורטים ושקופים.',
-                'about-heading': 'המשימה שלנו',
-                'about-subheading': 'אנחנו צוות של אסטרטגים דיגיטליים נלהבים המוקדשים לסייע למותגים לשגשג בעולם המקוון.',
-                'about-p': 'ב-סטקלי שיווק דיגיטלי, אנו מאמינים כי נוכחות מקוונת מוצלחת נבנית על בסיס של אסטרטגיה מוצקה, ביצוע יצירתי ואופטימיזציה מתמשכת. אנו שותפים איתכם כדי להבין את מטרותיכם ולספק תוצאות מדידות המניעות צמיחה עסקית.',
-                'case-studies-heading': 'מקרי בוחן אחרונים',
-                'case-studies-subheading': 'ראו כיצד עזרנו ללקוחותינו להשיג את יעדיהם השיווקיים ולפתח את העסק שלהם.',
-                'case-study-ecommerce-heading': 'צמיחה במכירות מסחר אלקטרוני',
-                'case-study-ecommerce-p': 'הגדלת ההכנסות החודשיות ב-150% באמצעות קמפיינים ממוקדים של PPC ואופטימיזציה לקידום אתרים.',
-                'case-study-saas-heading': 'יצירת לידים עבור תוכנה כשירות (SaaS)',
-                'case-study-saas-p': 'הפקת למעלה מ-500 לידים איכותיים בשלושה חודשים עם אסטרטגיית שיווק תוכן ממוקדת.',
-                'case-study-brand-heading': 'קמפיין מודעות למותג',
-                'case-study-brand-p': 'השגת עלייה של 300% במעורבות במדיה חברתית ובהגעה למותג בתוך שישה חודשים.',
-                'testimonials-heading': 'מה לקוחותינו אומרים',
-                'testimonials-subheading': 'אל תסתמכו רק על המילה שלנו - ראו מה יש לשותפים שלנו לומר על העבודה שלנו.',
-                'testimonial-quote': '"העבודה עם סטקלי הייתה שינוי משחק עבור העסק שלנו. הגישה האסטרטגית והמסירות שלהם לתוצאות הן ללא תחרות. הנוכחות המקוונת שלנו מעולם לא הייתה חזקה יותר."',
-                'testimonial-author': '- ג\'יין דו',
-                'testimonial-role': 'מנכ"ל InnovateTech Solutions',
-                'cta-heading': 'מוכנים להגדיל את העסק שלכם?',
-                'cta-p': 'בואו נדון כיצד אסטרטגיית שיווק דיגיטלי מותאמת אישית יכולה לעזור לכם להשיג את יעדיכם.',
-                'cta-button': 'צרו קשר',
-                'footer-tagline': 'השותף המהימן שלכם לצמיחה דיגיטלית. אנו מספקים פתרונות שיווק חדשניים ומומחיות כדי לעזור לעסק שלכם לשגשג באינטרנט.',
-                'footer-quick-links-heading': 'קישורים מהירים',
-                'footer-services-heading': 'שירותים',
-                'footer-contact-heading': 'פרטי התקשרות',
-                'footer-address': '123 Digital Marketing Blvd, City, State 12345',
-                'footer-phone': '(555) 123-4567',
-                'footer-email': 'info@stacklydigital.com',
-                'footer-copyright': '© 2025 סטקלי שיווק דיגיטלי. כל הזכויות שמורות.'
+            "he": {
+                "page-title": "Stackly Digital Marketing - בית",
+                "nav-home": "בית",
+                "nav-home1": "בית 1",
+                "nav-home3": "בית 2",
+                "nav-about": "אודות",
+                "nav-services": "שירותים",
+                "nav-allservices": "כל השירותים",
+                "nav-social": "שיווק במדיה חברתית",
+                "nav-seo": "אופטימיזציית SEO",
+                "nav-ppc": "פרסום PPC",
+                "nav-webdev": "פיתוח אתרים",
+                "nav-email": "שיווק בדוא\"ל",
+                "nav-analytics": "אנליטיקס ודיווח",
+                "nav-blog": "בלוג",
+                "nav-contact": "צור קשר",
+                "nav-login": "התחברות",
+                "nav-signup": "הרשמה/התחברות",
+                "nav-admin": "התחברות מנהל",
+                "logout-button": "התנתק",
+                "hero-eyebrow": "פתח את הפוטנציאל הדיגיטלי שלך",
+                "hero-title": "בית",
+                "hero-subtitle": "Stackly Digital Marketing עוזרת לעסקים לצמוח עם אסטרטגיות מונחות נתונים, תוכן יצירתי, ופתרונות מתקדמים.",
+                "hero-cta-button": "צור קשר היום",
+                "services-title": "השירותים שלנו",
+                "service1-title": "SEO ושיווק תוכן",
+                "service1-text": "הנע תנועה אורגנית ובנה סמכות עם אסטרטגיות מקיפות למנועי חיפוש ותוכן.",
+                "service2-title": "פרסום ממומן (PPC)",
+                "service2-text": "קבל חשיפה מיידית ולידים מוסמכים עם קמפיינים מנוהלים במומחיות של תשלום לפי קליק בכל הפלטפורמות העיקריות.",
+                "service3-title": "ניהול מדיה חברתית",
+                "service3-text": "בנה קהילה מקוונת חזקה וצור מעורבות עם הקהל שלך באמצעות תוכן מרתק במדיה חברתית.",
+                "service4-title": "שיווק בדוא\"ל",
+                "service4-text": "טפח לידים ושמור על לקוחות עם קמפיינים מותאמים אישית ואוטומטיים בדוא\"ל שממירים.",
+                "service5-title": "עיצוב ופיתוח אתרים",
+                "service5-text": "צור אתר אינטרנט מהמם ובעל ביצועים גבוהים שישמש כבסיס לנוכחות הדיגיטלית שלך.",
+                "service6-title": "אנליטיקס ודיווח",
+                "service6-text": "קבל החלטות עסקיות חכמות יותר עם תובנות ברורות וניתנות לפעולה מניתוח נתונים מעמיק.",
+                "mission-title": "המשימה שלנו",
+                "mission-paragraph1": "ב-Stackly Digital, המשימה שלנו פשוטה: להעצים מותגים לשגשג בעולם המקוון. אנו מאמינים שהצלחה דיגיטלית בנויה על בסיס של אסטרטגיה מוצקה, ביצוע יצירתי ואופטימיזציה מתמשכת. אנחנו לא רק ספק שירותים; אנחנו השותפים שלך לצמיחה.",
+                "mission-paragraph2": "הצוות שלנו מורכב ממומחים נלהבים שנשארים מעודכנים בטרנדים האחרונים בתעשייה, ומבטיחים שהעסק שלך ייהנה מטכניקות השיווק החדשניות והיעילות ביותר. אנו מחויבים לספק תוצאות מדידות שמתורגמות לצמיחה עסקית אמיתית, ובונים קשרים ארוכי טווח עם לקוחותינו לאורך הדרך.",
+                "read-more-button": "קרא עוד",
+                "case-studies-title": "מחקרי מקרה אחרונים",
+                "case-study-ecom-tag": "מסחר אלקטרוני",
+                "case-study-ecom-platform": "Shopify",
+                "case-study-ecom-title": "צמיחת מכירות במסחר אלקטרוני",
+                "case-study-ecom-text": "הגדלת ההכנסה החודשית ב-150% באמצעות קמפיינים ממוקדים של PPC ואופטימיזציית SEO.",
+                "case-study-saas-tag": "תוכנה כשירות",
+                "case-study-saas-platform": "HubSpot",
+                "case-study-saas-title": "יצירת לידים לתוכנה כשירות",
+                "case-study-saas-text": "יצירת מעל 500 לידים מוסמכים בשלושה חודשים עם אסטרטגיית שיווק תוכן ממוקדת.",
+                "case-study-brand-tag": "מודעות למותג",
+                "case-study-brand-platform": "מדיה חברתית",
+                "case-study-brand-title": "קמפיין מודעות למותג",
+                "case-study-brand-text": "השגת עלייה של 300% במעורבות במדיה חברתית והגעה למותג תוך שישה חודשים.",
+                "testimonials-title": "מה אומרים הלקוחות שלנו",
+                "testimonial1": "\"Stackly Digital שינתה את הנוכחות המקוונת שלנו. הגישה האסטרטגית והמסירות שלהם לתוצאות הן ללא תחרות. ראינו צמיחה מדהימה מאז שהתחלנו לשתף איתם פעולה.\"",
+                "testimonial2": "\"הצוות ב-Stackly מקצועי, יצירתי ויעיל במיוחד. הם עזרו לנו להשיג את יעדי השיווק שלנו לפני המועד ובמסגרת התקציב.\"",
+                "testimonial3": "\"התקשינו לייצר לידים באינטרנט עד שהתחלנו לעבוד עם Stackly Digital. המומחיות שלהם בתוכן וב-SEO עשתה את כל ההבדל.\"",
+                "cta-title": "מוכנים להגביר את הנוכחות הדיגיטלית שלכם?",
+                "cta-subtitle": "בואו נדבר על אסטרטגיית שיווק דיגיטלית מותאמת אישית כדי לעזור לעסק שלכם להגיע לגבהים חדשים.",
+                "cta-button": "קבל ייעוץ חינם",
+                "footer-description": "השותף המהימן שלך לצמיחה דיגיטלית. אנו מספקים פתרונות שיווק חדשניים ומומחיות כדי לעזור לעסק שלך לשגשג באינטרנט.",
+                "footer-links-title": "קישורים מהירים",
+                "footer-services-title": "שירותים",
+                "footer-contact-title": "פרטי התקשרות",
+                "footer-contact-address": "123 שדרת השיווק הדיגיטלי, עיר, מדינה 12345",
+                "footer-contact-phone": "(555) 123-4567",
+                "footer-contact-email": "info@stacklydigital.com",
+                "footer-rights": "© 2025 שיווק דיגיטלי סטאקלי. כל הזכויות שמורות."
             }
         };
 
-        // DOM elements
+        // Function to change the language
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    // Special handling for placeholder
+                    if (el.tagName === 'INPUT' && el.type === 'email') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+            // Handle HTML language direction for RTL languages
+            document.documentElement.lang = lang;
+            if (lang === 'ar' || lang === 'he') {
+                document.body.style.direction = 'rtl';
+            } else {
+                document.body.style.direction = 'ltr';
+            }
+        }
+        
+        // Event listener for language selector
+        document.getElementById('language-selector').addEventListener('change', (event) => {
+            setLanguage(event.target.value);
+        });
+
+        // Mobile nav toggle
         const mobileToggle = document.getElementById('mobile-toggle');
         const nav = document.getElementById('site-nav');
-        const themeToggle = document.getElementById('theme-toggle');
-        const languageSelect = document.getElementById('language-select');
+        mobileToggle?.addEventListener('click', ()=> nav.classList.toggle('open'));
+
+        // Theme toggle (simple demo toggling body class)
+        document.getElementById('theme-toggle')?.addEventListener('click', ()=>{
+            document.body.classList.toggle('light');
+        });
+
+        // Profile dropdown functionality
         const profileBtn = document.getElementById('profile-btn');
         const profileDropdown = document.getElementById('profile-dropdown');
         const initialsDisplay = document.getElementById('initials-display');
         const logoutBtn = document.getElementById('logout-btn');
 
-        // Mobile nav toggle
-        mobileToggle?.addEventListener('click', () => nav.classList.toggle('open'));
-
-        // Theme toggle (simple demo toggling body class)
-        themeToggle?.addEventListener('click', () => {
-            document.body.classList.toggle('light');
-        });
-
-        // Language select functionality
-        languageSelect?.addEventListener('change', (e) => {
-            const lang = e.target.value;
-            setLanguage(lang);
-        });
-        
-        // Function to set the language
-        function setLanguage(lang) {
-            const body = document.body;
-            if (!body) return;
-
-            const currentTranslations = translations[lang];
-
-            // Handle RTL
-            if (lang === 'ar' || lang === 'he') {
-                body.classList.add('rtl');
-            } else {
-                body.classList.remove('rtl');
-            }
-
-            // Update text content based on data attributes
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (currentTranslations[key]) {
-                    element.textContent = currentTranslations[key];
-                }
-            });
-        }
-        
-        // Function to generate and display initials from local storage
         function updateProfileButton() {
-          const userData = JSON.parse(localStorage.getItem('userData') || "{}");
+            const userData = JSON.parse(localStorage.getItem('userData') || "{}");
 
-          if (userData && userData.firstName && userData.lastName) {
-              const firstNameInitial = userData.firstName.charAt(0);
-              const lastNameInitial = userData.lastName.charAt(0);
-              const initials = `${firstNameInitial}${lastNameInitial}`.toUpperCase();
+            if (userData && userData.firstName && userData.lastName) {
+                const firstNameInitial = userData.firstName.charAt(0);
+                const lastNameInitial = userData.lastName.charAt(0);
+                const initials = `${firstNameInitial}${lastNameInitial}`.toUpperCase();
 
-              initialsDisplay.textContent = initials;
-              profileBtn.style.display = 'flex'; // Show the button
-          } else {
-              profileBtn.style.display = 'none';
-          }
+                initialsDisplay.textContent = initials;
+                profileBtn.style.display = 'flex'; // Show the button
+            } else {
+                profileBtn.style.display = 'none';
+            }
         }
-
-        // Function to toggle the dropdown's visibility
+        
+        // Function to show/hide the dropdown menu
         function toggleDropdown() {
-          profileDropdown.classList.toggle('active');
+            profileDropdown.classList.toggle('active');
         }
 
         // Function to handle logout
         function handleLogout() {
-          localStorage.removeItem('userData');
-          localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userData');
+            localStorage.removeItem('isLoggedIn');
+            console.log('User logged out. Local storage cleared.');
+            const messageBox = document.createElement('div');
+            messageBox.innerHTML = 'Logged out successfully! <i class="fas fa-check-circle"></i>';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: var(--brand);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: fadeOut 3s forwards;
+            `;
+            document.body.appendChild(messageBox);
 
-          console.log('User logged out. Local storage cleared.');
-
-          // Create and display a custom message box
-          const messageBox = document.createElement('div');
-          messageBox.innerHTML = 'Logged out successfully! <i class="fas fa-check-circle"></i>';
-          messageBox.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--brand);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: fadeOut 3s forwards;
-          `;
-          document.body.appendChild(messageBox);
-
-          // Define a simple fade-out animation
-          const styleSheet = document.createElement("style");
-          styleSheet.innerText = `
-            @keyframes fadeOut {
-              0% { opacity: 1; transform: translateY(0); }
-              80% { opacity: 1; transform: translateY(0); }
-              100% { opacity: 0; transform: translateY(-20px); }
-            }
-          `;
-          document.head.appendChild(styleSheet);
-          
-          // Navigate to the login page after a delay
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 2000); // 2-second delay to show the message
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `
+                @keyframes fadeOut {
+                    0% { opacity: 1; transform: translateY(0); }
+                    80% { opacity: 1; transform: translateY(0); }
+                    100% { opacity: 0; transform: translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+            
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
         }
 
         // Add event listeners to the buttons
         profileBtn?.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleDropdown();
+            e.stopPropagation();
+            toggleDropdown();
         });
         logoutBtn?.addEventListener('click', handleLogout);
-
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-          if (profileDropdown.classList.contains('active') && !profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-            profileDropdown.classList.remove('active');
-          }
+            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
         });
 
-        // An example function to save user data for testing
         function saveUserToLocalStorage(firstName, lastName) {
             const user = {
                 firstName: firstName,
@@ -1147,35 +904,172 @@
             console.log('User data saved to local storage.');
         }
 
-        // Initialize the profile button on page load
         document.addEventListener('DOMContentLoaded', () => {
-            // Example usage: uncomment this line to simulate a logged-in user
-            // saveUserToLocalStorage('John', 'Smith'); 
             updateProfileButton();
-            setLanguage('en'); // or get from user preference
+            setLanguage('en');
         });
-        // Mobile dropdown toggle for navigation
-document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
-  dropdownToggle.addEventListener('click', function(e) {
-    // Only run on mobile
-    if (window.innerWidth <= 780) {
-      e.preventDefault();
-      const dropdownMenu = this.nextElementSibling;
-      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-      }
-    }
-  });
-});
 
-// Hide dropdowns when resizing to desktop
-window.addEventListener('resize', function() {
-  if (window.innerWidth > 780) {
-    document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
-      menu.style.display = '';
-    });
-  }
-});
+        // Mobile dropdown toggle for navigation
+        document.querySelectorAll('.nav-links .dropdown > a').forEach(function(dropdownToggle) {
+          dropdownToggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 780) {
+              e.preventDefault();
+              const dropdownMenu = this.nextElementSibling;
+              if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+              }
+            }
+          });
+        });
+
+        // Hide dropdowns when resizing to desktop
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 780) {
+            document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+              menu.style.display = '';
+            });
+          }
+        });
+        
+        // ** UNIQUE JS FOR EACH SECTION **
+
+        // Hero Section: Typing effect for title and subtitle
+        function typeEffect(element, text, speed) {
+            let i = 0;
+            element.textContent = '';
+            const typingInterval = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                }
+            }, speed);
+        }
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSubtitle = document.querySelector('.hero-sub');
+        if (heroTitle && heroSubtitle) {
+            const observer = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    typeEffect(heroTitle, heroTitle.textContent, 80);
+                    setTimeout(() => {
+                        typeEffect(heroSubtitle, heroSubtitle.textContent, 40);
+                    }, heroTitle.textContent.length * 80 + 200);
+                    observer.unobserve(heroTitle);
+                }
+            }, { threshold: 0.5 });
+            observer.observe(heroTitle);
+        }
+
+        // Services Section: 3D Tilt on Hover
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const rotateX = (y / rect.height - 0.5) * 20;
+                const rotateY = (x / rect.width - 0.5) * -20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // Mission Section: Read More button functionality
+        const readMoreBtn = document.getElementById('read-more-btn');
+        const readMoreContent = document.querySelector('.read-more-content');
+        if (readMoreBtn && readMoreContent) {
+            readMoreBtn.addEventListener('click', () => {
+                const isExpanded = readMoreContent.style.display === 'block';
+                readMoreContent.style.display = isExpanded ? 'none' : 'block';
+                readMoreBtn.textContent = isExpanded ? readMoreBtn.getAttribute('data-i18n') : 'Read Less';
+            });
+        }
+
+        // Recent Case Studies: Filter system
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const caseStudyCards = document.querySelectorAll('.case-study-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                caseStudyCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || filter === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Testimonials Section: Automatic slider
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const dots = document.querySelectorAll('.dot');
+        let currentTestimonial = 0;
+        function showTestimonial(index) {
+            testimonials.forEach((t, i) => {
+                t.style.display = i === index ? 'block' : 'none';
+            });
+            dots.forEach((d, i) => {
+                if (i === index) {
+                    d.classList.add('active');
+                } else {
+                    d.classList.remove('active');
+                }
+            });
+        }
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }
+        setInterval(nextTestimonial, 7000); // Change testimonial every 7 seconds
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-slide'));
+                currentTestimonial = index;
+                showTestimonial(currentTestimonial);
+            });
+        });
+        showTestimonial(currentTestimonial);
+
+        // CTA Section: Button pulse animation on scroll
+        const ctaBtn = document.getElementById('cta-button-pulse');
+        if (ctaBtn) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        ctaBtn.classList.add('cta-pulse');
+                        observer.unobserve(ctaBtn);
+                    }
+                });
+            }, { threshold: 0.8 });
+            observer.observe(ctaBtn);
+        }
+
+        // New Intersection Observer for scroll animations
+        const elementsToAnimate = document.querySelectorAll('.animate-me');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                } else {
+                    entry.target.classList.remove('animate-on-scroll');
+                }
+            });
+        }, {
+            threshold: 0.1,
+        });
+
+        elementsToAnimate.forEach((element, index) => {
+            const isEven = index % 2 === 0;
+            element.style.setProperty('--translate-x', isEven ? '-50px' : '50px');
+            observer.observe(element);
+        });
     </script>
 </body>
 </html>

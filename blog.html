@@ -146,6 +146,7 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
         margin-top: 3rem;
+        animation: slide-left-right 15s ease-in-out infinite;
     }
     .blog-card {
         background-color: var(--card);
@@ -156,8 +157,8 @@
         transition: transform 0.3s, box-shadow 0.3s;
     }
     .blog-card:hover {
-        transform: translateY(-10px);
-        box-shadow: var(--shadow);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
     }
     .blog-card img {
         width: 100%;
@@ -191,6 +192,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 1.5rem;
+        animation: slide-left-right 12s ease-in-out infinite;
     }
     .category-card {
         background-color: var(--card);
@@ -210,6 +212,10 @@
         font-size: 3rem;
         color: var(--brand);
         margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+    .category-card:hover i {
+      transform: translateY(-5px);
     }
     .category-card h4 {
         font-size: 1.25rem;
@@ -229,6 +235,7 @@
         background-image: url('https://cdn.pixabay.com/photo/2015/01/25/21/02/phone-612061_1280.jpg');
         background-size: cover;
         background-position: center;
+        animation: slide-left-right 8s ease-in-out infinite;
     }
     .cta-image-section::after {
         content: '';
@@ -267,6 +274,12 @@
     box-shadow: 0 8px 20px rgba(0, 0, 139, 0.35); /* A subtle shadow for the dark blue */
     border: none;
     cursor: pointer;
+    animation: pulse-glow 2s infinite ease-in-out;
+}
+@keyframes pulse-glow {
+    0% { transform: scale(1); box-shadow: 0 8px 20px rgba(0, 0, 139, 0.35); }
+    50% { transform: scale(1.02); box-shadow: 0 12px 26px rgba(0, 0, 139, 0.45); }
+    100% { transform: scale(1); box-shadow: 0 8px 20px rgba(0, 0, 139, 0.35); }
 }
 
 .cta-image-content .cta-button:hover {
@@ -293,6 +306,7 @@
         padding: 2rem;
         text-align: left;
         align-items: center;
+        animation: slide-left-right 10s ease-in-out infinite;
     }
 
     .featured-post-image {
@@ -330,6 +344,13 @@
         color: var(--brand-2);
     }
     
+    /* New keyframes for continuous left-to-right animation */
+    @keyframes slide-left-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+      100% { transform: translateX(0); }
+    }
+
     /* ---------- Footer ---------- */
     .footer { background: var(--surface); border-top: 1px solid rgba(255,255,255,.06); transition: background-color 0.3s ease; }
     .footer-content { display:grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 20px; padding: 46px 0; }
@@ -471,7 +492,7 @@
               <p class="section-subheading" data-lang-key="latestArticlesSubheading">A curated collection of our most recent and valuable posts.</p>
               <div class="blog-grid">
                   <div class="blog-card">
-                      <img src="https://i.pinimg.com/73x/99/6c/4e/996c4efb72e62aa0c7e00fff2bdc9c32.jpg" alt="Image of a person interacting with an AI interface." />
+                      <img src="https://i.pinimg.com/736x/60/10/21/60102165894ca06863d6d3016b9de683.jpg" alt="Image of a person interacting with an AI interface." />
                       <div class="blog-content">
                           <h3 data-lang-key="article1Title">The Role of AI in Modern Marketing</h3>
                           <p data-lang-key="article1Text">Explore how artificial intelligence is transforming how we connect with customers and drive conversions.</p>
@@ -479,7 +500,7 @@
                       </div>
                   </div>
                   <div class="blog-card">
-                      <img src="https://i.pinimg.com/73x/77/2c/8d/772c8dc04ef0be5551c7d9dc358594e6.jpg" alt="Image of a search engine optimization chart with rising trends." />
+                      <img src="https://i.pinimg.com/736x/9e/30/c5/9e30c5cc8bc91496277038e875ea8ad5.jpg" alt="Image of a search engine optimization chart with rising trends." />
                       <div class="blog-content">
                           <h3 data-lang-key="article2Title">SEO Trends to Watch in 2024</h3>
                           <p data-lang-key="article2Text">An in-depth look at the key strategies you need to implement to stay ahead in search engine rankings.</p>
@@ -537,7 +558,7 @@
               <p class="section-subheading" data-lang-key="featuredPostSubheading">An in-depth guide to one of our most popular topics.</p>
               <div class="featured-post-container">
                   <div class="featured-post-image">
-                      <img src="https://i.pinimg.com/73x/75/81/2e/75812e7c5d058420ab6b8a71de308f45.jpg" alt="Image representing a featured article." />
+                      <img src="https://i.pinimg.com/736x/f4/a1/57/f4a157452e9f1fadcf8ec2fcd155d61c.jpg" alt="Image representing a featured article." />
                   </div>
                   <div class="featured-post-content">
                       <h3 data-lang-key="featuredPostTitle">How to Master Content Marketing in a Competitive Market</h3>

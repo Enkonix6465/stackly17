@@ -58,6 +58,62 @@
     img { max-width: 100%; display: block; }
     .container { width: min(1200px, 92%); margin-inline: auto; }
 
+    /* Keyframes for hero text animation */
+    @keyframes fadeInSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Hero section text animations */
+    .hero-section .eyebrow {
+      animation: fadeInSlideUp 0.8s ease-out forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+    .hero-section .hero-title {
+      animation: fadeInSlideUp 0.8s ease-out forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
+    }
+    .hero-section .hero-sub {
+      animation: fadeInSlideUp 0.8s ease-out forwards;
+      animation-delay: 0.6s;
+      opacity: 0;
+    }
+    .hero-section .hero-cta {
+      animation: fadeInSlideUp 0.8s ease-out forwards;
+      animation-delay: 0.8s;
+      opacity: 0;
+    }
+
+    /* New scroll animation styles */
+    .animate-me {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-on-scroll {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .animate-me.card {
+        transition-delay: var(--delay, 0s);
+    }
+    .animate-me.service-card {
+        transition-delay: var(--delay, 0s);
+    }
+    .animate-me.stat-item {
+        transition-delay: var(--delay, 0s);
+    }
+
     /* ---------- Header (sticky, glass) ---------- */
     .header { background-color: var(--surface); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); transition: background-color 0.3s ease; }
     .logo-img { height: 40px; width: auto; margin-right: 8px; }
@@ -254,6 +310,42 @@
 .profile-menu.active {
     display: block;
 }
+
+  /* Added CSS for the service modal */
+  .service-modal {
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+  }
+  .service-modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: var(--surface);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+  }
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--muted);
+  }
   </style>
   
 </head>
@@ -345,9 +437,9 @@
 
   <section class="welcome-image-section">
     <div class="container">
-      <div class="welcome-content">
+      <div class="welcome-content animate-me">
         <div class="welcome-text">
-          <h2 data-translate="welcome-title">Fuel Your Digital Growth</h2>
+          <h2 data-translate="Fuel Your Digital Growth">Fuel Your Digital Growth</h2>
           <p data-translate="welcome-subtitle">We help brands stand out in the digital world. From creative campaigns to data-driven strategies, we deliver results that matter and growth you can measure.</p>
           <div class="welcome-features">
             <div class="feature-item"><i class="fas fa-bullhorn"></i><span data-translate="welcome-feature1">Creative Campaigns</span></div>
@@ -356,7 +448,7 @@
           </div>
         </div>
         <div class="welcome-image">
-          <img src="img/b041abab5f12ce21f693f0bf2e1f895b.jpg" alt="Digital Marketing Strategy">
+          <img src="https://i.pinimg.com/736x/b0/41/ab/b041abab5f12ce21f693f0bf2e1f895b.jpg" alt="Digital Marketing Strategy">
         </div>
       </div>
     </div>
@@ -369,7 +461,7 @@
         <h2 data-translate="campaigns-title">Featured Campaigns</h2>
       </div>
       <div class="cards">
-        <article class="card">
+        <article class="card animate-me" style="--delay: 0s;">
           <img src="https://i.pinimg.com/1200x/cb/88/d7/cb88d7323b243657060c9bb4546f065d.jpg" alt="Social Media Growth">
           <div class="card-body">
             <h3 data-translate="campaign-social-title">Social Media Growth</h3>
@@ -385,7 +477,7 @@
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card animate-me" style="--delay: 0.2s;">
           <img src="https://i.pinimg.com/736x/29/1d/d2/291dd2ffce7d1b3417610ef5f1e7d88c.jpg" alt="SEO Optimization">
           <div class="card-body">
             <h3 data-translate="campaign-seo-title">SEO Optimization</h3>
@@ -401,7 +493,7 @@
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card animate-me" style="--delay: 0.4s;">
           <img src="https://i.pinimg.com/736x/53/1a/c9/531ac9b46b9a25f3c0a6b94f33b250c1.jpg" alt="Brand Awareness Ads">
           <div class="card-body">
             <h3 data-translate="campaign-ads-title">Brand Awareness Ads</h3>
@@ -425,17 +517,17 @@
     <div class="container">
       <div class="section-title"><h2 data-translate="services-title">Our Digital Marketing Services</h2></div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card animate-me" style="--delay: 0s;">
           <div class="icon-circle"><i class="fas fa-bullhorn"></i></div>
           <h3 data-translate="service1-title">Media Marketing</h3>
           <p data-translate="service1-text">Boost your brand presence and engagement across platforms like Instagram, Facebook, and LinkedIn.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card animate-me" style="--delay: 0.2s;">
           <div class="icon-circle"><i class="fas fa-search-dollar"></i></div>
           <h3 data-translate="service2-title">SEO Optimization</h3>
           <p data-translate="service2-text">Rank higher on search engines and drive organic traffic with our proven SEO strategies.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card animate-me" style="--delay: 0.4s;">
           <div class="icon-circle"><i class="fas fa-chart-pie"></i></div>
           <h3 data-translate="service3-title">Data-Driven</h3>
           <p data-translate="service3-text">Leverage analytics to create campaigns that deliver measurable results and higher ROI.</p>
@@ -447,19 +539,19 @@
   <section class="stats-section">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat-item">
+        <div class="stat-item animate-me" style="--delay: 0s;">
           <div class="stat-number" data-target="1000000">0</div>
           <div class="stat-label" data-translate="stat1-label">Ad Impressions Delivered</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item animate-me" style="--delay: 0.2s;">
           <div class="stat-number" data-target="5000">0</div>
           <div class="stat-label" data-translate="stat2-label">Leads Generated</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item animate-me" style="--delay: 0.4s;">
           <div class="stat-number" data-target="10">0</div>
           <div class="stat-label" data-translate="stat3-label">Years in Digital Marketing</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item animate-me" style="--delay: 0.6s;">
           <div class="stat-number" data-target="95">0</div>
           <div class="stat-label" data-translate="stat4-label">Client Retention Rate (%)</div>
         </div>
@@ -703,11 +795,6 @@
         "campaign-seo-badge1": "טופ 3 בגוגל",
         "campaign-seo-badge2": "300% תנועה",
         "campaign-seo-badge3": "120+ קישורים נכנסים",
-        "campaign-ads-title": "מודעות מודעות למותג",
-        "campaign-ads-meta": "גוגל ויוטיוב",
-        "campaign-ads-badge1": "5M+ הופעות",
-        "campaign-ads-badge2": "1.8M צפיות",
-        "campaign-ads-badge3": "75% שיעור צפייה",
         "campaign-view-button": "צפייה בפרטים",
         "campaign-start-button": "התחל משהו דומה",
         "services-title": "שירותי השיווק הדיגיטלי שלנו",
@@ -923,6 +1010,145 @@ window.addEventListener('resize', function() {
     });
   }
 });
+    // New Intersection Observer for scroll animations
+    const elementsToAnimate = document.querySelectorAll('.animate-me');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-on-scroll');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+    });
+
+    elementsToAnimate.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Hero Section: Video Play/Pause
+    const heroVideo = document.querySelector('.hero-bg-video');
+    const playPauseBtn = document.createElement('button');
+    playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    playPauseBtn.className = 'btn btn-ghost video-control-btn';
+    playPauseBtn.style.cssText = `
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      z-index: 10;
+    `;
+    document.querySelector('.hero-section').appendChild(playPauseBtn);
+    playPauseBtn.addEventListener('click', () => {
+      if (heroVideo.paused) {
+        heroVideo.play();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+      } else {
+        heroVideo.pause();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+      }
+    });
+
+    // Welcome Section: Dynamic Text and Image Swapping
+    const welcomeTitle = document.querySelector('.welcome-text h2');
+    const welcomeImage = document.querySelector('.welcome-image img');
+    const images = [
+      'https://cdn.pixabay.com/photo/2015/07/17/22/44/student-849828_1280.jpg',
+      'https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849826_1280.jpg',
+      'https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849826_1280.jpg'
+    ];
+    let currentImageIndex = 0;
+    function typeEffect(element, text, speed) {
+      let i = 0;
+      element.textContent = '';
+      const typingInterval = setInterval(() => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, speed);
+    }
+    function changeImage() {
+      welcomeImage.style.opacity = 0;
+      setTimeout(() => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        welcomeImage.src = images[currentImageIndex];
+        welcomeImage.style.opacity = 1;
+      }, 500);
+    }
+    const welcomeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          typeEffect(welcomeTitle, welcomeTitle.getAttribute('data-translate'), 50);
+          setInterval(changeImage, 5000);
+          welcomeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    welcomeObserver.observe(document.querySelector('.welcome-image-section'));
+
+    // Featured Campaigns: Card Hover Effects
+    const campaignCards = document.querySelectorAll('.cards .card');
+    campaignCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-6px) scale(1.02)';
+        card.style.boxShadow = '0 18px 40px rgba(0,0,0,.5)';
+        const badges = card.querySelectorAll('.badge');
+        const title = card.querySelector('h3');
+        const meta = card.querySelector('.meta');
+        badges.forEach(badge => {
+          badge.style.backgroundColor = 'var(--brand-2)';
+          badge.style.color = 'white';
+        });
+        title.style.color = 'var(--brand)';
+        meta.style.color = 'var(--text)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+        const badges = card.querySelectorAll('.badge');
+        const title = card.querySelector('h3');
+        const meta = card.querySelector('.meta');
+        badges.forEach(badge => {
+          badge.style.backgroundColor = '';
+          badge.style.color = '';
+        });
+        title.style.color = '';
+        meta.style.color = '';
+      });
+    });
+
+    // Services Section: Interactive Service Card Modals
+    const serviceCards = document.querySelectorAll('.service-card');
+    const modal = document.createElement('div');
+    modal.className = 'service-modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h3 id="modal-title"></h3>
+        <p id="modal-text"></p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top: 20px;">Contact Us for this Service</a>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    serviceCards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        const title = card.querySelector('h3').textContent;
+        const text = card.querySelector('p').textContent;
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-text').textContent = text;
+        modal.classList.add('active');
+      });
+    });
+    document.querySelector('.service-modal .close-button').addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
   </script>
 </body>
 </html>

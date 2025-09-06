@@ -592,6 +592,40 @@
             opacity: 1;
             transform: translateY(0) translateX(0) !important;
         }
+
+        /* New Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
         @media (max-width: 780px) {
   .dropdown-menu {
     position: static;
@@ -702,7 +736,7 @@ Improve your search engine rankings and attract valuable organic traffic with ou
                 </div>
             </div>
         </section>
-        <section class="full-width-section animated-element animate-fade-in-up">
+        <section class="full-width-section animated-element animate-slide-in-left">
             <div class="container full-width-content">
                 <h2 class="section-heading" data-translate="boostTitle">Boost Your Visibility & Authority</h2>
                 <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-translate="boostSubtitle">We help you become a trusted resource in your industry.</h3>
@@ -770,7 +804,7 @@ Improve your search engine rankings and attract valuable organic traffic with ou
             </div>
         </section>
 
-        <section class="section full-width-section reverse animated-element animate-fade-in-up">
+        <section class="section full-width-section reverse animated-element animate-slide-in-right">
             <div class="container full-width-content">
                 <h2 class="section-heading" data-translate="ctaTitle">Ready to Grow Your Organic Traffic?</h2>
                 <p data-translate="ctaText">Let's discuss how a powerful SEO and content strategy can help your business reach new heights. Our team is ready to build a custom plan just for you.</p>

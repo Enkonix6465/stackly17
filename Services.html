@@ -127,6 +127,24 @@
             animation: fadeUp 1s ease-out forwards;
             animation-delay: 1.5s;
         }
+
+        /* Continuous Left-Right Animation */
+        @keyframes slide-left-right-continuous {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        .continuous-animated-element {
+            animation: slide-left-right-continuous 4s ease-in-out infinite;
+        }
+        
         /* CSS variables for a consistent dark theme */
         :root {
             --bg: #0b0d12;
@@ -1030,37 +1048,37 @@
                 <h2 class="section-heading animated-element animate-fade-in-up" data-translate="core-services-heading">Our Core Digital Marketing Services</h2>
                 <p class="section-subheading animated-element animate-fade-in-up" data-translate="core-services-subheading">From strategy to execution, we've got you covered with a comprehensive suite of digital solutions.</p>
                 <div class="services-grid">
-                    <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="service-card continuous-animated-element" style="animation-delay: 0.1s;">
                         <img src="https://i.pinimg.com/1200x/93/63/4a/93634ab9dfe46f95561b88a182a97e3b.jpg" alt="A photo of a person analyzing SEO data." />
                         <h3 data-translate="seo-title">SEO & Content Marketing</h3>
                         <p data-translate="seo-desc">Improve your search engine rankings and attract more organic traffic. We create high-quality, relevant content that positions your brand as an industry leader.</p>
                         <a href="seo.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
-                    <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="service-card continuous-animated-element" style="animation-delay: 0.2s;">
                         <img src="https://i.pinimg.com/736x/e1/03/64/e103646b6a667786b2b010e94c989241.jpg" alt="A photo of a person working on ad campaigns." />
                         <h3 data-translate="ppc-title">PPC Management</h3>
                         <p data-translate="ppc-desc">Drive immediate results with targeted pay-per-click advertising. We manage your campaigns on platforms like Google Ads and Bing to ensure you get the best return on your ad spend.</p>
                         <a href="ppc.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
-                    <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="service-card continuous-animated-element" style="animation-delay: 0.3s;">
                         <img src="https://i.pinimg.com/736x/f8/bb/26/f8bb26f7387644df73e2660ab988ea81.jpg" alt="A photo of social media icons." />
                         <h3 data-translate="social-media-title">Social Media Marketing</h3>
                         <p data-translate="social-media-desc">Build a strong brand presence and engage with your community. We create and execute social media strategies that increase brand awareness and generate leads.</p>
                         <a href="social-media.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
-                    <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="service-card continuous-animated-element" style="animation-delay: 0.4s;">
                         <img src="https://i.pinimg.com/736x/2b/c1/c9/2bc1c9c6efc3c194e67f30bfb0aa5e22.jpg" alt="A photo of a laptop with code on the screen." />
                         <h3 data-translate="web-dev-title">Web Development</h3>
                         <p data-translate="web-dev-desc">Your website is your digital storefront. We design and develop responsive, user-friendly websites that are optimized for performance, security, and search engines.</p>
                         <a href="web-dev.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
-                    <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="service-card continuous-animated-element" style="animation-delay: 0.5s;">
                         <img src="https://i.pinimg.com/1200x/8c/3c/5c/8c3c5c02210e92bbe2afff9484badcec.jpg" alt="A photo of an email marketing interface." />
                         <h3 data-translate="email-title">Email Marketing</h3>
                         <p data-translate="email-desc">Connect directly with your audience through personalized email campaigns. We craft compelling emails and build automated sequences to nurture leads and drive conversions.</p>
                         <a href="email.html" class="btn" data-translate="learn-more">Learn More</a>
                     </div>
-                    <div class="service-card animated-element animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="service-card continuous-animated-element" style="animation-delay: 0.6s;">
                         <img src="https://i.pinimg.com/736x/64/27/28/642728ea3b6feafa6ca22a5b31914e7f.jpg" alt="A photo of a data dashboard." />
                         <h3 data-translate="analytics-title">Analytics & Reporting</h3>
                         <p data-translate="analytics-desc">We provide a clear view of your campaign performance with detailed analytics and regular reporting. Our insights help you make data-driven decisions for future growth.</p>

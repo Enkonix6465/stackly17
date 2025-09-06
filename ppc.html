@@ -398,6 +398,29 @@
                 transform: translateY(0);
             }
         }
+        /* New Animations added from seo.html */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .animate-slide-in {
             animation: slideIn 1s ease-out forwards;
             animation-delay: 0.5s;
@@ -410,19 +433,45 @@
             animation: fadeUp 1s ease-out forwards;
             animation-delay: 1.5s;
         }
+        .animate-slide-in-left {
+            animation: slideInLeft 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        .animate-slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
         .animate-slide-in,
         .animate-fade-up,
-        .animate-fade-up-delayed {
+        .animate-fade-up-delayed,
+        .animate-slide-in-left,
+        .animate-slide-in-right {
             animation-fill-mode: both;
         }
-        .animated-element {
-            opacity: 0;
-            transition: opacity 0.5s, transform 0.5s;
-        }
-        .visible {
+        
+        /* These elements are now animated on page load */
+        .full-width-section.animate-slide-in-left,
+        .full-width-section.animate-slide-in-right,
+        .section.animate-fade-in-up {
+            animation-delay: 0s; /* Start the animation instantly */
             opacity: 1;
-            transform: translateY(0) translateX(0) !important;
+            transform: translateY(0) translateX(0);
         }
+        
+        .full-width-section.animate-slide-in-left {
+            animation: slideInLeft 1s ease-out forwards;
+        }
+
+        .full-width-section.animate-slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+        }
+
+        .section.animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+
         .full-width-section {
             display: flex;
             align-items: center;
@@ -578,30 +627,30 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
         @media (max-width: 780px) {
-  .dropdown-menu {
-    position: static;
-    background: var(--card);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    padding: 8px 0;
-    margin-left: 16px;
-    min-width: 140px;
-    display: none; /* Hidden by default, shown by JS */
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-  }
-  .dropdown-menu li a {
-    color: var(--text);
-    padding: 10px 18px;
-    display: block;
-    font-weight: 500;
-  }
-  .dropdown-menu li a:hover {
-    background: var(--surface);
-    color: var(--brand);
-  }
-} 
+            .dropdown-menu {
+                position: static;
+                background: var(--card);
+                border-radius: 8px;
+                box-shadow: var(--shadow);
+                padding: 8px 0;
+                margin-left: 16px;
+                min-width: 140px;
+                display: none; /* Hidden by default, shown by JS */
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            .dropdown-menu li a {
+                color: var(--text);
+                padding: 10px 18px;
+                display: block;
+                font-weight: 500;
+            }
+            .dropdown-menu li a:hover {
+                background: var(--surface);
+                color: var(--brand);
+            }
+        }
     </style>
 </head>
 <body>
@@ -691,7 +740,7 @@
                 </div>
             </div>
         </section>
-        <section class="full-width-section animated-element animate-fade-in-up">
+        <section class="full-width-section animate-slide-in-left">
             <div class="container full-width-content">
                 <h2 class="section-heading" data-lang="get-seen-instantly-heading">Get Seen Instantly</h2>
                 <h3 class="section-subheading" style="margin-bottom: 1.5rem;" data-lang="get-seen-instantly-subheading">We connect you with customers who are ready to buy.</h3>
@@ -702,7 +751,7 @@
                 <img src="https://i.pinimg.com/736x/e1/03/64/e103646b6a667786b2b010e94c989241.jpg" alt="A photo of a person managing an online advertising dashboard." />
             </div>
         </section>
-        <section class="section animated-element animate-fade-in-up">
+        <section class="section animate-fade-in-up">
             <div class="container">
                 <h2 class="section-heading" data-lang="what-service-includes-heading">What Our PPC Service Includes</h2>
                 <div class="icon-grid">
@@ -729,7 +778,7 @@
                 </div>
             </div>
         </section>
-        <section class="section animated-element animate-fade-in-up">
+        <section class="section animate-fade-in-up">
             <div class="container">
                 <h2 class="section-heading" data-lang="proven-process-heading">Our Proven 4-Step Process</h2>
                 <div class="process-steps">
@@ -756,7 +805,7 @@
                 </div>
             </div>
         </section>
-        <section class="section full-width-section reverse animated-element animate-fade-in-up">
+        <section class="section full-width-section reverse animate-slide-in-right">
             <div class="container full-width-content">
                 <h2 class="section-heading" data-lang="traffic-surge-heading">Ready for a Surge in Traffic?</h2>
                 <p data-lang="traffic-surge-text">Our team is here to manage your PPC campaigns and deliver a steady stream of qualified leads to your business. Let's start building your success story today.</p>
@@ -817,25 +866,6 @@
         document.getElementById('theme-toggle')?.addEventListener('click', () => {
             document.body.classList.toggle('light');
         });
-
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animated-element');
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.2
-            });
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-        };
-        window.onload = animateOnScroll;
 
         const profileDropdown = document.getElementById('profile-dropdown');
         const profileIcon = profileDropdown.querySelector('.profile-icon');
@@ -1019,13 +1049,6 @@
                 'audience-targeting-text': 'ודא שהמודעות שלך נראות על ידי האנשים הנכונים בזמן הנכון באמצעות שיטות טרגוט מדויקות.',
                 'performance-monitoring-title': 'ניטור ביצועים',
                 'performance-monitoring-text': 'ניטור וייעול מתמיד של הצעות מחיר, מילות מפתח ומיקום מודעות כדי למקסם את יעילות התקציב שלך.',
-                'proven-process-heading': 'תהליך ה-4 שלבים המוכח שלנו',
-                'discovery-title': 'גילוי ואסטרטגיה',
-                'discovery-text': 'אנו מנתחים את העסק והשוק שלך כדי לבנות תוכנית PPC אסטרטגית עם יעדים ברורים.',
-                'launch-title': 'השקת קמפיין',
-                'launch-text': 'אנו מקימים ומשיקים את הקמפיינים שלך עם מילות מפתח, קבוצות מודעות וטקסטים למודעות אופטימליים.',
-                'optimization-title': 'אופטימיזציה וניהול',
-                'optimization-text': 'אנו מנהלים ומייעלים באופן פעיל את הקמפיינים שלך מדי יום כדי לשפר את הביצועים ולהפחית עלויות.',
                 'reporting-title': 'דיווח ותובנות',
                 'reporting-text': 'אתה מקבל דוחות שקופים וסדירים על ביצועי הקמפיין והחזר ההשקעה, עם תובנות מעשיות.',
                 'traffic-surge-heading': 'מוכן לעלייה בתנועה?',
